@@ -14,6 +14,7 @@ public class GridManager : Singleton<GridManager>
     public Transform bk;
     public Transform items;
     public Dictionary<Vector2Int, GameObject> GridArray = new Dictionary<Vector2Int, GameObject>();
+    public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,10 @@ public class GridManager : Singleton<GridManager>
 
         AddGrid(0, 0, ItemType.ore);
         AddGrid(1, 0, ItemType.herb);
-        AddGrid(2, 1, ItemType.ore);
+        AddGrid(1, 1, ItemType.ore);
+
+
+        StartCoroutine(MoveAfter(0, -1));
     }
     float animTime = 0.3f;
     int rotatedTime = 0;
@@ -117,7 +121,9 @@ public class GridManager : Singleton<GridManager>
             }
             if (newKey != key)
             {
-                MoveItemToPos(key, newKey, obj);
+                MoveItemToPos(key, newKey, obj,animTime);
+
+                obj.GetComponent<GridItem>().calculateHit();
             }
             else
             {
@@ -142,17 +148,17 @@ public class GridManager : Singleton<GridManager>
         return !HasItem(pos) && pos.x >= 0 && pos.x < Columns && pos.y >= 0 && pos.y < Rows;
     }
 
-    bool HasItem(Vector2Int pos)
+    public bool HasItem(Vector2Int pos)
     {
         return GridArray.ContainsKey(pos);
     }
 
-    GameObject GetItem(Vector2Int pos)
+    public GameObject GetItem(Vector2Int pos)
     {
         return GridArray[pos];
     }
 
-    Vector3 IndexToPosition(Vector2Int ind)
+    public Vector3 IndexToPosition(Vector2Int ind)
     {
         return IndexToPosition(ind.x, ind.y);
     }
@@ -161,17 +167,40 @@ public class GridManager : Singleton<GridManager>
     {
         return new Vector3(tileSize * i,  tileSize * j);
     }
-
-    public void MoveItemToPos(Vector2Int start, Vector2Int end, GameObject obj)
+    public void updatePos(GridItem item)
+    {
+        item.StartCoroutine(item.move(IndexToPosition(item.index), animTime));
+    }
+    public void MoveItemToPos(Vector2Int start, Vector2Int end, GameObject obj, float animTime)
     {
 
         GridArray[end] = obj;
 
         GridArray.Remove(start);
+        obj.GetComponent<GridItem>().index = end;
         obj.GetComponent<MonoBehaviour>().StartCoroutine(obj.GetComponent<GridItem>().move(IndexToPosition(end), animTime));
-       // obj.transform.DOLocalMove(IndexToPosition(end), 0.3f);
+
+        // obj.transform.DOLocalMove(IndexToPosition(end), 0.3f);
 
         //obj.transform.localPosition = IndexToPosition(end);
+    }
+
+    public void swapItem(GridItem item1, GridItem item2, float animTime)
+    {
+        var ind1 = item1.index;
+        var ind2 = item2.index;
+        GridArray[ind1] = item2.gameObject;
+        GridArray[ind2] = item1.gameObject;
+
+
+
+        item1.index = ind2;
+
+        item2.index = ind1;
+
+        item1.GetComponent<MonoBehaviour>().StartCoroutine(item1.GetComponent<GridItem>().move(IndexToPosition(item1.index), animTime));
+        item2.GetComponent<MonoBehaviour>().StartCoroutine(item2.GetComponent<GridItem>().move(IndexToPosition(item2.index), animTime));
+
     }
 
     public void FinishItemMoving(GameObject obj)
@@ -192,6 +221,8 @@ public class GridManager : Singleton<GridManager>
                 obj.name = $"grid-x{i}-y{j}";
                 obj.transform.SetParent(bk);
                 obj.transform.localPosition = IndexToPosition(i, j);
+                obj.GetComponent<GridEmptyCell>().index = new Vector2Int(i, j);
+                emptyGridList.Add(obj.GetComponent<GridEmptyCell>());
             }
         }
     }
@@ -200,6 +231,7 @@ public class GridManager : Singleton<GridManager>
     public void AddGrid(int i, int j, ItemType type)
     {
         GameObject obj = Instantiate(Resources.Load<GameObject>("items/"+type.ToString()));
+        obj.GetComponent<GridItem>().index = new Vector2Int(i, j);
         obj.name = $"grid-x{i}-y{j}";
         obj.transform.SetParent(items);
 

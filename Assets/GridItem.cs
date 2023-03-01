@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GridItem : MonoBehaviour
 {
+    public Vector2Int index;
     public virtual void hitBorder() { }
     public virtual void bigHitBorder() { }
     public virtual void beCrushed(GridItem item) { }
@@ -32,11 +33,12 @@ public class GridItem : MonoBehaviour
         beHit = true;
         beHitItem = item;
     }
+
+
     public IEnumerator move(Vector3 targetPos, float animTime) {
 
         transform.DOLocalMove(targetPos, animTime);
         yield return new WaitForSeconds(animTime);
-        calculateHit();
 
     }
 
