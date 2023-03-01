@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,19 +23,28 @@ public class GridManager : Singleton<GridManager>
         AddGrid(1, 0, ItemType.herb);
         AddGrid(2, 1, ItemType.ore);
     }
-
+    float animTime = 0.3f;
     int rotatedTime = 0;
     public void Rotate(int time)
     {
         rotatedTime += time;
         rotatedTime %= 4;
-        transform.eulerAngles = new Vector3(0, 0, 90 * rotatedTime);
+        //transform.eulerAngles = new Vector3(0, 0, 90 * rotatedTime);
+        transform.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
+        StartCoroutine(MoveAfter(0, -1));
     }
-    public void Move(int x, int y)
+
+    public IEnumerator MoveAfter(int x,int y)
+    {
+        yield return new WaitForSeconds(animTime);
+        MoveInternal(x,y);
+    }
+
+    public void MoveInternal(int x, int y)
     {
         var moveVector = new Vector2Int(x, y);
         var tempVector = (transform.rotation * (Vector2)moveVector);
-        if (rotatedTime==1 || rotatedTime ==3)
+        if (rotatedTime == 1 || rotatedTime == 3)
         {
             tempVector = -tempVector;
         }
@@ -44,7 +54,7 @@ public class GridManager : Singleton<GridManager>
         Debug.Log("move " + moveVector);
 
         var myList = new List<Vector2Int>();
-        foreach(var key in GridArray.Keys)
+        foreach (var key in GridArray.Keys)
         {
             myList.Add(key);
         }
@@ -52,10 +62,12 @@ public class GridManager : Singleton<GridManager>
             if (x == 1)
             {
                 return b.x.CompareTo(a.x);
-            } else if (x == -1)
+            }
+            else if (x == -1)
             {
                 return a.x.CompareTo(b.x);
-            }else if(y == 1)
+            }
+            else if (y == 1)
             {
 
                 return b.y.CompareTo(a.y);
@@ -67,10 +79,10 @@ public class GridManager : Singleton<GridManager>
             }
         });
 
-        foreach(var key in myList)
+        foreach (var key in myList)
         {
             var newKey = key;
-            int test=0;
+            int test = 0;
             while (true)
             {
                 test++;
@@ -90,6 +102,13 @@ public class GridManager : Singleton<GridManager>
                 MoveItemToPos(key, newKey, GetItem(key));
             }
         }
+    }
+
+    public void Move(int x, int y)
+    {
+        MoveInternal(x, y);
+
+        StartCoroutine(MoveAfter(0, -1));
     }
 
     bool CanMoveTo(Vector2Int pos)
@@ -124,7 +143,9 @@ public class GridManager : Singleton<GridManager>
 
         GridArray.Remove(start);
 
-        obj.transform.localPosition = IndexToPosition(end);
+        obj.transform.DOLocalMove(IndexToPosition(end), 0.3f);
+
+        //obj.transform.localPosition = IndexToPosition(end);
     }
     public void GenerateGrid()
     {
