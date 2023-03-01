@@ -37,10 +37,10 @@ public class GridManager : Singleton<GridManager>
     public IEnumerator MoveAfter(int x,int y)
     {
         yield return new WaitForSeconds(animTime);
-        MoveInternal(x,y);
+        MoveInternal(x,y,false);
     }
 
-    public void MoveInternal(int x, int y)
+    public void MoveInternal(int x, int y, bool isAttacking )
     {
         var moveVector = new Vector2Int(x, y);
         var tempVector = (transform.rotation * (Vector2)moveVector);
@@ -83,6 +83,8 @@ public class GridManager : Singleton<GridManager>
         {
             var newKey = key;
             int test = 0;
+            var obj = GetItem(key);
+            var gridItem = obj.GetComponent<GridItem>();
             while (true)
             {
                 test++;
@@ -93,24 +95,41 @@ public class GridManager : Singleton<GridManager>
                 newKey += moveVector;
                 if (!CanMoveTo(newKey))
                 {
+                    if (IsHittingBoarder(newKey))
+                    {
+                        if (isAttacking)
+                        {
+
+                            gridItem.hitBorder(true, newKey - moveVector != key, items.transform.TransformPoint(IndexToPosition(newKey)) );
+                        }
+                    }
+
                     newKey -= moveVector;
                     break;
                 }
             }
             if (newKey != key)
             {
-                MoveItemToPos(key, newKey, GetItem(key));
+                MoveItemToPos(key, newKey, obj);
+            }
+            else
+            {
+                obj.GetComponent<GridItem>().calculateHit();
             }
         }
     }
 
     public void Move(int x, int y)
     {
-        MoveInternal(x, y);
+        MoveInternal(x, y,true);
 
         StartCoroutine(MoveAfter(0, -1));
     }
 
+    bool IsHittingBoarder(Vector2Int pos)
+    {
+        return !(pos.x >= 0 && pos.x < Columns && pos.y >= 0 && pos.y < Rows);
+    }
     bool CanMoveTo(Vector2Int pos)
     {
         return !HasItem(pos) && pos.x >= 0 && pos.x < Columns && pos.y >= 0 && pos.y < Rows;
@@ -142,11 +161,18 @@ public class GridManager : Singleton<GridManager>
         GridArray[end] = obj;
 
         GridArray.Remove(start);
-
-        obj.transform.DOLocalMove(IndexToPosition(end), 0.3f);
+        obj.GetComponent<MonoBehaviour>().StartCoroutine(obj.GetComponent<GridItem>().move(IndexToPosition(end), animTime));
+       // obj.transform.DOLocalMove(IndexToPosition(end), 0.3f);
 
         //obj.transform.localPosition = IndexToPosition(end);
     }
+
+    public void FinishItemMoving(GameObject obj)
+    {
+
+    }
+
+
     public void GenerateGrid()
     {
 
