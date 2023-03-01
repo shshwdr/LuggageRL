@@ -8,7 +8,7 @@ public class FloatingText : MonoBehaviour
 {
 
     public Vector3 endValue;
-    public float jumpPower = 10;
+    public int jumpPower = 10;
     public float animTime = 1;
     public void init(string text,Vector3 pos)
     {
@@ -20,7 +20,7 @@ public class FloatingText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.DOPunchScale(endValue,animTime);
+        transform.DOPunchScale(endValue,animTime, jumpPower);
     }
 
     // Update is called once per frame

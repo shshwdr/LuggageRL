@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class GridItem : MonoBehaviour
 {
+    public virtual void hitBorder() { }
+    public virtual void bigHitBorder() { }
+    public virtual void beCrushed(GridItem item) { }
     bool willHitBorder = false;
     bool wasMoving = false;
-    Vector3 borderPosition;
+    protected Vector3 borderPosition;
 
-
+    bool beHit = false;
+    GridItem beHitItem;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +26,11 @@ public class GridItem : MonoBehaviour
         willHitBorder = hit;
         wasMoving = moved;
         borderPosition = hitPos;
+    }
+    public void BeHit(GridItem item)
+    {
+        beHit = true;
+        beHitItem = item;
     }
     public IEnumerator move(Vector3 targetPos, float animTime) {
 
@@ -39,12 +48,25 @@ public class GridItem : MonoBehaviour
             if (wasMoving)
             {
                 str += " big ";
+                bigHitBorder();
+            }
+            else
+            {
+                hitBorder();
             }
             str += " hit ";
-            FloatingTextManager.Instance.addText(str, borderPosition);
+           // hitBorder();
+           // FloatingTextManager.Instance.addText(str, borderPosition);
         }
+
+        if (beHit)
+        {
+            beCrushed(beHitItem);
+        }
+
         willHitBorder = false;
         wasMoving = false;
+        beHit = false;
     }
 
     // Update is called once per frame

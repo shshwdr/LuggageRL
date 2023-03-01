@@ -600,8 +600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfae9eca821f804888eaa6bac226cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endValue: {x: 2, y: 2, z: 2}
-  jumpPower: 10
+  endValue: {x: 1, y: 1, z: 1}
+  jumpPower: 2
   animTime: 1
 --- !u!1 &1875516937
 GameObject:

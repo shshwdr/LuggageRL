@@ -99,8 +99,15 @@ public class GridManager : Singleton<GridManager>
                     {
                         if (isAttacking)
                         {
-
                             gridItem.hitBorder(true, newKey - moveVector != key, items.transform.TransformPoint(IndexToPosition(newKey)) );
+                        }
+                    }
+                    if (HasItem(newKey))
+                    {
+
+                        if (isAttacking)
+                        {
+                            GetItem(newKey).GetComponent<GridItem>().BeHit(gridItem);
                         }
                     }
 
