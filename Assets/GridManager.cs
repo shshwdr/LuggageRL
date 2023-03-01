@@ -5,7 +5,7 @@ using UnityEngine;
 public enum ItemType { ore,herb}
 public class GridManager : Singleton<GridManager>
 {
-    float tileSize = 2f;
+    public float tileSize = 2f;
     public int Rows = 2;
     public int Columns = 3;
     public GameObject EmptyGridPrefab;
