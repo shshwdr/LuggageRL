@@ -13,7 +13,7 @@ public class AttackManager : MonoBehaviour
     void Rotate(int times)
     {
 
-        GridManager.Instance.Rotate(times);
+        GridManager.Instance.Rotate(times,true);
     }
 
     // Update is called once per frame
@@ -43,6 +43,16 @@ public class AttackManager : MonoBehaviour
         {
             //push forward and attack first enemy
             Luggage.Instance.PushForwardAttack();
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            //push forward and attack first enemy
+            StartCoroutine(Luggage.Instance.UpsideDownAndDrop());
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            //push forward and attack first enemy
+            StartCoroutine(Luggage.Instance.ThrowOutAndHitBack());
         }
 
     }

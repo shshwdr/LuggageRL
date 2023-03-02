@@ -29,14 +29,17 @@ public class GridManager : Singleton<GridManager>
 
         StartCoroutine(MoveAfter(0, -1));
     }
-    int rotatedTime = 0;
-    public void Rotate(int time)
+    public int rotatedTime = 0;
+    public void Rotate(int time, bool applyGravity)
     {
         rotatedTime += time;
         rotatedTime %= 4;
         //transform.eulerAngles = new Vector3(0, 0, 90 * rotatedTime);
         transform.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
-        StartCoroutine(MoveAfter(0, -1));
+        if (applyGravity)
+        {
+            StartCoroutine(MoveAfter(0, -1));
+        }
     }
 
     public IEnumerator MoveAfter(int x,int y)
