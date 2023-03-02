@@ -39,7 +39,11 @@ public class AttackManager : MonoBehaviour
         {
             Rotate(1);
         }
-
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            //push forward and attack first enemy
+            Luggage.Instance.PushForwardAttack();
+        }
 
     }
 }

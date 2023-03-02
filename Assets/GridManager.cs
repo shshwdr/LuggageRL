@@ -5,6 +5,8 @@ using UnityEngine;
 public enum ItemType { ore,herb}
 public class GridManager : Singleton<GridManager>
 {
+
+    static public float animTime = 0.3f;
     public float tileSize = 2f;
     public int Rows = 2;
     public int Columns = 3;
@@ -27,7 +29,6 @@ public class GridManager : Singleton<GridManager>
 
         StartCoroutine(MoveAfter(0, -1));
     }
-    float animTime = 0.3f;
     int rotatedTime = 0;
     public void Rotate(int time)
     {
