@@ -42,7 +42,7 @@ public class AttackManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Z))
         {
             //push forward and attack first enemy
-            Luggage.Instance.PushForwardAttack();
+            StartCoroutine(Luggage.Instance.PushForwardAttack());
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {

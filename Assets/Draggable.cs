@@ -107,5 +107,7 @@ public class Draggable : MonoBehaviour
         yield return StartCoroutine(GridManager.Instance.MoveAfter(0, -1));
 
         swapOb = null;
+
+        StartCoroutine( BattleManager.Instance.Move());
     }
 }

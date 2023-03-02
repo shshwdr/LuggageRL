@@ -25,6 +25,7 @@ public class GridManager : Singleton<GridManager>
         AddGrid(0, 0, ItemType.ore);
         AddGrid(1, 0, ItemType.herb);
         AddGrid(1, 1, ItemType.ore);
+        AddGrid(2, 0, ItemType.herb);
 
 
         StartCoroutine(MoveAfter(0, -1));

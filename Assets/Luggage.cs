@@ -25,13 +25,14 @@ public class Luggage : Singleton<Luggage>
         target = enemy;
         target.ClearDamage();
     }
-    public void PushForwardAttack()
+    public IEnumerator PushForwardAttack()
     {
         SelectEnemyTarget();
         //
         //suitcaseInBattle.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
         transform.DOMove(target.transform.position, GridManager.animTime);
         GridManager.Instance.Move(1, 0);
+        yield return new WaitForSeconds(GridManager.animTime);
 
         StartCoroutine(showDamage());
     }
