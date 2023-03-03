@@ -1,13 +1,19 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : HPObject
 {
+    public int attack = 3;
+    Vector3 originalPosition;
     // Start is called before the first frame update
-    void Start()
+    protected  override void Start()
     {
+        hp = maxHP;
+        base.Start();
         EnemyManager.Instance.AddEnemy(this);
+        originalPosition = transform.position;
     }
     int damage = 0;
     public void GetDamage(int dam)
@@ -18,16 +24,27 @@ public class Enemy : MonoBehaviour
     {
         damage = 0;
     }
+    protected override void DieInteral()
+    {
+        base.DieInteral();
 
+        EnemyManager.Instance.RemoveEnemy(this);
+        Destroy(gameObject);
+    }
     public void ShowDamage()
     {
-
-        FloatingTextManager.Instance.addText(damage.ToString(), transform.position+new Vector3(0,1,0));
+        ApplyDamage(damage);
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator Attack()
     {
-        
+        transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
+        yield return new WaitForSeconds(GridManager.animTime);
+
+        BattleManager.Instance.player.ApplyDamage(attack);
+
+        transform.DOMove(originalPosition, GridManager.animTime);
+        yield return new WaitForSeconds(GridManager.animTime);
     }
+
 }

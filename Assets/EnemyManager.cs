@@ -9,7 +9,23 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         enemies.Add(enemy);
     }
+    public void RemoveEnemy(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+        if(enemies.Count == 0)
+        {
+            BattleManager.Instance.FinishCurrentBattle();
 
+        }
+    }
+
+    public IEnumerator EnemiesAttack()
+    {
+        foreach(var enemy in enemies)
+        {
+            yield return StartCoroutine( enemy.Attack());
+        }
+    }
     public Enemy GetFrontEnemy()
     {
         return enemies[0];

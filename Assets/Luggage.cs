@@ -34,7 +34,7 @@ public class Luggage : Singleton<Luggage>
         GridManager.Instance.Move(1, 0);
         yield return new WaitForSeconds(GridManager.animTime);
 
-        StartCoroutine(showDamage());
+        yield return StartCoroutine(showDamage());
     }
 
     public IEnumerator UpsideDownAndDrop()
@@ -50,7 +50,7 @@ public class Luggage : Singleton<Luggage>
         GridManager.Instance.Move(0, -1); ;
         yield return new WaitForSeconds(GridManager.animTime);
 
-        StartCoroutine(showDamage());
+        yield return StartCoroutine(showDamage());
     }
     public IEnumerator ThrowOutAndHitBack()
     {
@@ -69,7 +69,7 @@ public class Luggage : Singleton<Luggage>
         GridManager.Instance.Move(-1, 0);
         yield return new WaitForSeconds(GridManager.animTime);
 
-        StartCoroutine(showDamage());
+        yield return StartCoroutine(showDamage());
     }
     IEnumerator showDamage()
     {
@@ -77,6 +77,8 @@ public class Luggage : Singleton<Luggage>
         target.ShowDamage();
 
         transform.DOMove(transform.parent.position, GridManager.animTime);
+
+        yield return new WaitForSeconds(GridManager.animTime);
     }
     
 
