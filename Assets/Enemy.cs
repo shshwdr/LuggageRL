@@ -9,8 +9,8 @@ public class Enemy : HPObject
     public int attack = 3;
     Vector3 originalPosition;
 
-    int attackInd;
-    bool attackFromBottom = true;
+    public int attackInd;
+    public bool attackFromBottom = true;
 
     // Start is called before the first frame update
     protected  override void Awake()
@@ -50,14 +50,29 @@ public class Enemy : HPObject
     }
     public IEnumerator Attack()
     {
+
+        GridManager.Instance.showAttackPreviewOfEnemy(this);
+        GridManager.Instance.showAttackPreviewOfEnemy(this);
         originalPosition = transform.position;
         transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);
 
         BattleManager.Instance.player.ApplyDamage(attack);
 
+        GridManager.Instance.clearAttackPreview();
         transform.DOMove(originalPosition, GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);
+    }
+
+    private void OnMouseEnter()
+    {
+        //show attack preview
+        GridManager.Instance.showAttackPreviewOfEnemy(this);
+    }
+
+    private void OnMouseExit()
+    {
+        GridManager.Instance.clearAttackPreview();
     }
 
 }

@@ -6,7 +6,7 @@ public enum ItemType { ore,herb}
 public class GridManager : Singleton<GridManager>
 {
 
-    static public float animTime = 0.3f;
+    static public float animTime = 0.5f;
     public float tileSize = 2f;
     public int Rows = 2;
     public int Columns = 3;
@@ -47,6 +47,83 @@ public class GridManager : Singleton<GridManager>
     {
         yield return new WaitForSeconds(animTime);
         MoveInternal(x,y,false);
+    }
+    List<Transform> sortEmptyCells()
+    {
+        var myList = new List<Transform>();
+        foreach (var key in emptyGridList)
+        {
+            myList.Add(key.transform);
+        }
+        myList.Sort(delegate (Transform a, Transform b) {
+            if (Mathf.Approximately(a.position.x , b.position.x))
+            {
+                return a.position.y.CompareTo(b.position.y);
+            }
+            else 
+            {
+                return b.position.x.CompareTo(a.position.x);
+            }
+        });
+        return myList;
+    }
+
+    public List<Vector2Int> getFrontCellsIndexFromBottomToTop()
+    {
+        var myList = sortEmptyCells();
+
+        List<Vector2Int> res = new List<Vector2Int>();
+        var x = myList[0].position.x;
+        for(int i= 0; i<10; i++){
+            if (myList[i].position.x  == x)
+            {
+                res.Add(myList[i].GetComponent<GridEmptyCell>().index);
+            }
+        }
+        return res;
+    }
+
+    public List<Transform> getFrontCellsFromBottomToTop()
+    {
+        var myList = sortEmptyCells();
+
+        List<Transform> res = new List<Transform>();
+        var x = myList[0].position.x;
+        for (int i = 0; i < 10; i++)
+        {
+            if (Mathf.Approximately( myList[i].position.x, x))
+            {
+                res.Add(myList[i]);
+            }
+        }
+        return res;
+    }
+    List<GameObject> previewCells = new List<GameObject>();
+    public GameObject gridPreviewCell;
+    public void showAttackPreviewOfEnemy(Enemy enemy)
+    {
+        clearAttackPreview();
+        var cells = getFrontCellsFromBottomToTop();
+        if (enemy.attackFromBottom)
+        {
+            var cell = cells[enemy.attackInd];
+            var go= Instantiate(gridPreviewCell,cell.position,cell.rotation);
+            previewCells.Add(go);
+        }
+    }
+
+    public void clearAttackPreview()
+    {
+        foreach(var cell in previewCells)
+        {
+            Destroy(cell);
+        }
+        previewCells.Clear();
+    }
+
+    void getFrontCellsBottomToUp()
+    {
+
     }
 
     public void MoveInternal(int x, int y, bool isAttacking )
