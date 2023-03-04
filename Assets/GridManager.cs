@@ -17,15 +17,55 @@ public class GridManager : Singleton<GridManager>
     public Transform items;
     public Dictionary<Vector2Int, GameObject> GridArray = new Dictionary<Vector2Int, GameObject>();
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
+
+    public bool CanDraw(out string failedReason, int drawCount)
+    {
+        failedReason = "";
+        List<Vector2Int> availableEmpty = new List<Vector2Int>();
+        foreach (var key in emptyGridList)
+        {
+            if (!GridArray.ContainsKey(key.index))
+            {
+                availableEmpty.Add(key.index);
+            }
+        }
+
+        if (availableEmpty.Count < drawCount)
+        {
+            failedReason = "Bag is Full!";
+            return false;
+        }
+        return true;
+    }
+    
+    public IEnumerator DrawItem(int drawCount)
+    {
+        List<Vector2Int> availableEmpty = new List<Vector2Int>();
+        foreach(var key in emptyGridList)
+        {
+            if (!GridArray.ContainsKey(key.index))
+            {
+                availableEmpty.Add(key.index);
+            }
+        }
+        for(int i = 0;i< drawCount; i++)
+        {
+            var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
+            AddGrid(picked.x, picked.y, (ItemType)Random.Range(0, System.Enum.GetValues(typeof(ItemType)).Length));
+            availableEmpty.Remove(picked);
+        }
+
+        yield return StartCoroutine(MoveAfter(0, -1));
+    }
     // Start is called before the first frame update
     void Start()
     {
         GenerateGrid();
 
-        AddGrid(0, 0, ItemType.ore);
-        AddGrid(1, 0, ItemType.herb);
-        AddGrid(1, 1, ItemType.ore);
-        AddGrid(2, 0, ItemType.herb);
+        //AddGrid(0, 0, ItemType.ore);
+        //AddGrid(1, 0, ItemType.herb);
+        //AddGrid(1, 1, ItemType.ore);
+        //AddGrid(2, 0, ItemType.herb);
 
 
         StartCoroutine(MoveAfter(0, -1));

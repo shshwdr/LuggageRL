@@ -24,6 +24,7 @@ public class HPObject : MonoBehaviour
     {
 
         hp += damage;
+        hp = Mathf.Min(hp, maxHP);
         hpbar.updateHPBar(hp, maxHP);
     }
     public void Die()

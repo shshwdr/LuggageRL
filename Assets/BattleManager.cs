@@ -8,20 +8,44 @@ public class BattleManager : Singleton<BattleManager>
 {
     public Text LuggageAttackText;
     int selected;
-    int moveMax = 2;
+    int moveMax = 4;
     int moveLeft;
     bool isBattleFinished = false;
     string[] attackString = new string[] {"Push","Upside Down","Throw And Back" };
     public GameObject[] enemies;
     public Transform[] enemyPositions;
     public Player player;
-
+    int drawCount = 2;
+    int startDrawCount = 4;
     public void SkipMove()
     {
         moveLeft = 0;
 
         StartCoroutine(EndOfTurn());
     }
+    public void DrawItem(bool noCost = false)
+    {
+        StartCoroutine(DrawItemEnumerator(noCost));
+    }
+    public IEnumerator DrawItemEnumerator(bool noCost =false)
+    {
+        string failedReason;
+        int count = noCost ? startDrawCount : drawCount;
+        if (GridManager.Instance.CanDraw(out failedReason, count))
+        {
+            yield return StartCoroutine(GridManager.Instance.DrawItem(count));
+            if (!noCost)
+            {
+                yield return useMove(1);
+            }
+        }
+        else
+        {
+
+            FloatingTextManager.Instance.addText(failedReason, Vector3.zero);
+        }
+    }
+
     public void FinishCurrentBattle()
     {
         if (!isBattleFinished)
@@ -47,6 +71,7 @@ public class BattleManager : Singleton<BattleManager>
     {
         isBattleFinished = false;
         AddEnemies();
+        DrawItem(true);
         SelectAttack();
         EnemyManager.Instance.SelectEenmiesAttack();
 
@@ -70,20 +95,28 @@ public class BattleManager : Singleton<BattleManager>
         moveLeft = moveMax;
         UpdateText();
     }
-
-    public IEnumerator Move()
+    IEnumerator useMove(int amount)
     {
-        moveLeft -= 1;
+        moveLeft -= amount;
         UpdateText();
-        if(moveLeft == 0)
+        if (moveLeft == 0)
         {
-            yield return StartCoroutine(PlayerAttackMove());
+            yield return StartCoroutine(EndOfTurn());
             //yield return StartCoroutine(PlayerAttackMove());
         }
+
+    }
+    public IEnumerator Move()
+    {
+        yield return useMove(1);
     }
 
     public void PlayerAttackManually()
     {
+        if (moveLeft < 2)
+        {
+            return;
+        }
         StartCoroutine(PlayerAttackMove());
     }
 
@@ -101,7 +134,7 @@ public class BattleManager : Singleton<BattleManager>
                 yield return StartCoroutine(Luggage.Instance.ThrowOutAndHitBack());
                 break;
         }
-
+        yield return useMove(2);
     }
 
     public IEnumerator EndOfTurn()

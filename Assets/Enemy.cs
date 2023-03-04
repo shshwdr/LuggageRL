@@ -66,6 +66,8 @@ public class Enemy : HPObject
         {
             damage -= item.defense;
             item.destory();
+
+            yield return StartCoroutine(GridManager.Instance. MoveAfter(0, -1));
         }
         BattleManager.Instance.player.ApplyDamage(damage);
 
