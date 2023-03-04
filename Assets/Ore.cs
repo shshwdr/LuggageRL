@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class Ore : GridItem
 {
-    [SerializeField] private int baseAttackDamage = 1; 
-    [SerializeField] private int bigAttackMultiplier = 2; 
-        
     public override void hitBorder() { 
         
-        FloatingTextManager.Instance.addText($"Attack! ({baseAttackDamage})", transform.position);
-        Luggage.Instance.DoDamage(baseAttackDamage);
+        FloatingTextManager.Instance.addText("Attack!", transform.position);
+        Luggage.Instance.DoDamage(1);
     }
-    public override void bigHitBorder() {
-        int finalDamage = baseAttackDamage * bigAttackMultiplier;
-        FloatingTextManager.Instance.addText($"Big Attack! ({finalDamage})", transform.position);
-        Luggage.Instance.DoDamage(finalDamage);
+    public override void bigHitBorder() { FloatingTextManager.Instance.addText("Big Attack!", transform.position);
+
+        Luggage.Instance.DoDamage(2);
     }
     public override void beCrushed(GridItem item)
     {
