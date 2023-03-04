@@ -37,7 +37,7 @@ public class GridManager : Singleton<GridManager>
         }
         return true;
     }
-    
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     public IEnumerator DrawItem(int drawCount)
     {
         List<Vector2Int> availableEmpty = new List<Vector2Int>();
@@ -51,7 +51,9 @@ public class GridManager : Singleton<GridManager>
         for(int i = 0;i< drawCount; i++)
         {
             var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
-            AddGrid(picked.x, picked.y, (ItemType)Random.Range(0, System.Enum.GetValues(typeof(ItemType)).Length));
+            var pickedType = deckPool[Random.Range(0, deckPool.Count)];
+            deckPool.Remove(pickedType);
+            AddGrid(picked.x, picked.y, pickedType);
             availableEmpty.Remove(picked);
         }
 
@@ -367,6 +369,7 @@ public class GridManager : Singleton<GridManager>
     {
         GameObject obj = Instantiate(Resources.Load<GameObject>("items/"+type.ToString()));
         obj.GetComponent<GridItem>().index = new Vector2Int(i, j);
+        obj.GetComponent<GridItem>().type = type;
         obj.name = $"grid-x{i}-y{j}";
         obj.transform.SetParent(items);
 
@@ -374,12 +377,14 @@ public class GridManager : Singleton<GridManager>
         // add to grid once instantiated
         GridArray[new Vector2Int(i,j)] = obj;
     }
-    public void RemoveGrid(int i, int j)
+    public void RemoveGrid(int i, int j,ItemType type)
     {
         GridArray.Remove(new Vector2Int(i, j));
+        deckPool.Add(type);
     }
-    public void RemoveGrid(Vector2Int ind)
+    public void RemoveGrid(Vector2Int ind, ItemType type)
     {
         GridArray.Remove(ind);
+        deckPool.Add(type);
     }
 }

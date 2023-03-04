@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GridItem : MonoBehaviour
 {
+    public ItemType type;
     public Vector2Int index;
     public int defense = 2;
     public virtual void hitBorder() { }
@@ -19,7 +20,7 @@ public class GridItem : MonoBehaviour
     GridItem beHitItem;
     public void destory()
     {
-        GridManager.Instance.RemoveGrid(index);
+        GridManager.Instance.RemoveGrid(index,type);
         Destroy(gameObject);
     }
     // Start is called before the first frame update
