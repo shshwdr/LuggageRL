@@ -20,7 +20,7 @@ public class BattleManager : Singleton<BattleManager>
     {
         moveLeft = 0;
 
-         StartCoroutine(PlayerAttackMove());
+        StartCoroutine(EndOfTurn());
     }
     public void FinishCurrentBattle()
     {
@@ -78,7 +78,13 @@ public class BattleManager : Singleton<BattleManager>
         if(moveLeft == 0)
         {
             yield return StartCoroutine(PlayerAttackMove());
+            //yield return StartCoroutine(PlayerAttackMove());
         }
+    }
+
+    public void PlayerAttackManually()
+    {
+        StartCoroutine(PlayerAttackMove());
     }
 
     public IEnumerator PlayerAttackMove()
@@ -96,9 +102,13 @@ public class BattleManager : Singleton<BattleManager>
                 break;
         }
 
+    }
+
+    public IEnumerator EndOfTurn()
+    {
         yield return StartCoroutine(EnemyManager.Instance.EnemiesAttack());
         SelectAttack();
-        EnemyManager.Instance. SelectEenmiesAttack();
+        EnemyManager.Instance.SelectEenmiesAttack();
     }
 
     void UpdateText()

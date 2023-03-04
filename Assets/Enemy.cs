@@ -57,7 +57,21 @@ public class Enemy : HPObject
         transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);
 
-        BattleManager.Instance.player.ApplyDamage(attack);
+
+
+        //attack item
+        var damage = attack;
+        var item = GridManager.Instance.itemEnemyAttack(this);
+        if (item != null)
+        {
+            damage -= item.defense;
+            item.destory();
+        }
+        BattleManager.Instance.player.ApplyDamage(damage);
+
+
+
+
 
         GridManager.Instance.clearAttackPreview();
         transform.DOMove(originalPosition, GridManager.animTime);

@@ -73,7 +73,7 @@ public class Luggage : Singleton<Luggage>
     }
     IEnumerator showDamage()
     {
-        yield return new WaitForSeconds(GridManager.animTime * 2);
+        yield return new WaitForSeconds(GridManager.animTime * 1.1f);
         target.ShowDamage();
 
         transform.DOMove(transform.parent.position, GridManager.animTime);

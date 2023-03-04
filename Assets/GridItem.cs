@@ -6,6 +6,7 @@ using UnityEngine;
 public class GridItem : MonoBehaviour
 {
     public Vector2Int index;
+    public int defense = 2;
     public virtual void hitBorder() { }
     public virtual void bigHitBorder() { }
     public virtual void beCrushed(GridItem item) { }
@@ -15,7 +16,11 @@ public class GridItem : MonoBehaviour
 
     bool beHit = false;
     GridItem beHitItem;
-
+    public void destory()
+    {
+        GridManager.Instance.RemoveGrid(index);
+        Destroy(gameObject);
+    }
     // Start is called before the first frame update
     void Start()
     {

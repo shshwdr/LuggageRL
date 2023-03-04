@@ -6,7 +6,7 @@ public enum ItemType { ore,herb}
 public class GridManager : Singleton<GridManager>
 {
 
-    static public float animTime = 0.5f;
+    static public float animTime = 0.4f;
     public float tileSize = 2f;
     public int Rows = 2;
     public int Columns = 3;
@@ -75,7 +75,7 @@ public class GridManager : Singleton<GridManager>
         List<Vector2Int> res = new List<Vector2Int>();
         var x = myList[0].position.x;
         for(int i= 0; i<10; i++){
-            if (myList[i].position.x  == x)
+            if (Mathf.Approximately(myList[i].position.x, x))
             {
                 res.Add(myList[i].GetComponent<GridEmptyCell>().index);
             }
@@ -110,6 +110,19 @@ public class GridManager : Singleton<GridManager>
             var go= Instantiate(gridPreviewCell,cell.position,cell.rotation);
             previewCells.Add(go);
         }
+    }
+
+    public GridItem itemEnemyAttack(Enemy enemy)
+    {
+
+        var cells = getFrontCellsIndexFromBottomToTop();
+        if (enemy.attackFromBottom)
+        {
+            var cell = cells[enemy.attackInd];
+            var item = GridArray.ContainsKey(cell) ? GridArray[cell].GetComponent<GridItem>() : null;
+            return item;
+        }
+        return null;
     }
 
     public void clearAttackPreview()
@@ -320,5 +333,13 @@ public class GridManager : Singleton<GridManager>
         obj.transform.localPosition = IndexToPosition(i, j);
         // add to grid once instantiated
         GridArray[new Vector2Int(i,j)] = obj;
+    }
+    public void RemoveGrid(int i, int j)
+    {
+        GridArray.Remove(new Vector2Int(i, j));
+    }
+    public void RemoveGrid(Vector2Int ind)
+    {
+        GridArray.Remove(ind);
     }
 }
