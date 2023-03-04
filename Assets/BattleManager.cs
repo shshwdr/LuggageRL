@@ -38,7 +38,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     IEnumerator searchNextBattle()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         StartBattle();
 
     }
@@ -48,6 +48,7 @@ public class BattleManager : Singleton<BattleManager>
         isBattleFinished = false;
         AddEnemies();
         SelectAttack();
+        EnemyManager.Instance.SelectEenmiesAttack();
 
     }
     void AddEnemies()
@@ -60,7 +61,7 @@ public class BattleManager : Singleton<BattleManager>
     // Start is called before the first frame update
     void Start()
     {
-        StartBattle();
+        StartCoroutine( searchNextBattle());
     }
 
     void SelectAttack()
@@ -97,6 +98,7 @@ public class BattleManager : Singleton<BattleManager>
 
         yield return StartCoroutine(EnemyManager.Instance.EnemiesAttack());
         SelectAttack();
+        EnemyManager.Instance. SelectEenmiesAttack();
     }
 
     void UpdateText()

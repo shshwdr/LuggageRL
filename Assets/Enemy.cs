@@ -5,15 +5,20 @@ using UnityEngine;
 
 public class Enemy : HPObject
 {
+    EnemyAttackPreview attackPreview;
     public int attack = 3;
     Vector3 originalPosition;
+
+    int attackInd;
+    bool attackFromBottom = true;
+
     // Start is called before the first frame update
-    protected  override void Start()
+    protected  override void Awake()
     {
         hp = maxHP;
-        base.Start();
+        base.Awake();
         EnemyManager.Instance.AddEnemy(this);
-        originalPosition = transform.position;
+        attackPreview = GetComponentInChildren<EnemyAttackPreview>();
     }
     int damage = 0;
     public void GetDamage(int dam)
@@ -35,9 +40,17 @@ public class Enemy : HPObject
     {
         ApplyDamage(damage);
     }
-
+    public void SelectAttack()
+    {
+        if (attackFromBottom)
+        {
+            attackInd = Random.Range(0, 3);
+            attackPreview.UpdatePreview(attackInd, attackFromBottom);
+        }
+    }
     public IEnumerator Attack()
     {
+        originalPosition = transform.position;
         transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);
 

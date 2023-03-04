@@ -18,7 +18,13 @@ public class EnemyManager : Singleton<EnemyManager>
 
         }
     }
-
+    public void SelectEenmiesAttack()
+    {
+        foreach (var enemy in enemies)
+        {
+            enemy.SelectAttack();
+        }
+    }
     public IEnumerator EnemiesAttack()
     {
         foreach(var enemy in enemies)
