@@ -9,5 +9,6 @@ public class Herb : GridItem
     public override void beCrushed(GridItem item) {
         BattleManager.Instance.player.Heal(3);
         FloatingTextManager.Instance.addText("Heal!", transform.position);
+        destory();
     }
 }

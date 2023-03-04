@@ -12,6 +12,7 @@ public class GridItem : MonoBehaviour
     public virtual void beCrushed(GridItem item) { }
     bool willHitBorder = false;
     bool wasMoving = false;
+    protected int movedCount = 0;
     protected Vector3 borderPosition;
 
     bool beHit = false;
@@ -27,10 +28,11 @@ public class GridItem : MonoBehaviour
         
     }
 
-    public void hitBorder(bool hit, bool moved, Vector3 hitPos)
+    public void hitBorder(bool hit, Vector2Int movedDistance, Vector3 hitPos)
     {
         willHitBorder = hit;
-        wasMoving = moved;
+        wasMoving = movedDistance!=Vector2Int.zero;
+        movedCount = (int)movedDistance.magnitude;
         borderPosition = hitPos;
     }
     public void BeHit(GridItem item)
@@ -73,6 +75,7 @@ public class GridItem : MonoBehaviour
 
         willHitBorder = false;
         wasMoving = false;
+        movedCount = 0;
         beHit = false;
     }
 

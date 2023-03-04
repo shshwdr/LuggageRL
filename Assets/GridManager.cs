@@ -2,7 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum ItemType { ore,herb}
+public enum ItemType { ore,herb, arrow, poison}
 public class GridManager : Singleton<GridManager>
 {
 
@@ -238,7 +238,7 @@ public class GridManager : Singleton<GridManager>
                     {
                         if (isAttacking)
                         {
-                            gridItem.hitBorder(true, newKey - moveVector != key, items.transform.TransformPoint(IndexToPosition(newKey)) );
+                            gridItem.hitBorder(true, newKey - moveVector - key, items.transform.TransformPoint(IndexToPosition(newKey)) );
                         }
                     }
                     if (HasItem(newKey))

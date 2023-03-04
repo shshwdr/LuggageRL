@@ -6,10 +6,10 @@ public class Ore : GridItem
 {
     public override void hitBorder() { 
         
-        FloatingTextManager.Instance.addText("Attack!", borderPosition);
+        FloatingTextManager.Instance.addText("Attack!", transform.position);
         Luggage.Instance.DoDamage(1);
     }
-    public override void bigHitBorder() { FloatingTextManager.Instance.addText("Big Attack!", borderPosition);
+    public override void bigHitBorder() { FloatingTextManager.Instance.addText("Big Attack!", transform.position);
 
         Luggage.Instance.DoDamage(2);
     }
