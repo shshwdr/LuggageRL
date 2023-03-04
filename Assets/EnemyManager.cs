@@ -18,7 +18,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
         }
     }
-    public void SelectEenmiesAttack()
+    public void SelectEnemiesAttack()
     {
         foreach (var enemy in enemies)
         {
