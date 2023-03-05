@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class BattleManager : Singleton<BattleManager>
 {
     public Text LuggageAttackText;
     int selected;
-    int moveMax = 4;
+    [SerializeField] private int moveMax = 4; 
     int moveLeft;
     bool isBattleFinished = false;
     string[] attackString = new string[] {"Push","Upside Down","Throw And Back" };
     public GameObject[] enemies;
     public Transform[] enemyPositions;
     public Player player;
-    int drawCount = 2;
-    int startDrawCount = 4;
+    [SerializeField] private int drawCount = 2;
+    [SerializeField] private int startDrawCount = 4;
+    [SerializeField] private int attackMoveCost = 1;
+
     public void SkipMove()
     {
         moveLeft = 0;
@@ -166,4 +169,43 @@ public class BattleManager : Singleton<BattleManager>
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
+    //----------------EDITOR ACTION BUTTONS---------------
+
+    [Button("Load")]
+    public void performLoad()
+    {
+        //Moves forward, and then draws in one turn
+        StartCoroutine(GridManager.Instance.MoveEnumerator(1, 0, false));
+        DrawItem(false);
+        //StartCoroutine(useMove(attackMoveCost));
+
+    }
+    /*[Button("Push")]
+    public void performPush() {
+        StartCoroutine(Luggage.Instance.PushForwardAttack());
+        StartCoroutine(useMove(attackMovePrice));
+
+    }*/
+    [Button("Push and Rotate")]
+    public void performPushandRotate()
+    {
+        StartCoroutine(Luggage.Instance.PushAndRotateAttack());
+        StartCoroutine(useMove(attackMoveCost));
+
+    }
+    [Button("Ground Pound")]
+    public void performGroundPound()
+    {
+        StartCoroutine(Luggage.Instance.UpsideDownAndDrop());
+        StartCoroutine(useMove(attackMoveCost));
+
+    }
+    [Button("Boomerang")]
+    public void performBoomerang()
+    {
+        StartCoroutine(Luggage.Instance.ThrowOutAndHitBack());
+        StartCoroutine(useMove(attackMoveCost));
+    }
+
 }
