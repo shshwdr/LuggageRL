@@ -27,7 +27,7 @@ public class Draggable : MonoBehaviour
         transform.position = worldPosition;
         swapOb = null;
         float distance = 3;
-        foreach(var item in GridManager.Instance.GridArray.Values)
+        foreach(var item in GridManager.Instance.GridItemDict.Values)
         {
             item.GetComponentInChildren<SpriteRenderer>().color = Color.white;
         }
@@ -78,7 +78,7 @@ public class Draggable : MonoBehaviour
     {
 
 
-        foreach (var item in GridManager.Instance.GridArray.Values)
+        foreach (var item in GridManager.Instance.GridItemDict.Values)
         {
             item.GetComponentInChildren<SpriteRenderer>().color = Color.white;
         }
@@ -92,15 +92,15 @@ public class Draggable : MonoBehaviour
             yield break;
         }
 
-        FloatingTextManager.Instance.addText("Move!", Vector3.zero);
+        FloatingTextManager.Instance.addText("Move!", Vector3.zero,Color.white);
 
-        if (!GridManager.Instance.HasItem(swapOb.index))
+        var targetItem = GridManager.Instance.GetItem(swapOb.index);
+        GridManager.Instance.MoveItemToIndex(GetComponent<GridItem>(), swapOb.index);
+
+        GridManager.Instance.MoveItemToIndexEnumerator(GetComponent<GridItem>());
+        if (targetItem!=null)
         {
-            GridManager.Instance.MoveItemToPos(GetComponent<GridItem>().index, swapOb.index, gameObject, 0);
-        }
-        else
-        {
-            GridManager.Instance.swapItem(GetComponent<GridItem>(), GridManager.Instance.GetItem(swapOb.index).GetComponent<GridItem>(), 0);
+            GridManager.Instance.MoveItemToIndexEnumerator(targetItem.GetComponent<GridItem>());
         }
 
         yield return new WaitForSeconds(0.1f);

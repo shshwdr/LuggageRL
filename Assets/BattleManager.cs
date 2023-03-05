@@ -42,7 +42,7 @@ public class BattleManager : Singleton<BattleManager>
         else
         {
 
-            FloatingTextManager.Instance.addText(failedReason, Vector3.zero);
+            FloatingTextManager.Instance.addText(failedReason, Vector3.zero, Color.red);
         }
     }
 
@@ -52,7 +52,7 @@ public class BattleManager : Singleton<BattleManager>
         {
             isBattleFinished = true;
 
-            FloatingTextManager.Instance.addText("Win Battle!", Vector3.zero);
+            FloatingTextManager.Instance.addText("Win Battle!", Vector3.zero, Color.red);
             //reward
             RemoveText();
             StartCoroutine(searchNextBattle());

@@ -10,7 +10,7 @@ public class HPObject : MonoBehaviour
     public HPBar hpbar;
     public void ApplyDamage(int damage)
     {
-        FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0));
+        FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0), Color.red);
         hp -= damage;
 
         hpbar.updateHPBar(hp, maxHP);

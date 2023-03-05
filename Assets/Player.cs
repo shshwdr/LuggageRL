@@ -7,6 +7,6 @@ public class Player : HPObject
     protected override void DieInteral()
     {
         base.DieInteral();
-        FloatingTextManager.Instance.addText("Game Over", Vector3.zero);
+        FloatingTextManager.Instance.addText("Game Over", Vector3.zero, Color.red);
     }
 }

@@ -6,7 +6,7 @@ public enum ItemType { ore,herb, arrow, poison}
 public class GridManager : Singleton<GridManager>
 {
 
-    static public float animTime = 0.4f;
+    static public float animTime = 0.5f;
     public float tileSize = 2f;
     public int Rows = 2;
     public int Columns = 3;
@@ -15,7 +15,7 @@ public class GridManager : Singleton<GridManager>
     public Vector3 startPosition;
     public Transform bk;
     public Transform items;
-    public Dictionary<Vector2Int, GameObject> GridArray = new Dictionary<Vector2Int, GameObject>();
+    public Dictionary<Vector2Int, GameObject> GridItemDict = new Dictionary<Vector2Int, GameObject>();
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
 
     public bool CanDraw(out string failedReason, int drawCount)
@@ -24,7 +24,7 @@ public class GridManager : Singleton<GridManager>
         List<Vector2Int> availableEmpty = new List<Vector2Int>();
         foreach (var key in emptyGridList)
         {
-            if (!GridArray.ContainsKey(key.index))
+            if (!GridItemDict.ContainsKey(key.index))
             {
                 availableEmpty.Add(key.index);
             }
@@ -37,13 +37,13 @@ public class GridManager : Singleton<GridManager>
         }
         return true;
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, };// ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     public IEnumerator DrawItem(int drawCount)
     {
         List<Vector2Int> availableEmpty = new List<Vector2Int>();
         foreach(var key in emptyGridList)
         {
-            if (!GridArray.ContainsKey(key.index))
+            if (!GridItemDict.ContainsKey(key.index))
             {
                 availableEmpty.Add(key.index);
             }
@@ -64,10 +64,10 @@ public class GridManager : Singleton<GridManager>
     {
         GenerateGrid();
 
-        //AddGrid(0, 0, ItemType.ore);
-        //AddGrid(1, 0, ItemType.herb);
-        //AddGrid(1, 1, ItemType.ore);
+        //AddGrid(1, 1, ItemType.herb);
+        //AddGrid(1, 2, ItemType.ore);
         //AddGrid(2, 0, ItemType.herb);
+        //AddGrid(2, 2, ItemType.herb);
 
 
         StartCoroutine(MoveAfter(0, -1));
@@ -84,11 +84,12 @@ public class GridManager : Singleton<GridManager>
             StartCoroutine(MoveAfter(0, -1));
         }
     }
-
+    
     public IEnumerator MoveAfter(int x,int y)
     {
+        Debug.Log("move after");
         yield return new WaitForSeconds(animTime);
-        MoveInternal(x,y,false);
+        yield return MoveEnumerator(x,y,false);
     }
     List<Transform> sortEmptyCells()
     {
@@ -161,7 +162,7 @@ public class GridManager : Singleton<GridManager>
         if (enemy.attackFromBottom)
         {
             var cell = cells[enemy.attackInd];
-            var item = GridArray.ContainsKey(cell) ? GridArray[cell].GetComponent<GridItem>() : null;
+            var item = GridItemDict.ContainsKey(cell) ? GridItemDict[cell].GetComponent<GridItem>() : null;
             return item;
         }
         return null;
@@ -180,9 +181,10 @@ public class GridManager : Singleton<GridManager>
     {
 
     }
-
-    public void MoveInternal(int x, int y, bool isAttacking )
+    List<IBattleMessage> messages;
+    public void MoveInternal(int x, int y, bool isAttacking, Dictionary<Vector2Int, GameObject> gridItemDict)
     {
+        messages = new List<IBattleMessage>();
         var moveVector = new Vector2Int(x, y);
         var tempVector = (transform.rotation * (Vector2)moveVector);
         if (rotatedTime == 1 || rotatedTime == 3)
@@ -192,13 +194,14 @@ public class GridManager : Singleton<GridManager>
         moveVector = new Vector2Int((int)tempVector.x, (int)tempVector.y);
         x = moveVector.x;
         y = moveVector.y;
-        Debug.Log("move " + moveVector);
 
         var myList = new List<Vector2Int>();
-        foreach (var key in GridArray.Keys)
+        foreach (var key in gridItemDict.Keys)
         {
             myList.Add(key);
         }
+        Dictionary<GridItem, Vector2Int> itemTargetIndex = new Dictionary<GridItem, Vector2Int>();
+        messages.Add(new MessageMove { itemTargetIndex = itemTargetIndex });
         myList.Sort(delegate (Vector2Int a, Vector2Int b) {
             if (x == 1)
             {
@@ -225,6 +228,10 @@ public class GridManager : Singleton<GridManager>
             var newKey = key;
             int test = 0;
             var obj = GetItem(key);
+            if(obj == null)
+            {
+                Debug.Log("null obj");
+            }
             var gridItem = obj.GetComponent<GridItem>();
             while (true)
             {
@@ -240,7 +247,9 @@ public class GridManager : Singleton<GridManager>
                     {
                         if (isAttacking)
                         {
-                            gridItem.hitBorder(true, newKey - moveVector - key, items.transform.TransformPoint(IndexToPosition(newKey)) );
+                            gridItem.hitBorder(messages);
+                            //messages.Add(new MessageItemHitBorder { item = gridItem });
+                            //gridItem.hitBorder(true, newKey - moveVector - key, items.transform.TransformPoint(IndexToPosition(newKey)));
                         }
                     }
                     if (HasItem(newKey))
@@ -248,7 +257,9 @@ public class GridManager : Singleton<GridManager>
 
                         if (isAttacking)
                         {
-                            GetItem(newKey).GetComponent<GridItem>().BeHit(gridItem);
+                            GetItem(newKey).GetComponent<GridItem>().beCrushed(gridItem,messages);
+                            //messages.Add(new MessageItemBeCrushed { item = gridItem });
+                            //GetItem(newKey).GetComponent<GridItem>().BeHit(gridItem);
                         }
                     }
 
@@ -258,22 +269,95 @@ public class GridManager : Singleton<GridManager>
             }
             if (newKey != key)
             {
-                MoveItemToPos(key, newKey, obj,animTime);
 
-                obj.GetComponent<GridItem>().calculateHit();
+                GridItemDict.Remove(key);
+                GridItemDict[newKey] = obj;
+                obj.GetComponent<GridItem>().index = newKey;
+                gridItem.move(messages);
+
+                Debug.Log($"move {obj.GetComponent<GridItem>().type.ToString()} from {key} to {newKey}");
             }
-            else
+            itemTargetIndex[gridItem] = newKey;
+            //if (newKey != key)
+            //{
+            //    MoveItemToPos(key, newKey, obj, animTime);
+
+            //    obj.GetComponent<GridItem>().calculateHit();
+            //}
+            //else
+            //{
+            //    obj.GetComponent<GridItem>().calculateHit();
+            //}
+
+        }
+    }
+
+    public IEnumerator ParseMessages()
+    {
+        foreach(var message in messages)
+        {
+            if (message is MessageMove move)
             {
-                obj.GetComponent<GridItem>().calculateHit();
+                foreach(var pair in Transform.FindObjectsOfType<GridItem>())
+                {
+                    MoveItemToIndexEnumerator(pair.GetComponent<GridItem>());
+                }
+
+                yield return new WaitForSeconds(animTime);
+            }
+            else if(message is MessageItemAttack attack)
+            {
+                Luggage.Instance.DoDamage(attack.damage);
+                FloatingTextManager.Instance.addText($"Attack {attack.damage}", attack.item.transform.position, Color.red);
+                //FloatingTextManager.Instance.addText($"{attack.damage}", heal.item.transform.position);
+                yield return new WaitForSeconds(animTime);
+
+            }
+            else if (message is MessageItemHeal heal)
+            {
+                heal.target.Heal(heal.amount);
+                FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
+                FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.item.transform.position, Color.green);
+                yield return new WaitForSeconds(animTime);
+            }
+            else if (message is MessageDestroy destr)
+            {
+                destr.item.destory();
+                FloatingTextManager.Instance.addText("Destroy!", destr.item.transform.position, Color.white);
+                yield return new WaitForSeconds(animTime);
             }
         }
     }
 
-    public void Move(int x, int y)
+    public IEnumerator EnemyAttackEnumerator(Enemy enemy)
     {
-        MoveInternal(x, y,true);
+        messages.Clear();
+        var damage = enemy. attack;
+        var item = GridManager.Instance.itemEnemyAttack(enemy);
+        if (item != null)
+        {
+            damage -= item.defense;
+            item.addDestroyMessage(messages);
 
-        StartCoroutine(MoveAfter(0, -1));
+            yield return StartCoroutine(ParseMessages());
+
+            yield return StartCoroutine(MoveAfter(0, -1));
+
+
+        }
+
+        BattleManager.Instance.player.ApplyDamage(damage);
+    }
+
+    public IEnumerator MoveEnumerator(int x, int y, bool isAttacking)
+    {
+        MoveInternal(x, y, isAttacking, GridItemDict);
+        yield return StartCoroutine(ParseMessages());
+        //MoveInternal(x, y,true);
+        if (isAttacking)
+        {
+            yield return StartCoroutine(MoveAfter(0, -1));
+        }
     }
 
     bool IsHittingBoarder(Vector2Int pos)
@@ -287,12 +371,16 @@ public class GridManager : Singleton<GridManager>
 
     public bool HasItem(Vector2Int pos)
     {
-        return GridArray.ContainsKey(pos);
+        return GridItemDict.ContainsKey(pos)&& GridItemDict[pos] !=null &&!GridItemDict[pos].GetComponent<GridItem>().isDestroyed;
     }
 
     public GameObject GetItem(Vector2Int pos)
     {
-        return GridArray[pos];
+        if (!HasItem(pos))
+        {
+            return null;
+        }
+        return GridItemDict[pos];
     }
 
     public Vector3 IndexToPosition(Vector2Int ind)
@@ -308,13 +396,14 @@ public class GridManager : Singleton<GridManager>
     {
         item.StartCoroutine(item.move(IndexToPosition(item.index), animTime));
     }
+
+    public void MoveItemToIndexEnumerator(GridItem item)
+    {
+        item.StartCoroutine(item.move(IndexToPosition(item.index),animTime));
+    }
     public void MoveItemToPos(Vector2Int start, Vector2Int end, GameObject obj, float animTime)
     {
 
-        GridArray[end] = obj;
-
-        GridArray.Remove(start);
-        obj.GetComponent<GridItem>().index = end;
         obj.GetComponent<MonoBehaviour>().StartCoroutine(obj.GetComponent<GridItem>().move(IndexToPosition(end), animTime));
 
         // obj.transform.DOLocalMove(IndexToPosition(end), 0.3f);
@@ -322,23 +411,37 @@ public class GridManager : Singleton<GridManager>
         //obj.transform.localPosition = IndexToPosition(end);
     }
 
-    public void swapItem(GridItem item1, GridItem item2, float animTime)
+    public void MoveItemToIndex(GridItem item1,Vector2Int targetIndex)
     {
-        var ind1 = item1.index;
-        var ind2 = item2.index;
-        GridArray[ind1] = item2.gameObject;
-        GridArray[ind2] = item1.gameObject;
+        var originIndex = item1.index;
+        if (GridManager.Instance.HasItem(targetIndex))
+        {
+            var swapOb = GridManager.Instance.GetItem(targetIndex).GetComponent<GridItem>();
+            swapOb.index = originIndex;
 
-
-
-        item1.index = ind2;
-
-        item2.index = ind1;
-
-        item1.GetComponent<MonoBehaviour>().StartCoroutine(item1.GetComponent<GridItem>().move(IndexToPosition(item1.index), animTime));
-        item2.GetComponent<MonoBehaviour>().StartCoroutine(item2.GetComponent<GridItem>().move(IndexToPosition(item2.index), animTime));
+            GridItemDict[originIndex] = swapOb.gameObject;
+        }
+        item1.index = targetIndex;
+        GridItemDict[targetIndex] = item1.gameObject;
 
     }
+    //public void swapItem(GridItem item1, GridItem item2, float animTime)
+    //{
+    //    var ind1 = item1.index;
+    //    var ind2 = item2.index;
+    //    GridItemDict[ind1] = item2.gameObject;
+    //    GridItemDict[ind2] = item1.gameObject;
+
+
+
+    //    item1.index = ind2;
+
+    //    item2.index = ind1;
+
+    //    item1.GetComponent<MonoBehaviour>().StartCoroutine(item1.GetComponent<GridItem>().move(IndexToPosition(item1.index), animTime));
+    //    item2.GetComponent<MonoBehaviour>().StartCoroutine(item2.GetComponent<GridItem>().move(IndexToPosition(item2.index), animTime));
+
+    //}
 
     public void FinishItemMoving(GameObject obj)
     {
@@ -375,16 +478,20 @@ public class GridManager : Singleton<GridManager>
 
         obj.transform.localPosition = IndexToPosition(i, j);
         // add to grid once instantiated
-        GridArray[new Vector2Int(i,j)] = obj;
+        GridItemDict[new Vector2Int(i,j)] = obj;
     }
     public void RemoveGrid(int i, int j,ItemType type)
     {
-        GridArray.Remove(new Vector2Int(i, j));
+        GridItemDict.Remove(new Vector2Int(i, j));
         deckPool.Add(type);
     }
     public void RemoveGrid(Vector2Int ind, ItemType type)
     {
-        GridArray.Remove(ind);
+        if (!GridItemDict.ContainsKey(ind))
+        {
+            Debug.Log("no remove for index " + ind);
+        }
+        GridItemDict.Remove(ind);
         deckPool.Add(type);
     }
 }

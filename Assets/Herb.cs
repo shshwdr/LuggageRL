@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Herb : GridItem
 {
-    public override void hitBorder() { }
-    public override void bigHitBorder() { }
-    public override void beCrushed(GridItem item) {
-        BattleManager.Instance.player.Heal(3);
-        FloatingTextManager.Instance.addText("Heal!", transform.position);
-        destory();
+    public override void beCrushed(GridItem item, List<IBattleMessage> messages) {
+        messages.Add(new MessageItemHeal { item = this, amount = 3, target = BattleManager.Instance.player });
+        this.addDestroyMessage(messages);
+        //BattleManager.Instance.player.Heal(3);
+        //FloatingTextManager.Instance.addText("Heal!", transform.position);
+        //destory();
     }
 }

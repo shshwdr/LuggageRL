@@ -7,10 +7,10 @@ public class FloatingTextManager : Singleton<FloatingTextManager>
     public GameObject floatingTextObj;
 
 
-    public void addText(string text, Vector3 pos)
+    public void addText(string text, Vector3 pos, Color color)
     {
         var obj = Instantiate(floatingTextObj);
-        obj.GetComponent<FloatingText>().init(text, pos);
+        obj.GetComponent<FloatingText>().init(text, pos, color);
     }
 
     // Start is called before the first frame update

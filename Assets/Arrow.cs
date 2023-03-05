@@ -5,18 +5,11 @@ using UnityEngine;
 public class Arrow : GridItem
 {
     int attack = 2;
-    public override void hitBorder()
+    public override void bigHitBorder(List<IBattleMessage> messages)
     {
-    }
-    public override void bigHitBorder()
-    {
-        FloatingTextManager.Instance.addText("Arrowwww!", transform.position);
+        FloatingTextManager.Instance.addText("Arrowwww!", transform.position,Color.red);
 
         Luggage.Instance.DoDamage(attack * movedCount);
         destory();
-    }
-    public override void beCrushed(GridItem item)
-    {
-
     }
 }

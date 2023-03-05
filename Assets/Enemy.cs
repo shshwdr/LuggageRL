@@ -60,16 +60,7 @@ public class Enemy : HPObject
 
 
         //attack item
-        var damage = attack;
-        var item = GridManager.Instance.itemEnemyAttack(this);
-        if (item != null)
-        {
-            damage -= item.defense;
-            item.destory();
-
-            yield return StartCoroutine(GridManager.Instance. MoveAfter(0, -1));
-        }
-        BattleManager.Instance.player.ApplyDamage(damage);
+        StartCoroutine( GridManager.Instance.EnemyAttackEnumerator(this));
 
 
 
