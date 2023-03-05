@@ -78,3 +78,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad85d4aca164afb4db36dbb3d6b8c32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  index: {x: 0, y: 0}
+  defense: 2
+  Name: Harb
+  isDestroyed: 0
+  healAmount: 3

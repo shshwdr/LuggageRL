@@ -74,3 +74,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e403d56a9d0bc448691dc5c31fb23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  index: {x: 0, y: 0}
+  defense: 2
+  Name: Stone
+  isDestroyed: 0
+  damage: 1
+  moveDamageScale: 2

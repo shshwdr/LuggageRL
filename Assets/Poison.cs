@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Poison : GridItem
 {
-    int attack = 3;
+    public int attack = 3;
+    public override string Desc => $@"{base.Desc}
+Deal {attack} damage when hit the border";
     public override void beCrushed(GridItem item, List<BattleMessage> messages)
     {
-        messages.Add(new MessageItemAttack { item = this, damage = 3 });
+        messages.Add(new MessageItemAttack { item = this, damage = attack });
         this.addDestroyMessage(messages);
     }
 }

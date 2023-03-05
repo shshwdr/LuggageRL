@@ -78,3 +78,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b440aebf1302184aa0af3326d442bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  index: {x: 0, y: 0}
+  defense: 2
+  Name: Poison
+  isDestroyed: 0
+  attack: 3

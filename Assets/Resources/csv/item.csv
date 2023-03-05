@@ -1,5 +1,5 @@
 ﻿name,displayName,maxCount,defense,attackBorder,attackBorderDesc,attackMoveBorder,attackMoveBorderDesc,attackBeCrushed,attackBeCrushedDesc
-ore,,,,,,,,,
-arrow,,,,,,,,,
-herb,,,,,,,,,
-poison,,,,,,,,,
+ore,Ore,4,5,,,,,,
+arrow,Arrow,4,1,,,,,,
+herb,Potion,4,2,,,,,,
+poison,Poison Bottle,4,2,,,,,,

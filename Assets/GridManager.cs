@@ -2,6 +2,8 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public enum ItemType { ore,herb, arrow, poison}
 public class GridManager : Singleton<GridManager>
 {
@@ -17,7 +19,7 @@ public class GridManager : Singleton<GridManager>
     public Transform items;
     public Dictionary<Vector2Int, GameObject> GridItemDict = new Dictionary<Vector2Int, GameObject>();
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
-
+    public Text itemViewText;
     public bool CanDraw(out string failedReason, int drawCount)
     {
         failedReason = "";

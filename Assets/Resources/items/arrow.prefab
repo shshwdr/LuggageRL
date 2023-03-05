@@ -78,3 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03f5c3583aaf3f49ad2da7620bcf946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  index: {x: 0, y: 0}
+  defense: 2
+  Name: Arrow
+  isDestroyed: 0

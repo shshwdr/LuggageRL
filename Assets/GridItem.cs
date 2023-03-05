@@ -8,7 +8,9 @@ public class GridItem : MonoBehaviour
     public ItemType type;
     public Vector2Int index;
     public int defense = 2;
-
+    public string Name;
+    public virtual string Desc => $@"{Name}
+defense: {defense}";
     public virtual void finishedAttack()
     {
         movedCount = 0;
@@ -51,7 +53,15 @@ public class GridItem : MonoBehaviour
     {
         
     }
+    private void OnMouseEnter()
+    {
+        GridManager.Instance.itemViewText.text = Desc;
+    }
+    private void OnMouseExit()
+    {
 
+        GridManager.Instance.itemViewText.text = "";
+    }
 
     public IEnumerator move(Vector3 targetPos, float animTime) {
 

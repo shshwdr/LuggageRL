@@ -5,6 +5,8 @@ using UnityEngine;
 public class Arrow : GridItem
 {
     int attack = 2;
+    public override string Desc => $@"{base.Desc}
+Attack {attack} * moved distance when hit the border";
     public override void hitBorder(List<BattleMessage> messages,Vector2Int borderIndex)
     {
         //FloatingTextManager.Instance.addText("Arrowwww!", transform.position,Color.red);
