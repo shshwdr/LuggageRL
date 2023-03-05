@@ -8,10 +8,14 @@ public class GridItem : MonoBehaviour
     public ItemType type;
     public Vector2Int index;
     public int defense = 2;
-    public virtual void hitBorder(List<IBattleMessage> messages) { }
-    public virtual void move(List<IBattleMessage> messages) { }
-    public virtual void bigHitBorder(List<IBattleMessage> messages) { }
-    public virtual void beCrushed(GridItem item, List<IBattleMessage> messages) { }
+
+    public virtual void finishedAttack()
+    {
+        movedCount = 0;
+    }
+    public virtual void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex) { }
+    public virtual void move(List<BattleMessage> messages) { movedCount++; }
+    public virtual void beCrushed(GridItem item, List<BattleMessage> messages) { }
     bool willHitBorder = false;
     bool wasMoving = false;
     protected int movedCount = 0;
@@ -21,35 +25,31 @@ public class GridItem : MonoBehaviour
     bool beHit = false;
     GridItem beHitItem;
 
-    public void addDestroyMessage(List<IBattleMessage> messages)
+    public void addDestroyMessage(List<BattleMessage> messages)
     {
         isDestroyed = true;
         messages.Add(new MessageDestroy { item = this });
         GridManager.Instance.RemoveGrid(index, type);
         Debug.Log($"addDestroyMessage {index} {type}");
     }
+
+    public void addDestroyMessageWithIndex(List<BattleMessage> messages,Vector2Int ind, bool skipAnim = false)
+    {
+        isDestroyed = true;
+        messages.Add(new MessageDestroy { item = this ,skipAnim = skipAnim});
+        GridManager.Instance.RemoveGrid(ind, type);
+        Debug.Log($"addDestroyMessage {ind} {type}");
+    }
     public void destory()
     {
+        transform.DOShakeScale(GridManager.animTime);
         Debug.Log($"destroy {index} {type}");
-        Destroy(gameObject);
+        Destroy(gameObject, GridManager.animTime);
     }
     // Start is called before the first frame update
     void Start()
     {
         
-    }
-
-    public void hitBorder(bool hit, Vector2Int movedDistance, Vector3 hitPos)
-    {
-        willHitBorder = hit;
-        wasMoving = movedDistance!=Vector2Int.zero;
-        movedCount = (int)movedDistance.magnitude;
-        borderPosition = hitPos;
-    }
-    public void BeHit(GridItem item)
-    {
-        beHit = true;
-        beHitItem = item;
     }
 
 
@@ -68,7 +68,6 @@ public class GridItem : MonoBehaviour
     //        if (wasMoving)
     //        {
     //            str += " big ";
-    //            bigHitBorder();
     //        }
     //        else
     //        {

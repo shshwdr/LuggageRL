@@ -29,16 +29,19 @@ public class Enemy : HPObject
     {
         damage = 0;
     }
-    protected override void DieInteral()
+    protected override IEnumerator DieInteral()
     {
-        base.DieInteral();
+        yield return StartCoroutine( base.DieInteral());
 
-        EnemyManager.Instance.RemoveEnemy(this);
-        Destroy(gameObject);
+        transform.DOShakeScale(GridManager.animTime);
+        yield return new WaitForSeconds(GridManager.animTime);
+        transform.DOLocalMoveY(-10, GridManager.animTime);
+        //Destroy(gameObject,GridManager.animTime);
+        yield return StartCoroutine(EnemyManager.Instance.RemoveEnemy(this));
     }
-    public void ShowDamage()
+    public IEnumerator ShowDamage()
     {
-        ApplyDamage(damage);
+        yield return  StartCoroutine( ApplyDamage(damage));
     }
     public void SelectAttack()
     {

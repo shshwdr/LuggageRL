@@ -17,6 +17,26 @@ public class BattleManager : Singleton<BattleManager>
     public Player player;
     int drawCount = 2;
     int startDrawCount = 4;
+    public Transform ButtonCanvas;
+
+    void hideButtonCanvas()
+    {
+        foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>())
+        {
+            button.gameObject.SetActive(false);
+        }
+    }
+    void showButtonCanvas()
+    {
+        if (isBattleFinished)
+        {
+            return;
+        }
+        foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>(true))
+        {
+            button.gameObject.SetActive(true);
+        }
+    }
     public void SkipMove()
     {
         moveLeft = 0;
@@ -29,6 +49,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     public IEnumerator DrawItemEnumerator(bool noCost =false)
     {
+        hideButtonCanvas();
         string failedReason;
         int count = noCost ? startDrawCount : drawCount;
         if (GridManager.Instance.CanDraw(out failedReason, count))
@@ -44,15 +65,16 @@ public class BattleManager : Singleton<BattleManager>
 
             FloatingTextManager.Instance.addText(failedReason, Vector3.zero, Color.red);
         }
+        showButtonCanvas();
     }
 
-    public void FinishCurrentBattle()
+    public IEnumerator FinishCurrentBattle()
     {
         if (!isBattleFinished)
         {
             isBattleFinished = true;
-
             FloatingTextManager.Instance.addText("Win Battle!", Vector3.zero, Color.red);
+            yield return new WaitForSeconds(GridManager.animTime);
             //reward
             RemoveText();
             StartCoroutine(searchNextBattle());
@@ -62,6 +84,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     IEnumerator searchNextBattle()
     {
+        hideButtonCanvas();
         yield return new WaitForSeconds(1);
         StartBattle();
 
@@ -69,6 +92,17 @@ public class BattleManager : Singleton<BattleManager>
 
     void StartBattle()
     {
+        //clear old enemies, this is bad, hacky solution
+        foreach(var enemy in Transform.FindObjectsOfType<Enemy>(true))
+        {
+            //if (!enemy.gameObject.activeInHierarchy)
+            {
+                Destroy(enemy.gameObject);
+            }
+        }
+
+
+        showButtonCanvas();
         isBattleFinished = false;
         AddEnemies();
         DrawItem(true);
@@ -108,7 +142,9 @@ public class BattleManager : Singleton<BattleManager>
     }
     public IEnumerator Move()
     {
+        hideButtonCanvas();
         yield return useMove(1);
+        showButtonCanvas();
     }
 
     public void PlayerAttackManually()
@@ -122,6 +158,7 @@ public class BattleManager : Singleton<BattleManager>
 
     public IEnumerator PlayerAttackMove()
     {
+        hideButtonCanvas();
         switch (selected)
         {
             case 0:
@@ -135,13 +172,18 @@ public class BattleManager : Singleton<BattleManager>
                 break;
         }
         yield return useMove(2);
+
+        showButtonCanvas();
     }
 
     public IEnumerator EndOfTurn()
     {
+        hideButtonCanvas();
         yield return StartCoroutine(EnemyManager.Instance.EnemiesAttack());
         SelectAttack();
         EnemyManager.Instance.SelectEenmiesAttack();
+        showButtonCanvas();
+
     }
 
     void UpdateText()

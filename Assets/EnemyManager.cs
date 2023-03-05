@@ -9,12 +9,12 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         enemies.Add(enemy);
     }
-    public void RemoveEnemy(Enemy enemy)
+    public IEnumerator RemoveEnemy(Enemy enemy)
     {
         enemies.Remove(enemy);
         if(enemies.Count == 0)
         {
-            BattleManager.Instance.FinishCurrentBattle();
+            yield return StartCoroutine( BattleManager.Instance.FinishCurrentBattle());
 
         }
     }

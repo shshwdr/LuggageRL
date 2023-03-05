@@ -8,15 +8,15 @@ public class HPObject : MonoBehaviour
     protected int hp = 0;
     public bool isDead = false;
     public HPBar hpbar;
-    public void ApplyDamage(int damage)
+    public IEnumerator ApplyDamage(int damage)
     {
         FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0), Color.red);
         hp -= damage;
-
+        yield return new WaitForSeconds(GridManager.animTime);
         hpbar.updateHPBar(hp, maxHP);
         if (hp <= 0)
         {
-            Die();
+            yield return StartCoroutine( Die());
         }
     }
 
@@ -27,18 +27,18 @@ public class HPObject : MonoBehaviour
         hp = Mathf.Min(hp, maxHP);
         hpbar.updateHPBar(hp, maxHP);
     }
-    public void Die()
+    public IEnumerator Die()
     {
         if (!isDead)
         {
             isDead = true;
-            DieInteral();
+            yield return StartCoroutine( DieInteral());
         }
     }
 
-    protected virtual void DieInteral()
+    protected virtual IEnumerator DieInteral()
     {
-
+        yield return null;
     }
     // Start is called before the first frame update
     protected virtual void Awake()

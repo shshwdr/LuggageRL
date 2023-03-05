@@ -5,10 +5,9 @@ using UnityEngine;
 public class Poison : GridItem
 {
     int attack = 3;
-    public override void beCrushed(GridItem item, List<IBattleMessage> messages)
+    public override void beCrushed(GridItem item, List<BattleMessage> messages)
     {
-        Luggage.Instance.DoDamage(attack);
-        FloatingTextManager.Instance.addText("Poison!", transform.position,Color.red);
-        destory();
+        messages.Add(new MessageItemAttack { item = this, damage = 3 });
+        this.addDestroyMessage(messages);
     }
 }

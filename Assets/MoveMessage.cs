@@ -2,46 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IBattleMessage { }
+public class BattleMessage
+{
+    public bool skipAnim = false;
+}
 
-public class MessageMove : IBattleMessage
+public class MessageMove : BattleMessage
 {
     public Dictionary<GridItem, Vector2Int> itemTargetIndex = new Dictionary<GridItem, Vector2Int>();
 }
-public class MessageItemMove : IBattleMessage
+public class MessageItemMove : BattleMessage
 {
-    public Dictionary<GridItem, Vector2Int> itemTargetIndex = new Dictionary<GridItem, Vector2Int>();
+    public GridItem item;
 }
 
-public class MessageItemHitBorder : IBattleMessage
+public class MessageItemHitBorder : BattleMessage
 {
     public GridItem item;
 }
-public class MessageItemBigHitBorder : IBattleMessage
+public class MessageItemBeCrushed : BattleMessage
 {
     public GridItem item;
 }
-public class MessageItemBeCrushed : IBattleMessage
-{
-    public GridItem item;
-}
-public class MessageItemAttack : IBattleMessage
+public class MessageItemAttack : BattleMessage
 {
     public GridItem item;
     public int damage;
     public HPObject target;
 }
-public class MessageItemHeal : IBattleMessage
+public class MessageItemHeal : BattleMessage
 {
     public GridItem item;
     public int amount;
     public HPObject target;
 }
-public class MessageShowPopup : IBattleMessage {
+public class MessageShowPopup : BattleMessage {
     public string str;
 
 }
-public class MessageDestroy : IBattleMessage {
+public class MessageDestroy : BattleMessage {
 
     public GridItem item;
 }
