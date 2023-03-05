@@ -36,7 +36,26 @@ public class Luggage : Singleton<Luggage>
 
         yield return StartCoroutine(showDamage());
     }
+    public IEnumerator PushAndRotateAttack()
+    {
+        SelectEnemyTarget();
+        //
+        //suitcaseInBattle.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
+        transform.DOMove(target.transform.position, GridManager.animTime);
 
+        //GridManager.Instance.Move(1, 0);
+        yield return GridManager.Instance.MoveEnumerator(1, 0, false);
+
+
+        yield return new WaitForSeconds(GridManager.animTime);
+
+        yield return StartCoroutine(showDamage());
+
+        transform.DORotate(new Vector3(0, 0, 90 * GridManager.Instance.rotatedTime), GridManager.animTime * 2);
+        GridManager.Instance.Rotate(1, true);
+
+
+    }
     public IEnumerator UpsideDownAndDrop()
     {
         SelectEnemyTarget();

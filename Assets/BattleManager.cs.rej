@@ -1,0 +1,9 @@
+diff a/Assets/BattleManager.cs b/Assets/BattleManager.cs	(rejected hunks)
+@@ -15,7 +15,6 @@
+     public GameObject[] enemies;
+     public Transform[] enemyPositions;
+     public Player player;
+-    [SerializeField] private int startDrawCount = 4;
+     int drawCount = 2;
+     int startDrawCount = 4;
+     public void SkipMove()
