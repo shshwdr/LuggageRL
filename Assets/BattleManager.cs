@@ -160,7 +160,6 @@ public class BattleManager : Singleton<BattleManager>
     {
 
         hideButtonCanvas();
-        yield return useMove(1);
         yield return StartCoroutine(Luggage.Instance.Rotate(i));
         yield return useMove(1);
 
@@ -171,7 +170,6 @@ public class BattleManager : Singleton<BattleManager>
         hideButtonCanvas();
 
         StartCoroutine(MoveForwardIEnumerator());
-        showButtonCanvas();
     }
     public IEnumerator MoveForwardIEnumerator()
     {

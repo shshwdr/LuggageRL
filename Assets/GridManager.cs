@@ -183,6 +183,125 @@ public class GridManager : Singleton<GridManager>
 
     List<BattleMessage> messages;
     public List<BattleMessage> attackBeforeMoveMessage;
+    //public void MoveInternal(int x, int y, bool isAttacking, Dictionary<Vector2Int, GameObject> gridItemDict)
+    //{
+    //    messages = new List<BattleMessage>();
+    //    attackBeforeMoveMessage = new List<BattleMessage>();
+    //    var moveVector = new Vector2Int(x, y);
+    //    var tempVector = (transform.rotation * (Vector2)moveVector);
+    //    if (rotatedTime == 1 || rotatedTime == 3)
+    //    {
+    //        tempVector = -tempVector;
+    //    }
+    //    moveVector = new Vector2Int((int)tempVector.x, (int)tempVector.y);
+    //    x = moveVector.x;
+    //    y = moveVector.y;
+
+    //    var myList = new List<Vector2Int>();
+    //    foreach (var key in gridItemDict.Keys)
+    //    {
+    //        myList.Add(key);
+    //    }
+    //    Dictionary<GridItem, Vector2Int> itemTargetIndex = new Dictionary<GridItem, Vector2Int>();
+    //    messages.Add(new MessageMove { itemTargetIndex = itemTargetIndex });
+    //    myList.Sort(delegate (Vector2Int a, Vector2Int b) {
+    //        if (x == 1)
+    //        {
+    //            return b.x.CompareTo(a.x);
+    //        }
+    //        else if (x == -1)
+    //        {
+    //            return a.x.CompareTo(b.x);
+    //        }
+    //        else if (y == 1)
+    //        {
+
+    //            return b.y.CompareTo(a.y);
+    //        }
+    //        else
+    //        {
+
+    //            return a.y.CompareTo(b.y);
+    //        }
+    //    });
+
+    //    foreach (var key in myList)
+    //    {
+    //        var newKey = key;
+    //        int test = 0;
+    //        var obj = GetItem(key);
+    //        if(obj == null)
+    //        {
+    //            Debug.Log("null obj");
+    //        }
+    //        var gridItem = obj.GetComponent<GridItem>();
+    //        while (true)
+    //        {
+    //            test++;
+    //            if (test > 10)
+    //            {
+    //                break;
+    //            }
+    //            newKey += moveVector;
+    //            if (!CanMoveTo(newKey))
+    //            {
+    //                if (IsHittingBoarder(newKey))
+    //                {
+    //                    if (isAttacking)
+    //                    {
+    //                        gridItem.hitBorder(messages, newKey);
+    //                        //messages.Add(new MessageItemHitBorder { item = gridItem });
+    //                        //gridItem.hitBorder(true, newKey - moveVector - key, items.transform.TransformPoint(IndexToPosition(newKey)));
+    //                    }
+    //                }
+    //                if (HasItem(newKey))
+    //                {
+
+    //                    if (isAttacking)
+    //                    {
+    //                        GetItem(newKey).GetComponent<GridItem>().beCrushed(gridItem,messages);
+    //                        //messages.Add(new MessageItemBeCrushed { item = gridItem });
+    //                        //GetItem(newKey).GetComponent<GridItem>().BeHit(gridItem);
+    //                    }
+    //                }
+
+    //                newKey -= moveVector;
+    //                break;
+    //            }
+    //        }
+    //        if (newKey != key)
+    //        {
+    //            if (GridItemDict.ContainsKey(key))
+    //            {
+    //                GridItemDict.Remove(key);
+    //                GridItemDict[newKey] = obj;
+    //            }
+    //            if(obj.GetComponent<GridItem>().index == key)
+    //            {
+    //                obj.GetComponent<GridItem>().index = newKey;
+    //                itemTargetIndex[gridItem] = newKey;
+    //            }
+    //            //gridItem.move(messages);
+
+    //            Debug.Log($"move {obj.GetComponent<GridItem>().type.ToString()} from {key} to {newKey}");
+    //        }
+
+    //        gridItem.finishedAttack();
+    //        //if (newKey != key)
+    //        //{
+    //        //    MoveItemToPos(key, newKey, obj, animTime);
+
+    //        //    obj.GetComponent<GridItem>().calculateHit();
+    //        //}
+    //        //else
+    //        //{
+    //        //    obj.GetComponent<GridItem>().calculateHit();
+    //        //}
+
+    //    }
+    //    messages.InsertRange(0, attackBeforeMoveMessage);
+    //}
+
     public void MoveInternal(int x, int y, bool isAttacking, Dictionary<Vector2Int, GameObject> gridItemDict)
     {
         messages = new List<BattleMessage>();
@@ -228,17 +347,17 @@ public class GridManager : Singleton<GridManager>
         foreach (var key in myList)
         {
             var newKey = key;
-            int test = 0;
+            int test = isAttacking?1:10;
             var obj = GetItem(key);
-            if(obj == null)
+            if (obj == null)
             {
                 Debug.Log("null obj");
             }
             var gridItem = obj.GetComponent<GridItem>();
             while (true)
             {
-                test++;
-                if (test > 10)
+                test--;
+                if (test <0)
                 {
                     break;
                 }
@@ -259,7 +378,7 @@ public class GridManager : Singleton<GridManager>
 
                         if (isAttacking)
                         {
-                            GetItem(newKey).GetComponent<GridItem>().beCrushed(gridItem,messages);
+                            GetItem(newKey).GetComponent<GridItem>().beCrushed(gridItem, messages);
                             //messages.Add(new MessageItemBeCrushed { item = gridItem });
                             //GetItem(newKey).GetComponent<GridItem>().BeHit(gridItem);
                         }
@@ -276,7 +395,7 @@ public class GridManager : Singleton<GridManager>
                     GridItemDict.Remove(key);
                     GridItemDict[newKey] = obj;
                 }
-                if(obj.GetComponent<GridItem>().index == key)
+                if (obj.GetComponent<GridItem>().index == key)
                 {
                     obj.GetComponent<GridItem>().index = newKey;
                     itemTargetIndex[gridItem] = newKey;
