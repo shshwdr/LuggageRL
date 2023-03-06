@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BattleManager : Singleton<BattleManager>
 {
     public Text LuggageAttackText;
+    public Text MoveText;
     int selected;
     [SerializeField] private int moveMax = 4;
     int moveLeft;
@@ -242,12 +243,14 @@ public class BattleManager : Singleton<BattleManager>
         {
             return;
         }
-        LuggageAttackText.text = $"Next Attack: {attackString[selected]} (in {moveLeft} moves)";
+        LuggageAttackText.text = $" {attackString[selected]} ({attackMoveCost})";
+        MoveText.text = $"{moveLeft}";
     }
 
     void RemoveText()
     {
-        LuggageAttackText.text = "Search for next Enemy";
+        FloatingTextManager.Instance.addText("Search for next Enemy",Vector3.zero,Color.white);
+        //LuggageAttackText.text = "Search for next Enemy";
     }
 
     // Update is called once per frame
