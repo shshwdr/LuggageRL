@@ -8,7 +8,7 @@ public enum ItemType { ore,herb, arrow, poison}
 public class GridManager : Singleton<GridManager>
 {
 
-    static public float animTime = 0.5f;
+    static public float animTime = 0.3f;
     public float tileSize = 2f;
     public int Rows = 2;
     public int Columns = 3;
