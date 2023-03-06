@@ -8,15 +8,19 @@ public class BattleManager : Singleton<BattleManager>
 {
     public Text LuggageAttackText;
     int selected;
-    int moveMax = 4;
+    [SerializeField] private int moveMax = 4;
     int moveLeft;
     bool isBattleFinished = false;
     string[] attackString = new string[] {"Push","Upside Down","Throw And Back" };
     public GameObject[] enemies;
     public Transform[] enemyPositions;
     public Player player;
-    int drawCount = 2;
-    int startDrawCount = 4;
+    [SerializeField] private int drawCount = 2;
+    [SerializeField] private int startDrawCount = 4;
+    [SerializeField] private int rotateMoveCost = 0;
+    [SerializeField] private int attackMoveCost = 0;
+    [SerializeField] private int swapActionCost = 0;
+    [SerializeField] private int drawMoveCost = 0;
     public Transform ButtonCanvas;
 
     void hideButtonCanvas()
@@ -45,7 +49,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void DrawItem(bool noCost = false)
     {
-        if (!noCost && moveLeft < 2)
+        if (!noCost && moveLeft < drawMoveCost)
         {
             return;
         }
@@ -61,7 +65,7 @@ public class BattleManager : Singleton<BattleManager>
             yield return StartCoroutine(GridManager.Instance.DrawItem(count));
             if (!noCost)
             {
-                yield return useMove(2);
+                yield return useMove(drawMoveCost);
             }
         }
         else
@@ -147,7 +151,7 @@ public class BattleManager : Singleton<BattleManager>
     public IEnumerator Move()
     {
         hideButtonCanvas();
-        yield return useMove(1);
+        yield return useMove(swapActionCost);
         showButtonCanvas();
     }
 
@@ -161,7 +165,7 @@ public class BattleManager : Singleton<BattleManager>
 
         hideButtonCanvas();
         yield return StartCoroutine(Luggage.Instance.Rotate(i));
-        yield return useMove(1);
+        yield return useMove(rotateMoveCost);
 
         showButtonCanvas();
     }
@@ -176,7 +180,7 @@ public class BattleManager : Singleton<BattleManager>
 
         hideButtonCanvas();
         yield return StartCoroutine(Luggage.Instance.MoveForward());
-        yield return useMove(1);
+        yield return useMove(rotateMoveCost);
 
         showButtonCanvas();
     }
@@ -184,7 +188,7 @@ public class BattleManager : Singleton<BattleManager>
     public void PlayerAttackManuallySelectId(int i)
     {
 
-        if (moveLeft < 2)
+        if (moveLeft < attackMoveCost)
         {
             return;
         }
@@ -192,7 +196,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void PlayerAttackManually()
     {
-        if (moveLeft < 2)
+        if (moveLeft < attackMoveCost)
         {
             return;
         }
@@ -217,7 +221,7 @@ public class BattleManager : Singleton<BattleManager>
                 yield return StartCoroutine(Luggage.Instance.LiftAndDownAttack());
                 break;
         }
-        yield return useMove(2);
+        yield return useMove(attackMoveCost);
 
         showButtonCanvas();
     }
