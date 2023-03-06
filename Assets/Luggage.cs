@@ -25,6 +25,34 @@ public class Luggage : Singleton<Luggage>
         target = enemy;
         target.ClearDamage();
     }
+
+    public IEnumerator Rotate(int ind)
+    {
+        GridManager.Instance.Rotate(ind, false);
+        transform.DORotate(new Vector3(0, 0, 90 * GridManager.Instance.rotatedTime), GridManager.animTime * 2);
+        yield return new WaitForSeconds(GridManager.animTime * 2);
+        yield return StartCoroutine(GridManager.Instance.MoveAfter(0, -1));
+    }
+
+    public IEnumerator MoveForward()
+    {
+        yield return GridManager.Instance.MoveEnumerator(1, 0, false);
+    }
+
+
+    public IEnumerator LiftAndDownAttack()
+    {
+        SelectEnemyTarget();
+        //
+        transform.DOMove(target.transform.position + Vector3.up * 5, GridManager.animTime * 2);
+        yield return new WaitForSeconds(GridManager.animTime * 2);
+        //suitcaseInBattle.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
+        transform.DOMove(target.transform.position, GridManager.animTime);
+        yield return GridManager.Instance.MoveEnumerator(0, -1, true);
+        //yield return new WaitForSeconds(GridManager.animTime);
+
+        yield return StartCoroutine(showDamage());
+    }
     public IEnumerator PushForwardAttack()
     {
         SelectEnemyTarget();

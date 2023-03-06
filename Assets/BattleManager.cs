@@ -45,6 +45,10 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void DrawItem(bool noCost = false)
     {
+        if (!noCost && moveLeft < 2)
+        {
+            return;
+        }
         StartCoroutine(DrawItemEnumerator(noCost));
     }
     public IEnumerator DrawItemEnumerator(bool noCost =false)
@@ -57,7 +61,7 @@ public class BattleManager : Singleton<BattleManager>
             yield return StartCoroutine(GridManager.Instance.DrawItem(count));
             if (!noCost)
             {
-                yield return useMove(1);
+                yield return useMove(2);
             }
         }
         else
@@ -147,19 +151,60 @@ public class BattleManager : Singleton<BattleManager>
         showButtonCanvas();
     }
 
+    public void Rotate(int i)
+    {
+
+        StartCoroutine(RotateIEnumerator(i));
+    }
+    public IEnumerator RotateIEnumerator(int i)
+    {
+
+        hideButtonCanvas();
+        yield return useMove(1);
+        yield return StartCoroutine(Luggage.Instance.Rotate(i));
+        yield return useMove(1);
+
+        showButtonCanvas();
+    }
+    public void MoveForward(int i)
+    {
+        hideButtonCanvas();
+
+        StartCoroutine(MoveForwardIEnumerator());
+        showButtonCanvas();
+    }
+    public IEnumerator MoveForwardIEnumerator()
+    {
+
+        hideButtonCanvas();
+        yield return StartCoroutine(Luggage.Instance.MoveForward());
+        yield return useMove(1);
+
+        showButtonCanvas();
+    }
+
+    public void PlayerAttackManuallySelectId(int i)
+    {
+
+        if (moveLeft < 2)
+        {
+            return;
+        }
+        StartCoroutine(PlayerAttackMove(i));
+    }
     public void PlayerAttackManually()
     {
         if (moveLeft < 2)
         {
             return;
         }
-        StartCoroutine(PlayerAttackMove());
+        StartCoroutine(PlayerAttackMove(selected));
     }
 
-    public IEnumerator PlayerAttackMove()
+    public IEnumerator PlayerAttackMove(int moveId)
     {
         hideButtonCanvas();
-        switch (selected)
+        switch (moveId)
         {
             case 0:
                 yield return StartCoroutine(Luggage.Instance.PushForwardAttack());
@@ -169,6 +214,9 @@ public class BattleManager : Singleton<BattleManager>
                 break;
             case 2:
                 yield return StartCoroutine(Luggage.Instance.ThrowOutAndHitBack());
+                break;
+            case 3:
+                yield return StartCoroutine(Luggage.Instance.LiftAndDownAttack());
                 break;
         }
         yield return useMove(2);
