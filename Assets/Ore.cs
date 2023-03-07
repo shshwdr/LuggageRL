@@ -8,7 +8,7 @@ public class Ore : GridItemCore
     public int moveDamageScale = 2;
 
     public override string Desc => $@"{base.Desc}
-Deal {damage} damage when hit the border
+Deal {CalculateDamage(damage)} damage when hit the border
 Deal x{moveDamageScale} when moved in the attack
 {BuffDesc}";
     public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
@@ -23,6 +23,7 @@ Deal x{moveDamageScale} when moved in the attack
         {
             messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage), index = index });
         }
+        buffs.Clear();
         //FloatingTextManager.Instance.addText("Attack!", transform.position);
         //Luggage.Instance.DoDamage(1);
     }

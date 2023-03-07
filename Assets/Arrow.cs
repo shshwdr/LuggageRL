@@ -6,7 +6,7 @@ public class Arrow : GridItemCore
 {
     int attack = 1;
     public override string Desc => $@"{base.Desc}
-Attack {attack} * moved distance when hit the border
+Attack {CalculateDamage(attack)} * moved distance when hit the border
 {BuffDesc}";
     public override void hitBorder(List<BattleMessage> messages,Vector2Int borderIndex)
     {

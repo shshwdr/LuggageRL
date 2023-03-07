@@ -108,6 +108,8 @@ public class Draggable : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         yield return StartCoroutine(GridManager.Instance.MoveAfter(0, -1));
 
+        BattleManager.Instance.PredictNextAttack();
+
         swapOb = null;
 
         StartCoroutine( BattleManager.Instance.MoveTile());

@@ -86,6 +86,8 @@ public class GridManager : Singleton<GridManager>
         deckPool.Clear();
 
         yield return StartCoroutine(MoveAfter(0, -1));
+
+        BattleManager.Instance.PredictNextAttack();
     }
     // Start is called before the first frame update
     void Start()
@@ -98,7 +100,7 @@ public class GridManager : Singleton<GridManager>
         //AddGrid(2, 2, ItemType.herb);
 
 
-        StartCoroutine(MoveAfter(0, -1));
+        //StartCoroutine(MoveAfter(0, -1));
     }
     public int rotatedTime = 0;
     public void Rotate(int time, bool applyGravity)
@@ -118,7 +120,6 @@ public class GridManager : Singleton<GridManager>
         //Debug.Log("move after");
         //yield return new WaitForSeconds(animTime);
         yield return MoveEnumerator(x,y,false);
-        BattleManager.Instance.PredictNextAttack();
     }
     List<Transform> sortEmptyCells()
     {
@@ -206,7 +207,7 @@ public class GridManager : Singleton<GridManager>
         previewCells.Clear();
     }
 
-    List<BattleMessage> messages;
+    List<BattleMessage> messages = new List<BattleMessage> ();
 
     Vector2Int rotateMoveVectorBasedOnRotateTime(int x,int y)
     {
@@ -408,8 +409,12 @@ public class GridManager : Singleton<GridManager>
             else if (message is MessageItemApplyEffect applyEffect)
             {
 
+                if (!GridItemDict.ContainsKey(applyEffect.targetIndex))
+                {
+                    Debug.Log("?");
+                }
                 GridItemDict[applyEffect.targetIndex].ApplyBuff(applyEffect.type, applyEffect.value);
-                FloatingTextManager.Instance.addText($"Apply {applyEffect.type.ToString()}", GridItemDict[applyEffect.index].transform.position, Color.yellow);
+                FloatingTextManager.Instance.addText($"Apply {applyEffect.type.ToString()}", GridItemDict[applyEffect.targetIndex].transform.position, Color.yellow);
                 //FloatingTextManager.Instance.addText($"{attack.damage}", heal.item.transform.position);
                 if (!applyEffect.skipAnim)
                 {
@@ -481,6 +486,7 @@ public class GridManager : Singleton<GridManager>
             yield return StartCoroutine(MoveAfter(0, -1));
 
 
+            BattleManager.Instance.PredictNextAttack();
         }
 
         yield return StartCoroutine( BattleManager.Instance.player.ApplyDamage(damage));
@@ -497,7 +503,8 @@ public class GridManager : Singleton<GridManager>
     }
     public IEnumerator MoveAndAttack(int x,int y)
     {
-        foreach(var item in GridItemDict.Values)
+        messages.Clear();
+        foreach (var item in GridItemDict.Values)
         {
             item.GetComponent<GridItem>().finishedAttack();
         }
@@ -513,12 +520,14 @@ public class GridManager : Singleton<GridManager>
 
         yield return StartCoroutine(MoveAfter(0, -1));
 
+        BattleManager.Instance.PredictNextAttack();
         updateAttackEdge();
 
     }
 
     public void predict(int x,int y)
     {
+        messages.Clear();
         // we need to copy a GridItemDict, create a map between original grid and new ones
         // move and attack using it
         var predictDict = new Dictionary<Vector2Int, GridItemCore>();
@@ -538,6 +547,7 @@ public class GridManager : Singleton<GridManager>
     }
     public IEnumerator MoveEnumerator(int x, int y, bool isAttacking)
     {
+        messages.Clear();
         MoveInternal(x, y, isAttacking, GridItemDict);
         yield return StartCoroutine(ParseMessages());
         //MoveInternal(x, y,true);

@@ -270,6 +270,9 @@ MonoBehaviour:
     isDestroyed: 0
     buffsKey: 
     buffsValue: 
+    buffs:
+      Keys: 
+      Values: 
   baseItem: {fileID: 0}
 --- !u!1 &1920938710777092685
 GameObject:
@@ -302,7 +305,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3096575628825872985}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -471,7 +474,7 @@ RectTransform:
   m_Children:
   - {fileID: 445072547566954210}
   m_Father: {fileID: 3096575628825872985}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -516,7 +519,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3096575628825872985}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -592,10 +595,10 @@ RectTransform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_Children:
   - {fileID: 2212702502428585867}
+  - {fileID: 3100261921185098126}
   - {fileID: 2359322226905590205}
   - {fileID: 4950285347357799318}
   - {fileID: 5071573556036089219}
-  - {fileID: 3100261921185098126}
   m_Father: {fileID: 1773436473970345895}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -696,7 +699,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3096575628825872985}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

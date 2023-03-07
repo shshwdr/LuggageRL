@@ -129,7 +129,10 @@ defense: {defense}";
         {
             buffs[type] += v;
         }
-        buffs[type] = v;
+        else
+        {
+            buffs[type] = v;
+        }
 
 
     }

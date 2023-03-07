@@ -63,7 +63,7 @@ public class Enemy : HPObject
 
 
         //attack item
-        StartCoroutine( GridManager.Instance.EnemyAttackEnumerator(this));
+        yield return StartCoroutine( GridManager.Instance.EnemyAttackEnumerator(this));
 
 
 
