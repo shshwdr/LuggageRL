@@ -92,15 +92,17 @@ public class Draggable : MonoBehaviour
             yield break;
         }
 
+        BattleManager.Instance.hideButtonCanvas();
+
         FloatingTextManager.Instance.addText("Move!", Vector3.zero,Color.white);
 
         var targetItem = GridManager.Instance.GetItem(swapOb.index);
         GridManager.Instance.MoveItemToIndex(GetComponent<GridItem>(), swapOb.index);
 
-        GridManager.Instance.MoveItemToIndexEnumerator(GetComponent<GridItem>());
+        GridManager.Instance.UpdateItemPositionToIndexEnumerator(GetComponent<GridItem>());
         if (targetItem!=null)
         {
-            GridManager.Instance.MoveItemToIndexEnumerator(targetItem.GetComponent<GridItem>());
+            GridManager.Instance.UpdateItemPositionToIndexEnumerator(targetItem.GetComponent<GridItem>());
         }
 
         yield return new WaitForSeconds(0.1f);
@@ -108,6 +110,6 @@ public class Draggable : MonoBehaviour
 
         swapOb = null;
 
-        StartCoroutine( BattleManager.Instance.Move());
+        StartCoroutine( BattleManager.Instance.MoveTile());
     }
 }

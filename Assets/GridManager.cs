@@ -431,7 +431,7 @@ public class GridManager : Singleton<GridManager>
                 {
                     foreach (var pair in Transform.FindObjectsOfType<GridItem>())
                     {
-                        MoveItemToIndexEnumerator(pair.GetComponent<GridItem>());
+                        UpdateItemPositionToIndexEnumerator(pair.GetComponent<GridItem>());
                     }
 
                     yield return new WaitForSeconds(animTime);
@@ -466,7 +466,7 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemMove itemMove)
             { 
-                MoveItemToIndexEnumerator(itemMove.item);
+                UpdateItemPositionToIndexEnumerator(itemMove.item);
                 yield return new WaitForSeconds(animTime);
             }
         }
@@ -565,7 +565,7 @@ public class GridManager : Singleton<GridManager>
         item.StartCoroutine(item.move(IndexToPosition(item.index), animTime));
     }
 
-    public void MoveItemToIndexEnumerator(GridItem item)
+    public void UpdateItemPositionToIndexEnumerator(GridItem item)
     {
         item.StartCoroutine(item.move(IndexToPosition(item.index),animTime));
     }
@@ -589,8 +589,14 @@ public class GridManager : Singleton<GridManager>
 
             GridItemDict[originIndex] = swapOb.gameObject;
         }
+        else
+        {
+
+            GridItemDict.Remove(originIndex);
+        }
         item1.index = targetIndex;
         GridItemDict[targetIndex] = item1.gameObject;
+        Debug.Log($"{targetIndex} {originIndex}");
 
     }
     //public void swapItem(GridItem item1, GridItem item2, float animTime)

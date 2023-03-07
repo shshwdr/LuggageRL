@@ -24,7 +24,7 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField] private int drawMoveCost = 0;
     public Transform ButtonCanvas;
 
-    void hideButtonCanvas()
+    public void hideButtonCanvas()
     {
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>())
         {
@@ -150,7 +150,7 @@ public class BattleManager : Singleton<BattleManager>
         }
 
     }
-    public IEnumerator Move()
+    public IEnumerator MoveTile()
     {
         hideButtonCanvas();
         yield return useMove(swapActionCost);
