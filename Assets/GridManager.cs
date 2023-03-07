@@ -359,6 +359,11 @@ public class GridManager : Singleton<GridManager>
 
 
             }
+            else if(message is MessageItemApplyEffect applyEffect)
+            {
+                predictToOrigin[(GridItemCore) applyEffect.target].baseItem.WillBeBuff();
+
+            }
             else if (message is MessageItemHeal heal)
             {
                 Debug.Log($"{heal.item.Name} heal {heal.amount}");
@@ -397,6 +402,17 @@ public class GridManager : Singleton<GridManager>
                         UpdateItemPositionToIndexEnumerator(GridItemDict[pair.index]);
                     }
 
+                    yield return new WaitForSeconds(animTime);
+                }
+            }
+            else if (message is MessageItemApplyEffect applyEffect)
+            {
+
+                GridItemDict[applyEffect.targetIndex].ApplyBuff(applyEffect.type, applyEffect.value);
+                FloatingTextManager.Instance.addText($"Apply {applyEffect.type.ToString()}", GridItemDict[applyEffect.index].transform.position, Color.yellow);
+                //FloatingTextManager.Instance.addText($"{attack.damage}", heal.item.transform.position);
+                if (!applyEffect.skipAnim)
+                {
                     yield return new WaitForSeconds(animTime);
                 }
             }

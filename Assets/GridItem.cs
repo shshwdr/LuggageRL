@@ -3,10 +3,61 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+[System.Serializable]
+public struct SerializedDictionary<T, U>
+{
+    public List<T> Keys;
+    public List<U> Values;
+    public void Clear()
+    {
+        Keys.Clear();
+        Values.Clear();
+    }
+    public U this[T key]
+    {
+        get { var index = Keys.IndexOf(key); return Values[index]; }
+        set { var index = Keys.IndexOf(key); if (index >= 0) { Values[index] = value; }
+            else
+            {
+                Keys.Add(key);
+                Values.Add(value);
+            }
+        }
+    }
+    public bool ContainsKey(T key)
+    {
+        return Keys.Contains(key);
+    }
+    public Dictionary<T, U> getDictionary()
+    {
+        Dictionary<T, U> res = new Dictionary<T, U>();
+        for (int i = 0; i < Keys.Count; i++)
+        {
+            res[Keys[i]] = Values[i];
+        }
+        return res;
+    }
+    public SerializedDictionary(Dictionary<T, U> dict)
+    {
+        Keys = dict.Keys.ToList();
+        Values = dict.Values.ToList();
+    }
 
+    public static implicit operator Dictionary<T, U>(SerializedDictionary<T, U> test)
+    {
+        return test.getDictionary();
+    }
+    public static implicit operator SerializedDictionary<T, U>(Dictionary<T, U> test)
+    {
+        return new SerializedDictionary<T, U>(test);
+    }
+}
+[Serializable]
+public enum BuffType { poison, coin}
 public static class Ut
 {
     public static T DeepClone<T>(this T obj)
@@ -38,6 +89,28 @@ public class GridItemCore: IGridItem
     public virtual string Desc => $@"{Name}
 defense: {defense}";
 
+    public string BuffDesc
+    {
+        get
+        {
+            var str = "";
+            foreach(var b in buffs.Keys)
+            {
+                str += $"{b.ToString()}: {buffs[b]}\n";
+            }
+            return str;
+        }
+    }
+
+    public int CalculateDamage(int rawDamage)
+    {
+        if (buffs.ContainsKey(BuffType.poison))
+        {
+            rawDamage += buffs[BuffType.poison];
+        }
+        return rawDamage;
+    }
+
     public int movedCount = 0;
     //protected Vector3 borderPosition;
     public bool isDestroyed = false;
@@ -45,7 +118,25 @@ defense: {defense}";
     bool beHit = false;
     //GridItemCore beHitItem;
 
+    public List<BuffType> buffsKey = new List<BuffType>();
+    public List<int> buffsValue = new List<int>();
 
+    public SerializedDictionary<BuffType, int> buffs = new SerializedDictionary<BuffType, int>() { Keys = new List<BuffType>(), Values = new List<int>() };
+
+    public void ApplyBuff(BuffType type, int v)
+    {
+        if (buffs.ContainsKey(type))
+        {
+            buffs[type] += v;
+        }
+        buffs[type] = v;
+
+
+    }
+    public void ClearBuff()
+    {
+        buffs.Clear();
+    }
     public virtual void finishedAttack()
     {
         movedCount = 0;
@@ -80,6 +171,8 @@ public interface IGridItem
     public void addDestroyMessageWithIndex(List<BattleMessage> messages, Vector2Int ind, bool skipAnim = false);
     public Vector2Int index { get; set; }
     public GridItemCore Core { get; }
+    public void ApplyBuff(BuffType type, int v);
+    public void ClearBuff();
 }
 
 public class GridItem : MonoBehaviour, IGridItem
@@ -90,6 +183,12 @@ public class GridItem : MonoBehaviour, IGridItem
     public virtual void finishedAttack()
     {
         core.finishedAttack();
+    }
+
+    public Dictionary<BuffType, int> buffs => core.buffs;
+    public void ApplyBuff(BuffType type, int v) { core.ApplyBuff(type, v); baseItem. updateBuff(); }
+    public void ClearBuff(){
+        core.ClearBuff(); baseItem.updateBuff();
     }
     public virtual void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex) { core.hitBorder(messages, borderIndex); }
     public virtual void move(List<BattleMessage> messages) { core.move(messages); }

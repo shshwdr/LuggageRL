@@ -24,6 +24,16 @@ public class MessageItemAttack : BattleMessage
     public int damage;
     public HPObject target;
 }
+
+public class MessageItemApplyEffect : BattleMessage
+{
+    public Vector2Int index;
+    public Vector2Int targetIndex;
+    public IGridItem item;
+    public BuffType type;
+    public int value;
+    public IGridItem target;
+}
 public class MessageItemHeal : BattleMessage
 {
     public Vector2Int index;
