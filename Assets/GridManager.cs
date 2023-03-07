@@ -39,10 +39,11 @@ public class GridManager : Singleton<GridManager>
         }
         return true;
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
-    //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
-    //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
-    public IEnumerator DrawItem(int drawCount)
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
+//{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
+//{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
+//{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
+public IEnumerator DrawItem(int drawCount)
     {
         List<Vector2Int> availableEmpty = new List<Vector2Int>();
         foreach(var key in emptyGridList)
@@ -60,6 +61,28 @@ public class GridManager : Singleton<GridManager>
             AddGrid(picked.x, picked.y, pickedType);
             availableEmpty.Remove(picked);
         }
+
+        yield return StartCoroutine(MoveAfter(0, -1));
+    }
+
+    public IEnumerator DrawAllItemsFromPool()
+    {
+        List<Vector2Int> availableEmpty = new List<Vector2Int>();
+        foreach (var key in emptyGridList)
+        {
+            if (!GridItemDict.ContainsKey(key.index))
+            {
+                availableEmpty.Add(key.index);
+            }
+        }
+        foreach(var item in deckPool)
+        {
+            var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
+            AddGrid(picked.x, picked.y, item);
+            availableEmpty.Remove(picked);
+        }
+
+        deckPool.Clear();
 
         yield return StartCoroutine(MoveAfter(0, -1));
     }
@@ -651,6 +674,11 @@ public class GridManager : Singleton<GridManager>
         obj.transform.SetParent(items);
 
         obj.transform.localPosition = IndexToPosition(i, j);
+        var render = obj.GetComponentInChildren<SpriteRenderer>();
+        render.color = new Color(1, 1, 1, 0);
+        DOTween.To(() => render.color, x => render.color = x, Color.white, animTime*2);
+
+        //obj.transform.position += new Vector3(0, 1, 0);
         // add to grid once instantiated
         GridItemDict[new Vector2Int(i,j)] = obj;
     }

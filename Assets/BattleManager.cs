@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class BattleManager : Singleton<BattleManager>
 {
     public Text LuggageAttackText;
+    public Button LuggageAttackButton;
+    bool canAttack = true;
     public Text MoveText;
     int selected;
     [SerializeField] private int moveMax = 4;
@@ -61,19 +63,21 @@ public class BattleManager : Singleton<BattleManager>
         hideButtonCanvas();
         string failedReason;
         int count = noCost ? startDrawCount : drawCount;
-        if (GridManager.Instance.CanDraw(out failedReason, count))
-        {
-            yield return StartCoroutine(GridManager.Instance.DrawItem(count));
-            if (!noCost)
-            {
-                yield return useMove(drawMoveCost);
-            }
-        }
-        else
-        {
+        //if (GridManager.Instance.CanDraw(out failedReason, count))
+        //{
+        //    yield return StartCoroutine(GridManager.Instance.DrawItem(count));
+        //    if (!noCost)
+        //    {
+        //        yield return useMove(drawMoveCost);
+        //    }
+        //}
+        //else
+        //{
 
-            FloatingTextManager.Instance.addText(failedReason, Vector3.zero, Color.red);
-        }
+        //    FloatingTextManager.Instance.addText(failedReason, Vector3.zero, Color.red);
+        //}
+
+        yield return StartCoroutine(GridManager.Instance.DrawAllItemsFromPool());
         showButtonCanvas();
     }
 
@@ -113,6 +117,8 @@ public class BattleManager : Singleton<BattleManager>
 
         showButtonCanvas();
         isBattleFinished = false;
+        canAttack = true;
+        UpdateText();
         AddEnemies();
         DrawItem(true);
         SelectAttack();
@@ -202,6 +208,8 @@ public class BattleManager : Singleton<BattleManager>
         {
             return;
         }
+
+        canAttack = false;
         StartCoroutine(PlayerAttackMove(selected));
     }
     List<int> attackIdToRotationId = new List<int>() { 0, 1, 1, 3 };
@@ -238,9 +246,13 @@ public class BattleManager : Singleton<BattleManager>
         yield return StartCoroutine(EnemyManager.Instance.EnemiesAttack());
         SelectAttack();
         EnemyManager.Instance.SelectEenmiesAttack();
+        yield return StartCoroutine(DrawItemEnumerator(true));
+        canAttack = true;
+        UpdateText();
         showButtonCanvas();
 
     }
+
 
     void UpdateText()
     {
@@ -248,7 +260,17 @@ public class BattleManager : Singleton<BattleManager>
         {
             return;
         }
-        LuggageAttackText.text = $" {attackString[selected]} ({attackMoveCost})";
+        LuggageAttackButton.interactable = canAttack;
+        if (canAttack)
+        {
+
+            LuggageAttackText.text = $" {attackString[selected]} ({attackMoveCost})";
+        }
+        else
+        {
+
+            LuggageAttackText.text = $" {attackString[selected]} (Attacked)";
+        }
         MoveText.text = $"{moveLeft}";
     }
 

@@ -3003,6 +3003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LuggageAttackText: {fileID: 1590983180}
+  LuggageAttackButton: {fileID: 286646130}
   MoveText: {fileID: 1715276521}
   moveMax: 4
   enemies:
