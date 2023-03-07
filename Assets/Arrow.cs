@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : GridItem
 {
-    int attack = 2;
+    int attack = 1;
     public override string Desc => $@"{base.Desc}
 Attack {attack} * moved distance when hit the border";
     public override void hitBorder(List<BattleMessage> messages,Vector2Int borderIndex)
@@ -16,11 +16,17 @@ Attack {attack} * moved distance when hit the border";
         int diff = (int)(borderIndex - originIndex).magnitude;
 
         var  dir = (borderIndex - originIndex) / diff;
-        Debug.Log("diff " + diff);
-        GridManager.Instance.attackBeforeMoveMessage.Add(new MessageItemAttack { item = this, damage = attack * diff, skipAnim = true });
+        //Debug.Log("diff " + diff);
+        messages.Add(new MessageItemAttack { item = this, damage = attack *( movedCount+1), skipAnim = true });
         index = borderIndex + dir * 10; ;
-        GridManager.Instance.attackBeforeMoveMessage.Add(new MessageItemMove { item = this });
+        messages.Add(new MessageItemMove { item = this });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
+    }
+
+    public override void move(List<BattleMessage> messages)
+    {
+        base.move(messages);
+
     }
 
 }

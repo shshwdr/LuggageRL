@@ -40,10 +40,11 @@ public class GridManager : Singleton<GridManager>
         return true;
     }
     List<ItemType> deckPool = new List<ItemType>() { ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
-//{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
-//{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
-//{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
-public IEnumerator DrawItem(int drawCount)
+    //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
+    //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
+    //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
+    //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
+    public IEnumerator DrawItem(int drawCount)
     {
         List<Vector2Int> availableEmpty = new List<Vector2Int>();
         foreach(var key in emptyGridList)
@@ -114,7 +115,7 @@ public IEnumerator DrawItem(int drawCount)
     
     public IEnumerator MoveAfter(int x,int y)
     {
-        Debug.Log("move after");
+        //Debug.Log("move after");
         //yield return new WaitForSeconds(animTime);
         yield return MoveEnumerator(x,y,false);
     }
@@ -205,130 +206,9 @@ public IEnumerator DrawItem(int drawCount)
     }
 
     List<BattleMessage> messages;
-    public List<BattleMessage> attackBeforeMoveMessage;
-    //public void MoveInternal(int x, int y, bool isAttacking, Dictionary<Vector2Int, GameObject> gridItemDict)
-    //{
-    //    messages = new List<BattleMessage>();
-    //    attackBeforeMoveMessage = new List<BattleMessage>();
-    //    var moveVector = new Vector2Int(x, y);
-    //    var tempVector = (transform.rotation * (Vector2)moveVector);
-    //    if (rotatedTime == 1 || rotatedTime == 3)
-    //    {
-    //        tempVector = -tempVector;
-    //    }
-    //    moveVector = new Vector2Int((int)tempVector.x, (int)tempVector.y);
-    //    x = moveVector.x;
-    //    y = moveVector.y;
 
-    //    var myList = new List<Vector2Int>();
-    //    foreach (var key in gridItemDict.Keys)
-    //    {
-    //        myList.Add(key);
-    //    }
-    //    Dictionary<GridItem, Vector2Int> itemTargetIndex = new Dictionary<GridItem, Vector2Int>();
-    //    messages.Add(new MessageMove { itemTargetIndex = itemTargetIndex });
-    //    myList.Sort(delegate (Vector2Int a, Vector2Int b) {
-    //        if (x == 1)
-    //        {
-    //            return b.x.CompareTo(a.x);
-    //        }
-    //        else if (x == -1)
-    //        {
-    //            return a.x.CompareTo(b.x);
-    //        }
-    //        else if (y == 1)
-    //        {
-
-    //            return b.y.CompareTo(a.y);
-    //        }
-    //        else
-    //        {
-
-    //            return a.y.CompareTo(b.y);
-    //        }
-    //    });
-
-    //    foreach (var key in myList)
-    //    {
-    //        var newKey = key;
-    //        int test = 0;
-    //        var obj = GetItem(key);
-    //        if(obj == null)
-    //        {
-    //            Debug.Log("null obj");
-    //        }
-    //        var gridItem = obj.GetComponent<GridItem>();
-    //        while (true)
-    //        {
-    //            test++;
-    //            if (test > 10)
-    //            {
-    //                break;
-    //            }
-    //            newKey += moveVector;
-    //            if (!CanMoveTo(newKey))
-    //            {
-    //                if (IsHittingBoarder(newKey))
-    //                {
-    //                    if (isAttacking)
-    //                    {
-    //                        gridItem.hitBorder(messages, newKey);
-    //                        //messages.Add(new MessageItemHitBorder { item = gridItem });
-    //                        //gridItem.hitBorder(true, newKey - moveVector - key, items.transform.TransformPoint(IndexToPosition(newKey)));
-    //                    }
-    //                }
-    //                if (HasItem(newKey))
-    //                {
-
-    //                    if (isAttacking)
-    //                    {
-    //                        GetItem(newKey).GetComponent<GridItem>().beCrushed(gridItem,messages);
-    //                        //messages.Add(new MessageItemBeCrushed { item = gridItem });
-    //                        //GetItem(newKey).GetComponent<GridItem>().BeHit(gridItem);
-    //                    }
-    //                }
-
-    //                newKey -= moveVector;
-    //                break;
-    //            }
-    //        }
-    //        if (newKey != key)
-    //        {
-    //            if (GridItemDict.ContainsKey(key))
-    //            {
-    //                GridItemDict.Remove(key);
-    //                GridItemDict[newKey] = obj;
-    //            }
-    //            if(obj.GetComponent<GridItem>().index == key)
-    //            {
-    //                obj.GetComponent<GridItem>().index = newKey;
-    //                itemTargetIndex[gridItem] = newKey;
-    //            }
-    //            //gridItem.move(messages);
-
-    //            Debug.Log($"move {obj.GetComponent<GridItem>().type.ToString()} from {key} to {newKey}");
-    //        }
-
-    //        gridItem.finishedAttack();
-    //        //if (newKey != key)
-    //        //{
-    //        //    MoveItemToPos(key, newKey, obj, animTime);
-
-    //        //    obj.GetComponent<GridItem>().calculateHit();
-    //        //}
-    //        //else
-    //        //{
-    //        //    obj.GetComponent<GridItem>().calculateHit();
-    //        //}
-
-    //    }
-    //    messages.InsertRange(0, attackBeforeMoveMessage);
-    //}
-
-    public void MoveInternal(int x, int y, bool isAttacking, Dictionary<Vector2Int, GameObject> gridItemDict)
+    Vector2Int rotateMoveVectorBasedOnRotateTime(int x,int y)
     {
-        messages = new List<BattleMessage>();
-        attackBeforeMoveMessage = new List<BattleMessage>();
         var moveVector = new Vector2Int(x, y);
         var tempVector = (transform.rotation * (Vector2)moveVector);
         if (rotatedTime == 1 || rotatedTime == 3)
@@ -336,17 +216,21 @@ public IEnumerator DrawItem(int drawCount)
             tempVector = -tempVector;
         }
         moveVector = new Vector2Int((int)tempVector.x, (int)tempVector.y);
-        x = moveVector.x;
-        y = moveVector.y;
+        return moveVector;
+    }
 
-        var myList = new List<Vector2Int>();
+    List<Vector2Int> sortItemIndex(Vector2Int moveVector, Dictionary<Vector2Int, GameObject> gridItemDict)
+    {
+
+        var x = moveVector.x;
+        var y = moveVector.y;
+
+        var allItemIndex = new List<Vector2Int>();
         foreach (var key in gridItemDict.Keys)
         {
-            myList.Add(key);
+            allItemIndex.Add(key);
         }
-        Dictionary<GridItem, Vector2Int> itemTargetIndex = new Dictionary<GridItem, Vector2Int>();
-        messages.Add(new MessageMove { itemTargetIndex = itemTargetIndex });
-        myList.Sort(delegate (Vector2Int a, Vector2Int b) {
+        allItemIndex.Sort(delegate (Vector2Int a, Vector2Int b) {
             if (x == 1)
             {
                 return b.x.CompareTo(a.x);
@@ -366,11 +250,26 @@ public IEnumerator DrawItem(int drawCount)
                 return a.y.CompareTo(b.y);
             }
         });
+        return allItemIndex;
+    }
 
-        foreach (var key in myList)
+    public void MoveInternal(int x, int y, bool isAttacking, Dictionary<Vector2Int, GameObject> gridItemDict)
+    {
+        messages = new List<BattleMessage>();
+        var moveVector = rotateMoveVectorBasedOnRotateTime(x, y);
+
+        var sortedAllItemIndex = sortItemIndex(moveVector, gridItemDict);
+
+        Dictionary<GridItem, Vector2Int> itemTargetIndex = new Dictionary<GridItem, Vector2Int>();
+        if (!isAttacking)
+        {
+
+            messages.Add(new MessageMove { itemTargetIndex = itemTargetIndex });
+        }
+        foreach (var key in sortedAllItemIndex)
         {
             var newKey = key;
-            int test = isAttacking?1:10;
+            int test = 10;
             var obj = GetItem(key);
             if (obj == null)
             {
@@ -382,6 +281,7 @@ public IEnumerator DrawItem(int drawCount)
                 test--;
                 if (test <0)
                 {
+                    Debug.LogError("wrong");
                     break;
                 }
                 newKey += moveVector;
@@ -410,49 +310,46 @@ public IEnumerator DrawItem(int drawCount)
                     newKey -= moveVector;
                     break;
                 }
+                else
+                {
+                    gridItem.move(messages);
+                }
+                //when attack, only check one move
+                if (isAttacking)
+                {
+                    break;
+                }
             }
-            if (newKey != key)
+            if (newKey != key && !isAttacking)
             {
+                //if item still existed, haven't been destroyed
                 if (GridItemDict.ContainsKey(key))
                 {
                     GridItemDict.Remove(key);
                     GridItemDict[newKey] = obj;
                 }
-                if (obj.GetComponent<GridItem>().index == key)
                 {
                     obj.GetComponent<GridItem>().index = newKey;
                     itemTargetIndex[gridItem] = newKey;
                 }
                 //gridItem.move(messages);
 
-                Debug.Log($"move {obj.GetComponent<GridItem>().type.ToString()} from {key} to {newKey}");
+                //Debug.Log($"move {obj.GetComponent<GridItem>().type.ToString()} from {key} to {newKey}");
             }
 
-            gridItem.finishedAttack();
-            //if (newKey != key)
-            //{
-            //    MoveItemToPos(key, newKey, obj, animTime);
-
-            //    obj.GetComponent<GridItem>().calculateHit();
-            //}
-            //else
-            //{
-            //    obj.GetComponent<GridItem>().calculateHit();
-            //}
-
         }
-        messages.InsertRange(0, attackBeforeMoveMessage);
     }
-
+    public void ParsePredictMessage() { }
     public IEnumerator ParseMessages()
     {
-        foreach(var message in messages)
+        for(int i = 0;i<messages.Count;i++)
         {
+            var message = messages[i];
             if (message is MessageMove move)
             {
                 if(move.itemTargetIndex.Count != 0)
                 {
-                    foreach (var pair in Transform.FindObjectsOfType<GridItem>())
+                    foreach (var pair in move.itemTargetIndex.Keys)
                     {
                         UpdateItemPositionToIndexEnumerator(pair.GetComponent<GridItem>());
                     }
@@ -463,6 +360,11 @@ public IEnumerator DrawItem(int drawCount)
             else if(message is MessageItemAttack attack)
             {
                 Luggage.Instance.DoDamage(attack.damage);
+                Debug.Log($"{attack.item.Name} Attack {attack.damage} {attack.item.transform.position}");
+                if (attack.item.transform.position.magnitude > 10)
+                {
+                    Debug.Log("how");
+                }
                 FloatingTextManager.Instance.addText($"Attack {attack.damage}", attack.item.transform.position, Color.red);
                 //FloatingTextManager.Instance.addText($"{attack.damage}", heal.item.transform.position);
                 if (!attack.skipAnim)
@@ -526,6 +428,11 @@ public IEnumerator DrawItem(int drawCount)
     }
     public IEnumerator MoveAndAttack(int x,int y)
     {
+        foreach(var item in GridItemDict.Values)
+        {
+            item.GetComponent<GridItem>().finishedAttack();
+        }
+
         //move all tiles to the edge
 
         MoveInternal(x, y, false, GridItemDict);
@@ -539,6 +446,18 @@ public IEnumerator DrawItem(int drawCount)
 
         updateAttackEdge();
 
+    }
+
+    public void predict(int x,int y)
+    {
+        // we need to copy a GridItemDict, create a map between original grid and new ones
+        // move and attack using it
+
+        MoveInternal(x, y, false, GridItemDict);
+        ParsePredictMessage();
+        MoveInternal(x, y, true, GridItemDict);
+        //read message and update damage it would made on the item, show a red overlay to it?
+        ParsePredictMessage();
     }
     public IEnumerator MoveEnumerator(int x, int y, bool isAttacking)
     {

@@ -45,7 +45,7 @@ defense: {defense}";
     public void destory()
     {
         transform.DOShakeScale(GridManager.animTime);
-        Debug.Log($"destroy {index} {type}");
+        //Debug.Log($"destroy {index} {type}");
         Destroy(gameObject, GridManager.animTime);
     }
     // Start is called before the first frame update

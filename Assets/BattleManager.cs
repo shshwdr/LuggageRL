@@ -90,6 +90,7 @@ public class BattleManager : Singleton<BattleManager>
             yield return new WaitForSeconds(GridManager.animTime);
             //reward
             RemoveText();
+            clearTurnData();
             StartCoroutine(searchNextBattle());
         }
 
@@ -244,6 +245,8 @@ public class BattleManager : Singleton<BattleManager>
     {
         hideButtonCanvas();
         yield return StartCoroutine(EnemyManager.Instance.EnemiesAttack());
+        clearTurnData();
+
         SelectAttack();
         EnemyManager.Instance.SelectEenmiesAttack();
         yield return StartCoroutine(DrawItemEnumerator(true));
@@ -251,6 +254,17 @@ public class BattleManager : Singleton<BattleManager>
         UpdateText();
         showButtonCanvas();
 
+    }
+
+    void clearTurnData()
+    {
+
+        canAttack = true;
+        foreach (var item in GridManager.Instance.GridItemDict.Values)
+        {
+            item.GetComponent<GridItem>().finishedAttack();
+        }
+        UpdateText();
     }
 
 
