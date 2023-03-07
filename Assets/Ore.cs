@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class Ore : GridItem
+public class Ore : GridItemCore
 {
     public int damage = 1;
     public int moveDamageScale = 2;

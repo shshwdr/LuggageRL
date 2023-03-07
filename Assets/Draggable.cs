@@ -45,7 +45,7 @@ public class Draggable : MonoBehaviour
         if (swapOb)
         {
 
-            if (swapOb.index == GetComponent<GridItem>().index)
+            if (swapOb.index == GetComponent<GridItem>().core.index)
             {
                 swapOb = null;
                 return;
@@ -87,7 +87,7 @@ public class Draggable : MonoBehaviour
             item.GetComponentInChildren<SpriteRenderer>().color = Color.white;
         }
 
-        if (swapOb.index == GetComponent<GridItem>().index)
+        if (swapOb.index == GetComponent<GridItem>().core.index)
         {
             yield break;
         }

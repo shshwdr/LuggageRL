@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class Arrow : GridItem
+public class Arrow : GridItemCore
 {
     int attack = 1;
     public override string Desc => $@"{base.Desc}

@@ -57,27 +57,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8b323fc1552f6a40855fc6dc737b3f9, type: 3}
---- !u!1 &6354156634588377854 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1773436473970345894, guid: c8b323fc1552f6a40855fc6dc737b3f9, type: 3}
-  m_PrefabInstance: {fileID: 4662066571834668376}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5748953546469470918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354156634588377854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1e403d56a9d0bc448691dc5c31fb23f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  index: {x: 0, y: 0}
-  defense: 2
-  Name: Stone
-  isDestroyed: 0
-  damage: 1
-  moveDamageScale: 2

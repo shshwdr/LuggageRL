@@ -9,30 +9,30 @@ public class BattleMessage
 
 public class MessageMove : BattleMessage
 {
-    public Dictionary<GridItem, Vector2Int> itemTargetIndex = new Dictionary<GridItem, Vector2Int>();
+    public Dictionary<GridItemCore, Vector2Int> itemTargetIndex = new Dictionary<GridItemCore, Vector2Int>();
 }
 public class MessageItemMove : BattleMessage
 {
-    public GridItem item;
+    public GridItemCore item;
 }
 
 public class MessageItemHitBorder : BattleMessage
 {
-    public GridItem item;
+    public GridItemCore item;
 }
 public class MessageItemBeCrushed : BattleMessage
 {
-    public GridItem item;
+    public GridItemCore item;
 }
 public class MessageItemAttack : BattleMessage
 {
-    public GridItem item;
+    public GridItemCore item;
     public int damage;
     public HPObject target;
 }
 public class MessageItemHeal : BattleMessage
 {
-    public GridItem item;
+    public GridItemCore item;
     public int amount;
     public HPObject target;
 }
@@ -42,6 +42,6 @@ public class MessageShowPopup : BattleMessage {
 }
 public class MessageDestroy : BattleMessage {
 
-    public GridItem item;
+    public GridItemCore item;
 }
 
