@@ -55,5 +55,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4590661104223907535, guid: c8b323fc1552f6a40855fc6dc737b3f9, type: 3}
+      propertyPath: core.Name
+      value: Stone
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8b323fc1552f6a40855fc6dc737b3f9, type: 3}

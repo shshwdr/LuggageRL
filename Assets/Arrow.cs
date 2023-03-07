@@ -17,10 +17,10 @@ Attack {attack} * moved distance when hit the border";
 
         var  dir = (borderIndex - originIndex) / diff;
         //Debug.Log("diff " + diff);
-        messages.Add(new MessageItemAttack { item = this, damage = attack *( movedCount+1), skipAnim = true });
-        index = borderIndex + dir * 10; ;
-        messages.Add(new MessageItemMove { item = this });
+        messages.Add(new MessageItemAttack { item = this, damage = attack *( movedCount+1), skipAnim = true ,index = index});
+        messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
+        index = borderIndex + dir * 10; ;
     }
 
     public override void move(List<BattleMessage> messages)

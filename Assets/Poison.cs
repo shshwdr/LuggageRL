@@ -9,7 +9,7 @@ public class Poison : GridItemCore
 Deal {attack} damage when hit the border";
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
-        messages.Add(new MessageItemAttack { item = this, damage = attack });
+        messages.Add(new MessageItemAttack { item = this, damage = attack, index = index });
         this.addDestroyMessage(messages);
     }
 }

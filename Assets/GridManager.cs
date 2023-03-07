@@ -220,7 +220,7 @@ public class GridManager : Singleton<GridManager>
         return moveVector;
     }
 
-    List<Vector2Int> sortItemIndex<T>(Vector2Int moveVector, Dictionary<Vector2Int, T> gridItemDict)where T : IGridItem
+    static List<Vector2Int> sortItemIndex<T>(Vector2Int moveVector, Dictionary<Vector2Int, T> gridItemDict)where T : IGridItem
     {
 
         var x = moveVector.x;
@@ -264,19 +264,17 @@ public class GridManager : Singleton<GridManager>
         Dictionary<GridItemCore, Vector2Int> itemTargetIndex = new Dictionary<GridItemCore, Vector2Int>();
         if (!isAttacking)
         {
-
             messages.Add(new MessageMove { itemTargetIndex = itemTargetIndex });
         }
         foreach (var key in sortedAllItemIndex)
         {
             var newKey = key;
             int test = 10;
-            var obj = GetItem(gridItemDict, key);
-            if (obj == null)
+            var gridItem = GetItem(gridItemDict, key);
+            if (gridItem == null)
             {
                 Debug.Log("null obj");
             }
-            var gridItem = obj;
             while (true)
             {
                 test--;
@@ -286,7 +284,7 @@ public class GridManager : Singleton<GridManager>
                     break;
                 }
                 newKey += moveVector;
-                if (!CanMoveTo(newKey))
+                if (!CanMoveTo(gridItemDict,newKey))
                 {
                     if (IsHittingBoarder(newKey))
                     {
@@ -327,10 +325,10 @@ public class GridManager : Singleton<GridManager>
                 if (gridItemDict.ContainsKey(key))
                 {
                     gridItemDict.Remove(key);
-                    gridItemDict[newKey] = obj;
+                    gridItemDict[newKey] = gridItem;
                 }
                 {
-                    obj.index = newKey;
+                    gridItem.index = newKey;
                     itemTargetIndex[gridItem.Core] = newKey;
                 }
                 //gridItem.move(messages);
@@ -340,7 +338,7 @@ public class GridManager : Singleton<GridManager>
 
         }
     }
-    public void ParsePredictMessage() {
+    public void ParsePredictMessage(Dictionary<GridItemCore, GridItem> predictToOrigin) {
         for (int i = 0; i < messages.Count; i++)
         {
             var message = messages[i];
@@ -350,6 +348,7 @@ public class GridManager : Singleton<GridManager>
             else if (message is MessageItemAttack attack)
             {
                 Debug.Log($"{attack.item.Name} Attack {attack.damage}");
+                predictToOrigin[attack.item].baseItem.WillAttack(attack.damage);
                 //Luggage.Instance.DoDamage(attack.damage);
                 //Debug.Log($"{attack.item.Name} Attack {attack.damage} {attack.item.transform.position}");
                 //if (attack.item.transform.position.magnitude > 10)
@@ -363,6 +362,7 @@ public class GridManager : Singleton<GridManager>
             else if (message is MessageItemHeal heal)
             {
                 Debug.Log($"{heal.item.Name} heal {heal.amount}");
+                predictToOrigin[heal.item].baseItem.WillHeal(heal.amount);
                 //heal.target.Heal(heal.amount);
                 ////FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.item.transform.position, Color.green);
@@ -371,6 +371,7 @@ public class GridManager : Singleton<GridManager>
             else if (message is MessageDestroy destr)
             {
                 Debug.Log($"{destr.item.Name} destroy");
+                predictToOrigin[destr.item].baseItem.WillDestroy();
                 //destr.item.destory();
                 //FloatingTextManager.Instance.addText("Destroy!", destr.item.transform.position, Color.white);
 
@@ -402,12 +403,13 @@ public class GridManager : Singleton<GridManager>
             else if(message is MessageItemAttack attack)
             {
                 Luggage.Instance.DoDamage(attack.damage);
-                Debug.Log($"{attack.item.Name} Attack {attack.damage} {GridItemDict[attack.item.index].transform.position}");
-                if (GridItemDict[attack.item.index].transform.position.magnitude > 10)
+                if (!GridItemDict.ContainsKey(attack.index))
                 {
-                    Debug.Log("how");
+                    Debug.Log("?");
                 }
-                FloatingTextManager.Instance.addText($"Attack {attack.damage}", GridItemDict[attack.item.index].transform.position, Color.red);
+               // Debug.Log($"{attack.item.Name} Attack {attack.damage} {GridItemDict[attack.index].transform.position}");
+
+                FloatingTextManager.Instance.addText($"Attack {attack.damage}", GridItemDict[attack.index].transform.position, Color.red);
                 //FloatingTextManager.Instance.addText($"{attack.damage}", heal.item.transform.position);
                 if (!attack.skipAnim)
                 {
@@ -418,14 +420,23 @@ public class GridManager : Singleton<GridManager>
             else if (message is MessageItemHeal heal)
             {
                 heal.target.Heal(heal.amount);
+                if (!GridItemDict.ContainsKey(heal.index))
+                {
+                    Debug.Log("?");
+                }
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
-                FloatingTextManager.Instance.addText($"Heal {heal.amount}", GridItemDict[heal.item.index].transform.position, Color.green);
+                FloatingTextManager.Instance.addText($"Heal {heal.amount}", GridItemDict[heal.index].transform.position, Color.green);
                 yield return new WaitForSeconds(animTime);
             }
             else if (message is MessageDestroy destr)
             {
-                GridItemDict[destr.item.index].destory();
-                FloatingTextManager.Instance.addText("Destroy!", GridItemDict[destr.item.index].transform.position, Color.white);
+                if (!GridItemDict.ContainsKey(destr.index))
+                {
+                    Debug.Log("?");
+                }
+                FloatingTextManager.Instance.addText("Destroy!", GridItemDict[destr.index].transform.position, Color.white);
+                GridItemDict[destr.index].destory();
+                GridManager.Instance.RemoveGrid(destr.index, destr.item.type);
                 if (!destr.skipAnim)
                 {
                     yield return new WaitForSeconds(animTime);
@@ -433,7 +444,7 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemMove itemMove)
             { 
-                UpdateItemPositionToIndexEnumerator(GridItemDict[itemMove.item.index]);
+                UpdateItemPositionToIndexEnumerator(GridItemDict[itemMove.index]);
                 yield return new WaitForSeconds(animTime);
             }
         }
@@ -495,15 +506,19 @@ public class GridManager : Singleton<GridManager>
         // we need to copy a GridItemDict, create a map between original grid and new ones
         // move and attack using it
         var predictDict = new Dictionary<Vector2Int, GridItemCore>();
-        foreach(var pair in GridItemDict)
+        var originalItemToPredictItem = new Dictionary<GridItemCore, GridItem>();
+        foreach (var pair in GridItemDict)
         {
-            predictDict[pair.Key] = Ut.DeepClone(pair.Value.core) ;
+            pair.Value.baseItem.ClearOverlayes();
+            predictDict[pair.Key] = Ut.DeepClone(pair.Value.core);
+            predictDict[pair.Key].movedCount = 0;
+            originalItemToPredictItem[predictDict[pair.Key]] = pair.Value;
         }
         MoveInternal(x, y, false, predictDict);
-        ParsePredictMessage();
+        //ParsePredictMessage(originalItemToPredictItem);
         MoveInternal(x, y, true, predictDict);
         //read message and update damage it would made on the item, show a red overlay to it?
-        ParsePredictMessage();
+        ParsePredictMessage(originalItemToPredictItem);
     }
     public IEnumerator MoveEnumerator(int x, int y, bool isAttacking)
     {
@@ -520,9 +535,9 @@ public class GridManager : Singleton<GridManager>
     {
         return !(pos.x >= 0 && pos.x < Columns && pos.y >= 0 && pos.y < Rows);
     }
-    bool CanMoveTo(Vector2Int pos)
+    bool CanMoveTo<T>(Dictionary<Vector2Int, T> dict,Vector2Int pos) where T : IGridItem
     {
-        return !HasItem(pos) && pos.x >= 0 && pos.x < Columns && pos.y >= 0 && pos.y < Rows;
+        return !HasItem(dict,pos) && pos.x >= 0 && pos.x < Columns && pos.y >= 0 && pos.y < Rows;
     }
 
     public bool HasItem(Vector2Int pos)

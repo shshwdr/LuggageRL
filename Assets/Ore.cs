@@ -16,11 +16,11 @@ Deal x{moveDamageScale} when moved in the attack";
         int diff = (int)(borderIndex - originIndex).magnitude;
         if (diff > 0)
         {
-            messages.Add(new MessageItemAttack { item = this, damage = damage* moveDamageScale });
+            messages.Add(new MessageItemAttack { item = this, damage = damage* moveDamageScale, index = index });
         }
         else
         {
-            messages.Add(new MessageItemAttack { item = this, damage = damage });
+            messages.Add(new MessageItemAttack { item = this, damage = damage, index = index });
         }
         //FloatingTextManager.Instance.addText("Attack!", transform.position);
         //Luggage.Instance.DoDamage(1);

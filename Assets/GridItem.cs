@@ -38,7 +38,7 @@ public class GridItemCore: IGridItem
     public virtual string Desc => $@"{Name}
 defense: {defense}";
 
-    protected int movedCount = 0;
+    public int movedCount = 0;
     //protected Vector3 borderPosition;
     public bool isDestroyed = false;
 
@@ -57,16 +57,16 @@ defense: {defense}";
     public void addDestroyMessage(List<BattleMessage> messages)
     {
         isDestroyed = true;
-        messages.Add(new MessageDestroy { item = this });
-        GridManager.Instance.RemoveGrid(index, type);
+        messages.Add(new MessageDestroy {index = index, item = this });
+        //GridManager.Instance.RemoveGrid(index, type);
         Debug.Log($"addDestroyMessage {index} {type}");
     }
 
     public void addDestroyMessageWithIndex(List<BattleMessage> messages, Vector2Int ind, bool skipAnim = false)
     {
         isDestroyed = true;
-        messages.Add(new MessageDestroy { item = this, skipAnim = skipAnim });
-        GridManager.Instance.RemoveGrid(ind, type);
+        messages.Add(new MessageDestroy { index = index, item = this, skipAnim = skipAnim });
+        //GridManager.Instance.RemoveGrid(ind, type);
         Debug.Log($"addDestroyMessage {ind} {type}");
     }
 }

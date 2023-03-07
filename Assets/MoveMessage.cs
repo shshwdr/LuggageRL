@@ -13,25 +13,20 @@ public class MessageMove : BattleMessage
 }
 public class MessageItemMove : BattleMessage
 {
+    public Vector2Int index;
     public GridItemCore item;
 }
 
-public class MessageItemHitBorder : BattleMessage
-{
-    public GridItemCore item;
-}
-public class MessageItemBeCrushed : BattleMessage
-{
-    public GridItemCore item;
-}
 public class MessageItemAttack : BattleMessage
 {
+    public Vector2Int index;
     public GridItemCore item;
     public int damage;
     public HPObject target;
 }
 public class MessageItemHeal : BattleMessage
 {
+    public Vector2Int index;
     public GridItemCore item;
     public int amount;
     public HPObject target;
@@ -41,7 +36,7 @@ public class MessageShowPopup : BattleMessage {
 
 }
 public class MessageDestroy : BattleMessage {
-
+    public Vector2Int index;
     public GridItemCore item;
 }
 
