@@ -137,6 +137,7 @@ public class BattleManager : Singleton<BattleManager>
         selected = Random.Range(0, 3);
         moveLeft = moveMax;
         UpdateText();
+        GridManager.Instance.updateAttackEdge();
     }
     IEnumerator useMove(int amount)
     {
@@ -203,7 +204,11 @@ public class BattleManager : Singleton<BattleManager>
         }
         StartCoroutine(PlayerAttackMove(selected));
     }
-
+    List<int> attackIdToRotationId = new List<int>() { 0, 1, 1, 3 };
+    public int getCurrentAttackRotationId()
+    {
+        return attackIdToRotationId[selected];
+    }
     public IEnumerator PlayerAttackMove(int moveId)
     {
         hideButtonCanvas();

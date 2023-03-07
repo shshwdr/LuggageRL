@@ -8,7 +8,7 @@ public enum ItemType { ore,herb, arrow, poison}
 public class GridManager : Singleton<GridManager>
 {
 
-    static public float animTime = 0.3f;
+    static public float animTime = 0.4f;
     public float tileSize = 2f;
     public int Rows = 2;
     public int Columns = 3;
@@ -491,7 +491,32 @@ public class GridManager : Singleton<GridManager>
 
         yield return StartCoroutine( BattleManager.Instance.player.ApplyDamage(damage));
     }
+    public List<GameObject> attackingEdges;
+    public void updateAttackEdge()
+    {
+        foreach(var edge in attackingEdges)
+        {
+            edge.SetActive(false);
+        }
+        var nextAttackEdge = (BattleManager.Instance.getCurrentAttackRotationId() - rotatedTime + 4) % 4;
+        attackingEdges[nextAttackEdge].SetActive(true);
+    }
+    public IEnumerator MoveAndAttack(int x,int y)
+    {
+        //move all tiles to the edge
 
+        MoveInternal(x, y, false, GridItemDict);
+        yield return StartCoroutine(ParseMessages());
+        //attack one step
+
+        MoveInternal(x, y, true, GridItemDict);
+        yield return StartCoroutine(ParseMessages());
+
+        yield return StartCoroutine(MoveAfter(0, -1));
+
+        updateAttackEdge();
+
+    }
     public IEnumerator MoveEnumerator(int x, int y, bool isAttacking)
     {
         MoveInternal(x, y, isAttacking, GridItemDict);

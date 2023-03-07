@@ -48,7 +48,7 @@ public class Luggage : Singleton<Luggage>
         yield return new WaitForSeconds(GridManager.animTime * 2);
         //suitcaseInBattle.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
         transform.DOMove(target.transform.position, GridManager.animTime);
-        yield return GridManager.Instance.MoveEnumerator(0, -1, true);
+        yield return GridManager.Instance.MoveAndAttack(0, -1);
         //yield return new WaitForSeconds(GridManager.animTime);
 
         yield return StartCoroutine(showDamage());
@@ -59,7 +59,8 @@ public class Luggage : Singleton<Luggage>
         //
         //suitcaseInBattle.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
         transform.DOMove(target.transform.position, GridManager.animTime);
-        yield return GridManager.Instance.MoveEnumerator(1, 0,true);
+        yield return GridManager.Instance.MoveAndAttack(1, 0);
+        //yield return GridManager.Instance.MoveEnumerator(1, 0,true);
         //yield return new WaitForSeconds(GridManager.animTime);
 
         yield return StartCoroutine(showDamage());
@@ -77,7 +78,7 @@ public class Luggage : Singleton<Luggage>
         transform.DOMove(target.transform.position, GridManager.animTime);
         //GridManager.Instance.Move(0, -1); ;
 
-        yield return GridManager.Instance.MoveEnumerator(0, -1, true);
+        yield return GridManager.Instance.MoveAndAttack(0, -1);
         //yield return new WaitForSeconds(GridManager.animTime);
 
         yield return StartCoroutine(showDamage());
@@ -97,7 +98,7 @@ public class Luggage : Singleton<Luggage>
 
         transform.DOMove(target.transform.position, GridManager.animTime);
         //GridManager.Instance.Move(-1, 0);
-        yield return GridManager.Instance.MoveEnumerator(-1,0, true);
+        yield return GridManager.Instance.MoveAndAttack(-1,0);
        // yield return new WaitForSeconds(GridManager.animTime);
 
         yield return StartCoroutine(showDamage());
