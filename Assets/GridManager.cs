@@ -17,7 +17,7 @@ public class GridManager : Singleton<GridManager>
     public Vector3 startPosition;
     public Transform bk;
     public Transform items;
-    public Dictionary<Vector2Int, GameObject> GridItemDict = new Dictionary<Vector2Int, GameObject>();
+    public Dictionary<Vector2Int, GridItem> GridItemDict = new Dictionary<Vector2Int, GridItem>();
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
     public Text itemViewText;
     public bool CanDraw(out string failedReason, int drawCount)
@@ -219,7 +219,7 @@ public class GridManager : Singleton<GridManager>
         return moveVector;
     }
 
-    List<Vector2Int> sortItemIndex(Vector2Int moveVector, Dictionary<Vector2Int, GameObject> gridItemDict)
+    List<Vector2Int> sortItemIndex(Vector2Int moveVector, Dictionary<Vector2Int, GridItem> gridItemDict)
     {
 
         var x = moveVector.x;
@@ -253,7 +253,7 @@ public class GridManager : Singleton<GridManager>
         return allItemIndex;
     }
 
-    public void MoveInternal(int x, int y, bool isAttacking, Dictionary<Vector2Int, GameObject> gridItemDict)
+    public void MoveInternal(int x, int y, bool isAttacking, Dictionary<Vector2Int, GridItem> gridItemDict)
     {
         messages = new List<BattleMessage>();
         var moveVector = rotateMoveVectorBasedOnRotateTime(x, y);
@@ -484,7 +484,7 @@ public class GridManager : Singleton<GridManager>
         return GridItemDict.ContainsKey(pos)/*&& GridItemDict[pos] !=null &&!GridItemDict[pos].GetComponent<GridItem>().isDestroyed*/;
     }
 
-    public GameObject GetItem(Vector2Int pos)
+    public GridItem GetItem(Vector2Int pos)
     {
         if (!HasItem(pos))
         {
@@ -529,7 +529,7 @@ public class GridManager : Singleton<GridManager>
             var swapOb = GridManager.Instance.GetItem(targetIndex).GetComponent<GridItem>();
             swapOb.index = originIndex;
 
-            GridItemDict[originIndex] = swapOb.gameObject;
+            GridItemDict[originIndex] = swapOb;
         }
         else
         {
@@ -537,7 +537,7 @@ public class GridManager : Singleton<GridManager>
             GridItemDict.Remove(originIndex);
         }
         item1.index = targetIndex;
-        GridItemDict[targetIndex] = item1.gameObject;
+        GridItemDict[targetIndex] = item1;
         Debug.Log($"{targetIndex} {originIndex}");
 
     }
@@ -599,7 +599,7 @@ public class GridManager : Singleton<GridManager>
 
         //obj.transform.position += new Vector3(0, 1, 0);
         // add to grid once instantiated
-        GridItemDict[new Vector2Int(i,j)] = obj;
+        GridItemDict[new Vector2Int(i,j)] = obj.GetComponent< GridItem>();
     }
     public void RemoveGrid(int i, int j,ItemType type)
     {
