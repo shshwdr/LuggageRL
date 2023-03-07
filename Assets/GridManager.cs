@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+[System.Serializable]
 public enum ItemType { ore,herb, arrow, poison}
 public class GridManager : Singleton<GridManager>
 {
@@ -118,6 +118,7 @@ public class GridManager : Singleton<GridManager>
         //Debug.Log("move after");
         //yield return new WaitForSeconds(animTime);
         yield return MoveEnumerator(x,y,false);
+        BattleManager.Instance.PredictNextAttack();
     }
     List<Transform> sortEmptyCells()
     {
@@ -270,7 +271,7 @@ public class GridManager : Singleton<GridManager>
         {
             var newKey = key;
             int test = 10;
-            var obj = GetItem(key);
+            var obj = GetItem(gridItemDict, key);
             if (obj == null)
             {
                 Debug.Log("null obj");
@@ -301,7 +302,7 @@ public class GridManager : Singleton<GridManager>
 
                         if (isAttacking)
                         {
-                            GetItem(newKey).GetComponent<GridItem>().beCrushed(gridItem, messages);
+                            GetItem(gridItemDict,newKey).GetComponent<GridItem>().beCrushed(gridItem, messages);
                             //messages.Add(new MessageItemBeCrushed { item = gridItem });
                             //GetItem(newKey).GetComponent<GridItem>().BeHit(gridItem);
                         }
@@ -339,7 +340,48 @@ public class GridManager : Singleton<GridManager>
 
         }
     }
-    public void ParsePredictMessage() { }
+    public void ParsePredictMessage() {
+        for (int i = 0; i < messages.Count; i++)
+        {
+            var message = messages[i];
+            if (message is MessageMove move)
+            {
+            }
+            else if (message is MessageItemAttack attack)
+            {
+                Debug.Log($"{attack.item.Name} Attack {attack.damage}");
+                //Luggage.Instance.DoDamage(attack.damage);
+                //Debug.Log($"{attack.item.Name} Attack {attack.damage} {attack.item.transform.position}");
+                //if (attack.item.transform.position.magnitude > 10)
+                //{
+                //    Debug.Log("how");
+                //}
+                //FloatingTextManager.Instance.addText($"Attack {attack.damage}", attack.item.transform.position, Color.red);
+
+
+            }
+            else if (message is MessageItemHeal heal)
+            {
+                Debug.Log($"{heal.item.Name} heal {heal.amount}");
+                //heal.target.Heal(heal.amount);
+                ////FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
+                //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.item.transform.position, Color.green);
+
+            }
+            else if (message is MessageDestroy destr)
+            {
+                Debug.Log($"{destr.item.Name} destroy");
+                //destr.item.destory();
+                //FloatingTextManager.Instance.addText("Destroy!", destr.item.transform.position, Color.white);
+
+            }
+            else if (message is MessageItemMove itemMove)
+            {
+            }
+        }
+
+
+    }
     public IEnumerator ParseMessages()
     {
         for(int i = 0;i<messages.Count;i++)
@@ -452,10 +494,14 @@ public class GridManager : Singleton<GridManager>
     {
         // we need to copy a GridItemDict, create a map between original grid and new ones
         // move and attack using it
-
-        MoveInternal(x, y, false, GridItemDict);
+        var predictDict = new Dictionary<Vector2Int, GridItem>();
+        foreach(var pair in GridItemDict)
+        {
+            predictDict[pair.Key] = Ut.DeepClone( pair.Value);
+        }
+        MoveInternal(x, y, false, predictDict);
         ParsePredictMessage();
-        MoveInternal(x, y, true, GridItemDict);
+        MoveInternal(x, y, true, predictDict);
         //read message and update damage it would made on the item, show a red overlay to it?
         ParsePredictMessage();
     }
@@ -484,13 +530,13 @@ public class GridManager : Singleton<GridManager>
         return GridItemDict.ContainsKey(pos)/*&& GridItemDict[pos] !=null &&!GridItemDict[pos].GetComponent<GridItem>().isDestroyed*/;
     }
 
-    public GridItem GetItem(Vector2Int pos)
+    public GridItem GetItem(Dictionary<Vector2Int, GridItem> gridItemDict,Vector2Int pos)
     {
         if (!HasItem(pos))
         {
             return null;
         }
-        return GridItemDict[pos];
+        return gridItemDict[pos];
     }
 
     public Vector3 IndexToPosition(Vector2Int ind)
@@ -526,7 +572,7 @@ public class GridManager : Singleton<GridManager>
         var originIndex = item1.index;
         if (GridManager.Instance.HasItem(targetIndex))
         {
-            var swapOb = GridManager.Instance.GetItem(targetIndex).GetComponent<GridItem>();
+            var swapOb = GridManager.Instance.GetItem(GridItemDict, targetIndex).GetComponent<GridItem>();
             swapOb.index = originIndex;
 
             GridItemDict[originIndex] = swapOb;

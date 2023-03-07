@@ -1,16 +1,34 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+public static class Ut
+{
+    public static T DeepClone<T>(this T obj)
+    {
+        using (var ms = new MemoryStream())
+        {
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(ms, obj);
+            ms.Position = 0;
+
+            return (T)formatter.Deserialize(ms);
+        }
+    }
+}
+[System.Serializable]
+public class GridItemCore
+{
+
+}
 public class GridItem : MonoBehaviour
 {
-    public ItemType type;
-    public Vector2Int index;
-    public int defense = 2;
-    public string Name;
-    public virtual string Desc => $@"{Name}
-defense: {defense}";
+   
+    
     public virtual void finishedAttack()
     {
         movedCount = 0;
@@ -26,6 +44,8 @@ defense: {defense}";
 
     bool beHit = false;
     GridItem beHitItem;
+    public BaseItem baseItem;
+
 
     public void addDestroyMessage(List<BattleMessage> messages)
     {
@@ -51,7 +71,7 @@ defense: {defense}";
     // Start is called before the first frame update
     void Start()
     {
-        
+        baseItem = GetComponent<BaseItem>();
     }
     private void OnMouseEnter()
     {

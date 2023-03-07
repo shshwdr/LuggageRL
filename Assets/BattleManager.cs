@@ -241,6 +241,26 @@ public class BattleManager : Singleton<BattleManager>
         showButtonCanvas();
     }
 
+
+    public void PredictNextAttack()
+    {
+        switch (selected)
+        {
+            case 0:
+                GridManager.Instance.predict(1, 0);
+                break;
+            case 1:
+                GridManager.Instance.predict(0, 1);
+                break;
+            case 2:
+                GridManager.Instance.predict(0, 1);
+                break;
+            case 3:
+                GridManager.Instance.predict(0, -1);
+                break;
+        }
+    }
+
     public IEnumerator EndOfTurn()
     {
         hideButtonCanvas();

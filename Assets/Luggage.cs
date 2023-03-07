@@ -39,7 +39,6 @@ public class Luggage : Singleton<Luggage>
         yield return GridManager.Instance.MoveEnumerator(1, 0, false);
     }
 
-
     public IEnumerator LiftAndDownAttack()
     {
         SelectEnemyTarget();

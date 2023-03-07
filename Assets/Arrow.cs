@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class Arrow : GridItem
 {
     int attack = 1;
@@ -28,5 +28,4 @@ Attack {attack} * moved distance when hit the border";
         base.move(messages);
 
     }
-
 }

@@ -57,7 +57,7 @@ public class Draggable : MonoBehaviour
             }
             else
             {
-                GridManager.Instance.GetItem(swapOb.index).GetComponentInChildren<SpriteRenderer>().color = Color.green;
+                GridManager.Instance.GetItem(GridManager.Instance.GridItemDict, swapOb.index).GetComponentInChildren<SpriteRenderer>().color = Color.green;
             }
         }
     }
@@ -96,7 +96,7 @@ public class Draggable : MonoBehaviour
 
         FloatingTextManager.Instance.addText("Move!", Vector3.zero,Color.white);
 
-        var targetItem = GridManager.Instance.GetItem(swapOb.index);
+        var targetItem = GridManager.Instance.GetItem(GridManager.Instance.GridItemDict, swapOb.index);
         GridManager.Instance.MoveItemToIndex(GetComponent<GridItem>(), swapOb.index);
 
         GridManager.Instance.UpdateItemPositionToIndexEnumerator(GetComponent<GridItem>());
