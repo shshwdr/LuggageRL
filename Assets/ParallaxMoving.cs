@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ParallaxMoving : BaseMovable
 {
-    [SerializeField] float moveSpeed;
     [SerializeField] float swapOffeset;
 
     // Start is called before the first frame update
@@ -14,11 +13,11 @@ public class ParallaxMoving : BaseMovable
     }
 
     // Update is called once per frame
-    void Update()
+    protected override  void  Update()
     {
+        base.Update();
         if (isMoving)
         {
-            transform.Translate(Vector2.left * moveSpeed*Time.deltaTime);
             if (transform.position.x <= -swapOffeset)
             {
                 var pos = transform.position;

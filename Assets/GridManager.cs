@@ -464,7 +464,11 @@ public class GridManager : Singleton<GridManager>
                 }
             }
             else if (message is MessageItemMove itemMove)
-            { 
+            {
+                if (!GridItemDict.ContainsKey(itemMove.index))
+                {
+                    Debug.Log("?");
+                }
                 UpdateItemPositionToIndexEnumerator(GridItemDict[itemMove.index]);
                 yield return new WaitForSeconds(animTime);
             }

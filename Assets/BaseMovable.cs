@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BaseMovable : MonoBehaviour
 {
-    protected bool isMoving = true;
+    [SerializeField] protected float moveSpeed;
+    protected bool isMoving = false;
     public void startMove()
     {
         isMoving = true;
@@ -12,5 +13,13 @@ public class BaseMovable : MonoBehaviour
     public void stopMove()
     {
         isMoving = false;
+    }
+
+    protected virtual void Update()
+    {
+        if (isMoving)
+        {
+            transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
+        }
     }
 }
