@@ -5,6 +5,12 @@ using UnityEngine;
 public class BaseScene : BaseMovable
 {
     protected bool hasStarted = false;
+
+
+    public Transform itemPositionsParent;
+    protected Transform[] itemPositions;
+    public GameObject[] itemsToActivate;
+
     // Start is called before the first frame update
     void Start()
     {

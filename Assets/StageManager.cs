@@ -12,7 +12,7 @@ public class StageManager : Singleton<StageManager>
     [SerializeField] float sceneDistanceEnd;
     public bool isMoving = true;
     int eventIndex = 0;
-    public List<StageEventType> eventList = new List<StageEventType>() { StageEventType.normalBattle, StageEventType.itemSelect, StageEventType.normalBattle, StageEventType.itemSelect };
+    public List<StageEventType> eventList = new List<StageEventType>() { StageEventType.itemSelect, StageEventType.normalBattle, StageEventType.itemSelect, StageEventType.normalBattle, StageEventType.itemSelect };
     // Start is called before the first frame update
     void Start()
     {
@@ -54,8 +54,11 @@ public class StageManager : Singleton<StageManager>
 
                 break;
             case StageEventType.itemSelect:
+
+                go = Instantiate(itemSelectScenePrefab);
                 break;
         }
+        eventIndex++;
         go.transform.position += new Vector3(randomX, 0, 0);
 
     }

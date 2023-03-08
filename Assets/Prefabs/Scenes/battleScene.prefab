@@ -106,4 +106,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  enemyPositionsParent: {fileID: 2208437628973877932}
+  itemPositionsParent: {fileID: 2208437628973877932}
+  itemsToActivate: []

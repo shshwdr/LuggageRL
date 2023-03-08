@@ -8,6 +8,7 @@ public class BattleManager : Singleton<BattleManager>
 {
     public Text LuggageAttackText;
     public Button LuggageAttackButton;
+    public GameObject[] itemsToActivate;
     bool canAttack = true;
     public Text MoveText;
     int selected;
@@ -110,7 +111,14 @@ public class BattleManager : Singleton<BattleManager>
 
     public void takeControl()
     {
-        StartCoroutine(test());
+        foreach (var item in itemsToActivate)
+        {
+            item.SetActive(true);
+        }
+        ButtonCanvas.gameObject.SetActive(true);
+        showButtonCanvas();
+        StartBattle();
+        //StartCoroutine(test());
     }
     IEnumerator test()
     {
@@ -121,7 +129,12 @@ public class BattleManager : Singleton<BattleManager>
     public void outControl()
     {
 
+        foreach (var item in itemsToActivate)
+        {
+            item.SetActive(false);
+        }
         hideButtonCanvas();
+        ButtonCanvas.gameObject.SetActive(false);
     }
     void StartBattle()
     {

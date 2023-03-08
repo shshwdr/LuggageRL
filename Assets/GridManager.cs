@@ -39,7 +39,12 @@ public class GridManager : Singleton<GridManager>
         }
         return true;
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
+
+    public void addItemToDeck(ItemType type)
+    {
+        deckPool.Add(type);
+    }
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.ore, ItemType.ore, ItemType.ore };
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
