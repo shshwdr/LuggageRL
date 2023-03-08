@@ -253,7 +253,7 @@ MonoBehaviour:
   sceneDistanceStart: 10
   sceneDistanceEnd: 15
   isMoving: 1
-  eventList: 030000000000000003000000000000000300000000000000
+  eventList: 000000000300000000000000030000000000000003000000
 --- !u!1 &177583494
 GameObject:
   m_ObjectHideFlags: 0
