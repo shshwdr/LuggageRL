@@ -11,13 +11,14 @@ public class FloatingText : MonoBehaviour
     public int jumpPower = 10;
     public float animTime = 1;
     public float moveUp = 1;
-    public void init(string text,Vector3 pos,Color color)
+    public void init(string text,Vector3 pos,Color color,float stayTime)
     {
         gameObject.SetActive(true);
         GetComponentInChildren<Text>().text = text;
         GetComponentInChildren<Text>().color = color;
         transform.position = pos;
         Destroy(gameObject, 1);
+        animTime = stayTime;
     }
     // Start is called before the first frame update
     void Start()

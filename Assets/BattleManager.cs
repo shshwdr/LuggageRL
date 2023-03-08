@@ -8,6 +8,7 @@ public class BattleManager : Singleton<BattleManager>
 {
     public Text LuggageAttackText;
     public Button LuggageAttackButton;
+    public GameObject[] itemsToActivate;
     bool canAttack = true;
     public Text MoveText;
     int selected;
@@ -86,58 +87,88 @@ public class BattleManager : Singleton<BattleManager>
         if (!isBattleFinished)
         {
             isBattleFinished = true;
-            FloatingTextManager.Instance.addText("Win Battle!", Vector3.zero, Color.red);
+
             yield return new WaitForSeconds(GridManager.animTime);
-            //reward
-            RemoveText();
-            clearTurnData();
-            StartCoroutine(searchNextBattle());
+            FloatingTextManager.Instance.addText("Win Battle!", Vector3.zero, Color.red,1);
+            yield return new WaitForSeconds(GridManager.animTime*3);
+            //RemoveText();
+            //clearTurnData();
+            //StartCoroutine(searchNextBattle());
+            //hmm make this into a class to control all?
+            outControl();
+            StageManager.Instance.takeControl();
         }
 
 
     }
-    IEnumerator searchNextBattle()
+    //IEnumerator searchNextBattle()
+    //{
+    //    hideButtonCanvas();
+    //    yield return new WaitForSeconds(1);
+    //    StartBattle();
+
+    //}
+
+    public void takeControl()
     {
-        hideButtonCanvas();
-        yield return new WaitForSeconds(1);
+        foreach (var item in itemsToActivate)
+        {
+            item.SetActive(true);
+        }
+        ButtonCanvas.gameObject.SetActive(true);
+        showButtonCanvas();
         StartBattle();
-
+        //StartCoroutine(test());
     }
+    IEnumerator test()
+    {
+        yield return new WaitForSeconds(0.1f);
+        showButtonCanvas();
+        StartBattle();
+    }
+    public void outControl()
+    {
 
+        foreach (var item in itemsToActivate)
+        {
+            item.SetActive(false);
+        }
+        hideButtonCanvas();
+        ButtonCanvas.gameObject.SetActive(false);
+    }
     void StartBattle()
     {
-        //clear old enemies, this is bad, hacky solution
-        foreach(var enemy in Transform.FindObjectsOfType<Enemy>(true))
-        {
-            //if (!enemy.gameObject.activeInHierarchy)
-            {
-                Destroy(enemy.gameObject);
-            }
-        }
+
+
+        ////clear old enemies, this is bad, hacky solution
+        //foreach(var enemy in Transform.FindObjectsOfType<Enemy>(true))
+        //{
+        //    //if (!enemy.gameObject.activeInHierarchy)
+        //    {
+        //        Destroy(enemy.gameObject);
+        //    }
+        //}
 
 
         showButtonCanvas();
         isBattleFinished = false;
         canAttack = true;
         UpdateText();
-        AddEnemies();
+        //AddEnemies();
         DrawItem(true);
         SelectAttack();
         EnemyManager.Instance.SelectEenmiesAttack();
 
     }
-    void AddEnemies()
+    public void AddEnemies()
     {
+        var enemySlot = enemyPositions[0];
         var pickedEnemy = enemies[Random.Range(0, enemies.Length)];
-        var go = Instantiate(pickedEnemy);
-        go.transform.position =  enemyPositions[0].position;
+        var go = Instantiate(pickedEnemy, enemySlot.position,Quaternion.identity, enemySlot);
+        go.transform.parent = enemySlot;
+        go.transform.localPosition = Vector3.zero;//enemySlot.position;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine( searchNextBattle());
-    }
 
     void SelectAttack()
     {
