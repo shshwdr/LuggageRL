@@ -511,7 +511,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: FeedbacksList.Array.data[0].Owner
     value: 
-    objectReference: {fileID: 1489175567256414683, guid: 02151644b57293047aff96684add7a4a, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: FeedbacksList.Array.data[0].DebugActive
     value: 0
@@ -1363,7 +1363,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: FeedbacksList.Array.data[1].Owner
     value: 
-    objectReference: {fileID: 1489175567256414683, guid: 02151644b57293047aff96684add7a4a, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: FeedbacksList.Array.data[1].DebugActive
     value: 0
@@ -1811,7 +1811,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: FeedbacksList.Array.data[2].Owner
     value: 
-    objectReference: {fileID: 1489175567256414683, guid: 02151644b57293047aff96684add7a4a, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: FeedbacksList.Array.data[2].DebugActive
     value: 0

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Luggage : Singleton<Luggage>
 {
+
+    MoreMountains.Feedbacks.MMF_Player feedbackPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
