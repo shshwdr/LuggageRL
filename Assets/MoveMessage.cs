@@ -40,6 +40,17 @@ public class MessageItemChangeCounter : BattleMessage
     public GridItemCore item;
     public int amount;
 }
+
+public class MessageAttackPlayer : BattleMessage
+{
+
+
+    public Vector2Int index;
+    public GridItemCore item;
+    public int amount;
+    public HPObject target;
+}
+
 public class MessageItemHeal : BattleMessage
 {
     public Vector2Int index;

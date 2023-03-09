@@ -88,6 +88,8 @@ public class GridItemCore: IGridItem
     }
     public int defense =>info.Defense;
     public ItemInfo info;
+    public virtual void init()
+    { }
     public string Name => info.DisplayName;
     public virtual string Desc
     {
@@ -238,12 +240,14 @@ public class GridItem : MonoBehaviour, IGridItem
         core.type = t;
         core.info = ItemManager.Instance.getItemInfo((core.type).ToString());
         core.index = ind;
+        core.init();
         var spriteResource = Resources.Load<Sprite>("itemSprite/" + core.type.ToString());
         if(spriteResource == null)
         {
             Debug.LogError("no sprite " + core.type.ToString());
         }
         baseItem.spriteRender.sprite = spriteResource;
+        baseItem.updateCounter(core.count);
     }
     public void addDestroyMessage(List<BattleMessage> messages)
     {

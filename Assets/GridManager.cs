@@ -55,7 +55,7 @@ public class GridManager : Singleton<GridManager>
     {
         deckPool.Add(type);
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.Pins, ItemType.Pins, ItemType.Pins };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Bomb, ItemType.Bomb, ItemType.Coke, ItemType.Coke };
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
@@ -423,6 +423,16 @@ public class GridManager : Singleton<GridManager>
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.item.transform.position, Color.green);
 
             }
+            else if (message is MessageAttackPlayer attackPlayer)
+            {
+                Debug.Log($"{attackPlayer.item.Name} attack {attackPlayer.amount}");
+                //predictToOrigin[attackPlayer.item].baseItem.WillHeal(heal.amount);
+                //heal.target.Heal(heal.amount);
+                ////FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
+                //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.item.transform.position, Color.green);
+
+            }
+            
             else if (message is MessageDestroy destr)
             {
                 Debug.Log($"{destr.item.Name} destroy");
@@ -503,6 +513,19 @@ public class GridManager : Singleton<GridManager>
                 {
                     yield return new WaitForSeconds(animTime);
                 }
+
+            }
+            else if (message is MessageAttackPlayer attackPlayer)
+            {
+
+                if (!GridItemDict.ContainsKey(attackPlayer.index))
+                {
+                    Debug.Log("?");
+                }
+                //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
+                FloatingTextManager.Instance.addText($"Self Damage {attackPlayer.amount}", GridItemDict[attackPlayer.index].transform.position, Color.red);
+                yield return new WaitForSeconds(animTime);
+                yield return StartCoroutine(attackPlayer.target.ApplyDamage(attackPlayer.amount));
 
             }
             else if (message is MessageItemHeal heal)
