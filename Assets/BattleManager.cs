@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BattleManager : Singleton<BattleManager>
 {
+    public BaseScene baseScene;
     public Text LuggageAttackText;
     public Button LuggageAttackButton;
     public GameObject[] itemsToActivate;
@@ -134,6 +135,7 @@ public class BattleManager : Singleton<BattleManager>
         }
         hideButtonCanvas();
         ButtonCanvas.gameObject.SetActive(false);
+        baseScene.hasFinished = true;
     }
     void StartBattle()
     {

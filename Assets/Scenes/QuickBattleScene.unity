@@ -2209,6 +2209,7 @@ MonoBehaviour:
   items: {fileID: 1056302651}
   emptyGridList: []
   itemViewText: {fileID: 1039747864}
+  deckPool: 040000000000000001000000010000000100000000000000
   rotatedTime: 0
   gridPreviewCell: {fileID: 1193028419026758767, guid: ed3e98aaeb23d994ebddb63104e5aa01, type: 3}
   isPredict: 0
@@ -3257,6 +3258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088e45f50c77b7549843c36512cd172c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseScene: {fileID: 0}
   LuggageAttackText: {fileID: 1590983180}
   LuggageAttackButton: {fileID: 286646130}
   itemsToActivate: []

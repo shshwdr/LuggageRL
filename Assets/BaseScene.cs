@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BaseScene : BaseMovable
 {
-    protected bool hasStarted = false;
+    public bool hasStarted = false;
+    public bool hasFinished = false;
 
 
     public Transform itemPositionsParent;
@@ -21,7 +22,7 @@ public class BaseScene : BaseMovable
     protected override void Update()
     {
         base.Update();
-        if (hasStarted)
+        if (hasFinished)
         {
             if (transform.position.x < -50)
             {

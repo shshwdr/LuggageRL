@@ -42,6 +42,13 @@ public class StageManager : Singleton<StageManager>
     }
     void addNextEvent()
     {
+        foreach (var scene in Transform.FindObjectsOfType<BaseScene>())
+        {
+            if (!scene.hasStarted)
+            {
+                return;
+            }
+        }
         if (eventIndex >= eventList.Count)
         {
             FloatingTextManager.Instance.addText("Finished Stage!", Vector3.zero, Color.yellow, 5);
