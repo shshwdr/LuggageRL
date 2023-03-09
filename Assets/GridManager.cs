@@ -76,15 +76,15 @@ public class GridManager : Singleton<GridManager>
         }
         for (int i = 0; i < drawCount; i++)
         {
+            if (availableEmpty.Count == 0 || deckPool.Count == 0)
+            {
+                break;
+            }
             var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
             var pickedType = deckPool[Random.Range(0, deckPool.Count)];
             deckPool.Remove(pickedType);
             AddGrid(picked.x, picked.y, pickedType);
             availableEmpty.Remove(picked);
-            if (availableEmpty.Count == 0 || deckPool.Count == 0)
-            {
-                break;
-            }
         }
 
         yield return StartCoroutine(MoveAfter(0, -1));
