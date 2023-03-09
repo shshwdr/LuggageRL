@@ -11,10 +11,10 @@ public class BaseMovable : MonoBehaviour
     {
         if (player == null)
         {
-            player = FindObjectOfType<MoreMountains.Feedbacks.MMF_Player>();
+            //player = FindObjectOfType<MoreMountains.Feedbacks.MMF_Player>();
         }
         isMoving = true;
-        player.PlayFeedbacks();
+        //player.PlayFeedbacks();
     }
     public void stopMove()
     {
