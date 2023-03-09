@@ -8,6 +8,10 @@ public class Enemy : HPObject
     EnemyAttackPreview attackPreview;
     public int attack = 3;
     Vector3 originalPosition;
+    public Transform leftTargetTransform; //where player should impact
+    public Transform topTargetTransform;
+    public Collider2D enemyCollider;
+    public GameObject targetedIndicator;
 
     public int attackInd;
     public bool attackFromBottom = true;
@@ -21,6 +25,8 @@ public class Enemy : HPObject
         attackPreview = GetComponentInChildren<EnemyAttackPreview>();
     }
     int damage = 0;
+    private bool isTargeted;
+
     public void GetDamage(int dam)
     {
         damage += dam;
@@ -51,6 +57,20 @@ public class Enemy : HPObject
             attackPreview.UpdatePreview(attackInd, attackFromBottom);
         }
     }
+
+    internal void setIsTargeted(bool isBeingTargeted)
+    {
+        if(isBeingTargeted)
+        {
+            targetedIndicator.SetActive(true);
+        }
+        else
+        {
+            targetedIndicator.SetActive(false);
+        }
+        isTargeted = isBeingTargeted;
+    }
+
     public IEnumerator Attack()
     {
 
@@ -84,5 +104,9 @@ public class Enemy : HPObject
     {
         GridManager.Instance.clearAttackPreview();
     }
-
+    private void OnMouseDown()
+    {
+        EnemyManager.Instance.setCurrentTargetedEnemy(this);
+        setIsTargeted(true);
+    }
 }

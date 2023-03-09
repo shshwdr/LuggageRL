@@ -12,7 +12,7 @@ public class BattleManager : Singleton<BattleManager>
     public GameObject[] itemsToActivate;
     bool canAttack = true;
     public Text MoveText;
-    int selected;
+    int selectedAttackIndex;
     [SerializeField] private int moveMax = 4;
     int moveLeft;
     bool isBattleFinished = false;
@@ -161,19 +161,26 @@ public class BattleManager : Singleton<BattleManager>
         EnemyManager.Instance.SelectEenmiesAttack();
 
     }
-    public void AddEnemies()
+    public void AddEnemies(int numEnemiesToAdd)
     {
-        var enemySlot = enemyPositions[0];
-        var pickedEnemy = enemies[Random.Range(0, enemies.Length)];
-        var go = Instantiate(pickedEnemy, enemySlot.position,Quaternion.identity, enemySlot);
-        go.transform.parent = enemySlot;
-        go.transform.localPosition = Vector3.zero;//enemySlot.position;
+        if(numEnemiesToAdd > enemyPositions.Length)
+        {
+            Debug.LogError("Adding too many enemies to fit the slots");
+        }
+        for(int x = 0; x < numEnemiesToAdd; x++)
+        {
+            var enemySlot = enemyPositions[x];
+            var pickedEnemy = enemies[Random.Range(0, enemies.Length)];
+            var go = Instantiate(pickedEnemy, enemySlot.position, Quaternion.identity, enemySlot);
+            go.transform.parent = enemySlot;
+            go.transform.localPosition = Vector3.zero;//enemySlot.position;
+        }
     }
 
 
     void SelectAttack()
     {
-        selected = Random.Range(0, 3);
+        selectedAttackIndex = Random.Range(0, 3);
         moveLeft = moveMax;
         UpdateText();
         GridManager.Instance.updateAttackEdge();
@@ -243,16 +250,19 @@ public class BattleManager : Singleton<BattleManager>
         }
 
         canAttack = false;
-        StartCoroutine(PlayerAttackMove(selected));
+        StartCoroutine(PlayerAttackMove(selectedAttackIndex));
     }
     List<int> attackIdToRotationId = new List<int>() { 0, 1, 1, 3 };
     public int getCurrentAttackRotationId()
     {
-        return attackIdToRotationId[selected];
+        return attackIdToRotationId[selectedAttackIndex];
     }
     public IEnumerator PlayerAttackMove(int moveId)
     {
         hideButtonCanvas();
+        
+        //moveId = 0; //force to push (debug)
+
         switch (moveId)
         {
             case 0:
@@ -276,7 +286,7 @@ public class BattleManager : Singleton<BattleManager>
 
     public void PredictNextAttack()
     {
-        switch (selected)
+        switch (selectedAttackIndex)
         {
             case 0:
                 GridManager.Instance.predict(1, 0);
@@ -333,12 +343,12 @@ public class BattleManager : Singleton<BattleManager>
         if (canAttack)
         {
 
-            LuggageAttackText.text = $" {attackString[selected]} ({attackMoveCost})";
+            LuggageAttackText.text = $" {attackString[selectedAttackIndex]} ({attackMoveCost})";
         }
         else
         {
 
-            LuggageAttackText.text = $" {attackString[selected]} (Attacked)";
+            LuggageAttackText.text = $" {attackString[selectedAttackIndex]} (Attacked)";
         }
         MoveText.text = $"{moveLeft}";
     }
@@ -346,7 +356,7 @@ public class BattleManager : Singleton<BattleManager>
     void RemoveText()
     {
         FloatingTextManager.Instance.addText("Search for next Enemy",Vector3.zero,Color.white);
-        //LuggageAttackText.text = "Search for next Enemy";
+        //LuggageAttackText.text = "Search for next Enemy";u
     }
 
     // Update is called once per frame
