@@ -84,10 +84,20 @@ public class GridItemCore: IGridItem
         get { return new Vector2Int(indexx, indexy); }
         set { indexx = value.x; indexy = value.y; }
     }
-    public int defense = 2;
-    public string Name;
-    public virtual string Desc => $@"{Name}
-defense: {defense}";
+    public int defense =>info.Defense;
+    public ItemInfo info;
+    public string Name => info.DisplayName;
+    public virtual string Desc
+    {
+        get
+        {
+            return $@"{info.DisplayName}
+defense: {info.Defense}
+{string.Format(info.Description, info.Param1, info.Param2)}
+strategy: {info.Strategy}
+{BuffDesc}";
+        }
+    }
 
     public string BuffDesc
     {
@@ -203,21 +213,28 @@ public class GridItem : MonoBehaviour, IGridItem
 
         switch (t)
         {
-            case ItemType.ore:
+            case ItemType.Stone:
                 core = new Ore();
                 break;
-            case ItemType.arrow:
+            case ItemType.Arrow:
                 core = new Arrow();
                 break;
-            case ItemType.herb:
+            case ItemType.Potion:
                 core = new Herb();
                 break;
-            case ItemType.poison:
+            case ItemType.Poison:
                 core = new Poison();
                 break;
         }
         core.type = t;
+        core.info = ItemManager.Instance.getItemInfo((core.type).ToString());
         core.index = ind;
+        var spriteResource = Resources.Load<Sprite>("itemSprite/" + core.type.ToString());
+        if(spriteResource == null)
+        {
+            Debug.LogError("no sprite " + core.type.ToString());
+        }
+        baseItem.spriteRender.sprite = spriteResource;
     }
     public void addDestroyMessage(List<BattleMessage> messages)
     {

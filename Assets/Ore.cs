@@ -4,15 +4,10 @@ using UnityEngine;
 [System.Serializable]
 public class Ore : GridItemCore
 {
-    public int damage = 1;
-    public int moveDamageScale = 2;
-
-    public override string Desc => $@"{base.Desc}
-Deal {CalculateDamage(damage)} damage when hit the border
-Deal x{moveDamageScale} when moved in the attack
-{BuffDesc}";
     public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
     {
+        int damage = info.Param1;
+        int moveDamageScale = info.Param2;
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
         if (diff > 0)

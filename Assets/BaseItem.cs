@@ -10,6 +10,7 @@ public class BaseItem : MonoBehaviour
     public GameObject DestroyOverlay;
     public GameObject buffOverlay;
     public GameObject poisonBuff;
+    public SpriteRenderer spriteRender;
     public void WillAttack(int damage)
     {
         AttackText.text = damage.ToString();

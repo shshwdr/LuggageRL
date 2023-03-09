@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
-public enum ItemType { ore,herb, arrow, poison}
+public enum ItemType { Stone,Potion, Arrow, Poison}
 public class GridManager : Singleton<GridManager>
 {
 
@@ -44,7 +44,7 @@ public class GridManager : Singleton<GridManager>
     {
         deckPool.Add(type);
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.ore, ItemType.ore, ItemType.ore };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Poison, ItemType.Arrow };
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
@@ -686,8 +686,9 @@ public class GridManager : Singleton<GridManager>
 
     public void AddGrid(int i, int j, ItemType type)
     {
-        GameObject obj = Instantiate(Resources.Load<GameObject>("items/"+type.ToString()));
-        obj.GetComponent<GridItem>().init(new Vector2Int(i, j), type);
+        var obj = ItemManager.Instance.createItem(type, items, Vector3.zero, i, j);
+        //GameObject obj = Instantiate(Resources.Load<GameObject>("items/"+type.ToString()));
+        //obj.GetComponent<GridItem>().init(new Vector2Int(i, j), type);
         obj.name = $"grid-x{i}-y{j}";
         obj.transform.SetParent(items);
 

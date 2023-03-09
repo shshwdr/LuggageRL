@@ -248,6 +248,7 @@ MonoBehaviour:
   DestroyOverlay: {fileID: 1976586095416762342}
   buffOverlay: {fileID: 2696704789240385785}
   poisonBuff: {fileID: 749318757150021534}
+  spriteRender: {fileID: 1773436473793387812}
 --- !u!114 &4590661104223907535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,8 +265,6 @@ MonoBehaviour:
     type: 0
     indexx: 0
     indexy: 0
-    defense: 2
-    Name: 
     movedCount: 0
     isDestroyed: 0
     buffsKey: 

@@ -476,7 +476,11 @@ namespace Sinbad
                 strValue = "0";
             }
             var cv = TypeDescriptor.GetConverter(t);
+            if(strValue == "Breakable")
+            {
 
+                Debug.Log("str " + strValue);
+            }
             return cv.ConvertFromInvariantString(strValue);
         }
 
