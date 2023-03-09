@@ -79,7 +79,9 @@ public class GridItemCore: IGridItem
     public int indexx;
     public int indexy;
     public int count;
+    public int isParam2Attack;
     public bool isAttacker => info.Type == "Attacker";
+    public bool IsParam2Attack => isParam2Attack == 1;
     public GridItemCore Core => this;
     public Vector2Int index
     {
@@ -97,7 +99,7 @@ public class GridItemCore: IGridItem
         {
             return $@"{info.DisplayName}
 defense: {info.Defense}
-{string.Format(info.Description, isAttacker? CalculateDamage(info.Param1):  info.Param1, info.Param2)}
+{string.Format(info.Description, isAttacker? CalculateDamage(info.Param1):  info.Param1, IsParam2Attack ? CalculateDamage(info.Param2): info.Param2)}
 strategy: {info.Strategy}
 {BuffDesc}";
         }

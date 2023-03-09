@@ -101,14 +101,14 @@ public class Pins : GridItemCore
 {
     public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
     {
-        
+
         int damage = info.Param1;
         int pinCountDamageIncrease = info.Param2;
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
 
         var dir = (borderIndex - originIndex) / diff;
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + pinCountDamageIncrease * GridManager.Instance.pinsCount, index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + CalculateDamage(pinCountDamageIncrease) * GridManager.Instance.pinsCount, index = index });
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         buffs.Clear();
@@ -122,7 +122,8 @@ public class Pins : GridItemCore
 public class Circuit : GridItemCore { }
 
 [System.Serializable]
-public class Coke : GridItemCore {
+public class Coke : GridItemCore
+{
 
     public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
     {
@@ -146,7 +147,8 @@ public class Coke : GridItemCore {
 }
 
 [System.Serializable]
-public class Bomb : GridItemCore {
+public class Bomb : GridItemCore
+{
     public override void init()
     {
         count = info.Param2;
@@ -156,7 +158,7 @@ public class Bomb : GridItemCore {
         int damage = info.Param1;
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
-            messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage), index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage), index = index });
         this.addDestroyMessage(messages);
     }
 
@@ -166,7 +168,7 @@ public class Bomb : GridItemCore {
         int damage = info.Param1;
         messages.Add(new MessageItemChangeCounter { item = this, index = index, amount = -1 });
 
-        if(count == 0)
+        if (count == 0)
         {
             messages.Add(new MessageAttackPlayer { item = this, index = index, amount = CalculateDamage(damage), target = BattleManager.Instance.player });
 
@@ -177,41 +179,92 @@ public class Bomb : GridItemCore {
 }
 
 [System.Serializable]
-public class CreditCard : GridItemCore {
+public class CreditCard : GridItemCore
+{
     public override void afterAttack(List<BattleMessage> messages)
     {
         int amount = info.Param1;
         int count = 0;
-        foreach(var item in GridManager.Instance.GridItemDict.Values)
+        foreach (var item in GridManager.Instance.GridItemDict.Values)
         {
             if (!item.IsDestroyed)
             {
                 count++;
             }
         }
-        if(count == 1)
+        if (count == 1)
         {
             messages.Add(new MessageDrawItem { index = index, amount = amount });
             this.addDestroyMessage(messages);
-            
+
         }
     }
 }
 
 [System.Serializable]
-public class Umbrella : GridItemCore { }
+public class Umbrella : GridItemCore
+{
+
+    public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
+    {
+        int damage = info.Param1;
+        var originIndex = index;
+        int diff = (int)(borderIndex - originIndex).magnitude;
+        var emptySlotCount = 12 - GridManager.Instance.GridItemDict.Count;
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(emptySlotCount * damage), index = index });
+        this.addDestroyMessage(messages);
+    }
+}
 
 [System.Serializable]
-public class Slingshot : GridItemCore { }
+public class Slingshot : GridItemCore
+{
+    public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
+    {
+        int damage = info.Param1;
+        int damage2 = info.Param2;
+        var originIndex = index;
+        int diff = (int)(borderIndex - originIndex).magnitude;
+        var itemCountBehind = GridManager.Instance.getEmptysBehind(index, index - borderIndex);
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + CalculateDamage(damage2) * itemCountBehind, index = index });
+        this.addDestroyMessage(messages);
+    }
+}
 
 [System.Serializable]
 public class Balancer : GridItemCore { }
 
 [System.Serializable]
-public class Rocket : GridItemCore { }
+public class Rocket : GridItemCore
+{
+    public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
+    {
+        int damage = info.Param1;
+        int damage2 = info.Param2;
+        var originIndex = index;
+        int diff = (int)(borderIndex - originIndex).magnitude;
+        var dir = (borderIndex - originIndex) / diff;
+        var itemBehind = GridManager.Instance.getItemsBehind(index, index - borderIndex);
+        foreach(var item in itemBehind)
+        {
+            item.addDestroyMessageWithIndex(messages, originIndex, true);
+        }
+        messages.Add(new MessageItemAttack
+        {
+            item = this,
+            damage = CalculateDamage(damage) + CalculateDamage(damage2) * itemBehind.Count,
+            index = index
+        });
 
-[System.Serializable] 
-public class Pinata : GridItemCore {
+        messages.Add(new MessageItemMove { item = this, index = index });
+        this.addDestroyMessageWithIndex(messages, originIndex, true);
+        index = borderIndex + dir * 10; ;
+    }
+}
+
+[System.Serializable]
+public class Pinata : GridItemCore
+{
 
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {

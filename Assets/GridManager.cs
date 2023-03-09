@@ -57,7 +57,7 @@ public class GridManager : Singleton<GridManager>
     {
         deckPool.Add(type);
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.Pinata, ItemType.Coke, ItemType.Coke, ItemType.Coke, ItemType.Coke, ItemType.Coke, ItemType.Coke };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Rocket, ItemType.Rocket, ItemType.Potion, ItemType.Potion };
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
@@ -278,7 +278,50 @@ public class GridManager : Singleton<GridManager>
         });
         return allItemIndex;
     }
-
+    public bool isPredict = false;
+    public List<IGridItem> getItemsBehind(Vector2Int target, Vector2Int dir) 
+    {
+        List<IGridItem> res = new List<IGridItem>();
+        for (int i = 0; i < 4; i++)
+        {
+            target += dir;
+            if (isPredict)
+            {
+                if(HasItem(predictDict, target))
+                    res.Add((IGridItem)GetItem(predictDict, target));
+            }
+            else
+            {
+                if (HasItem(predictDict, target))
+                    res.Add((IGridItem)GetItem(GridItemDict, target));
+            }
+        }
+        return res;
+    }
+    public int getEmptysBehind(Vector2Int target, Vector2Int dir)
+    {
+        int res = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            target += dir;
+            if (isPredict)
+            {
+                if (!CanMoveTo(predictDict, target))
+                {
+                    return res;
+                }
+            }
+            else
+            {
+                if (!CanMoveTo(GridItemDict, target))
+                {
+                    return res;
+                }
+            }
+            res++;
+        }
+        return res;
+    }
     public void MoveInternal<T>(int x, int y, bool isAttacking, Dictionary<Vector2Int, T> gridItemDict) where T : IGridItem
     {
         messages = new List<BattleMessage>();
@@ -320,7 +363,7 @@ public class GridManager : Singleton<GridManager>
                             //gridItem.hitBorder(true, newKey - moveVector - key, items.transform.TransformPoint(IndexToPosition(newKey)));
                         }
                     }
-                    if (HasItem(gridItemDict, newKey))
+                    if (HasItem(gridItemDict, newKey) && !GetItem(gridItemDict, newKey).IsDestroyed)
                     {
 
                         if (isAttacking)
@@ -650,13 +693,14 @@ public class GridManager : Singleton<GridManager>
         updateAttackEdge();
 
     }
-
+    Dictionary<Vector2Int, GridItemCore> predictDict;
     public void predict(int x,int y)
     {
+        isPredict = true;
         clearBeforeAttack();
         // we need to copy a GridItemDict, create a map between original grid and new ones
         // move and attack using it
-        var predictDict = new Dictionary<Vector2Int, GridItemCore>();
+        predictDict = new Dictionary<Vector2Int, GridItemCore>();
         var originalItemToPredictItem = new Dictionary<GridItemCore, GridItem>();
         foreach (var pair in GridItemDict)
         {
@@ -670,6 +714,7 @@ public class GridManager : Singleton<GridManager>
         MoveInternal(x, y, true, predictDict);
         //read message and update damage it would made on the item, show a red overlay to it?
         ParsePredictMessage(originalItemToPredictItem);
+        isPredict = false;
     }
     public IEnumerator MoveEnumerator(int x, int y, bool isAttacking)
     {
