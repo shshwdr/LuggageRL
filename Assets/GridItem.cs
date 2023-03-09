@@ -57,7 +57,7 @@ public struct SerializedDictionary<T, U>
     }
 }
 [Serializable]
-public enum BuffType { poison, coin}
+public enum BuffType { poison, piggyBank, balancer}
 public static class Ut
 {
     public static T DeepClone<T>(this T obj)
@@ -78,16 +78,32 @@ public class GridItemCore: IGridItem
     public ItemType type;
     public int indexx;
     public int indexy;
+    public int count;
+    public int isParam2Attack;
+    public bool isAttacker => info.Type == "Attacker";
+    public bool IsParam2Attack => isParam2Attack == 1;
     public GridItemCore Core => this;
     public Vector2Int index
     {
         get { return new Vector2Int(indexx, indexy); }
         set { indexx = value.x; indexy = value.y; }
     }
-    public int defense = 2;
-    public string Name;
-    public virtual string Desc => $@"{Name}
-defense: {defense}";
+    public int defense =>info.Defense;
+    public ItemInfo info;
+    public virtual void init()
+    { }
+    public string Name => info.DisplayName;
+    public virtual string Desc
+    {
+        get
+        {
+            return $@"{info.DisplayName}
+defense: {info.Defense}
+{string.Format(info.Description, isAttacker? CalculateDamage(info.Param1):  info.Param1, IsParam2Attack ? CalculateDamage(info.Param2): info.Param2)}
+strategy: {info.Strategy}
+{BuffDesc}";
+        }
+    }
 
     public string BuffDesc
     {
@@ -108,10 +124,19 @@ defense: {defense}";
         {
             rawDamage += buffs[BuffType.poison];
         }
+        if (buffs.ContainsKey(BuffType.piggyBank))
+        {
+            rawDamage += buffs[BuffType.piggyBank];
+        }
+        if (buffs.ContainsKey(BuffType.balancer))
+        {
+            rawDamage += buffs[BuffType.balancer];
+        }
         return rawDamage;
     }
 
     public int movedCount = 0;
+    public bool IsDestroyed => isDestroyed;
     //protected Vector3 borderPosition;
     public bool isDestroyed = false;
 
@@ -144,9 +169,12 @@ defense: {defense}";
     {
         movedCount = 0;
     }
+    public virtual void beforeAttack(List<BattleMessage> messages) { }
     public virtual void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex) { }
     public virtual void move(List<BattleMessage> messages) { movedCount++; }
     public virtual void beCrushed(IGridItem item, List<BattleMessage> messages) { }
+    public virtual void afterAttack(List<BattleMessage> messages) { }
+    public virtual void afterTurn(List<BattleMessage> messages) { }
 
     public void addDestroyMessage(List<BattleMessage> messages)
     {
@@ -167,12 +195,17 @@ defense: {defense}";
 
 public interface IGridItem
 {
+    public void beforeAttack(List<BattleMessage> messages);
     public void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex);
     public void move(List<BattleMessage> messages);
     public void beCrushed(IGridItem item, List<BattleMessage> messages);
     public void addDestroyMessage(List<BattleMessage> messages);
     public void addDestroyMessageWithIndex(List<BattleMessage> messages, Vector2Int ind, bool skipAnim = false);
+    public void afterAttack(List<BattleMessage> messages);
+
+    public void afterTurn(List<BattleMessage> messages);
     public Vector2Int index { get; set; }
+    public bool IsDestroyed { get; }
     public GridItemCore Core { get; }
     public void ApplyBuff(BuffType type, int v);
     public void ClearBuff();
@@ -187,9 +220,13 @@ public class GridItem : MonoBehaviour, IGridItem
     {
         core.finishedAttack();
     }
-
+    public bool IsDestroyed => core.isDestroyed;
     public Dictionary<BuffType, int> buffs => core.buffs;
     public void ApplyBuff(BuffType type, int v) { core.ApplyBuff(type, v); baseItem. updateBuff(); }
+    public void UpdateCounter()
+    {
+        baseItem.updateCounter(core.count);
+    }
     public void ClearBuff(){
         core.ClearBuff(); baseItem.updateBuff();
     }
@@ -200,24 +237,19 @@ public class GridItem : MonoBehaviour, IGridItem
     public ItemType type { get { return core.type; } }
     public void init(Vector2Int ind,ItemType t)
     {
-
-        switch (t)
-        {
-            case ItemType.ore:
-                core = new Ore();
-                break;
-            case ItemType.arrow:
-                core = new Arrow();
-                break;
-            case ItemType.herb:
-                core = new Herb();
-                break;
-            case ItemType.poison:
-                core = new Poison();
-                break;
-        }
+        core = (GridItemCore) System.Activator.CreateInstance(System.Type.GetType(t.ToString()));
+        
         core.type = t;
+        core.info = ItemManager.Instance.getItemInfo((core.type).ToString());
         core.index = ind;
+        core.init();
+        var spriteResource = Resources.Load<Sprite>("itemSprite/" + core.type.ToString());
+        if(spriteResource == null)
+        {
+            Debug.LogError("no sprite " + core.type.ToString());
+        }
+        baseItem.spriteRender.sprite = spriteResource;
+        baseItem.updateCounter(core.count);
     }
     public void addDestroyMessage(List<BattleMessage> messages)
     {
@@ -290,5 +322,20 @@ public class GridItem : MonoBehaviour, IGridItem
     void Update()
     {
         
+    }
+
+    public void beforeAttack(List<BattleMessage> messages)
+    {
+        core.beforeAttack(messages);
+    }
+
+    public void afterAttack(List<BattleMessage> messages)
+    {
+        core.afterAttack(messages);
+    }
+
+    public virtual void afterTurn(List<BattleMessage> messages) {
+
+        core.afterTurn(messages);
     }
 }

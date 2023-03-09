@@ -12,6 +12,7 @@ public class BattleScene : BaseScene
         BattleManager.Instance.enemyPositions = itemPositions;
         BattleManager.Instance.itemsToActivate = itemsToActivate;
         BattleManager.Instance.AddEnemies();
+        BattleManager.Instance.baseScene = this;
     }
 
     // Update is called once per frame

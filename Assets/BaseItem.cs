@@ -10,6 +10,9 @@ public class BaseItem : MonoBehaviour
     public GameObject DestroyOverlay;
     public GameObject buffOverlay;
     public GameObject poisonBuff;
+    public SpriteRenderer spriteRender;
+    public Text Count;
+
     public void WillAttack(int damage)
     {
         AttackText.text = damage.ToString();
@@ -45,6 +48,15 @@ public class BaseItem : MonoBehaviour
             {
                 poisonBuff.SetActive(true);
             }
+        }
+    }
+    public void updateCounter(int count)
+    {
+        if(count > 0)
+        {
+
+            Count.gameObject.SetActive(true);
+            Count.text = count.ToString();
         }
     }
 }
