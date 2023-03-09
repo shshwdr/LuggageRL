@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class Ore : GridItemCore
+public class Stone : GridItemCore
 {
     public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
     {

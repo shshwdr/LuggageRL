@@ -55,7 +55,7 @@ public class GridManager : Singleton<GridManager>
     {
         deckPool.Add(type);
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.PiggyBank, ItemType.Arrow };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Pins, ItemType.Pins, ItemType.Pins };
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
@@ -403,7 +403,11 @@ public class GridManager : Singleton<GridManager>
             }
             else if(message is MessageItemApplyEffect applyEffect)
             {
-                predictToOrigin[(GridItemCore) applyEffect.target].baseItem.WillBeBuff();
+                if (GridItemDict[applyEffect.targetIndex].core.isAttacker)
+                {
+
+                    predictToOrigin[(GridItemCore)applyEffect.target].baseItem.WillBeBuff();
+                }
 
             }
             else if(message is MessageItemChangeCounter counterChanage)
@@ -473,9 +477,12 @@ public class GridManager : Singleton<GridManager>
                 {
                     Debug.Log("?");
                 }
-                GridItemDict[applyEffect.targetIndex].ApplyBuff(applyEffect.type, applyEffect.value);
-                FloatingTextManager.Instance.addText($"Apply {applyEffect.type.ToString()}", GridItemDict[applyEffect.targetIndex].transform.position, Color.yellow);
-                //FloatingTextManager.Instance.addText($"{attack.damage}", heal.item.transform.position);
+                if (GridItemDict[applyEffect.targetIndex].core.isAttacker)
+                {
+                    GridItemDict[applyEffect.targetIndex].ApplyBuff(applyEffect.type, applyEffect.value);
+                    FloatingTextManager.Instance.addText($"Apply {applyEffect.type.ToString()}", GridItemDict[applyEffect.targetIndex].transform.position, Color.yellow);
+                    //FloatingTextManager.Instance.addText($"{attack.damage}", heal.item.transform.position);
+                }
                 if (!applyEffect.skipAnim)
                 {
                     yield return new WaitForSeconds(animTime);
@@ -565,9 +572,17 @@ public class GridManager : Singleton<GridManager>
         var nextAttackEdge = (BattleManager.Instance.getCurrentAttackRotationId() - rotatedTime + 4) % 4;
         attackingEdges[nextAttackEdge].SetActive(true);
     }
+
+    public int pinsCount = 0;
+
+    void clearBeforeAttack()
+    {
+        pinsCount = 0;
+        messages.Clear();
+    }
     public IEnumerator MoveAndAttack(int x,int y)
     {
-        messages.Clear();
+        clearBeforeAttack();
         foreach (var item in GridItemDict.Values)
         {
             item.GetComponent<GridItem>().finishedAttack();
@@ -591,7 +606,7 @@ public class GridManager : Singleton<GridManager>
 
     public void predict(int x,int y)
     {
-        messages.Clear();
+        clearBeforeAttack();
         // we need to copy a GridItemDict, create a map between original grid and new ones
         // move and attack using it
         var predictDict = new Dictionary<Vector2Int, GridItemCore>();

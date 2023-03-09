@@ -79,6 +79,7 @@ public class GridItemCore: IGridItem
     public int indexx;
     public int indexy;
     public int count;
+    public bool isAttacker => info.Type == "Attacker";
     public GridItemCore Core => this;
     public Vector2Int index
     {
@@ -94,7 +95,7 @@ public class GridItemCore: IGridItem
         {
             return $@"{info.DisplayName}
 defense: {info.Defense}
-{string.Format(info.Description, info.Param1, info.Param2)}
+{string.Format(info.Description, isAttacker? CalculateDamage(info.Param1):  info.Param1, info.Param2)}
 strategy: {info.Strategy}
 {BuffDesc}";
         }
@@ -232,25 +233,8 @@ public class GridItem : MonoBehaviour, IGridItem
     public ItemType type { get { return core.type; } }
     public void init(Vector2Int ind,ItemType t)
     {
-
-        switch (t)
-        {
-            case ItemType.Stone:
-                core = new Ore();
-                break;
-            case ItemType.Arrow:
-                core = new Arrow();
-                break;
-            case ItemType.Potion:
-                core = new Herb();
-                break;
-            case ItemType.Poison:
-                core = new Poison();
-                break;
-            case ItemType.PiggyBank:
-                core = new PiggyBank();
-                break;
-        }
+        core = (GridItemCore) System.Activator.CreateInstance(System.Type.GetType(t.ToString()));
+        
         core.type = t;
         core.info = ItemManager.Instance.getItemInfo((core.type).ToString());
         core.index = ind;

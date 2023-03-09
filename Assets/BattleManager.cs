@@ -26,7 +26,6 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField] private int swapActionCost = 0;
     [SerializeField] private int drawMoveCost = 0;
     public Transform ButtonCanvas;
-
     public void hideButtonCanvas()
     {
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>())
