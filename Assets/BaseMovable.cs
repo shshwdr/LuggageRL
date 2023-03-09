@@ -6,9 +6,15 @@ public class BaseMovable : MonoBehaviour
 {
     [SerializeField] protected float moveSpeed;
     protected bool isMoving = false;
+    [SerializeField] protected MoreMountains.Feedbacks.MMF_Player player;
     public void startMove()
     {
+        if (player == null)
+        {
+            //player = FindObjectOfType<MoreMountains.Feedbacks.MMF_Player>();
+        }
         isMoving = true;
+        //player.PlayFeedbacks();
     }
     public void stopMove()
     {

@@ -2,9 +2,14 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 public class Luggage : Singleton<Luggage>
 {
+
+    [SerializeField] MoreMountains.Feedbacks.MMF_Player pushForwardAttackAnimationPlayer;
+    public Transform idleTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +23,19 @@ public class Luggage : Singleton<Luggage>
     }
     Enemy target;
 
-    void SelectEnemyTarget()
+    void SetTarget() //EnemyManager will handle target
     {
-
-        Enemy enemy = EnemyManager.Instance.GetFrontEnemy();
-        target = enemy;
-        target.ClearDamage();
+        target = EnemyManager.Instance.GetCurrentTargetedEnemy();
+        //target.ClearDamage()
+        foreach(MMF_Position feedback in pushForwardAttackAnimationPlayer.GetFeedbacksOfType<MMF_Position>())
+        {
+            if(feedback.Mode == MMF_Position.Modes.ToDestination)
+            {
+                if (feedback.DestinationPositionTransform != idleTransform) {
+                    feedback.DestinationPositionTransform = target.leftTargetTransform;
+                }
+            }
+        }
     }
 
     public IEnumerator Rotate(int ind)
@@ -41,8 +53,9 @@ public class Luggage : Singleton<Luggage>
 
     public IEnumerator LiftAndDownAttack()
     {
-        SelectEnemyTarget();
+        SetTarget();
         //
+        
         transform.DOMove(target.transform.position + Vector3.up * 5, GridManager.animTime * 2);
         yield return new WaitForSeconds(GridManager.animTime * 2);
         //suitcaseInBattle.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
@@ -54,20 +67,19 @@ public class Luggage : Singleton<Luggage>
     }
     public IEnumerator PushForwardAttack()
     {
-        SelectEnemyTarget();
-        //
-        //suitcaseInBattle.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
-        transform.DOMove(target.transform.position, GridManager.animTime);
+        SetTarget();
+
+        yield return StartCoroutine(pushForwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
+        
+        //transform.DOMove(target.transform.position, GridManager.animTime);
         yield return GridManager.Instance.MoveAndAttack(1, 0);
-        //yield return GridManager.Instance.MoveEnumerator(1, 0,true);
-        //yield return new WaitForSeconds(GridManager.animTime);
 
         yield return StartCoroutine(showDamage());
     }
 
     public IEnumerator UpsideDownAndDrop()
     {
-        SelectEnemyTarget();
+        SetTarget();
 
         GridManager.Instance.Rotate(2, false);
         transform.DOMove(target.transform.position + Vector3.up*5, GridManager.animTime*2);
@@ -85,7 +97,7 @@ public class Luggage : Singleton<Luggage>
     public IEnumerator ThrowOutAndHitBack()
     {
 
-        SelectEnemyTarget();
+        SetTarget();
 
 
         GridManager.Instance.Rotate(1, false);
