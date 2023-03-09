@@ -117,9 +117,26 @@ public class Pins : GridItemCore
     }
 }
 
-
 [System.Serializable]
-public class Circuit : GridItemCore { }
+public class Circuit : GridItemCore {
+    public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
+    {
+        
+        int damage = info.Param1;
+        int damage2 = info.Param2;
+        var originIndex = index;
+        int diff = (int)(borderIndex - originIndex).magnitude; 
+        var itemConnected = GridManager.Instance.getItemsWithTypeAround(index,true, "Breakable");
+        foreach (var item in itemConnected)
+        {
+            messages.Add(new MessageItemVisualEffect { item = item.Core, index = item.index,effect = VisualEffect.electric });
+            //item.addDestroyMessageWithIndex(messages, originIndex, true);
+        }
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + CalculateDamage(damage2) * itemConnected.Count, index = index });
+        this.addDestroyMessage(messages);
+    }
+
+}
 
 [System.Serializable]
 public class Coke : GridItemCore

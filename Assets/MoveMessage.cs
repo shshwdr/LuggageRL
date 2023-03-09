@@ -7,6 +7,9 @@ public class BattleMessage
     public bool skipAnim = false;
 }
 
+
+public enum VisualEffect { electric }
+
 public class MessageMove : BattleMessage
 {
     public Dictionary<GridItemCore, Vector2Int> itemTargetIndex = new Dictionary<GridItemCore, Vector2Int>();
@@ -16,13 +19,19 @@ public class MessageItemMove : BattleMessage
     public Vector2Int index;
     public GridItemCore item;
 }
-
 public class MessageItemAttack : BattleMessage
 {
     public Vector2Int index;
     public GridItemCore item;
     public int damage;
     public HPObject target;
+}
+
+public class MessageItemVisualEffect : BattleMessage
+{
+    public Vector2Int index;
+    public GridItemCore item;
+    public VisualEffect effect;
 }
 
 public class MessageItemApplyEffect : BattleMessage
