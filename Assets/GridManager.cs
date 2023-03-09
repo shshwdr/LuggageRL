@@ -32,7 +32,7 @@ public class GridManager : Singleton<GridManager>
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
     public Text itemViewText;
 
-    int drawCount = 4;
+    int drawCount = 6;
     public bool CanDraw(out string failedReason, int drawCount)
     {
         failedReason = "";
@@ -57,7 +57,7 @@ public class GridManager : Singleton<GridManager>
     {
         deckPool.Add(type);
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.Rocket, ItemType.Rocket, ItemType.Potion, ItemType.Potion };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Balancer, ItemType.Stone, ItemType.Stone, ItemType.Stone, ItemType.Stone, ItemType.Stone, ItemType.Stone, ItemType.Stone };
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
@@ -693,7 +693,8 @@ public class GridManager : Singleton<GridManager>
         updateAttackEdge();
 
     }
-    Dictionary<Vector2Int, GridItemCore> predictDict;
+    public Dictionary<Vector2Int, GridItemCore> predictDict;
+    public Dictionary<GridItemCore, GridItem> originalItemToPredictItem;
     public void predict(int x,int y)
     {
         isPredict = true;
@@ -701,7 +702,7 @@ public class GridManager : Singleton<GridManager>
         // we need to copy a GridItemDict, create a map between original grid and new ones
         // move and attack using it
         predictDict = new Dictionary<Vector2Int, GridItemCore>();
-        var originalItemToPredictItem = new Dictionary<GridItemCore, GridItem>();
+        originalItemToPredictItem = new Dictionary<GridItemCore, GridItem>();
         foreach (var pair in GridItemDict)
         {
             pair.Value.baseItem.ClearOverlayes();

@@ -232,7 +232,37 @@ public class Slingshot : GridItemCore
 }
 
 [System.Serializable]
-public class Balancer : GridItemCore { }
+public class Balancer : GridItemCore {
+    public override void afterAttack(List<BattleMessage> messages)
+    {
+        if(movedCount == 0)
+        {
+            var originIndex = index;
+                if (GridManager.Instance.isPredict)
+                {
+                    foreach (var item in GridManager.Instance.predictDict.Values)
+                    {
+                        if (!item.IsDestroyed)
+                        {
+                            messages.Add(new MessageItemApplyEffect { item = this, index = index, target = item, type = BuffType.balancer, value = info.Param1, targetIndex = GridManager.Instance.originalItemToPredictItem[  item].index });
+                        }
+                    }
+                }
+                else
+            {
+                foreach (var item in GridManager.Instance.GridItemDict.Values)
+                {
+                    if (!item.IsDestroyed)
+                    {
+                        messages.Add(new MessageItemApplyEffect { item = this, index = index, target = item, type = BuffType.balancer, value = info.Param1, targetIndex = item.index });
+                    }
+                }
+
+            }
+            addDestroyMessageWithIndex(messages, originIndex, true);
+        }
+    }
+}
 
 [System.Serializable]
 public class Rocket : GridItemCore
