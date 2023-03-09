@@ -177,7 +177,26 @@ public class Bomb : GridItemCore {
 }
 
 [System.Serializable]
-public class CreditCard : GridItemCore { }
+public class CreditCard : GridItemCore {
+    public override void afterAttack(List<BattleMessage> messages)
+    {
+        int amount = info.Param1;
+        int count = 0;
+        foreach(var item in GridManager.Instance.GridItemDict.Values)
+        {
+            if (!item.IsDestroyed)
+            {
+                count++;
+            }
+        }
+        if(count == 1)
+        {
+            messages.Add(new MessageDrawItem { index = index, amount = amount });
+            this.addDestroyMessage(messages);
+            
+        }
+    }
+}
 
 [System.Serializable]
 public class Umbrella : GridItemCore { }
@@ -192,5 +211,17 @@ public class Balancer : GridItemCore { }
 public class Rocket : GridItemCore { }
 
 [System.Serializable] 
-public class Pinata : GridItemCore { }
+public class Pinata : GridItemCore {
+
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    {
+        var drawAmount = info.Param1;
+
+        messages.Add(new MessageDrawItem { index = index, amount = drawAmount });
+        this.addDestroyMessage(messages);
+        //BattleManager.Instance.player.Heal(3);
+        //FloatingTextManager.Instance.addText("Heal!", transform.position);
+        //destory();
+    }
+}
 

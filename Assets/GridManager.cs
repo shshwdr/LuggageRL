@@ -31,6 +31,8 @@ public class GridManager : Singleton<GridManager>
     public Dictionary<Vector2Int, GridItem> GridItemDict = new Dictionary<Vector2Int, GridItem>();
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
     public Text itemViewText;
+
+    int drawCount = 4;
     public bool CanDraw(out string failedReason, int drawCount)
     {
         failedReason = "";
@@ -55,7 +57,7 @@ public class GridManager : Singleton<GridManager>
     {
         deckPool.Add(type);
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.Bomb, ItemType.Bomb, ItemType.Coke, ItemType.Coke };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Pinata, ItemType.Coke, ItemType.Coke, ItemType.Coke, ItemType.Coke, ItemType.Coke, ItemType.Coke };
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
@@ -77,33 +79,39 @@ public class GridManager : Singleton<GridManager>
             deckPool.Remove(pickedType);
             AddGrid(picked.x, picked.y, pickedType);
             availableEmpty.Remove(picked);
+            if(availableEmpty.Count == 0 || deckPool.Count == 0)
+            {
+                break;
+            }
         }
 
         yield return StartCoroutine(MoveAfter(0, -1));
+        BattleManager.Instance.PredictNextAttack();
     }
 
     public IEnumerator DrawAllItemsFromPool()
     {
-        List<Vector2Int> availableEmpty = new List<Vector2Int>();
-        foreach (var key in emptyGridList)
-        {
-            if (!GridItemDict.ContainsKey(key.index))
-            {
-                availableEmpty.Add(key.index);
-            }
-        }
-        foreach(var item in deckPool)
-        {
-            var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
-            AddGrid(picked.x, picked.y, item);
-            availableEmpty.Remove(picked);
-        }
+        yield return StartCoroutine(DrawItem(drawCount));
+        //List<Vector2Int> availableEmpty = new List<Vector2Int>();
+        //foreach (var key in emptyGridList)
+        //{
+        //    if (!GridItemDict.ContainsKey(key.index))
+        //    {
+        //        availableEmpty.Add(key.index);
+        //    }
+        //}
+        //foreach(var item in deckPool)
+        //{
+        //    var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
+        //    AddGrid(picked.x, picked.y, item);
+        //    availableEmpty.Remove(picked);
+        //}
 
-        deckPool.Clear();
+        //deckPool.Clear();
 
-        yield return StartCoroutine(MoveAfter(0, -1));
+        //yield return StartCoroutine(MoveAfter(0, -1));
 
-        BattleManager.Instance.PredictNextAttack();
+        //BattleManager.Instance.PredictNextAttack();
     }
     // Start is called before the first frame update
     void Start()
@@ -431,6 +439,10 @@ public class GridManager : Singleton<GridManager>
                 ////FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.item.transform.position, Color.green);
 
+            }else if(message is MessageDrawItem drawItem)
+            {
+
+                Debug.Log($"draw {drawItem.amount}");
             }
             
             else if (message is MessageDestroy destr)
@@ -514,6 +526,18 @@ public class GridManager : Singleton<GridManager>
                     yield return new WaitForSeconds(animTime);
                 }
 
+            }
+            else if (message is MessageDrawItem drawItem)
+            {
+
+                if (!GridItemDict.ContainsKey(drawItem.index))
+                {
+                    Debug.Log("?");
+                }
+                //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
+                FloatingTextManager.Instance.addText($"Draw {drawItem.amount} Items", GridItemDict[drawItem.index].transform.position, Color.blue);
+                yield return new WaitForSeconds(animTime);
+                yield return StartCoroutine(DrawItem(drawItem.amount));
             }
             else if (message is MessageAttackPlayer attackPlayer)
             {
