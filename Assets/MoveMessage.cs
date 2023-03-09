@@ -34,6 +34,12 @@ public class MessageItemApplyEffect : BattleMessage
     public int value;
     public IGridItem target;
 }
+public class MessageItemChangeCounter : BattleMessage
+{
+    public Vector2Int index;
+    public GridItemCore item;
+    public int amount;
+}
 public class MessageItemHeal : BattleMessage
 {
     public Vector2Int index;

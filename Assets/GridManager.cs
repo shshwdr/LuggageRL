@@ -4,11 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
-public enum ItemType { Stone,Potion, Arrow, Poison}
+public enum ItemType { Stone,Potion, Arrow, Poison, Circuit,
+Pins,
+PiggyBank,
+Coke,
+Bomb,
+CreditCard,
+Umbrella,
+Slingshot,
+Balancer,
+Rocket,
+Pinata,
+}
 public class GridManager : Singleton<GridManager>
 {
 
-    static public float animTime = 0.4f;
+    static public float animTime = 0.5f;
     public float tileSize = 2f;
     public int Rows = 2;
     public int Columns = 3;
@@ -44,7 +55,7 @@ public class GridManager : Singleton<GridManager>
     {
         deckPool.Add(type);
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Poison, ItemType.Arrow };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.PiggyBank, ItemType.Arrow };
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
@@ -343,6 +354,31 @@ public class GridManager : Singleton<GridManager>
             }
 
         }
+        if (isAttacking)
+        {
+            foreach (var item in gridItemDict.Values)
+            {
+                if (!item.IsDestroyed)
+                {
+
+                    item.afterAttack(messages);
+                }
+            }
+        }
+    }
+
+    public IEnumerator EndTurnCardBehaviorEnumerator() 
+    {
+        messages.Clear();
+            foreach (var item in GridItemDict.Values)
+            {
+                if (!item.IsDestroyed)
+                {
+
+                    item.afterTurn(messages);
+                }
+            }
+        yield return StartCoroutine(ParseMessages());
     }
     public void ParsePredictMessage(Dictionary<GridItemCore, GridItem> predictToOrigin) {
         for (int i = 0; i < messages.Count; i++)
@@ -368,6 +404,10 @@ public class GridManager : Singleton<GridManager>
             else if(message is MessageItemApplyEffect applyEffect)
             {
                 predictToOrigin[(GridItemCore) applyEffect.target].baseItem.WillBeBuff();
+
+            }
+            else if(message is MessageItemChangeCounter counterChanage)
+            {
 
             }
             else if (message is MessageItemHeal heal)
@@ -410,6 +450,21 @@ public class GridManager : Singleton<GridManager>
 
                     yield return new WaitForSeconds(animTime);
                 }
+            }
+            else if (message is MessageItemChangeCounter counterChanage)
+            {
+
+                if (!GridItemDict.ContainsKey(counterChanage.index))
+                {
+                    Debug.Log("?");
+                }
+                GridItemDict[counterChanage.index].UpdateCounter();
+                FloatingTextManager.Instance.addText( (counterChanage.amount > 0 ? "+" : "")+ $"{counterChanage.amount.ToString()}", GridItemDict[counterChanage.index].transform.position, Color.yellow);
+                if (!counterChanage.skipAnim)
+                {
+                    yield return new WaitForSeconds(animTime);
+                }
+
             }
             else if (message is MessageItemApplyEffect applyEffect)
             {

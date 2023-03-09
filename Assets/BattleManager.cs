@@ -295,6 +295,9 @@ public class BattleManager : Singleton<BattleManager>
     public IEnumerator EndOfTurn()
     {
         hideButtonCanvas();
+
+        yield return StartCoroutine(GridManager.Instance.EndTurnCardBehaviorEnumerator());
+        
         yield return StartCoroutine(EnemyManager.Instance.EnemiesAttack());
         clearTurnData();
 
