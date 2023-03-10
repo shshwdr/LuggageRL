@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemSelectScene : BaseScene
+public class ItemRemoveScene : BaseScene
 {
     // Start is called before the first frame update
     void Start()
     {
-        GetComponentInChildren<Text>(true).text = TutorialManager.Instance.getText("PickupSelection");
+        GetComponentInChildren<Text>(true).text = TutorialManager.Instance.getText("RemoveItemSelection");
         itemPositions = itemPositionsParent.GetComponentsInChildren<Transform>();
         ItemManager.Instance.itemPositions = itemPositions;
         ItemManager.Instance.itemsToActivate = itemsToActivate;

@@ -107,7 +107,7 @@ public class BossPinata : EnemyBehavior
 {
     public BossPinata()
     {
-        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.Mud } };
+        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.Mud }, new EnemyActionAttack() { attackDamage = 6, attackHeight = 2 }, new EnemyActionShield() { shieldAmount = 10 } };
     }
 }
 public class BossExplode : EnemyBehavior

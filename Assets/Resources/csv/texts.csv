@@ -1,0 +1,3 @@
+﻿Name,Text
+PickupSelection,"Whoa, Something on the ground! Let's pick one"
+RemoveItemSelection,"Select an item in the bag to remove, or skip and heal 50% hp"

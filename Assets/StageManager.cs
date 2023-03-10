@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum BiomeType { none,forest, desert,river}
-public enum StageEventType { normalBattle, bossBattle, eliteBattle, itemSelect, upgradeLuggageNPC, upgradeItemNPC}
+public enum StageEventType { normalBattle, bossBattle, eliteBattle, itemSelect, upgradeLuggageNPC, upgradeRemoveNPC}
 public class StageManager : Singleton<StageManager>
 {
     [SerializeField] GameObject battleScenePrefab;
     [SerializeField] GameObject itemSelectScenePrefab;
+    [SerializeField] GameObject removeItemScenePrefab;
 
     [SerializeField] float sceneDistanceStart;
     [SerializeField] float sceneDistanceEnd;
@@ -77,6 +78,11 @@ public class StageManager : Singleton<StageManager>
 
                 go = Instantiate(itemSelectScenePrefab);
                 break;
+            case StageEventType.upgradeRemoveNPC:
+
+                go = Instantiate(removeItemScenePrefab);
+                break;
+                
         }
         eventIndex++;
         go.transform.position += new Vector3(randomX, 0, 0);
