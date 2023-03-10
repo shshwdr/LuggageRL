@@ -10358,6 +10358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1268015397992814308}
+  - component: {fileID: 1268015397580205259}
   m_Layer: 0
   m_Name: HeroContainer
   m_TagString: Untagged
@@ -10381,6 +10382,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &1268015397580205259
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268015397992814309}
+  m_Enabled: 1
+  m_SortingLayerID: 1337077575
+  m_SortingLayer: 4
+  m_SortingOrder: 0
 --- !u!1 &1268015398161644034
 GameObject:
   m_ObjectHideFlags: 0
@@ -10632,6 +10644,7 @@ MonoBehaviour:
   maxHP: 100
   isDead: 0
   hpbar: {fileID: 7922783075191796820}
+  shield: 0
 --- !u!114 &8912587666962909188
 MonoBehaviour:
   m_ObjectHideFlags: 0
