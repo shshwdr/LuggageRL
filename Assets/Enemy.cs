@@ -20,6 +20,7 @@ public class Enemy : HPObject
     Vector3 originalPosition;
     public Transform leftTargetTransform; //where player should impact
     public Transform topTargetTransform;
+    public Transform rightTargetTransform;
     public Collider2D enemyCollider;
     public GameObject targetedIndicator;
 
