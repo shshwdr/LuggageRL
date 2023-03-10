@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAction
 {
-
+    public virtual void Preview(Enemy enemy) { }
 }
 
 public class EnemyActionIdle : EnemyAction
@@ -16,6 +16,12 @@ public class EnemyActionIdle : EnemyAction
     {
         FloatingTextManager.Instance.addText(enemy.DisplayName + " is looking at you.",enemy.transform.position,Color.white);
         yield return new WaitForSeconds(GridManager.animTime);
+    }
+
+    public override void Preview(Enemy enemy)
+    {
+        base.Preview(enemy);
+        enemy.attackPreview.UpdateOtherPreview("idle", "");
     }
 }
 

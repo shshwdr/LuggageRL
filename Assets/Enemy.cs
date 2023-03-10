@@ -15,7 +15,8 @@ public class EnemyInfo
 }
 public class Enemy : HPObject
 {
-    EnemyAttackPreview attackPreview;
+    public EnemyAttackPreview attackPreview;
+
     public int attack = 3;
     Vector3 originalPosition;
     public Transform leftTargetTransform; //where player should impact
@@ -35,6 +36,7 @@ public class Enemy : HPObject
     public void Init(EnemyBehavior core)
     {
         Core = core;
+        core.enemy = this;
         info = EnemyManager.Instance.getEnemyInfo(Core.Name);
         maxHP = info.HP;
         hp = maxHP;
@@ -71,19 +73,18 @@ public class Enemy : HPObject
         //yield return  StartCoroutine( ApplyDamage(damage));
     }
 
+
     public void SelectAction()
     {
 
-    }
 
-    public void SelectAttack()
-    {
+        Core.SelectAction();
 
-        if (attackFromBottom)
-        {
-            attackInd = Random.Range(0, 3);
-            attackPreview.UpdatePreview(attackInd, attackFromBottom);
-        }
+        //if (attackFromBottom)
+        //{
+        //    attackInd = Random.Range(0, 3);
+        //    attackPreview.UpdatePreview(attackInd, attackFromBottom);
+        //}
     }
 
     internal void setIsTargeted(bool isBeingTargeted)
