@@ -8,8 +8,16 @@ public class HPObject : MonoBehaviour
     protected int hp = 0;
     public bool isDead = false;
     public HPBar hpbar;
+    public int shield;
     public IEnumerator ApplyDamage(int damage)
     {
+        if (shield > 0)
+        {
+            var reduce = Mathf.Min(damage, shield);
+            damage -= reduce;
+            yield return StartCoroutine(ShieldBeAttacked(reduce));
+
+        }
         FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0), Color.red);
         hp -= damage;
         yield return new WaitForSeconds(GridManager.animTime);
@@ -18,6 +26,11 @@ public class HPObject : MonoBehaviour
         {
             yield return StartCoroutine( Die());
         }
+    }
+
+    public virtual IEnumerator ShieldBeAttacked(int amount)
+    {
+        yield return null;
     }
 
     public void Heal(int damage)

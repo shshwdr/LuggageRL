@@ -205,13 +205,19 @@ public class GridManager : Singleton<GridManager>
     public void showAttackPreviewOfEnemy(Enemy enemy)
     {
         clearAttackPreview();
-        var cells = getFrontCellsFromBottomToTop();
-        if (enemy.attackFromBottom)
+
+        if (enemy.Core.willAttacking)
         {
-            var cell = cells[enemy.attackInd];
-            var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
-            previewCells.Add(go);
+            var cells = getFrontCellsFromBottomToTop();
+            if (enemy.attackFromBottom)
+            {
+                var cell = cells[enemy.attackInd];
+                var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
+                previewCells.Add(go);
+            }
+
         }
+
     }
 
     public GridItem itemEnemyAttack(Enemy enemy)

@@ -43,3 +43,31 @@ public class EnemyActionAttack : EnemyAction
     }
 }
 
+public class EnemyActionShield : EnemyAction
+{
+    public int shieldAmount = 5;
+    public override IEnumerator TakeAction(Enemy enemy)
+    {
+        yield return enemy.StartCoroutine(enemy.AddShield(shieldAmount));
+        //yield return new WaitForSeconds(GridManager.animTime);
+    }
+    public override void Preview(Enemy enemy)
+    {
+        base.Preview(enemy);
+        enemy.attackPreview.UpdateOtherPreview("shield", shieldAmount.ToString());
+    }
+}
+public class EnemyActionHeal : EnemyAction
+{
+    public int healAmount = 5;
+    public override IEnumerator TakeAction(Enemy enemy)
+    {
+        yield return enemy.StartCoroutine(enemy.HealMinHP(healAmount));
+        //yield return new WaitForSeconds(GridManager.animTime);
+    }
+    public override void Preview(Enemy enemy)
+    {
+        base.Preview(enemy);
+        enemy.attackPreview.UpdateOtherPreview("heal", healAmount.ToString());
+    }
+}

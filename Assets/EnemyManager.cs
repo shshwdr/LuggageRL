@@ -8,6 +8,8 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     List<Enemy> enemies = new List<Enemy>();
     public Enemy currentTargetedEnemy;
+
+    public List<Enemy> GetEnemies() => enemies;
     public void AddEnemy(Enemy enemy)
     {
         enemies.Add(enemy);
@@ -15,10 +17,20 @@ public class EnemyManager : Singleton<EnemyManager>
     public IEnumerator RemoveEnemy(Enemy enemy)
     {
         enemies.Remove(enemy);
-        if(enemies.Count == 0)
+        if (enemies.Count == 0)
         {
-            yield return StartCoroutine( BattleManager.Instance.FinishCurrentBattle());
+            yield return StartCoroutine(BattleManager.Instance.FinishCurrentBattle());
 
+        }
+        else
+        {
+            if (enemy == currentTargetedEnemy)
+            {
+                foreach (var ene in enemies)
+                {
+                    setCurrentTargetedEnemy(ene);
+                }
+            }
         }
     }
     public void SelectEenmiesAction()
@@ -32,7 +44,9 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         foreach(var enemy in enemies)
         {
+            enemy.EndOfTurn();
             yield return StartCoroutine( enemy.Core.TakeAction());
+
         }
     }
     public Enemy GetCurrentTargetedEnemy()
@@ -56,7 +70,7 @@ public class EnemyManager : Singleton<EnemyManager>
     }
     public List<EnemyBehavior> GetEnemyEnemyBehaviorsToAdd()
     {
-        return new List<EnemyBehavior> {new SimpleAttackEnemy() };
+        return new List<EnemyBehavior> {new ShieldHealEnemy(),new AttackHealEnemy() };
     }
     public Dictionary<string, EnemyInfo> enemyDict = new Dictionary<string, EnemyInfo>();
     // Start is called before the first frame update
@@ -93,13 +107,17 @@ public class EnemyManager : Singleton<EnemyManager>
             }
         }
     }
-
-    internal void setCurrentTargetedEnemy(Enemy enemy)
+    public void setCurrentTargetedEnemy()
     {
-        if (currentTargetedEnemy != null)
+        setCurrentTargetedEnemy(enemies[0]);
+    }
+    public void setCurrentTargetedEnemy(Enemy enemy)
+    {
+        foreach(var e in enemies)
         {
-            currentTargetedEnemy.setIsTargeted(false); //out with the old
+            e.setIsTargeted(false);
         }
-        currentTargetedEnemy = enemy; //in with the new
+        enemy.setIsTargeted(true);
+        currentTargetedEnemy = enemy; 
     }
 }

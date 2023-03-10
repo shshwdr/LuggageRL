@@ -1,3 +1,9 @@
 ﻿Name,DisplayName,Description,Type,Difficulty,Biome,HP
 dummy,Dummy,"This guy does nothing, poor tutorial guy",Attacker,0,0,9
 simple,Simple,This guy just attack,Attacker,0,0,11
+attackShield,attackShield,"This guy knows how to shield, it can attack at height 2",Attacker,0,0,11
+attackFly,,This guy can fly!,,,,11
+attackStealItem,,This guy steal certain item from you and attack,,,,11
+attackHeal,,This guy heals the enemy with least hp ratio,,,,11
+attackGrow,,"This guy would attack from bottom and then middle and then top. Basically it grow and attack higher and higher, then back to lowest",,,,11
+shieldHeal,,This guy heals the enemy with least hp ratio and shield!,,,,11
