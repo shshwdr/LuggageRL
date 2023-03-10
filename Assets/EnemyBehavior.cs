@@ -34,4 +34,13 @@ public class DummyEnemy : EnemyBehavior
     public override string Name => "dummy";
 
 }
+public class SimpleAttackEnemy : EnemyBehavior
+{
+    public SimpleAttackEnemy()
+    {
+        actions = new EnemyAction[] { new EnemyActionAttack(),new EnemyActionIdle(),new EnemyActionAttack(), };
+    }
+    public override string Name => "simple";
+
+}
 

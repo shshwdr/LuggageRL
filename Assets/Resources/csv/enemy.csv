@@ -1,16 +1,3 @@
 ﻿Name,DisplayName,Description,Type,Difficulty,Biome,HP
 dummy,Dummy,"This guy does nothing, poor tutorial guy",Attacker,0,0,9
-simpleAttack,Stone,"On Attack: Deal {0} damage. If moved during attack, do {1}x damage. Would not destory after attack.",Attacker,0,0,9
-attackAndBlock,Healing Potion,On Break: Heals Player for {0},Breakable,0,0,9
-attackAndThorn,Power strip,"On Attack: Deal {0} damage. For each breakables connect to it, that item would deal {1} damage",Attacker,1,0,9
-attackAndRemove,Pins,"On Attack: Deal {0} damage. For each other Pins attacking before it in the same move, damage increase {1}",Attacker,1,0,9
-multiAttack,Piggy Bank,On Move: increase a counter with {0}. On Break: increase attack of the counter value to the item breaks it,Breakable,1,0,9
-Boss1,Coke Coola,"On Attack: Deal {0} damage. If NOT moved during attack, heal {1}",Attacker,1,0,9
-Boss2,Bomb,"On Attack: Deal {0} damage, explodes in {1} turns, dealing {0} DMG to you",Attacker,1,0,9
-Boss3,Credit card,"Would not attack or break. draw {0}. When it is the only item left in the bag, draw {0} cards then destroy",Special,2,0,9
-Boss4,Umbrella,"On Attack: For each empty slot in bag before attack, do {0} more damage",Attacker,2,0,9
-attackAndAddItems,Slingshot,"On Attack: Deal {0} damage, for each empty slot behind it, do {1} more damage",Attacker,1,0,9
-shieldAndAddItem,Poison,On Break: Buff the item that broke it {0} damage - Can stack,Breakable,0,0,9
-stunAndShieldAndAttack,Balancer,"After Attack: If not moved in this attack, All items increase {0} damage, destroy itself",Special,1,0,9
-swapToYourBag,Rocket,"On Attack: deal {0} damage, destroy items behind it, increase {1} damage for each item destroyed.",Attacker,1,0,9
-heal,Pinata,On Break: draw {0} cards,Breakable,1,0,9
+simple,Simple,This guy just attack,Attacker,0,0,11

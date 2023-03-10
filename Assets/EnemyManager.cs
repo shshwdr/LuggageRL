@@ -56,7 +56,7 @@ public class EnemyManager : Singleton<EnemyManager>
     }
     public List<EnemyBehavior> GetEnemyEnemyBehaviorsToAdd()
     {
-        return new List<EnemyBehavior> {new DummyEnemy() };
+        return new List<EnemyBehavior> {new SimpleAttackEnemy() };
     }
     public Dictionary<string, EnemyInfo> enemyDict = new Dictionary<string, EnemyInfo>();
     // Start is called before the first frame update
