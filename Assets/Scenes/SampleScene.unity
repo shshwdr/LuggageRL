@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &66422014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66422015}
+  - component: {fileID: 66422016}
+  m_Layer: 0
+  m_Name: Forest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &66422015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66422014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 38.45, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429413483}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &66422016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66422014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c16f669044601b4c9b84cc581a8536b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  area: 1
+  hasTriggered: 0
 --- !u!114 &115978890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1056049623, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
@@ -150,6 +195,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1973271041631622995, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
   m_PrefabInstance: {fileID: 1973271040941265894}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &241767597 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1973271041631622992, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
+  m_PrefabInstance: {fileID: 1973271040941265894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &241767598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +225,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d2593f979ffc84c9fbbbd04efb0584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &429413482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429413483}
+  m_Layer: 0
+  m_Name: MusicTriggers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &429413483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429413482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1072211446}
+  - {fileID: 66422015}
+  - {fileID: 688776286}
+  m_Father: {fileID: 241767597}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &688776285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 688776286}
+  - component: {fileID: 688776287}
+  m_Layer: 0
+  m_Name: Boss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &688776286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688776285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 104.2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429413483}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &688776287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688776285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c16f669044601b4c9b84cc581a8536b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  area: 2
+  hasTriggered: 0
 --- !u!1 &811623695
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +396,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1072211445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1072211446}
+  - component: {fileID: 1072211447}
+  m_Layer: 0
+  m_Name: InitialAirport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1072211446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072211445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.21, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429413483}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1072211447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072211445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c16f669044601b4c9b84cc581a8536b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  area: 0
+  hasTriggered: 0
 --- !u!1 &1187736670 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1268015398595313319, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
@@ -3398,7 +3571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1973271041631622992, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.55
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 1973271041631622992, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3648,6 +3821,10 @@ PrefabInstance:
       value: event:/music_airport
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_biome_1>k__BackingField.Path
+      value: event:/music_biome_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <music_boss>k__BackingField.Guid.Data1
       value: -370713243
       objectReference: {fileID: 0}
@@ -3682,6 +3859,22 @@ PrefabInstance:
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <music_airport>k__BackingField.Guid.Data4
       value: 1926985539
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_biome_1>k__BackingField.Guid.Data1
+      value: -1695975820
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_biome_1>k__BackingField.Guid.Data2
+      value: 1184270347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_biome_1>k__BackingField.Guid.Data3
+      value: -1294754118
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_biome_1>k__BackingField.Guid.Data4
+      value: -2010475050
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <musicPlaylist>k__BackingField.Array.data[0].Path

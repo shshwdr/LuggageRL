@@ -7,6 +7,7 @@ using System;
 public class FMODEvents : Singleton<FMODEvents>
 {
     [field: Header("Music")]
+    [field: SerializeField] public EventReference music_biome_1 { get; private set; }
     [field: SerializeField] public EventReference music_luggage_adventure { get; private set; }
     [field: SerializeField] public EventReference music_boss { get; private set; }
     [field: SerializeField] public EventReference music_airport { get; private set; }

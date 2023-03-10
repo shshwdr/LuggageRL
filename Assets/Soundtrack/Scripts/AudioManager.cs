@@ -72,7 +72,7 @@ public class AudioManager : Singleton<AudioManager>
             //something else has already initialized the sound. Nothing to do anymore. 
             return;
         }
-        musicEventInstance = CreateInstance(FMODEvents.Instance.music_luggage_adventure);
+        musicEventInstance = CreateInstance(FMODEvents.Instance.music_biome_1);
         FMOD.RESULT result = musicEventInstance.start();
         //Debug.Log("Music Start Result: " + result.ToString());
     }   
@@ -109,6 +109,11 @@ public class AudioManager : Singleton<AudioManager>
         musicEventInstance = CreateInstance(newReference);
         currentLevelTheme = levelTheme;
         FMOD.RESULT result = musicEventInstance.start();
+    }
+
+    public void SetMusicArea(MusicArea area)
+    {
+        musicEventInstance.setParameterByName("area", (float)area);
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
