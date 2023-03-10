@@ -3,22 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
+using System;
 
 public class Luggage : Singleton<Luggage>
 {
 
     [SerializeField] MMF_Player pushForwardAttackAnimationPlayer;
     [SerializeField] MMF_Player throwOutAndHitBackAttackAnimationPlayer;
+
     [SerializeField] MMF_Player upsideDownAndDropAttackAnimationPlayer;
-    List<MMF_Player> animationPlayers = new List<MMF_Player>();
+    [SerializeField] MMF_Player walkingAnimationPlayer;
+
+    [SerializeField] MMF_Player returnToIdleAnimationPlayer;
+    List<MMF_Player> attackAnimationPlayers = new List<MMF_Player>();
     public Transform idleTransform;
 
     // Start is called before the first frame update
     void Start()
     {
-        animationPlayers.Add(pushForwardAttackAnimationPlayer);
-        animationPlayers.Add(throwOutAndHitBackAttackAnimationPlayer);
-        animationPlayers.Add(upsideDownAndDropAttackAnimationPlayer);
+        attackAnimationPlayers.Add(pushForwardAttackAnimationPlayer);
+        attackAnimationPlayers.Add(throwOutAndHitBackAttackAnimationPlayer);
+        attackAnimationPlayers.Add(upsideDownAndDropAttackAnimationPlayer);
     }
 
     // Update is called once per frame  
@@ -37,7 +42,7 @@ public class Luggage : Singleton<Luggage>
     {
         target = EnemyManager.Instance.GetCurrentTargetedEnemy();
         //target.ClearDamage()
-        foreach (MMF_Player animationPlayerList in animationPlayers)
+        foreach (MMF_Player animationPlayerList in attackAnimationPlayers)
         {
             foreach (MMF_Position feedback in animationPlayerList.GetFeedbacksOfType<MMF_Position>())
             {
@@ -166,4 +171,28 @@ public class Luggage : Singleton<Luggage>
     {
         target.GetDamage(dam);
     }
+
+
+
+    internal void StartCharacterWalking()
+    {
+        if (walkingAnimationPlayer != null)
+        {
+            walkingAnimationPlayer.PlayFeedbacks();
+        }
+    }
+
+    internal void StopCharacterWalking()
+    {
+        if (walkingAnimationPlayer != null)
+        {
+            walkingAnimationPlayer.StopFeedbacks();
+        }
+        if (returnToIdleAnimationPlayer != null)
+        {
+            returnToIdleAnimationPlayer.PlayFeedbacks();
+        }
+
+    }
+
 }

@@ -6,11 +6,11 @@ public class BaseMovable : MonoBehaviour
 {
     [SerializeField] protected float moveSpeed;
     protected bool isMoving = false;
-    public void startMove()
+    virtual public void startMove()
     {
         isMoving = true;
     }
-    public void stopMove()
+    virtual public void stopMove()
     {
         isMoving = false;
     }

@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseScene: {fileID: 0}
-  LuggageAttackText: {fileID: 0}
+  LuggageAttackText: {fileID: 1392621330}
   LuggageAttackButton: {fileID: 7804120229954410934}
   itemsToActivate: []
   MoveText: {fileID: 2672507904482429547}
