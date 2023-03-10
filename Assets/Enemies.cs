@@ -7,9 +7,16 @@ public class Enemies : MonoBehaviour
 
 }
 
-public class DummyEnemy : Enemy {
+public class EnemyBehavior {
 
-    public override string Desc => "This guy does nothing, poor tutorial guy";
+    public virtual string Name { get; }
+}
+
+
+public class DummyEnemy : EnemyBehavior
+{
+
+    public override string Name => "dummy";
 
 
 }

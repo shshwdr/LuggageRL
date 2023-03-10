@@ -11,7 +11,7 @@ public class BattleScene : BaseScene
         itemPositions = itemPositionsParent.GetComponentsInChildren<Transform>();
         BattleManager.Instance.enemyPositions = itemPositions;
         BattleManager.Instance.itemsToActivate = itemsToActivate;
-        BattleManager.Instance.AddEnemies(1);
+        BattleManager.Instance.AddEnemies();
         BattleManager.Instance.baseScene = this;
     }
 

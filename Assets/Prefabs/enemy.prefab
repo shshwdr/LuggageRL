@@ -356,7 +356,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1824119007
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 33e9cb2943493454ba9a81b6fcedc391, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -395,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5396105676842874760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.6, y: 2.9, z: 0}
+  m_LocalPosition: {x: -3.73, y: -2.5499997, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5396105675173200860}
@@ -419,16 +419,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee6f13df1d5afa4a83c61d0e84b4069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 9
   isDead: 0
-  hpbar: {fileID: 0}
+  hpbar: {fileID: 5396105675036245160}
   attack: 3
   leftTargetTransform: {fileID: 1396621135893089179}
   topTargetTransform: {fileID: 2713506569938761161}
   enemyCollider: {fileID: 0}
   targetedIndicator: {fileID: 804961314656613356}
-  attackInd: 0
+  attackInd: 1
   attackFromBottom: 1
+  info:
+    Name: dummy
+    DisplayName: Dummy
+    Description: This guy does nothing, poor tutorial guy
+    Type: Attacker
+    Difficulty: 0
+    Biome: 0
+    HP: 9
 --- !u!61 &6516401140132719181
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -577,7 +585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5180197514710801987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -625,7 +633,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ee6a1baab8574b14392277a2cb425b5f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31cf3f5f18f70044d80dc21cb834e012, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -700,7 +708,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ee6a1baab8574b14392277a2cb425b5f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31cf3f5f18f70044d80dc21cb834e012, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -801,6 +809,10 @@ PrefabInstance:
       propertyPath: m_BlockingMask.m_Bits
       value: 55
       objectReference: {fileID: 0}
+    - target: {fileID: 4941693302103946789, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
+      propertyPath: m_Text
+      value: 9 / 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4941693302459687920, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
       propertyPath: m_Name
       value: hpbar
@@ -849,6 +861,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4941693302575962762, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
 --- !u!4 &5396105675036245161 stripped
@@ -856,3 +872,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4941693302459687927, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
   m_PrefabInstance: {fileID: 1042225310244298590}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5396105675036245160 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4941693302459687926, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
+  m_PrefabInstance: {fileID: 1042225310244298590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad197385326f4aa4b8d26677e3909f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,3 +1,4 @@
+using Sinbad;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -53,11 +54,31 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         return enemies[0];
     }
-
+    public List<EnemyBehavior> GetEnemyEnemyBehaviorsToAdd()
+    {
+        return new List<EnemyBehavior> {new DummyEnemy() };
+    }
+    public Dictionary<string, EnemyInfo> enemyDict = new Dictionary<string, EnemyInfo>();
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        var itemInfos = CsvUtil.LoadObjects<EnemyInfo>("enemy");
+        foreach (var item in itemInfos)
+        {
+            enemyDict[item.Name] = item;
+        }
+    }
+
+    public EnemyInfo getEnemyInfo(string itemName)
+    {
+        if (enemyDict.ContainsKey(itemName))
+        {
+            return enemyDict[itemName];
+
+        }
+        Debug.LogError("no enemy " + itemName);
+        return null;
     }
 
     // Update is called once per frame

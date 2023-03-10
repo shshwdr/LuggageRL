@@ -101,14 +101,6 @@ public class BattleManager : Singleton<BattleManager>
 
 
     }
-    //IEnumerator searchNextBattle()
-    //{
-    //    hideButtonCanvas();
-    //    yield return new WaitForSeconds(1);
-    //    StartBattle();
-
-    //}
-
     public void takeControl()
     {
         foreach (var item in itemsToActivate)
@@ -119,12 +111,6 @@ public class BattleManager : Singleton<BattleManager>
         showButtonCanvas();
         StartBattle();
         //StartCoroutine(test());
-    }
-    IEnumerator test()
-    {
-        yield return new WaitForSeconds(0.1f);
-        showButtonCanvas();
-        StartBattle();
     }
     public void outControl()
     {
@@ -160,17 +146,20 @@ public class BattleManager : Singleton<BattleManager>
         EnemyManager.Instance.SelectEenmiesAttack();
 
     }
-    public void AddEnemies(int numEnemiesToAdd)
+    public void AddEnemies()
     {
-        if(numEnemiesToAdd > enemyPositions.Length)
+        var enemyList = EnemyManager.Instance.GetEnemyEnemyBehaviorsToAdd();
+
+        if(enemyList.Count > enemyPositions.Length)
         {
             Debug.LogError("Adding too many enemies to fit the slots");
         }
-        for(int x = 0; x < numEnemiesToAdd; x++)
+        for(int x = 0; x < enemyList.Count; x++)
         {
             var enemySlot = enemyPositions[x];
             var pickedEnemy = enemies[Random.Range(0, enemies.Length)];
             var go = Instantiate(pickedEnemy, enemySlot.position, Quaternion.identity, enemySlot);
+            pickedEnemy.GetComponent<Enemy>().Init(enemyList[x]);
             go.transform.parent = enemySlot;
             go.transform.localPosition = Vector3.zero;//enemySlot.position;
             break;
