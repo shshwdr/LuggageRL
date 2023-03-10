@@ -182,7 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 1
-  hasTriggered: 0
   hasFinishedTransitioning: 0
   transitionDistance: 8
 --- !u!114 &115978890 stripped
@@ -352,7 +351,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
-  hasTriggered: 0
   hasFinishedTransitioning: 0
   transitionDistance: 8
 --- !u!1 &811623695
@@ -507,7 +505,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
-  hasTriggered: 0
   hasFinishedTransitioning: 0
   transitionDistance: 0
 --- !u!1 &1187736670 stripped
@@ -3849,6 +3846,14 @@ PrefabInstance:
     - target: {fileID: 2672507905682957349, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
+      propertyPath: sceneDistanceEnd
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
+      propertyPath: sceneDistanceStart
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa7267459d73887499b0a8475d719b96, type: 3}

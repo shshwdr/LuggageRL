@@ -18,7 +18,7 @@ public class EnemyInfo
 public class Enemy : HPObject
 {
     public EnemyAttackPreview attackPreview;
-
+    public SpriteRenderer enemyRender;
     public int attack = 3;
     Vector3 originalPosition;
     public Transform leftTargetTransform; //where player should impact
@@ -138,6 +138,16 @@ public class Enemy : HPObject
         EnemyManager.Instance.AddEnemy(this);
         attackPreview = GetComponentInChildren<EnemyAttackPreview>();
         hpbar.updateHPBar(hp, maxHP);
+        var prefab = Resources.Load<Sprite>("enemies/" + info.Name);
+        if(prefab == null)
+        {
+            Debug.LogWarning("no enemy image "+ info.Name);
+        }
+        else
+        {
+
+            enemyRender.sprite = prefab;
+        }
     }
 
     int damage = 0;
