@@ -75,7 +75,7 @@ public class Enemy : HPObject
     {
 
         GridManager.Instance.showAttackPreviewOfEnemy(this);
-        GridManager.Instance.showAttackPreviewOfEnemy(this);
+
         originalPosition = transform.position;
         transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);
@@ -84,9 +84,6 @@ public class Enemy : HPObject
 
         //attack item
         yield return StartCoroutine( GridManager.Instance.EnemyAttackEnumerator(this));
-
-
-
 
 
         GridManager.Instance.clearAttackPreview();
