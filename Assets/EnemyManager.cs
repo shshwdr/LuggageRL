@@ -42,10 +42,10 @@ public class EnemyManager : Singleton<EnemyManager>
     }
     public IEnumerator EnemiesAttack()
     {
-        foreach(var enemy in enemies)
+        foreach (var enemy in enemies)
         {
             enemy.EndOfTurn();
-            yield return StartCoroutine( enemy.Core.TakeAction());
+            yield return StartCoroutine(enemy.Core.TakeAction());
 
         }
     }
@@ -56,7 +56,9 @@ public class EnemyManager : Singleton<EnemyManager>
             if (enemies.Count > 0)
             {
                 currentTargetedEnemy = GetFrontEnemy();
-            } else
+                setCurrentTargetedEnemy(currentTargetedEnemy);
+            }
+            else
             {
                 Debug.Log("No enemy available to select");
             }
@@ -70,7 +72,7 @@ public class EnemyManager : Singleton<EnemyManager>
     }
     public List<EnemyBehavior> GetEnemyEnemyBehaviorsToAdd()
     {
-        return new List<EnemyBehavior> {new StealAttackEnemy(),new AttackStealEnemy() };
+        return new List<EnemyBehavior> { new StealAttackEnemy(), new AttackStealEnemy() };
     }
     public Dictionary<string, EnemyInfo> enemyDict = new Dictionary<string, EnemyInfo>();
     // Start is called before the first frame update
@@ -100,24 +102,20 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            for(int i = 0;i<enemies.Count;i++)
+            for (int i = 0; i < enemies.Count; i++)
             {
                 var enemy = enemies[0];
-                StartCoroutine( RemoveEnemy(enemy));
+                StartCoroutine(RemoveEnemy(enemy));
             }
         }
     }
-    public void setCurrentTargetedEnemy()
-    {
-        setCurrentTargetedEnemy(enemies[0]);
-    }
     public void setCurrentTargetedEnemy(Enemy enemy)
     {
-        foreach(var e in enemies)
+        foreach (var e in enemies)
         {
             e.setIsTargeted(false);
         }
         enemy.setIsTargeted(true);
-        currentTargetedEnemy = enemy; 
+        currentTargetedEnemy = enemy;
     }
 }

@@ -781,7 +781,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 435809968
+        UniqueID: 234059623
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -901,7 +901,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -118682567
+        UniqueID: 1712935701
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -1160,7 +1160,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 2116501289
+        UniqueID: -1919642990
         Label: Anticipation Finished
         ChannelMode: 0
         Channel: 0
@@ -1236,7 +1236,7 @@ MonoBehaviour:
       type: {class: MMF_Rotation, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 0
-        UniqueID: -235215203
+        UniqueID: 194071499
         Label: Rotation
         ChannelMode: 0
         Channel: 0
@@ -1480,7 +1480,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 0
-        UniqueID: 964434910
+        UniqueID: -98132295
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -1600,8 +1600,8 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 626333609
-        Label: Position
+        UniqueID: 1219186910
+        Label: PositionBehindEnemyTarget
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -1668,7 +1668,7 @@ MonoBehaviour:
         Mode: 2
         Space: 0
         RandomizeRemap: 0
-        AnimatePositionDuration: 0.5
+        AnimatePositionDuration: 0.6
         AnimatePositionTween:
           MMTweenDefinitionType: 1
           MMTweenCurve: 4
@@ -1853,9 +1853,9 @@ MonoBehaviour:
           Initialized: 0
         AllowAdditivePlays: 0
         RelativePosition: 1
-        DeterminePositionsOnPlay: 0
+        DeterminePositionsOnPlay: 1
         InitialPosition: {x: 0, y: 0, z: 0}
-        DestinationPosition: {x: 1, y: 1, z: 1}
+        DestinationPosition: {x: 11, y: -2.2999997, z: 0}
         InitialPositionTransform: {fileID: 0}
         DestinationPositionTransform: {fileID: 0}
         AnimatePositionCurveX:
@@ -1885,8 +1885,8 @@ MonoBehaviour:
     00000006:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
-        Active: 0
-        UniqueID: 1781613549
+        Active: 1
+        UniqueID: 491896040
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -1952,9 +1952,9 @@ MonoBehaviour:
         DebugActive: 0
         AnimatePositionTarget: {fileID: 1268015398595313319}
         Mode: 1
-        Space: 0
+        Space: 1
         RandomizeRemap: 0
-        AnimatePositionDuration: 0.35
+        AnimatePositionDuration: 0.6
         AnimatePositionTween:
           MMTweenDefinitionType: 1
           MMTweenCurve: 4
@@ -1985,7 +1985,7 @@ MonoBehaviour:
           Initialized: 0
         RemapCurveZero: 0
         RemapCurveZeroAlt: 0
-        RemapCurveOne: 1
+        RemapCurveOne: 4
         RemapCurveOneAlt: 1
         AnimateX: 0
         AnimatePositionTweenX:
@@ -2051,31 +2051,22 @@ MonoBehaviour:
               inWeight: 0
               outWeight: 0
             - serializedVersion: 3
-              time: 0.3
-              value: 1
+              time: 0.3020172
+              value: 0.81142807
               inSlope: 0
               outSlope: 0
               tangentMode: 0
               weightedMode: 0
-              inWeight: 0
-              outWeight: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
             - serializedVersion: 3
-              time: 0.5718628
-              value: 1.0028381
-              inSlope: 0
-              outSlope: 0
+              time: 1
+              value: 0
+              inSlope: -3.5244026
+              outSlope: -3.5244026
               tangentMode: 0
               weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1.0058594
-              value: 1.0131989
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
+              inWeight: 0.05885501
               outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
@@ -2160,197 +2151,10 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
     00000007:
-      type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
-      data:
-        Active: 1
-        UniqueID: -2104102641
-        Label: Jump Behind Target Finished
-        ChannelMode: 0
-        Channel: 0
-        MMChannelDefinition: {fileID: 0}
-        Chance: 100
-        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
-        Timing:
-          TimescaleMode: 0
-          ExcludeFromHoldingPauses: 0
-          ContributeToTotalDuration: 1
-          InitialDelay: 0
-          CooldownDuration: 0
-          InterruptsOnStop: 1
-          NumberOfRepeats: 0
-          RepeatForever: 0
-          DelayBetweenRepeats: 1
-          MMFeedbacksDirectionCondition: 0
-          PlayDirection: 0
-          ConstantIntensity: 0
-          UseIntensityInterval: 0
-          IntensityIntervalMin: 0
-          IntensityIntervalMax: 0
-          Sequence: {fileID: 0}
-          TrackID: 0
-          Quantized: 0
-          TargetBPM: 120
-        AutomatedTargetAcquisition:
-          Mode: 0
-          ChildIndex: 0
-        RandomizeOutput: 0
-        RandomMultiplier: {x: 0.8, y: 1}
-        RandomizeDuration: 0
-        RandomDurationMultiplier: {x: 0.5, y: 2}
-        UseRange: 0
-        RangeDistance: 5
-        UseRangeFalloff: 0
-        RangeFalloff:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        RemapRangeFalloff: {x: 0, y: 1}
-        Owner: {fileID: 1056049623}
-        DebugActive: 0
-        PauseDuration: 0
-        RandomizePauseDuration: 0
-        MinPauseDuration: 1
-        MaxPauseDuration: 3
-        RandomizeOnEachPlay: 1
-        ScriptDriven: 0
-        AutoResume: 0
-        AutoResumeAfter: 0.25
-    00000008:
-      type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
-      data:
-        Active: 1
-        UniqueID: -2097742697
-        Label: Squash and Stretch
-        ChannelMode: 0
-        Channel: 0
-        MMChannelDefinition: {fileID: 0}
-        Chance: 100
-        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
-        Timing:
-          TimescaleMode: 0
-          ExcludeFromHoldingPauses: 0
-          ContributeToTotalDuration: 1
-          InitialDelay: 0
-          CooldownDuration: 0
-          InterruptsOnStop: 1
-          NumberOfRepeats: 0
-          RepeatForever: 0
-          DelayBetweenRepeats: 1
-          MMFeedbacksDirectionCondition: 0
-          PlayDirection: 0
-          ConstantIntensity: 0
-          UseIntensityInterval: 0
-          IntensityIntervalMin: 0
-          IntensityIntervalMax: 0
-          Sequence: {fileID: 0}
-          TrackID: 0
-          Quantized: 0
-          TargetBPM: 120
-        AutomatedTargetAcquisition:
-          Mode: 0
-          ChildIndex: 0
-        RandomizeOutput: 0
-        RandomMultiplier: {x: 0.8, y: 1}
-        RandomizeDuration: 0
-        RandomDurationMultiplier: {x: 0.5, y: 2}
-        UseRange: 0
-        RangeDistance: 5
-        UseRangeFalloff: 0
-        RangeFalloff:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        RemapRangeFalloff: {x: 0, y: 1}
-        Owner: {fileID: 1056049623}
-        DebugActive: 0
-        SquashAndStretchTarget: {fileID: 1268015398595313318}
-        Mode: 0
-        Axis: 1
-        AnimateScaleDuration: 0.2
-        RemapCurveZero: 1
-        RemapCurveOne: 1.3
-        Offset: 0
-        AnimateCurve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 10.68868
-            outSlope: 10.68868
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.3495265
-          - serializedVersion: 3
-            time: 0.38841707
-            value: 1.2492814
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        AllowAdditivePlays: 0
-        DetermineScaleOnPlay: 0
-        DestinationScale: 2
-    00000009:
       type: {class: MMF_Rotation, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 1365869650
+        UniqueID: -746785368
         Label: Rotation
         ChannelMode: 0
         Channel: 0
@@ -2416,8 +2220,8 @@ MonoBehaviour:
         DebugActive: 0
         AnimateRotationTarget: {fileID: 1268015398595313318}
         Mode: 0
-        RotationSpace: 0
-        AnimateRotationDuration: 0.3
+        RotationSpace: 1
+        AnimateRotationDuration: 0.6
         RemapCurveZero: 0
         RemapCurveOne: 540
         AnimateX: 0
@@ -2581,11 +2385,198 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
+    00000008:
+      type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
+      data:
+        Active: 1
+        UniqueID: 47534749
+        Label: Jump Behind Target Finished
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        Owner: {fileID: 1056049623}
+        DebugActive: 0
+        PauseDuration: 0
+        RandomizePauseDuration: 0
+        MinPauseDuration: 1
+        MaxPauseDuration: 3
+        RandomizeOnEachPlay: 1
+        ScriptDriven: 0
+        AutoResume: 0
+        AutoResumeAfter: 0.25
+    00000009:
+      type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
+      data:
+        Active: 1
+        UniqueID: 163005458
+        Label: Squash and Stretch
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        Owner: {fileID: 1056049623}
+        DebugActive: 0
+        SquashAndStretchTarget: {fileID: 1268015398595313318}
+        Mode: 0
+        Axis: 1
+        AnimateScaleDuration: 0.2
+        RemapCurveZero: 1
+        RemapCurveOne: 1.3
+        Offset: 0
+        AnimateCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 10.68868
+            outSlope: 10.68868
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.3495265
+          - serializedVersion: 3
+            time: 0.38841707
+            value: 1.2492814
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        AllowAdditivePlays: 0
+        DetermineScaleOnPlay: 0
+        DestinationScale: 2
     0000000A:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -313408750
+        UniqueID: -1112701805
         Label: Turn UpsideDown Finished
         ChannelMode: 0
         Channel: 0
@@ -2661,7 +2652,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 1784095315
+        UniqueID: -1952179032
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -2938,7 +2929,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 2121141041
+        UniqueID: -1626386632
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -3058,7 +3049,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1174741695
+        UniqueID: 449781261
         Label: GroundPound Finished
         ChannelMode: 0
         Channel: 0
@@ -3134,7 +3125,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 239355522
+        UniqueID: -629291183
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -3420,7 +3411,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 2112642583
+        UniqueID: -1161590800
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -3688,7 +3679,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1377345540
+        UniqueID: 1095248786
         Label: Jump Back Finished
         ChannelMode: 0
         Channel: 0
@@ -3764,7 +3755,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 1077393091
+        UniqueID: 1560303966
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -4002,6 +3993,7 @@ MonoBehaviour:
   - id: 15
   - id: 16
   - id: 17
+  - id: 18
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   ForceStopFeedbacksOnDisable: 1
@@ -4011,7 +4003,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1738580888
+        UniqueID: -250642634
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -4131,7 +4123,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 317225147
+        UniqueID: 778524582
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -4390,7 +4382,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1793842016
+        UniqueID: -1044391303
         Label: Anticipation Finished
         ChannelMode: 0
         Channel: 0
@@ -4466,7 +4458,7 @@ MonoBehaviour:
       type: {class: MMF_Rotation, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 0
-        UniqueID: -570923438
+        UniqueID: 16775652
         Label: Rotation
         ChannelMode: 0
         Channel: 0
@@ -4710,7 +4702,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 0
-        UniqueID: -820112885
+        UniqueID: -747207754
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -4830,8 +4822,8 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1881157205
-        Label: Position
+        UniqueID: 1048661741
+        Label: PositionTopEnemyTarget
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -5083,7 +5075,7 @@ MonoBehaviour:
           Initialized: 0
         AllowAdditivePlays: 0
         RelativePosition: 1
-        DeterminePositionsOnPlay: 0
+        DeterminePositionsOnPlay: 1
         InitialPosition: {x: 0, y: 0, z: 0}
         DestinationPosition: {x: 1, y: 1, z: 1}
         InitialPositionTransform: {fileID: 0}
@@ -5115,8 +5107,8 @@ MonoBehaviour:
     00000006:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
-        Active: 0
-        UniqueID: -1907270788
+        Active: 1
+        UniqueID: -1545672159
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -5182,9 +5174,9 @@ MonoBehaviour:
         DebugActive: 0
         AnimatePositionTarget: {fileID: 1268015398595313319}
         Mode: 1
-        Space: 0
+        Space: 1
         RandomizeRemap: 0
-        AnimatePositionDuration: 0.35
+        AnimatePositionDuration: 0.5
         AnimatePositionTween:
           MMTweenDefinitionType: 1
           MMTweenCurve: 4
@@ -5215,7 +5207,7 @@ MonoBehaviour:
           Initialized: 0
         RemapCurveZero: 0
         RemapCurveZeroAlt: 0
-        RemapCurveOne: 1
+        RemapCurveOne: 5
         RemapCurveOneAlt: 1
         AnimateX: 0
         AnimatePositionTweenX:
@@ -5274,6 +5266,44 @@ MonoBehaviour:
             - serializedVersion: 3
               time: 0
               value: 0
+              inSlope: 4.2912216
+              outSlope: 4.2912216
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0.096818164
+            - serializedVersion: 3
+              time: 0.5431894
+              value: 1.0029397
+              inSlope: 0.9446708
+              outSlope: -0.006435273
+              tangentMode: 65
+              weightedMode: 0
+              inWeight: 0.062966414
+              outWeight: 0.23797625
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: -0.006435273
+              outSlope: -7.5759506
+              tangentMode: 5
+              weightedMode: 0
+              inWeight: 0.057261948
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          Initialized: 0
+        AnimateZ: 0
+        AnimatePositionTweenZ:
+          MMTweenDefinitionType: 1
+          MMTweenCurve: 4
+          Curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -5290,14 +5320,235 @@ MonoBehaviour:
               inWeight: 0
               outWeight: 0
             - serializedVersion: 3
-              time: 0.5718628
-              value: 1.0028381
+              time: 0.6
+              value: -1
               inSlope: 0
               outSlope: 0
               tangentMode: 0
               weightedMode: 0
               inWeight: 0
               outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          Initialized: 0
+        AllowAdditivePlays: 0
+        RelativePosition: 1
+        DeterminePositionsOnPlay: 0
+        InitialPosition: {x: 0, y: 0, z: 0}
+        DestinationPosition: {x: 1, y: 1, z: 1}
+        InitialPositionTransform: {fileID: 0}
+        DestinationPositionTransform: {fileID: 0}
+        AnimatePositionCurveX:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        AnimatePositionCurveY:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        AnimatePositionCurveZ:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        AnimatePositionCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    00000007:
+      type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
+      data:
+        Active: 0
+        UniqueID: -142760738
+        Label: Position
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        Owner: {fileID: 1304813528}
+        DebugActive: 0
+        AnimatePositionTarget: {fileID: 1268015398595313319}
+        Mode: 1
+        Space: 1
+        RandomizeRemap: 0
+        AnimatePositionDuration: 0.5
+        AnimatePositionTween:
+          MMTweenDefinitionType: 1
+          MMTweenCurve: 4
+          Curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          Initialized: 0
+        RemapCurveZero: 0
+        RemapCurveZeroAlt: 0
+        RemapCurveOne: 0.2
+        RemapCurveOneAlt: 1
+        AnimateX: 0
+        AnimatePositionTweenX:
+          MMTweenDefinitionType: 1
+          MMTweenCurve: 4
+          Curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 0.3
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 0.6
+              value: -1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          Initialized: 0
+        AnimateY: 1
+        AnimatePositionTweenY:
+          MMTweenDefinitionType: 1
+          MMTweenCurve: 4
+          Curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1.4961137
+              outSlope: 1.4961137
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0.11785598
+            - serializedVersion: 3
+              time: 0.51991767
+              value: 0.7593757
+              inSlope: 1.3741591
+              outSlope: 1.3741591
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
             - serializedVersion: 3
               time: 1.0058594
               value: 1.0131989
@@ -5389,11 +5640,11 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    00000007:
+    00000008:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -178768797
+        UniqueID: 1810684106
         Label: Jump Above Target Finished
         ChannelMode: 0
         Channel: 0
@@ -5465,11 +5716,11 @@ MonoBehaviour:
         ScriptDriven: 0
         AutoResume: 0
         AutoResumeAfter: 0.25
-    00000008:
+    00000009:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 81066081
+        UniqueID: -1461352502
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -5576,11 +5827,11 @@ MonoBehaviour:
         AllowAdditivePlays: 0
         DetermineScaleOnPlay: 0
         DestinationScale: 2
-    00000009:
+    0000000A:
       type: {class: MMF_Rotation, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 942628780
+        UniqueID: 1897387575
         Label: Rotation
         ChannelMode: 0
         Channel: 0
@@ -5811,11 +6062,11 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    0000000A:
+    0000000B:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -269569799
+        UniqueID: -1972397567
         Label: Turn UpsideDown Finished
         ChannelMode: 0
         Channel: 0
@@ -5887,12 +6138,12 @@ MonoBehaviour:
         ScriptDriven: 0
         AutoResume: 0
         AutoResumeAfter: 0.25
-    0000000B:
+    0000000C:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -463968622
-        Label: Position
+        UniqueID: -1670186879
+        Label: PositionTopEnemyTarget
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -6135,7 +6386,7 @@ MonoBehaviour:
           Initialized: 0
         AllowAdditivePlays: 0
         RelativePosition: 1
-        DeterminePositionsOnPlay: 0
+        DeterminePositionsOnPlay: 1
         InitialPosition: {x: 0, y: 0, z: 0}
         DestinationPosition: {x: 1, y: 1, z: 1}
         InitialPositionTransform: {fileID: 0}
@@ -6164,11 +6415,11 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    0000000C:
+    0000000D:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -832240983
+        UniqueID: -1659326376
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -6284,11 +6535,11 @@ MonoBehaviour:
         AllowAdditivePlays: 0
         DetermineScaleOnPlay: 0
         DestinationScale: 2
-    0000000D:
+    0000000E:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 1248555678
+        UniqueID: -1647761616
         Label: GroundPound Finished
         ChannelMode: 0
         Channel: 0
@@ -6360,11 +6611,11 @@ MonoBehaviour:
         ScriptDriven: 0
         AutoResume: 0
         AutoResumeAfter: 0.25
-    0000000E:
+    0000000F:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 335006598
+        UniqueID: 460510764
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -6646,11 +6897,11 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    0000000F:
+    00000010:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 357773761
+        UniqueID: -548350903
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -6914,11 +7165,11 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    00000010:
+    00000011:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 1987992932
+        UniqueID: 1368727003
         Label: Jump Back Finished
         ChannelMode: 0
         Channel: 0
@@ -6990,11 +7241,11 @@ MonoBehaviour:
         ScriptDriven: 0
         AutoResume: 0
         AutoResumeAfter: 0.25
-    00000011:
+    00000012:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -553294709
+        UniqueID: -829477515
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -7235,7 +7486,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 1008089711
+        UniqueID: 942024541
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -7355,7 +7606,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 1692278205
+        UniqueID: -814057963
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -7590,7 +7841,7 @@ MonoBehaviour:
           Initialized: 0
         AllowAdditivePlays: 0
         RelativePosition: 1
-        DeterminePositionsOnPlay: 0
+        DeterminePositionsOnPlay: 1
         InitialPosition: {x: 0, y: 0, z: 0}
         DestinationPosition: {x: 1, y: 1, z: 1}
         InitialPositionTransform: {fileID: 0}
@@ -7623,7 +7874,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 713595700
+        UniqueID: 838738643
         Label: Holding Pause
         ChannelMode: 0
         Channel: 0
@@ -7699,7 +7950,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1565179158
+        UniqueID: -1659525132
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -7819,8 +8070,8 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -855750579
-        Label: Position
+        UniqueID: 388418421
+        Label: PositionLeftEnemyTarget
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -8063,7 +8314,7 @@ MonoBehaviour:
           Initialized: 0
         AllowAdditivePlays: 0
         RelativePosition: 1
-        DeterminePositionsOnPlay: 0
+        DeterminePositionsOnPlay: 1
         InitialPosition: {x: 0, y: 0, z: 0}
         DestinationPosition: {x: -1, y: 0, z: 0}
         InitialPositionTransform: {fileID: 0}
@@ -8096,7 +8347,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 415445369
+        UniqueID: 1451603379
         Label: Holding Pause
         ChannelMode: 0
         Channel: 0
@@ -8172,7 +8423,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 0
-        UniqueID: -1255340665
+        UniqueID: 1557740773
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -8283,7 +8534,7 @@ MonoBehaviour:
       type: {class: MMF_Rotation, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -251039352
+        UniqueID: 12824310
         Label: Rotation
         ChannelMode: 0
         Channel: 0
@@ -8527,8 +8778,8 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 579802056
-        Label: Position
+        UniqueID: -117529550
+        Label: PositionReturnToIdle
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -8780,7 +9031,7 @@ MonoBehaviour:
           Initialized: 0
         AllowAdditivePlays: 0
         RelativePosition: 1
-        DeterminePositionsOnPlay: 0
+        DeterminePositionsOnPlay: 1
         InitialPosition: {x: 0, y: 0, z: 0}
         DestinationPosition: {x: 1, y: 1, z: 1}
         InitialPositionTransform: {fileID: 0}
@@ -8813,7 +9064,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -509172965
+        UniqueID: 1092520707
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -9081,7 +9332,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1114675694
+        UniqueID: -479697753
         Label: Holding Pause
         ChannelMode: 0
         Channel: 0
@@ -9157,7 +9408,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1131533415
+        UniqueID: 638886883
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -10658,6 +10909,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushForwardAttackAnimationPlayer: {fileID: 1558168936}
+  throwOutAndHitBackAttackAnimationPlayer: {fileID: 1056049623}
+  upsideDownAndDropAttackAnimationPlayer: {fileID: 1304813528}
   idleTransform: {fileID: 1268015396848479313}
 --- !u!1 &1268015398760189261
 GameObject:

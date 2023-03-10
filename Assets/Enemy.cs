@@ -24,7 +24,6 @@ public class Enemy : HPObject
     public Transform leftTargetTransform; //where player should impact
     public Transform topTargetTransform;
     public Transform rightTargetTransform;
-    public Collider2D enemyCollider;
     public GameObject targetedIndicator;
 
     public int attackInd;
@@ -141,7 +140,7 @@ public class Enemy : HPObject
     }
 
     int damage = 0;
-    private bool isTargeted;
+    [SerializeField] private bool isTargeted;
 
     public void GetDamage(int dam)
     {
@@ -218,6 +217,5 @@ public class Enemy : HPObject
     private void OnMouseDown()
     {
         EnemyManager.Instance.setCurrentTargetedEnemy(this);
-        //setIsTargeted(true);
     }
 }
