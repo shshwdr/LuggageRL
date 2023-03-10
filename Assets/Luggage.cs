@@ -21,7 +21,7 @@ public class Luggage : Singleton<Luggage>
         animationPlayers.Add(upsideDownAndDropAttackAnimationPlayer);
     }
 
-    // Update is called once per frame
+    // Update is called once per frame  
     void Update()
     {
 
