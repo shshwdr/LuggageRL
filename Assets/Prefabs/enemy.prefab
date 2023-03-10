@@ -967,7 +967,7 @@ MonoBehaviour:
     Description: This guy does nothing, poor tutorial guy
     Type: Attacker
     Difficulty: 0
-    Biome: 0
+    BiomeString: 
     HP: 9
   shieldObj: {fileID: 5317881196502984178}
   shieldText: {fileID: 1120893301603374417}
@@ -985,7 +985,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1.52}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

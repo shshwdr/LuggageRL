@@ -174,7 +174,8 @@ public class BattleManager : Singleton<BattleManager>
             var go = Instantiate(enemyPrefab, enemySlot.position, Quaternion.identity, enemySlot);
             go.GetComponent<Enemy>().Init(enemyList[x]);
             go.transform.parent = enemySlot;
-            go.transform.localPosition = Vector3.zero;//enemySlot.position;
+            //go.transform.position = 
+            //go.transform.localPosition = Vector3.zero;//enemySlot.position;
         }
         EnemyManager.Instance.setCurrentTargetedEnemy(EnemyManager.Instance.GetFrontEnemy());
     }

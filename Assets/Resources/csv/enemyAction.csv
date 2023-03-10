@@ -1,7 +1,9 @@
 ﻿Name,Description
 EnemyActionIdle,This enemy would not do anything
 EnemyActionAttack,EnemyActionStealMax
-EnemyActionShield,EnemyActionStealMax
-EnemyActionHeal,EnemyActionStealMax
-EnemyActionSteal,EnemyActionStealMax
-EnemyActionStealMax,EnemyActionStealMax
+EnemyActionShield,enemy would shield himself
+EnemyActionHeal,enemy will heal the one with least hp
+EnemyActionSteal,Enemy would pick an item and steal
+EnemyActionStealMax,Enemy would steal the item that you have most in your bag when it attacks
+EnemyActionRotate,Enemy would rotate your bag
+EnemyActionAdd,Enemy would sneak some crappy items in your bag
