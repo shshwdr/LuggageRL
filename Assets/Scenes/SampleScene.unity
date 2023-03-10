@@ -473,6 +473,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1304813528, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
+      propertyPath: FeedbacksList.Array.data[5].Label
+      value: PositionTopEnemyTarget
+      objectReference: {fileID: 0}
+    - target: {fileID: 1304813528, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
       propertyPath: FeedbacksList.Array.data[5].DeterminePositionsOnPlay
       value: 1
       objectReference: {fileID: 0}

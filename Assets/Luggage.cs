@@ -56,7 +56,7 @@ public class Luggage : Singleton<Luggage>
                         case "PositionTopEnemyTarget":
                             feedback.DestinationPositionTransform = target.topTargetTransform;
                             break;
-                        case "PositionAboveEnemyTarget":
+                        case "PositionAboveEnemyTarget": //not used right now
                             targetTransform = target.topTargetTransform;
                             feedback.DestinationPosition = new Vector3(targetTransform.TransformPoint(targetTransform.position).x, JUMP_ATTACK_HEIGHT, 0);
                             break;

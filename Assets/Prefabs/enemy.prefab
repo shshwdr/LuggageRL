@@ -624,6 +624,7 @@ MonoBehaviour:
     Difficulty: 0
     Biome: 0
     HP: 9
+  isTargeted: 0
 --- !u!61 &6516401140132719181
 BoxCollider2D:
   m_ObjectHideFlags: 0
