@@ -14,3 +14,6 @@ Poison,Poison,1,0,0,On Break: Buff the item that broke it {0} damage - Can stack
 Balancer,Balancer,1,0,0,"After Attack: If not moved in this attack, All items increase {0} damage, destroy itself",2,Special,1,1,2,Flurry
 Rocket,Rocket,1,2,0,"On Attack: deal {0} damage, destroy items behind it, increase {1} damage for each item destroyed.",2,Attacker,1,1,3,Scapegoat
 Pinata,Pinata,2,0,0,On Break: draw {0} cards,2,Breakable,1,1,1,Scapegoat
+Mud,Mud,0,0,0,On Attack: destory itself. On Move: Left a mud behind,2,Curse,1,0,0,Curse
+LiquidBomb,LiquidBomb,0,0,0,On Break: Destroy everything in bag,2,Curse,1,0,0,Curse
+FreezeBomb,freezeBomb,0,0,0,On Break: Freeze the bag,2,Curse,1,0,0,Curse
