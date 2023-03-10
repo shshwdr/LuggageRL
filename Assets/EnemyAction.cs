@@ -71,3 +71,41 @@ public class EnemyActionHeal : EnemyAction
         enemy.attackPreview.UpdateOtherPreview("heal", healAmount.ToString());
     }
 }
+public class EnemyActionSteal : EnemyAction
+{
+    ItemType stealItem;
+    public override IEnumerator TakeAction(Enemy enemy)
+    {
+
+        yield return enemy.StartCoroutine(enemy.StealItem(stealItem));
+        //yield return new WaitForSeconds(GridManager.animTime);
+    }
+    public override void Preview(Enemy enemy)
+    {
+        base.Preview(enemy);
+
+        //find the most item
+        stealItem = GridManager.Instance.findMostItem();
+
+        enemy.attackPreview.UpdateOtherPreview(stealItem.ToString(), "steal",false);
+    }
+}
+
+public class EnemyActionStealMax : EnemyAction
+{
+    public override IEnumerator TakeAction(Enemy enemy)
+    {
+
+        var stealItem = GridManager.Instance.findMostItem();
+        yield return enemy.StartCoroutine(enemy.StealItem(stealItem));
+        //yield return new WaitForSeconds(GridManager.animTime);
+    }
+    public override void Preview(Enemy enemy)
+    {
+        base.Preview(enemy);
+
+        //find the most item
+
+        enemy.attackPreview.UpdateOtherPreview("max", "steal");
+    }
+}

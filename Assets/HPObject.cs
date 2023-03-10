@@ -33,12 +33,15 @@ public class HPObject : MonoBehaviour
         yield return null;
     }
 
-    public void Heal(int damage)
+    public IEnumerator HealEnumerator(int damage)
     {
 
         hp += damage;
         hp = Mathf.Min(hp, maxHP);
         hpbar.updateHPBar(hp, maxHP);
+
+        FloatingTextManager.Instance.addText(damage.ToString(), transform.position, Color.green);
+        yield return new WaitForSeconds(GridManager.animTime);
     }
     public IEnumerator Die()
     {

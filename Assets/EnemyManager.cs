@@ -70,7 +70,7 @@ public class EnemyManager : Singleton<EnemyManager>
     }
     public List<EnemyBehavior> GetEnemyEnemyBehaviorsToAdd()
     {
-        return new List<EnemyBehavior> {new ShieldHealEnemy(),new AttackHealEnemy() };
+        return new List<EnemyBehavior> {new StealAttackEnemy(),new AttackStealEnemy() };
     }
     public Dictionary<string, EnemyInfo> enemyDict = new Dictionary<string, EnemyInfo>();
     // Start is called before the first frame update

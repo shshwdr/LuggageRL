@@ -75,6 +75,32 @@ public class Enemy : HPObject
             shieldText.text = shield.ToString();
         }
     }
+    public IEnumerator StealItem(ItemType type)
+    {
+
+
+        attackPreview.transform.DOShakeScale(GridManager.animTime * 2);
+        yield return new WaitForSeconds(GridManager.animTime * 2);
+
+
+
+        var items = GridManager.Instance.GetItemOfType(type);
+
+        foreach (var item in items)
+        {
+            GridManager.Instance.RemoveGrid(item);
+            item.transform.DOMove(transform.position, GridManager.animTime);
+
+        }
+        if (items.Count > 0)
+        {
+            yield return new WaitForSeconds(GridManager.animTime * 2);
+        }
+        foreach (var item in items)
+        {
+            Destroy(item.gameObject);
+        }
+    }
     public float HPRatio()
     {
         return (float)hp / (float)maxHP;
@@ -93,7 +119,8 @@ public class Enemy : HPObject
                 healTarget = ene;
             }
         }
-        healTarget.Heal(healAmount);
+
+        yield return StartCoroutine(healTarget.HealEnumerator(healAmount));
 
         attackPreview.transform.DOShakeScale(GridManager.animTime*2);
         yield return new WaitForSeconds(GridManager.animTime*2);

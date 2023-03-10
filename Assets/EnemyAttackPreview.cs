@@ -41,9 +41,18 @@ public class EnemyAttackPreview : MonoBehaviour
         }
     }
     
-    public void UpdateOtherPreview(string actionName, string count)
+    public void UpdateOtherPreview(string actionName, string count, bool isAction = true)
     {
-        var sprite = Resources.Load<Sprite>("enemyActionSprite/" + actionName);
+        Sprite sprite;
+        if (isAction)
+        {
+            sprite = Resources.Load<Sprite>("enemyActionSprite/" + actionName);
+        }
+        else
+        {
+
+            sprite = Resources.Load<Sprite>("itemSprite/" + actionName);
+        }
         if(sprite == null)
         {
             Debug.LogError("no action sprite " + actionName);

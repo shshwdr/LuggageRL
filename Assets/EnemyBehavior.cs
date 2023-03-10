@@ -87,6 +87,23 @@ public class ShieldHealEnemy : EnemyBehavior
     }
     public override string Name => "shieldHeal";
 }
+public class StealAttackEnemy : EnemyBehavior
+{
+    public StealAttackEnemy()
+    {
+        actions = new EnemyAction[] { new EnemyActionSteal() { }, new EnemyActionAttack() { attackDamage = 3 }, };
+    }
+    public override string Name => "stealAttack";
+}
+
+public class AttackStealEnemy : EnemyBehavior
+{
+    public AttackStealEnemy()
+    {
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 2 }, new EnemyActionStealMax() { }, };
+    }
+    public override string Name => "attackSteal";
+}
 
 
 
