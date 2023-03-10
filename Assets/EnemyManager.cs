@@ -42,6 +42,7 @@ public class EnemyManager : Singleton<EnemyManager>
             if (enemies.Count > 0)
             {
                 currentTargetedEnemy = GetFrontEnemy();
+                updateTargetedEnemy(currentTargetedEnemy);
             } else
             {
                 Debug.Log("No enemy available to select");
@@ -87,12 +88,14 @@ public class EnemyManager : Singleton<EnemyManager>
         
     }
 
-    internal void setCurrentTargetedEnemy(Enemy enemy)
+    internal void updateTargetedEnemy(Enemy enemy)
     {
         if (currentTargetedEnemy != null)
         {
             currentTargetedEnemy.setIsTargeted(false); //out with the old
         }
         currentTargetedEnemy = enemy; //in with the new
+        currentTargetedEnemy.setIsTargeted(true); //out with the old
+
     }
 }

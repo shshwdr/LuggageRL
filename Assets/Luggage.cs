@@ -41,6 +41,8 @@ public class Luggage : Singleton<Luggage>
         {
             foreach (MMF_Position feedback in animationPlayerList.GetFeedbacksOfType<MMF_Position>())
             {
+                Transform targetTransform;
+
                 if (feedback.Mode == MMF_Position.Modes.ToDestination)
                 {
                     switch (feedback.Label)
@@ -55,10 +57,12 @@ public class Luggage : Singleton<Luggage>
                             feedback.DestinationPositionTransform = target.topTargetTransform;
                             break;
                         case "PositionAboveEnemyTarget":
-                            feedback.DestinationPosition = new Vector3(targetTransform.position.x, JUMP_ATTACK_HEIGHT, 0);
+                            targetTransform = target.topTargetTransform;
+                            feedback.DestinationPosition = new Vector3(targetTransform.TransformPoint(targetTransform.position).x, JUMP_ATTACK_HEIGHT, 0);
                             break;
                         case "PositionBehindEnemyTarget":
-                            feedback.DestinationPosition = new Vector3(targetTransform.position.x + BEHIND_ATTACK_DISTANCE, target.rightTargetTransform.position.y, 0);
+                            targetTransform = target.rightTargetTransform;
+                            feedback.DestinationPosition = new Vector3(targetTransform.TransformPoint(targetTransform.position).x + BEHIND_ATTACK_DISTANCE, target.rightTargetTransform.position.y, 0);
                             break;
                         default:
                             break;
