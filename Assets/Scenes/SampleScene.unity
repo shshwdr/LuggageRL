@@ -618,7 +618,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1973271041138912219, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: parallaxSpeed
-      value: 0.4
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1973271041138912221, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: m_IsActive
@@ -678,7 +678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1973271041770016269, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: parallaxSpeed
-      value: 0.1
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1973271041770016271, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: m_IsActive
@@ -686,7 +686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1973271042051665299, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: parallaxSpeed
-      value: 0.3
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1973271042051665301, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: m_IsActive
@@ -694,7 +694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1973271042402263444, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: parallaxSpeed
-      value: 0.2
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1973271042402263446, guid: 71c2e12e3162b9a498a065c528512fb3, type: 3}
       propertyPath: m_IsActive
