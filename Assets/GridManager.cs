@@ -22,7 +22,8 @@ public class GridManager : Singleton<GridManager>
 {
 
     static public float animTime = 0.5f;
-    public float tileSize = 2f;
+    public float tileSizey = 2f;
+    public float tileSizex = 2f;
     public int Rows = 2;
     public int Columns = 3;
     public GameObject EmptyGridPrefab;
@@ -837,7 +838,7 @@ public class GridManager : Singleton<GridManager>
 
     Vector3 IndexToPosition(int i, int j)
     {
-        return new Vector3(tileSize * i, tileSize * j);
+        return new Vector3(tileSizex * i, tileSizey * j);
     }
     public void updatePos(GridItem item)
     {
