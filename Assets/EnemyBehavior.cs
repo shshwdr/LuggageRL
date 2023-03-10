@@ -7,7 +7,6 @@ public class EnemyBehavior {
 
     public EnemyAction currentAction => actions[i];
     public bool willAttacking => currentAction is EnemyActionAttack;
-    public virtual string Name { get; }
     public virtual void SelectAction() {
         actions[i].Preview(enemy);
     }
@@ -34,7 +33,6 @@ public class DummyEnemy : EnemyBehavior
     {
         actions = new EnemyAction[] { new EnemyActionIdle() };
     }
-    public override string Name => "dummy";
 
 }
 public class SimpleAttackEnemy : EnemyBehavior
@@ -43,7 +41,6 @@ public class SimpleAttackEnemy : EnemyBehavior
     {
         actions = new EnemyAction[] { new EnemyActionAttack(), new EnemyActionIdle(), new EnemyActionAttack(), };
     }
-    public override string Name => "simple";
 
 }
 public class AttackShieldEnemy : EnemyBehavior
@@ -52,7 +49,6 @@ public class AttackShieldEnemy : EnemyBehavior
     {
         actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 4, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5 }, };
     }
-    public override string Name => "attackShield";
 
 }
 public class AttackFlyEnemy : EnemyBehavior
@@ -61,7 +57,6 @@ public class AttackFlyEnemy : EnemyBehavior
     {
         actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 3, attackFromBottom = false }, new EnemyActionAttack() { attackDamage = 5, attackFromBottom = false }, new EnemyActionIdle() };
     }
-    public override string Name => "attackFly";
 }
 public class AttackGrowEnemy : EnemyBehavior
 {
@@ -69,7 +64,6 @@ public class AttackGrowEnemy : EnemyBehavior
     {
         actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 4, attackHeight = 0 }, new EnemyActionAttack() { attackDamage = 5, attackHeight = 1 }, new EnemyActionAttack() { attackDamage = 6, attackHeight = 2 } };
     }
-    public override string Name => "attackGrow";
 }
 public class AttackHealEnemy : EnemyBehavior
 {
@@ -77,7 +71,6 @@ public class AttackHealEnemy : EnemyBehavior
     {
         actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 2, attackHeight = 1 }, new EnemyActionHeal() { healAmount = 5 }, };
     }
-    public override string Name => "attackHeal";
 }
 public class ShieldHealEnemy : EnemyBehavior
 {
@@ -85,7 +78,6 @@ public class ShieldHealEnemy : EnemyBehavior
     {
         actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 5 }, new EnemyActionHeal() { healAmount = 7 }, };
     }
-    public override string Name => "shieldHeal";
 }
 public class StealAttackEnemy : EnemyBehavior
 {
@@ -93,7 +85,6 @@ public class StealAttackEnemy : EnemyBehavior
     {
         actions = new EnemyAction[] { new EnemyActionSteal() { }, new EnemyActionAttack() { attackDamage = 3 }, };
     }
-    public override string Name => "stealAttack";
 }
 
 public class AttackStealEnemy : EnemyBehavior
@@ -102,7 +93,13 @@ public class AttackStealEnemy : EnemyBehavior
     {
         actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 2 }, new EnemyActionStealMax() { }, };
     }
-    public override string Name => "attackSteal";
+}
+public class AttackRotateEnemy : EnemyBehavior
+{
+    public AttackRotateEnemy()
+    {
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 2 }, new EnemyActionStealMax() { }, };
+    }
 }
 
 

@@ -52,6 +52,7 @@ public class StageManager : Singleton<StageManager>
         if (eventIndex >= eventList.Count)
         {
             FloatingTextManager.Instance.addText("Finished Stage!", Vector3.zero, Color.yellow, 5);
+            return;
         }
         float randomX = Random.Range(sceneDistanceStart, sceneDistanceEnd);
         GameObject go = null;

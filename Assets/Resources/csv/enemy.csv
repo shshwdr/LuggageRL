@@ -1,10 +1,17 @@
 ﻿Name,DisplayName,Description,Type,Difficulty,Biome,HP
-dummy,Dummy,"This guy does nothing, poor tutorial guy",Attacker,0,0,9
-simple,Simple,This guy just attack,Attacker,0,0,11
-attackShield,attackShield,"This guy knows how to shield, it can attack at height 2",Attacker,0,0,11
-attackFly,,This guy can fly!,,,,11
-attackHeal,,This guy heals the enemy with least hp ratio,,,,11
-attackGrow,,"This guy would attack from bottom and then middle and then top. Basically it grow and attack higher and higher, then back to lowest",,,,11
-shieldHeal,,This guy heals the enemy with least hp ratio and shield!,,,,11
-stealAttack,,This guy steal certain item from you and attack,,,,11
-attackSteal,,This guy steal max item you are having and attack,,,,11
+DummyEnemy,Dummy,"This guy does nothing, poor tutorial guy",minion,0,-1,9
+SimpleAttackEnemy,Simple,This guy just attack,minion,1,0,11
+AttackShieldEnemy,attackShield,"This guy knows how to shield, it can attack at height 2",minion,2,0,11
+AttackFlyEnemy,,This guy can fly!,minion,3,,11
+AttackHealEnemy,,This guy heals the enemy with least hp ratio,minion,3,,11
+AttackGrowEnemy,,"This guy would attack from bottom and then middle and then top. Basically it grow and attack higher and higher, then back to lowest",minion,3,,11
+ShieldHealEnemy,,This guy heals the enemy with least hp ratio and shield!,minion,4,,11
+StealAttackEnemy,,This guy steal certain item from you and attack,minion,4,,11
+AttackStealEnemy,,This guy steal max item you are having and attack,minion,4,,11
+AttackRotateEnemy,,This guy would rotate bag and attack,minion,2,,11
+BossFlood,,This boss would flood your bag with useless items,boss,,,50
+BossExplode,,This boss would throw liquid bomb to your bag that explode everything in your bag,boss,,,50
+EliteRefuse,,This elite guy would only get 2 attackes per turn,elite,,,30
+EliteCap,,This elite guy would cap each attack to 5 damage,elite,,,30
+BossFreeze,,This boss would throw freeze bomb to your bag that explode and freeze your bag next turn,boss,,,50
+EliteThorn,,This elite guy would return damage to player for each attack he get,elite,,,30

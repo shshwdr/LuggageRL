@@ -3,11 +3,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum BattleType { normal, elite, boss}
 
+public class EnemyActionInfo
+{
+    public string Name;
+    public string Description;
+}
 public class EnemyManager : Singleton<EnemyManager>
 {
     List<Enemy> enemies = new List<Enemy>();
     public Enemy currentTargetedEnemy;
+    public Dictionary<string, EnemyInfo> enemyDict = new Dictionary<string, EnemyInfo>();
+    public Dictionary<string, EnemyActionInfo> enemyActionDict = new Dictionary<string, EnemyActionInfo>();
 
     public List<Enemy> GetEnemies() => enemies;
     public void AddEnemy(Enemy enemy)
@@ -70,12 +78,49 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         return enemies[0];
     }
-    public List<EnemyBehavior> GetEnemyEnemyBehaviorsToAdd()
+
+    List<EnemyInfo> GetEnemiesWithLowerDifficulty(int d)
     {
-        return new List<EnemyBehavior> { new StealAttackEnemy(), new AttackStealEnemy() };
+        List<EnemyInfo> res = new List<EnemyInfo>();
+        foreach(var info in enemyDict.Values)
+        {
+            if (info.Difficulty <= d && info.Difficulty>0)
+            {
+                res.Add(info);
+            }
+        }
+        return res;
     }
-    public Dictionary<string, EnemyInfo> enemyDict = new Dictionary<string, EnemyInfo>();
-    // Start is called before the first frame update
+
+    public List<EnemyInfo> GetEnemyInfosToAdd(int difficultCount, BattleType battleType, int maxEnemy = 3)
+    {
+
+        List<EnemyInfo> res = new List<EnemyInfo>();
+        if(difficultCount == 0)
+        {
+            res.Add(enemyDict["DummyEnemy"]);
+            return res;
+        }
+        for( int i = 0; i < maxEnemy; i++)
+        {
+
+            var potentials = GetEnemiesWithLowerDifficulty(difficultCount);
+            if(potentials.Count == 0)
+            {
+                break;
+            }
+            var picked = potentials[UnityEngine.Random.Range(0, potentials.Count)];
+            res.Add(picked);
+            difficultCount -= picked.Difficulty;
+            if(difficultCount == 0)
+            {
+                break;
+            }
+        }
+
+
+        return res;
+    }
     void Start()
     {
 
@@ -84,13 +129,31 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             enemyDict[item.Name] = item;
         }
-    }
+        var itemActionInfos = CsvUtil.LoadObjects<EnemyActionInfo>("enemyAction");
+        foreach (var item in itemActionInfos)
+        {
+            enemyActionDict[item.Name] = item;
+        }
 
+        
+    }
+    
     public EnemyInfo getEnemyInfo(string itemName)
     {
         if (enemyDict.ContainsKey(itemName))
         {
             return enemyDict[itemName];
+
+        }
+        Debug.LogError("no enemy " + itemName);
+        return null;
+    }
+
+    public EnemyActionInfo getEnemyActionInfo(string itemName)
+    {
+        if (enemyActionDict.ContainsKey(itemName))
+        {
+            return enemyActionDict[itemName];
 
         }
         Debug.LogError("no enemy " + itemName);

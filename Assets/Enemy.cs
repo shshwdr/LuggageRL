@@ -126,11 +126,12 @@ public class Enemy : HPObject
         yield return new WaitForSeconds(GridManager.animTime*2);
     }
 
-    public void Init(EnemyBehavior core)
+    public void Init(EnemyInfo _info)
     {
-        Core = core;
-        core.enemy = this;
-        info = EnemyManager.Instance.getEnemyInfo(Core.Name);
+        Debug.Log("select " + info.Name);
+        Core = (EnemyBehavior)System.Activator.CreateInstance(System.Type.GetType(_info.Name.ToString()));
+        Core.enemy = this;
+        info = _info;
         maxHP = info.HP;
         hp = maxHP;
         base.Awake();
@@ -208,11 +209,14 @@ public class Enemy : HPObject
     {
         //show attack preview
         GridManager.Instance.showAttackPreviewOfEnemy(this);
+
+        DetailView.Instance.UpdateValue(this);
     }
 
     private void OnMouseExit()
     {
         GridManager.Instance.clearAttackPreview();
+        DetailView.Instance.UpdateValue(null);
     }
     private void OnMouseDown()
     {

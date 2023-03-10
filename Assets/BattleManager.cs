@@ -27,6 +27,9 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField] private int swapActionCost = 0;
     [SerializeField] private int drawMoveCost = 0;
     public Transform ButtonCanvas;
+
+    int battleMet = 0;
+
     public void hideButtonCanvas()
     {
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>())
@@ -145,10 +148,21 @@ public class BattleManager : Singleton<BattleManager>
         SelectAttack();
         EnemyManager.Instance.SelectEenmiesAction();
 
+        battleMet++;
+
     }
     public void AddEnemies()
     {
-        var enemyList = EnemyManager.Instance.GetEnemyEnemyBehaviorsToAdd();
+        var maxEnemy = 3;
+        if (battleMet < 7)
+        {
+            maxEnemy = 2;
+        }
+        if(battleMet < 3)
+        {
+            maxEnemy = 1;
+        }
+        var enemyList = EnemyManager.Instance.GetEnemyInfosToAdd(battleMet, BattleType.normal);
 
         if(enemyList.Count > enemyPositions.Length)
         {

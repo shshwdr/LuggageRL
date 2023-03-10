@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseScene: {fileID: 0}
-  LuggageAttackText: {fileID: 1392621330}
+  LuggageAttackText: {fileID: 0}
   LuggageAttackButton: {fileID: 7804120229954410934}
   itemsToActivate: []
   MoveText: {fileID: 2672507904482429547}
@@ -871,10 +871,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleScenePrefab: {fileID: 2208437630440124427, guid: a8c15f4a5960e4440829c5dae7b538c5, type: 3}
   itemSelectScenePrefab: {fileID: 1029336581098450868, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
-  sceneDistanceStart: 10
-  sceneDistanceEnd: 15
+  sceneDistanceStart: 5
+  sceneDistanceEnd: 6
   isMoving: 1
-  eventList: 000000000300000000000000030000000000000003000000
+  eventList: 0000000003000000000000000300000000000000030000000000000000000000000000000000000000000000
 --- !u!1 &2672507906304374020
 GameObject:
   m_ObjectHideFlags: 0

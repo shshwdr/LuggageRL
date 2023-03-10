@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class EnemyAction
 {
+    public virtual string Desc =>EnemyManager.Instance.getEnemyActionInfo(GetType().ToString()).Description;
     public virtual void Preview(Enemy enemy) { }
     public abstract IEnumerator TakeAction(Enemy enemy);
 }
