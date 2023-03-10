@@ -7,7 +7,6 @@ using DG.Tweening;
 public class UIThemeChangeTrigger : MonoBehaviour
 {
     [SerializeField] private BiomeArea area;
-    [SerializeField] bool hasTriggered = false;
     [SerializeField] bool hasFinishedTransitioning = false;
 
     private GameObject airportFrameUI;
@@ -17,7 +16,6 @@ public class UIThemeChangeTrigger : MonoBehaviour
 
     private void Start()
     {
-        hasTriggered = false;
         foreach(ThemedUIContainer container in FindObjectsOfType<ThemedUIContainer>())
         {
             switch (container.theme)
