@@ -216,6 +216,6 @@ public class Enemy : HPObject
     }
     private void OnMouseDown()
     {
-        EnemyManager.Instance.updateTargetedEnemy(this);
+        EnemyManager.Instance.setCurrentTargetedEnemy(this);
     }
 }
