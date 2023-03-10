@@ -106,5 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  player: {fileID: 0}
+  hasStarted: 0
+  hasFinished: 0
   itemPositionsParent: {fileID: 2208437628973877932}
   itemsToActivate: []

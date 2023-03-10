@@ -174,6 +174,7 @@ public class BattleManager : Singleton<BattleManager>
             var go = Instantiate(pickedEnemy, enemySlot.position, Quaternion.identity, enemySlot);
             go.transform.parent = enemySlot;
             go.transform.localPosition = Vector3.zero;//enemySlot.position;
+            break;
         }
     }
 

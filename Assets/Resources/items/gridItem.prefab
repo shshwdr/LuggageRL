@@ -144,7 +144,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -399441049
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6b9640ac306d1654d930e593e16fbe00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 9135755077334337204}
   - component: {fileID: 7813576957548204236}
   - component: {fileID: 4590661104223907535}
+  - component: {fileID: 2069970983835408495}
   m_Layer: 0
   m_Name: gridItem
   m_TagString: Untagged
@@ -267,6 +268,7 @@ MonoBehaviour:
     indexx: 0
     indexy: 0
     count: 0
+    isParam2Attack: 0
     info:
       Item: 
       DisplayName: 
@@ -287,6 +289,17 @@ MonoBehaviour:
       Keys: 
       Values: 
   baseItem: {fileID: 0}
+--- !u!210 &2069970983835408495
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773436473970345894}
+  m_Enabled: 1
+  m_SortingLayerID: 704657263
+  m_SortingLayer: 5
+  m_SortingOrder: 100
 --- !u!1 &1920938710777092685
 GameObject:
   m_ObjectHideFlags: 0
