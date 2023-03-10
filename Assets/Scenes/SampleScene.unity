@@ -3639,6 +3639,110 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_boss>k__BackingField.Path
+      value: event:/music_boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_airport>k__BackingField.Path
+      value: event:/music_airport
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_boss>k__BackingField.Guid.Data1
+      value: -370713243
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_boss>k__BackingField.Guid.Data2
+      value: 1260200056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_boss>k__BackingField.Guid.Data3
+      value: 558385328
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_boss>k__BackingField.Guid.Data4
+      value: -1559840
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_airport>k__BackingField.Guid.Data1
+      value: -1228935347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_airport>k__BackingField.Guid.Data2
+      value: 1179370425
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_airport>k__BackingField.Guid.Data3
+      value: -1122943354
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_airport>k__BackingField.Guid.Data4
+      value: 1926985539
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[0].Path
+      value: event:/music_airport
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[1].Path
+      value: event:/music_boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[2].Path
+      value: event:/music_luggage_adventure
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[0].Guid.Data1
+      value: -1228935347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[0].Guid.Data2
+      value: 1179370425
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[0].Guid.Data3
+      value: -1122943354
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[0].Guid.Data4
+      value: 1926985539
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[1].Guid.Data1
+      value: -370713243
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[1].Guid.Data2
+      value: 1260200056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[1].Guid.Data3
+      value: 558385328
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[1].Guid.Data4
+      value: -1559840
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[2].Guid.Data1
+      value: 347517947
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[2].Guid.Data2
+      value: 1201711524
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[2].Guid.Data3
+      value: -565034327
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <musicPlaylist>k__BackingField.Array.data[2].Guid.Data4
+      value: 975092811
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
 --- !u!1001 &4549562707947164602

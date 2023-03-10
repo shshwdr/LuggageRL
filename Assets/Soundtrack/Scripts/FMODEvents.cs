@@ -8,6 +8,8 @@ public class FMODEvents : Singleton<FMODEvents>
 {
     [field: Header("Music")]
     [field: SerializeField] public EventReference music_luggage_adventure { get; private set; }
+    [field: SerializeField] public EventReference music_boss { get; private set; }
+    [field: SerializeField] public EventReference music_airport { get; private set; }
     [field: SerializeField] public List<EventReference> musicPlaylist { get; private set; }
 
     [field: Header("SFX")]
