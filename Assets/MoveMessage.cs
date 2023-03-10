@@ -8,7 +8,7 @@ public class BattleMessage
 }
 
 
-public enum VisualEffect { electric }
+public enum VisualEffect { electric, explode }
 
 public class MessageMove : BattleMessage
 {
@@ -32,6 +32,10 @@ public class MessageItemVisualEffect : BattleMessage
     public Vector2Int index;
     public GridItemCore item;
     public VisualEffect effect;
+}
+public class MessageWait : BattleMessage
+{
+    public float waitTime;
 }
 
 public class MessageItemApplyEffect : BattleMessage

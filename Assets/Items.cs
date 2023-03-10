@@ -187,6 +187,8 @@ public class Bomb : GridItemCore
 
         if (count == 0)
         {
+
+            messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode });
             messages.Add(new MessageAttackPlayer { item = this, index = index, amount = CalculateDamage(damage), target = BattleManager.Instance.player });
 
             this.addDestroyMessage(messages);
@@ -325,3 +327,39 @@ public class Pinata : GridItemCore
     }
 }
 
+[System.Serializable]
+public class Mud : GridItemCore
+{
+
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    {
+        this.addDestroyMessage(messages);
+    }
+}
+[System.Serializable]
+public class LiquidBomb : GridItemCore
+{
+
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    {
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode });
+        if (GridManager.Instance.isPredict)
+        {
+            foreach (var i in GridManager.Instance.predictDict.Values)
+            {
+                i.addDestroyMessage(messages);
+            }
+        }
+        else
+        {
+            foreach (var i in  GridManager.Instance.GridItemDict.Values)
+            {
+                i.addDestroyMessage(messages);
+
+            }
+        }
+        messages.Add(new MessageWait { waitTime = GridManager.animTime });
+
+        //this.addDestroyMessage(messages);
+    }
+}

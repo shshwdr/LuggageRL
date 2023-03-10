@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum BiomeType { none,forest, desert,river}
 public enum StageEventType { normalBattle, bossBattle, eliteBattle, itemSelect, upgradeLuggageNPC, upgradeItemNPC}
 public class StageManager : Singleton<StageManager>
 {
@@ -12,6 +12,7 @@ public class StageManager : Singleton<StageManager>
     [SerializeField] float sceneDistanceEnd;
     public bool isMoving = true;
     int eventIndex = 0;
+    public BiomeType biomeType = BiomeType.forest;
     public List<StageEventType> eventList = new List<StageEventType>() { StageEventType.itemSelect, StageEventType.normalBattle, StageEventType.itemSelect, StageEventType.normalBattle, StageEventType.itemSelect };
     // Start is called before the first frame update
     void Start()
@@ -56,7 +57,18 @@ public class StageManager : Singleton<StageManager>
         }
         float randomX = Random.Range(sceneDistanceStart, sceneDistanceEnd);
         GameObject go = null;
-        switch (eventList[eventIndex]) {
+        switch (eventList[eventIndex])
+        {
+            case StageEventType.bossBattle:
+                go = Instantiate(battleScenePrefab);
+                go.GetComponent<BattleScene>().battleType = BattleType.boss;
+                break;
+            case StageEventType.eliteBattle:
+                go = Instantiate(battleScenePrefab);
+                go.GetComponent<BattleScene>().battleType = BattleType.elite;
+
+                break;
+
             case StageEventType.normalBattle:
                 go = Instantiate(battleScenePrefab);
 

@@ -3855,6 +3855,10 @@ PrefabInstance:
       propertyPath: sceneDistanceStart
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
+      propertyPath: eventList.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa7267459d73887499b0a8475d719b96, type: 3}
 --- !u!1001 &3618617847176632425

@@ -176,10 +176,10 @@ strategy: {info.Strategy}
     public virtual void afterAttack(List<BattleMessage> messages) { }
     public virtual void afterTurn(List<BattleMessage> messages) { }
 
-    public void addDestroyMessage(List<BattleMessage> messages)
+    public void addDestroyMessage(List<BattleMessage> messages, bool skipAnim = false)
     {
         isDestroyed = true;
-        messages.Add(new MessageDestroy {index = index, item = this });
+        messages.Add(new MessageDestroy {index = index, item = this, skipAnim = skipAnim });
         //GridManager.Instance.RemoveGrid(index, type);
         Debug.Log($"addDestroyMessage {index} {type}");
     }
@@ -191,6 +191,7 @@ strategy: {info.Strategy}
         //GridManager.Instance.RemoveGrid(ind, type);
         Debug.Log($"addDestroyMessage {ind} {type}");
     }
+
 }
 
 public interface IGridItem
@@ -199,7 +200,7 @@ public interface IGridItem
     public void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex);
     public void move(List<BattleMessage> messages);
     public void beCrushed(IGridItem item, List<BattleMessage> messages);
-    public void addDestroyMessage(List<BattleMessage> messages);
+    public void addDestroyMessage(List<BattleMessage> messages, bool skipAnim = false);
     public void addDestroyMessageWithIndex(List<BattleMessage> messages, Vector2Int ind, bool skipAnim = false);
     public void afterAttack(List<BattleMessage> messages);
 
@@ -251,7 +252,7 @@ public class GridItem : MonoBehaviour, IGridItem
         baseItem.spriteRender.sprite = spriteResource;
         baseItem.updateCounter(core.count);
     }
-    public void addDestroyMessage(List<BattleMessage> messages)
+    public void addDestroyMessage(List<BattleMessage> messages,bool skipAnim = false)
     {
         core.addDestroyMessage(messages);
     }

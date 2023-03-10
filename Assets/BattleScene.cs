@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class BattleScene : BaseScene
 {
-
+    public BattleType battleType;
     // Start is called before the first frame update
     void Start()
     {
         itemPositions = itemPositionsParent.GetComponentsInChildren<Transform>();
         BattleManager.Instance.enemyPositions = itemPositions;
         BattleManager.Instance.itemsToActivate = itemsToActivate;
-        BattleManager.Instance.AddEnemies();
+        BattleManager.Instance.AddEnemies(battleType);
         BattleManager.Instance.baseScene = this;
     }
 
