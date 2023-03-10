@@ -92,6 +92,24 @@ public class EnemyActionSteal : EnemyAction
     }
 }
 
+public class EnemyActionAdd : EnemyAction
+{
+    public ItemType addItem;
+    public override IEnumerator TakeAction(Enemy enemy)
+    {
+
+        yield return enemy.StartCoroutine(enemy.AddItem(addItem));
+        //yield return new WaitForSeconds(GridManager.animTime);
+    }
+    public override void Preview(Enemy enemy)
+    {
+        base.Preview(enemy);
+
+
+        enemy.attackPreview.UpdateOtherPreview(addItem.ToString(), "add", false);
+    }
+}
+
 public class EnemyActionStealMax : EnemyAction
 {
     public override IEnumerator TakeAction(Enemy enemy)

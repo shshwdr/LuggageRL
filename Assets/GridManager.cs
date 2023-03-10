@@ -18,6 +18,11 @@ public enum ItemType
     Balancer,
     Rocket,
     Pinata,
+
+    Mud,
+LiquidBomb,
+FreezeBomb,
+
 }
 public class GridManager : Singleton<GridManager>
 {
@@ -113,6 +118,30 @@ public class GridManager : Singleton<GridManager>
         yield return StartCoroutine(MoveAfter(0, -1));
         BattleManager.Instance.PredictNextAttack();
     }
+
+    public GameObject AddItemRandomPosition(ItemType type)
+    {
+        List<Vector2Int> availableEmpty = new List<Vector2Int>();
+        foreach (var key in emptyGridList)
+        {
+            if (!GridItemDict.ContainsKey(key.index))
+            {
+                availableEmpty.Add(key.index);
+            }
+        }
+        if(availableEmpty .Count > 0)
+        {
+            var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
+
+            return AddGrid(picked.x, picked.y, type);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    
 
     public List<GridItem> GetItemOfType(ItemType type)
     {
@@ -531,10 +560,15 @@ public class GridManager : Singleton<GridManager>
             if (message is MessageMove move)
             {
             }
-            else if(message is MessageItemVisualEffect visualEffect)
+            else if (message is MessageItemVisualEffect visualEffect)
             {
 
             }
+            else if (message is MessageWait wait)
+            {
+
+            }
+            
             else if (message is MessageItemAttack attack)
             {
                 Debug.Log($"{attack.item.Name} Attack {attack.damage}");
@@ -651,6 +685,10 @@ public class GridManager : Singleton<GridManager>
                     yield return new WaitForSeconds(animTime);
                 }
             }
+            else if (message is MessageWait wait)
+            {
+                yield return new WaitForSeconds(wait.waitTime);
+            }
             else if (message is MessageItemVisualEffect visualEffect)
             {
 
@@ -659,9 +697,13 @@ public class GridManager : Singleton<GridManager>
                     Debug.Log("?");
                 }
                 string visualText = "";
-                if(visualEffect.effect == VisualEffect.electric)
+                if (visualEffect.effect == VisualEffect.electric)
                 {
                     visualText = "Electric!";
+                }
+                if (visualEffect.effect == VisualEffect.explode)
+                {
+                    visualText = "Boom!";
                 }
                 FloatingTextManager.Instance.addText(visualText, GridItemDict[visualEffect.index].transform.position, Color.white);
                 if (!visualEffect.skipAnim)
@@ -964,7 +1006,7 @@ public class GridManager : Singleton<GridManager>
     }
 
 
-    public void AddGrid(int i, int j, ItemType type)
+    public GameObject AddGrid(int i, int j, ItemType type)
     {
         var obj = ItemManager.Instance.createItem(type, items, Vector3.zero, i, j);
         //GameObject obj = Instantiate(Resources.Load<GameObject>("items/"+type.ToString()));
@@ -980,6 +1022,7 @@ public class GridManager : Singleton<GridManager>
         //obj.transform.position += new Vector3(0, 1, 0);
         // add to grid once instantiated
         GridItemDict[new Vector2Int(i, j)] = obj.GetComponent<GridItem>();
+        return obj;
     }
     public void RemoveGrid(int i, int j, ItemType type)
     {

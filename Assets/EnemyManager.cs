@@ -78,13 +78,34 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         return enemies[0];
     }
-
-    List<EnemyInfo> GetEnemiesWithLowerDifficulty(int d)
+    EnemyInfo GetBossInBiome(BiomeType biome)
+    {
+        foreach (var info in enemyDict.Values)
+        {
+            if (info.Type == "boss" && info.canPutInBiome(biome))
+            {
+                return info;
+            }
+        }
+        return null;
+    }
+    EnemyInfo GetEliteInBiome(BiomeType biome)
+    {
+        foreach (var info in enemyDict.Values)
+        {
+            if (info.Type == "elite" && info.canPutInBiome(biome))
+            {
+                return info;
+            }
+        }
+        return null;
+    }
+    List<EnemyInfo> GetEnemiesWithLowerDifficulty(int d, BiomeType biome)
     {
         List<EnemyInfo> res = new List<EnemyInfo>();
         foreach(var info in enemyDict.Values)
         {
-            if (info.Difficulty <= d && info.Difficulty>0)
+            if (info.Difficulty <= d && info.Difficulty>0 && info.canPutInBiome(biome))
             {
                 res.Add(info);
             }
@@ -95,16 +116,34 @@ public class EnemyManager : Singleton<EnemyManager>
     public List<EnemyInfo> GetEnemyInfosToAdd(int difficultCount, BattleType battleType, int maxEnemy = 3)
     {
 
+        //return new List<EnemyInfo>() { enemyDict["BossPinata"], enemyDict["BossPinata"], }
         List<EnemyInfo> res = new List<EnemyInfo>();
+        if (battleType == BattleType.boss)
+        {
+            var boss = GetBossInBiome(StageManager.Instance.biomeType);
+            res.Add(boss);
+        }
+        else if(battleType == BattleType.elite)
+        {
+
+            var boss = GetEliteInBiome(StageManager.Instance.biomeType);
+            res.Add(boss);
+        }
+        else
+        {
+
+        }
+
         if(difficultCount == 0)
         {
             res.Add(enemyDict["DummyEnemy"]);
             return res;
         }
-        for( int i = 0; i < maxEnemy; i++)
+        var c = res.Count;
+        for ( int i =c; i < maxEnemy; i++)
         {
 
-            var potentials = GetEnemiesWithLowerDifficulty(difficultCount);
+            var potentials = GetEnemiesWithLowerDifficulty(difficultCount, StageManager.Instance.biomeType);
             if(potentials.Count == 0)
             {
                 break;

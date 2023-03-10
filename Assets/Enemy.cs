@@ -12,7 +12,11 @@ public class EnemyInfo
     public string Description;
     public string Type;
     public int Difficulty;
-    public int Biome;
+    public string BiomeString;
+    public BiomeType BiomeType{get{
+            Debug.Log("biome " +Name+" "+ BiomeString);
+            return (BiomeType) System.Enum.Parse(typeof(BiomeType), BiomeString); }}
+    public bool canPutInBiome(BiomeType type) => BiomeType == type|| BiomeType == BiomeType.none;
     public int HP;
 }
 public class Enemy : HPObject
@@ -74,6 +78,32 @@ public class Enemy : HPObject
             shieldObj.SetActive(true);
             shieldText.text = shield.ToString();
         }
+    }
+
+    public IEnumerator AddItem(ItemType type)
+    {
+        attackPreview.transform.DOShakeScale(GridManager.animTime * 2);
+        yield return new WaitForSeconds(GridManager.animTime * 2);
+
+        var obj = GridManager.Instance.AddItemRandomPosition(type);
+
+        if(obj == null)
+        {
+
+            FloatingTextManager.Instance.addText("Bag is Full!", transform.position, Color.yellow);
+            yield return new WaitForSeconds(GridManager.animTime);
+        }
+        else
+        {
+            var originPosition = obj.transform.position;
+            obj.transform.position = transform.position;
+
+            obj.transform.DOMove(originPosition, GridManager.animTime);
+            yield return new WaitForSeconds(GridManager.animTime);
+
+
+        }
+
     }
     public IEnumerator StealItem(ItemType type)
     {

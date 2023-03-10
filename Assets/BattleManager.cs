@@ -151,7 +151,7 @@ public class BattleManager : Singleton<BattleManager>
         battleMet++;
 
     }
-    public void AddEnemies()
+    public void AddEnemies(BattleType battleType)
     {
         var maxEnemy = 3;
         if (battleMet < 7)
@@ -162,7 +162,7 @@ public class BattleManager : Singleton<BattleManager>
         {
             maxEnemy = 1;
         }
-        var enemyList = EnemyManager.Instance.GetEnemyInfosToAdd(battleMet, BattleType.normal);
+        var enemyList = EnemyManager.Instance.GetEnemyInfosToAdd(battleMet, battleType, maxEnemy);
 
         if(enemyList.Count > enemyPositions.Length)
         {

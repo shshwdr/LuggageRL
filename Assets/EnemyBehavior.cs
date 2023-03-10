@@ -103,4 +103,25 @@ public class AttackRotateEnemy : EnemyBehavior
 }
 
 
+public class BossPinata : EnemyBehavior
+{
+    public BossPinata()
+    {
+        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.Mud } };
+    }
+}
+public class BossExplode : EnemyBehavior
+{
+    public BossExplode()
+    {
+        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.LiquidBomb } };
+    }
+}
+public class BossFreeze : EnemyBehavior
+{
+    public BossFreeze()
+    {
+        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.FreezeBomb } };
+    }
+}
 
