@@ -107,10 +107,20 @@ public class Luggage : Singleton<Luggage>
         SetTarget();
 
         yield return StartCoroutine(pushForwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
-        
-        //transform.DOMove(target.transform.position, GridManager.animTime);
+
+        /*//transform.DOMove(target.transform.position, GridManager.animTime);
         yield return GridManager.Instance.MoveAndAttack(1, 0);
 
+        yield return StartCoroutine(showDamage());*/
+    }
+    public void PushForwardAttackImpact() //use to call through unity events
+    {
+        //transform.DOMove(target.transform.position, GridManager.animTime);
+        StartCoroutine(PushForwardAttackFinish());
+    }
+    private IEnumerator PushForwardAttackFinish() //perform coroutines
+    {
+        yield return StartCoroutine(GridManager.Instance.MoveAndAttack(1, 0));
         yield return StartCoroutine(showDamage());
     }
 
@@ -122,40 +132,41 @@ public class Luggage : Singleton<Luggage>
 
         yield return StartCoroutine(upsideDownAndDropAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
 
-        /*transform.DOMove(target.transform.position + Vector3.up*5, GridManager.animTime*2);
-        transform.DORotate(new Vector3(0, 0, 90 * GridManager.Instance.rotatedTime), GridManager.animTime * 2);
-        yield return new WaitForSeconds(GridManager.animTime * 2);
+        
+    }
+    public void UpsideDownAndDropImpact()
+    {
+        StartCoroutine(UpsideDownAndDropFinish());
+    }
 
-        transform.DOMove(target.transform.position, GridManager.animTime);
-        //GridManager.Instance.Move(0, -1); ;
-*/
+    private IEnumerator UpsideDownAndDropFinish()
+    {
         yield return GridManager.Instance.MoveAndAttack(0, -1);
-        //yield return new WaitForSeconds(GridManager.animTime);
 
         yield return StartCoroutine(showDamage());
     }
+
     public IEnumerator ThrowOutAndHitBack()
     {
 
         SetTarget();
 
-
         GridManager.Instance.Rotate(1, false);
         yield return StartCoroutine(throwOutAndHitBackAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
+    }
 
-        /*transform.DORotate(new Vector3(0, 0, 90 * GridManager.Instance.rotatedTime), GridManager.animTime * 2);
-        transform.DOMove(target.transform.position + Vector3.up * 5, GridManager.animTime );
-        yield return new WaitForSeconds(GridManager.animTime);
-        transform.DOMove(target.transform.position + Vector3.right * 2, GridManager.animTime);
-        yield return new WaitForSeconds(GridManager.animTime );
+    public void ThrowOutAndHitBackImpact()
+    {
+        StartCoroutine(ThrowOutAndHitBackFinish());
+    }
 
-        transform.DOMove(target.transform.position, GridManager.animTime);
-        //GridManager.Instance.Move(-1, 0);*/
-        yield return GridManager.Instance.MoveAndAttack(-1,0);
-       // yield return new WaitForSeconds(GridManager.animTime);
+    private IEnumerator ThrowOutAndHitBackFinish()
+    {
+        yield return GridManager.Instance.MoveAndAttack(-1, 0);
 
         yield return StartCoroutine(showDamage());
     }
+
     IEnumerator showDamage()
     {
         //yield return new WaitForSeconds(GridManager.animTime * 1.1f);
