@@ -1,0 +1,7 @@
+﻿Name,Description
+EnemyActionIdle,This enemy would not do anything
+EnemyActionAttack,EnemyActionStealMax
+EnemyActionShield,EnemyActionStealMax
+EnemyActionHeal,EnemyActionStealMax
+EnemyActionSteal,EnemyActionStealMax
+EnemyActionStealMax,EnemyActionStealMax
