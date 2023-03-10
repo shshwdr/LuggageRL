@@ -143,7 +143,7 @@ public class BattleManager : Singleton<BattleManager>
         UpdateText();
         DrawItem(true);
         SelectAttack();
-        EnemyManager.Instance.SelectEenmiesAttack();
+        EnemyManager.Instance.SelectEenmiesAction();
 
     }
     public void AddEnemies()
@@ -302,7 +302,7 @@ public class BattleManager : Singleton<BattleManager>
         clearTurnData();
 
         SelectAttack();
-        EnemyManager.Instance.SelectEenmiesAttack();
+        EnemyManager.Instance.SelectEenmiesAction();
         yield return StartCoroutine(DrawItemEnumerator(true));
         canAttack = true;
         UpdateText();
