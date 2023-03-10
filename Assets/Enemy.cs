@@ -22,7 +22,6 @@ public class Enemy : HPObject
     public Transform leftTargetTransform; //where player should impact
     public Transform topTargetTransform;
     public Transform rightTargetTransform;
-    public Collider2D enemyCollider;
     public GameObject targetedIndicator;
 
     public int attackInd;

@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 2.92, y: 1.97, z: 1}
   m_Children: []
   m_Father: {fileID: 5396105676842874763}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7927744371072309567
 SpriteRenderer:
@@ -200,7 +200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1244746041439408529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!1 &4159335676237654218
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +442,36 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &4467768845936691177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3520406197641657334}
+  m_Layer: 0
+  m_Name: RightTargetTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3520406197641657334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4467768845936691177}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.15, y: 0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5396105676842874763}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5396105675173200861
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +588,7 @@ Transform:
   - {fileID: 2690890700706284525}
   - {fileID: 1396621135893089179}
   - {fileID: 2713506569938761161}
+  - {fileID: 3520406197641657334}
   - {fileID: 1793305463062522202}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -577,11 +608,11 @@ MonoBehaviour:
   maxHP: 9
   isDead: 0
   hpbar: {fileID: 5396105675036245160}
-  attackPreview: {fileID: 0}
+  attackPreview: {fileID: 5791175552444314832}
   attack: 3
   leftTargetTransform: {fileID: 1396621135893089179}
   topTargetTransform: {fileID: 2713506569938761161}
-  enemyCollider: {fileID: 0}
+  rightTargetTransform: {fileID: 3520406197641657334}
   targetedIndicator: {fileID: 804961314656613356}
   attackInd: 0
   attackFromBottom: 1
@@ -643,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5715112365829540659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.877, y: 0.167, z: 0}
+  m_LocalPosition: {x: -1.32, y: 0.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5396105676842874763}
@@ -667,7 +698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7757418963367475363
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1002,7 +1033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8292861010034207088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.52, z: 0}
+  m_LocalPosition: {x: -0.24, y: 1.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5396105676842874763}
@@ -1131,6 +1162,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
+--- !u!4 &5396105675036245161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4941693302459687927, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
+  m_PrefabInstance: {fileID: 1042225310244298590}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5396105675036245160 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4941693302459687926, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
@@ -1142,8 +1178,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad197385326f4aa4b8d26677e3909f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5396105675036245161 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4941693302459687927, guid: 4a3879f25423e0a47b44c058ab2e84a0, type: 3}
-  m_PrefabInstance: {fileID: 1042225310244298590}
-  m_PrefabAsset: {fileID: 0}

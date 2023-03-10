@@ -7,32 +7,62 @@ using MoreMountains.Feedbacks;
 public class Luggage : Singleton<Luggage>
 {
 
-    [SerializeField] MoreMountains.Feedbacks.MMF_Player pushForwardAttackAnimationPlayer;
+    [SerializeField] MMF_Player pushForwardAttackAnimationPlayer;
+    [SerializeField] MMF_Player throwOutAndHitBackAttackAnimationPlayer;
+    [SerializeField] MMF_Player upsideDownAndDropAttackAnimationPlayer;
+    List<MMF_Player> animationPlayers = new List<MMF_Player>();
     public Transform idleTransform;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        animationPlayers.Add(pushForwardAttackAnimationPlayer);
+        animationPlayers.Add(throwOutAndHitBackAttackAnimationPlayer);
+        animationPlayers.Add(upsideDownAndDropAttackAnimationPlayer);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     Enemy target;
+
+    private static float JUMP_ATTACK_HEIGHT = 2.5F; //how high the luggage will go to ground pound
+    public static float BEHIND_ATTACK_DISTANCE = 2.5F; //how far away right luggage will land for attack.
+
+    enum ENEMY_ATTACK_LOCATION { TOP, LEFT, RIGHT };
 
     void SetTarget() //EnemyManager will handle target
     {
         target = EnemyManager.Instance.GetCurrentTargetedEnemy();
         //target.ClearDamage()
-        foreach(MMF_Position feedback in pushForwardAttackAnimationPlayer.GetFeedbacksOfType<MMF_Position>())
+        foreach (MMF_Player animationPlayerList in animationPlayers)
         {
-            if(feedback.Mode == MMF_Position.Modes.ToDestination)
+            foreach (MMF_Position feedback in animationPlayerList.GetFeedbacksOfType<MMF_Position>())
             {
-                if (feedback.DestinationPositionTransform != idleTransform) {
-                    feedback.DestinationPositionTransform = target.leftTargetTransform;
+                if (feedback.Mode == MMF_Position.Modes.ToDestination)
+                {
+                    switch (feedback.Label)
+                    {
+                        case "PositionLeftEnemyTarget":
+                            feedback.DestinationPositionTransform = target.leftTargetTransform;
+                            break;
+                        case "PositionRightEnemyTarget":
+                            feedback.DestinationPositionTransform = target.rightTargetTransform;
+                            break;  
+                        case "PositionTopEnemyTarget":
+                            feedback.DestinationPositionTransform = target.topTargetTransform;
+                            break;
+                        case "PositionAboveEnemyTarget":
+                            feedback.DestinationPosition = new Vector3(targetTransform.position.x, JUMP_ATTACK_HEIGHT, 0);
+                            break;
+                        case "PositionBehindEnemyTarget":
+                            feedback.DestinationPosition = new Vector3(targetTransform.position.x + BEHIND_ATTACK_DISTANCE, target.rightTargetTransform.position.y, 0);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -55,10 +85,8 @@ public class Luggage : Singleton<Luggage>
     {
         SetTarget();
         //
-        
         transform.DOMove(target.transform.position + Vector3.up * 5, GridManager.animTime * 2);
         yield return new WaitForSeconds(GridManager.animTime * 2);
-        //suitcaseInBattle.DORotate(new Vector3(0, 0, 90 * rotatedTime), animTime);
         transform.DOMove(target.transform.position, GridManager.animTime);
         yield return GridManager.Instance.MoveAndAttack(0, -1);
         //yield return new WaitForSeconds(GridManager.animTime);
@@ -82,13 +110,16 @@ public class Luggage : Singleton<Luggage>
         SetTarget();
 
         GridManager.Instance.Rotate(2, false);
-        transform.DOMove(target.transform.position + Vector3.up*5, GridManager.animTime*2);
+
+        yield return StartCoroutine(upsideDownAndDropAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
+
+        /*transform.DOMove(target.transform.position + Vector3.up*5, GridManager.animTime*2);
         transform.DORotate(new Vector3(0, 0, 90 * GridManager.Instance.rotatedTime), GridManager.animTime * 2);
         yield return new WaitForSeconds(GridManager.animTime * 2);
 
         transform.DOMove(target.transform.position, GridManager.animTime);
         //GridManager.Instance.Move(0, -1); ;
-
+*/
         yield return GridManager.Instance.MoveAndAttack(0, -1);
         //yield return new WaitForSeconds(GridManager.animTime);
 
@@ -101,14 +132,16 @@ public class Luggage : Singleton<Luggage>
 
 
         GridManager.Instance.Rotate(1, false);
-        transform.DORotate(new Vector3(0, 0, 90 * GridManager.Instance.rotatedTime), GridManager.animTime * 2);
+        yield return StartCoroutine(throwOutAndHitBackAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
+
+        /*transform.DORotate(new Vector3(0, 0, 90 * GridManager.Instance.rotatedTime), GridManager.animTime * 2);
         transform.DOMove(target.transform.position + Vector3.up * 5, GridManager.animTime );
         yield return new WaitForSeconds(GridManager.animTime);
         transform.DOMove(target.transform.position + Vector3.right * 2, GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime );
 
         transform.DOMove(target.transform.position, GridManager.animTime);
-        //GridManager.Instance.Move(-1, 0);
+        //GridManager.Instance.Move(-1, 0);*/
         yield return GridManager.Instance.MoveAndAttack(-1,0);
        // yield return new WaitForSeconds(GridManager.animTime);
 
