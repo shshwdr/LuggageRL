@@ -491,18 +491,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 195926856}
-    - target: {fileID: 2672507904966578841, guid: aa7267459d73887499b0a8475d719b96, type: 3}
-      propertyPath: enemyPositions.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2672507905469148105, guid: aa7267459d73887499b0a8475d719b96, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2672507905469148107, guid: aa7267459d73887499b0a8475d719b96, type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 55
-      objectReference: {fileID: 0}
     - target: {fileID: 2672507905682957348, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: m_Name
       value: gameManagers
