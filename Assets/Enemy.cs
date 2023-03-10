@@ -16,6 +16,7 @@ public class Enemy : HPObject
     public int attackInd;
     public bool attackFromBottom = true;
 
+    public virtual string Desc { get; }
     // Start is called before the first frame update
     protected  override void Awake()
     {
@@ -49,8 +50,15 @@ public class Enemy : HPObject
     {
         yield return  StartCoroutine( ApplyDamage(damage));
     }
+
+    public void SelectAction()
+    {
+
+    }
+
     public void SelectAttack()
     {
+
         if (attackFromBottom)
         {
             attackInd = Random.Range(0, 3);

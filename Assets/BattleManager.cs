@@ -155,7 +155,6 @@ public class BattleManager : Singleton<BattleManager>
         isBattleFinished = false;
         canAttack = true;
         UpdateText();
-        //AddEnemies();
         DrawItem(true);
         SelectAttack();
         EnemyManager.Instance.SelectEenmiesAttack();
