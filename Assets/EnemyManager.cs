@@ -32,7 +32,7 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         foreach(var enemy in enemies)
         {
-            yield return StartCoroutine( enemy.Attack());
+            yield return StartCoroutine( enemy.Core.TakeAction());
         }
     }
     public Enemy GetCurrentTargetedEnemy()
@@ -84,7 +84,14 @@ public class EnemyManager : Singleton<EnemyManager>
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            for(int i = 0;i<enemies.Count;i++)
+            {
+                var enemy = enemies[0];
+                StartCoroutine( RemoveEnemy(enemy));
+            }
+        }
     }
 
     internal void setCurrentTargetedEnemy(Enemy enemy)

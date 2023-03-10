@@ -159,7 +159,7 @@ public class BattleManager : Singleton<BattleManager>
             var enemySlot = enemyPositions[x];
             var pickedEnemy = enemies[Random.Range(0, enemies.Length)];
             var go = Instantiate(pickedEnemy, enemySlot.position, Quaternion.identity, enemySlot);
-            pickedEnemy.GetComponent<Enemy>().Init(enemyList[x]);
+            go.GetComponent<Enemy>().Init(enemyList[x]);
             go.transform.parent = enemySlot;
             go.transform.localPosition = Vector3.zero;//enemySlot.position;
             break;

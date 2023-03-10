@@ -17,7 +17,7 @@ public class EnemyAttackPreview : MonoBehaviour
     public Text otherText;
 
     public List<Image> previewCell;
-    public void UpdateAttackPreview(int ind, bool startFromBottom)
+    public void UpdateAttackPreview(int ind, bool startFromBottom, int attackAmount)
     {
         otherPanel.SetActive(false);
         attackPanel.SetActive(true);

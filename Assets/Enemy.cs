@@ -76,15 +76,7 @@ public class Enemy : HPObject
 
     public void SelectAction()
     {
-
-
         Core.SelectAction();
-
-        //if (attackFromBottom)
-        //{
-        //    attackInd = Random.Range(0, 3);
-        //    attackPreview.UpdatePreview(attackInd, attackFromBottom);
-        //}
     }
 
     internal void setIsTargeted(bool isBeingTargeted)
@@ -103,22 +95,21 @@ public class Enemy : HPObject
     public IEnumerator Attack()
     {
 
+        GridManager.Instance.showAttackPreviewOfEnemy(this);
+
+        originalPosition = transform.position;
+        transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);
-        //GridManager.Instance.showAttackPreviewOfEnemy(this);
-
-        //originalPosition = transform.position;
-        //transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
-        //yield return new WaitForSeconds(GridManager.animTime);
 
 
 
-        ////attack item
-        //yield return StartCoroutine( GridManager.Instance.EnemyAttackEnumerator(this));
+        //attack item
+        yield return StartCoroutine(GridManager.Instance.EnemyAttackEnumerator(this));
 
 
-        //GridManager.Instance.clearAttackPreview();
-        //transform.DOMove(originalPosition, GridManager.animTime);
-        //yield return new WaitForSeconds(GridManager.animTime);
+        GridManager.Instance.clearAttackPreview();
+        transform.DOMove(originalPosition, GridManager.animTime);
+        yield return new WaitForSeconds(GridManager.animTime);
     }
 
     private void OnMouseEnter()
