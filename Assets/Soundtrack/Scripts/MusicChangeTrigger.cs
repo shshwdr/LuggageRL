@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MusicChangeTrigger : MonoBehaviour
 {
-    [Header("Area")]
-    [SerializeField] private MusicArea area;
+    [SerializeField] private BiomeArea area;
     [SerializeField] bool hasTriggered = false;
 
     private void Start()
@@ -19,10 +18,5 @@ public class MusicChangeTrigger : MonoBehaviour
             AudioManager.Instance.SetMusicArea(area);
             hasTriggered = true;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, 1);
     }
 }

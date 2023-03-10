@@ -111,7 +111,7 @@ public class AudioManager : Singleton<AudioManager>
         FMOD.RESULT result = musicEventInstance.start();
     }
 
-    public void SetMusicArea(MusicArea area)
+    public void SetMusicArea(BiomeArea area)
     {
         musicEventInstance.setParameterByName("area", (float)area);
     }

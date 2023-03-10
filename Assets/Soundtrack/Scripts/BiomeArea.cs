@@ -1,5 +1,5 @@
 
-public enum MusicArea
+public enum BiomeArea
 {
     AIRPORT = 0,
     OUTSIDE = 1,
