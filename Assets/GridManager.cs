@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
@@ -56,6 +57,27 @@ public class GridManager : Singleton<GridManager>
         return true;
     }
 
+    public ItemType findMostItem()
+    {
+        if(GridItemDict.Count == 0)
+        {
+            return ItemType.Stone;
+        }
+        Dictionary<ItemType, int> dic = new Dictionary<ItemType, int>();
+        foreach(var item in GridItemDict.Values)
+        {
+            if (dic.ContainsKey(item.type))
+            {
+                dic[item.type]++;
+            }
+            else
+            {
+                dic[item.type] = 1;
+            }
+        }
+        var max = dic.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+        return max;
+    }
     public void addItemToDeck(ItemType type)
     {
         deckPool.Add(type);
@@ -90,6 +112,19 @@ public class GridManager : Singleton<GridManager>
 
         yield return StartCoroutine(MoveAfter(0, -1));
         BattleManager.Instance.PredictNextAttack();
+    }
+
+    public List<GridItem> GetItemOfType(ItemType type)
+    {
+        List<GridItem> res = new List<GridItem>();
+        foreach(var item in GridItemDict.Values)
+        {
+            if(item.type == type)
+            {
+                res.Add(item);
+            }
+        }
+        return res;
     }
 
     public IEnumerator DrawAllItemsFromPool()
@@ -205,13 +240,19 @@ public class GridManager : Singleton<GridManager>
     public void showAttackPreviewOfEnemy(Enemy enemy)
     {
         clearAttackPreview();
-        var cells = getFrontCellsFromBottomToTop();
-        if (enemy.attackFromBottom)
+
+        if (enemy.Core.willAttacking)
         {
-            var cell = cells[enemy.attackInd];
-            var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
-            previewCells.Add(go);
+            var cells = getFrontCellsFromBottomToTop();
+            if (enemy.attackFromBottom)
+            {
+                var cell = cells[enemy.attackInd];
+                var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
+                previewCells.Add(go);
+            }
+
         }
+
     }
 
     public GridItem itemEnemyAttack(Enemy enemy)
@@ -672,7 +713,6 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemHeal heal)
             {
-                heal.target.Heal(heal.amount);
                 if (!GridItemDict.ContainsKey(heal.index))
                 {
                     Debug.Log("?");
@@ -680,6 +720,8 @@ public class GridManager : Singleton<GridManager>
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
                 FloatingTextManager.Instance.addText($"Heal {heal.amount}", GridItemDict[heal.index].transform.position, Color.green);
                 yield return new WaitForSeconds(animTime);
+
+                yield return StartCoroutine( heal.target.HealEnumerator(heal.amount));
             }
             else if (message is MessageDestroy destr)
             {
@@ -953,5 +995,10 @@ public class GridManager : Singleton<GridManager>
         }
         GridItemDict.Remove(ind);
         deckPool.Add(type);
+    }
+
+    public void RemoveGrid(GridItem item)
+    {
+        RemoveGrid(item.index, item.type);
     }
 }

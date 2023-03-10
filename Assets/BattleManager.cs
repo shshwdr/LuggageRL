@@ -17,7 +17,7 @@ public class BattleManager : Singleton<BattleManager>
     int moveLeft;
     bool isBattleFinished = false;
     string[] attackString = new string[] {"Push","Upside Down","Throw And Back" };
-    public GameObject[] enemies;
+    public GameObject enemyPrefab;
     public Transform[] enemyPositions;
     public Player player;
     [SerializeField] private int drawCount = 2;
@@ -157,13 +157,12 @@ public class BattleManager : Singleton<BattleManager>
         for(int x = 0; x < enemyList.Count; x++)
         {
             var enemySlot = enemyPositions[x];
-            var pickedEnemy = enemies[Random.Range(0, enemies.Length)];
-            var go = Instantiate(pickedEnemy, enemySlot.position, Quaternion.identity, enemySlot);
-            pickedEnemy.GetComponent<Enemy>().Init(enemyList[x]);
+            var go = Instantiate(enemyPrefab, enemySlot.position, Quaternion.identity, enemySlot);
+            go.GetComponent<Enemy>().Init(enemyList[x]);
             go.transform.parent = enemySlot;
             go.transform.localPosition = Vector3.zero;//enemySlot.position;
-            break;
         }
+        EnemyManager.Instance.setCurrentTargetedEnemy();
     }
 
 
@@ -306,6 +305,8 @@ public class BattleManager : Singleton<BattleManager>
         yield return StartCoroutine(DrawItemEnumerator(true));
         canAttack = true;
         UpdateText();
+
+        
         showButtonCanvas();
 
     }
