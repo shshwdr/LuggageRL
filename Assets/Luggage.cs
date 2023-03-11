@@ -13,6 +13,7 @@ public class Luggage : Singleton<Luggage>
 
     [SerializeField] MMF_Player upsideDownAndDropAttackAnimationPlayer;
     [SerializeField] MMF_Player walkingAnimationPlayer;
+    [SerializeField] Transform luggageRightTargetTransform;
 
     [SerializeField] MMF_Player returnToIdleAnimationPlayer;
     List<MMF_Player> attackAnimationPlayers = new List<MMF_Player>();
