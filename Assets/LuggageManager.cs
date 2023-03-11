@@ -20,7 +20,8 @@ public class LuggageManager : Singleton<LuggageManager>
         typeDescription[UpgradeType.drawCount] = "Draw Count +1";
         typeDescription[UpgradeType.hp] = "hp +10";
         typeDescription[UpgradeType.attackCount] = "Attack Count +1";
-        foreach(var type in typeDescription)
+        typeDescription[UpgradeType.basicAttack] = "Final Damage +1";
+        foreach (var type in typeDescription)
         {
             UpgradedTime[type.Key] = 0;
         }

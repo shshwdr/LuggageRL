@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public enum UpgradeType { actionCount, drawCount, hp, attackCount/*, basicAttack*/}
+public enum UpgradeType { actionCount, drawCount, hp, attackCount, basicAttack}
 public class LuggageUpgradeScene : BaseScene
 {
     public Button button1;
