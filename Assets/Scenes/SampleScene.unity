@@ -1142,6 +1142,26 @@ PrefabInstance:
       propertyPath: itemViewText
       value: 
       objectReference: {fileID: 1039747864}
+    - target: {fileID: 6381184249550377912, guid: 7976568b9a812b843818c1f834692eac, type: 3}
+      propertyPath: deckPool.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381184249550377912, guid: 7976568b9a812b843818c1f834692eac, type: 3}
+      propertyPath: deckPool.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381184249550377912, guid: 7976568b9a812b843818c1f834692eac, type: 3}
+      propertyPath: deckPool.Array.data[2]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381184249550377912, guid: 7976568b9a812b843818c1f834692eac, type: 3}
+      propertyPath: deckPool.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381184249550377912, guid: 7976568b9a812b843818c1f834692eac, type: 3}
+      propertyPath: deckPool.Array.data[4]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6381184249550377914, guid: 7976568b9a812b843818c1f834692eac, type: 3}
       propertyPath: m_Name
       value: suicase inner

@@ -24,6 +24,9 @@ public class BaseItem : MonoBehaviour
     public GameObject glassBrokenBK;
     public GridItem item;
 
+    public GameObject willBeAttackedObj;
+    public GameObject willBeStokenObj;
+
     public GameObject previewAttack;
     public GameObject previewSteal;
     bool isBreakable;
@@ -102,6 +105,26 @@ public class BaseItem : MonoBehaviour
 
 
         updateBK();
+    }
+
+    public void ClearWillBeAttacked()
+    {
+        willBeAttackedObj.SetActive(false);
+    }
+    public void WillBeAttacked()
+    {
+
+        willBeAttackedObj.SetActive(true);
+    }
+
+    public void WillBeStolen()
+    {
+        willBeStokenObj.SetActive(true);
+    }
+    public void ClearWillBeStolen()
+    {
+
+        willBeStokenObj.SetActive(false);
     }
     void updateAttack(bool willAttack)
     {

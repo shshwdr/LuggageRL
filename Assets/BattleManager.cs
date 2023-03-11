@@ -42,8 +42,11 @@ public class BattleManager : Singleton<BattleManager>
     {
         if (isBattleFinished)
         {
+            GridManager.Instance.clearAttackPreview();
             return;
         }
+
+        GridManager.Instance.showAllAttackPreview();
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>(true))
         {
             button.gameObject.SetActive(true);
@@ -331,6 +334,8 @@ public class BattleManager : Singleton<BattleManager>
 
         
         showButtonCanvas();
+
+
 
     }
 

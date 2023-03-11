@@ -36,8 +36,8 @@ public class Enemy : HPObject
     public Transform rightTargetTransform;
     public GameObject targetedIndicator;
 
-    public int attackInd;
-    public bool attackFromBottom = true;
+    public int attackInd => Core.currentAction is EnemyActionAttack attackAction ? attackAction.attackHeight : 0;
+    public bool attackFromBottom =>Core.currentAction is EnemyActionAttack attackAction?attackAction.attackFromBottom:false;
     public EnemyInfo info;
 
     public string DisplayName => info.DisplayName;
@@ -290,7 +290,7 @@ public class Enemy : HPObject
     }
     public IEnumerator Attack()
     {
-        GridManager.Instance.showAttackPreviewOfEnemy(this);
+        GridManager.Instance.cleanAndShowAttackPreviewOfEnemy(this);
         yield return StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
 
         /* originalPosition = transform.position;
@@ -328,17 +328,19 @@ public class Enemy : HPObject
     }
 
 
+
+
     private void OnMouseEnter()
     {
         //show attack preview
-        GridManager.Instance.showAttackPreviewOfEnemy(this);
+        GridManager.Instance.cleanAndShowAttackPreviewOfEnemy(this);
 
         DetailView.Instance.UpdateValue(this);
     }
 
     private void OnMouseExit()
     {
-        GridManager.Instance.clearAttackPreview();
+        GridManager.Instance.showAllAttackPreview();
         DetailView.Instance.UpdateValue(null);
     }
     private void OnMouseDown()

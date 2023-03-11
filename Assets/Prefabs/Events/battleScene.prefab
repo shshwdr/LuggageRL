@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2208437629467863317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.71, y: -0.4, z: 0}
+  m_LocalPosition: {x: -0.54, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4899568650039437184}
@@ -110,6 +110,7 @@ MonoBehaviour:
   moveSpeed: 3
   hasStarted: 0
   hasFinished: 0
+  skipAndHealButton: {fileID: 0}
   itemPositionsParent: {fileID: 2208437629467863318}
   itemsToActivate: []
   battleType: 0
@@ -137,7 +138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3061051251976341089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4, y: -0.2, z: 0}
+  m_LocalPosition: {x: -2.57, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2208437629467863318}
