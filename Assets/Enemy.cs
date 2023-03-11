@@ -63,13 +63,15 @@ public class Enemy : HPObject
             }
         }
 
+
+        yield return StartCoroutine( base.ApplyDamage(damage));
+
+
         if (Core is EliteThorn)
         {
             FloatingTextManager.Instance.addText("Thorn!", transform.position, Color.yellow);
-            yield return StartCoroutine( BattleManager.Instance.player.ApplyDamage(1));
+            yield return StartCoroutine(BattleManager.Instance.player.ApplyDamage(1));
         }
-
-        yield return StartCoroutine( base.ApplyDamage(damage));
     }
     public void EndOfTurn()
     {

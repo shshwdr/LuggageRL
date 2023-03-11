@@ -113,7 +113,7 @@ public class EliteThorn : EnemyBehavior {
 
     public EliteThorn()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 5, attackHeight = 1 }, new EnemyActionAdd() { addItem = ItemType.Mud }, new EnemyActionAttack() { attackDamage = 6, attackHeight = 2 }, new EnemyActionShield() { shieldAmount = 10 } };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 5, attackHeight = 1 }, new EnemyActionAttack() { attackDamage = 6, attackHeight = 2 }, new EnemyActionShield() { shieldAmount = 10 } };
     }
 }
 public class BossPinata : EnemyBehavior
