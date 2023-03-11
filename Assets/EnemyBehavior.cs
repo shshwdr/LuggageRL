@@ -39,7 +39,7 @@ public class SimpleAttackEnemy : EnemyBehavior
 {
     public SimpleAttackEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack(), new EnemyActionIdle(), new EnemyActionAttack(), };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack }, new EnemyActionIdle(), new EnemyActionAttack(), };
     }
 
 }
@@ -47,7 +47,7 @@ public class AttackShieldEnemy : EnemyBehavior
 {
     public AttackShieldEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 4, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5 }, };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = enemy.info.BasicAttack*2 }, };
     }
 
 }
@@ -55,35 +55,35 @@ public class AttackFlyEnemy : EnemyBehavior
 {
     public AttackFlyEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 3, attackFromBottom = false }, new EnemyActionAttack() { attackDamage = 5, attackFromBottom = false }, new EnemyActionIdle() };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack, attackFromBottom = false }, new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack+2, attackFromBottom = false }, new EnemyActionIdle() };
     }
 }
 public class AttackGrowEnemy : EnemyBehavior
 {
     public AttackGrowEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 4, attackHeight = 0 }, new EnemyActionAttack() { attackDamage = 5, attackHeight = 1 }, new EnemyActionAttack() { attackDamage = 6, attackHeight = 2 } };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack, attackHeight = 0 }, new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack+1, attackHeight = 1 }, new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack+2, attackHeight = 2 } };
     }
 }
 public class AttackHealEnemy : EnemyBehavior
 {
     public AttackHealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 2, attackHeight = 1 }, new EnemyActionHeal() { healAmount = 5 }, };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack, attackHeight = 1 }, new EnemyActionHeal() { healAmount = enemy.info.BasicAttack*2 }, };
     }
 }
 public class ShieldHealEnemy : EnemyBehavior
 {
     public ShieldHealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 5 }, new EnemyActionHeal() { healAmount = 7 }, };
+        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = enemy.info.BasicAttack*2 }, new EnemyActionHeal() { healAmount = enemy.info.BasicAttack*2 }, };
     }
 }
 public class StealAttackEnemy : EnemyBehavior
 {
     public StealAttackEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionSteal() { }, new EnemyActionAttack() { attackDamage = 3 }, };
+        actions = new EnemyAction[] { new EnemyActionSteal() { }, new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack }, new EnemyActionShield() { shieldAmount = enemy.info.BasicAttack * 2 } };
     }
 }
 
@@ -91,14 +91,14 @@ public class AttackStealEnemy : EnemyBehavior
 {
     public AttackStealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 2 }, new EnemyActionStealMax() { }, };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack }, new EnemyActionStealMax() { }, new EnemyActionHeal() { healAmount = enemy.info.BasicAttack * 2 } };
     }
 }
 public class AttackRotateEnemy : EnemyBehavior
 {
     public AttackRotateEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 2 }, new EnemyActionStealMax() { }, };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack }, new EnemyActionStealMax() { }, };
     }
 }
 
@@ -106,28 +106,28 @@ public class EliteCap : EnemyBehavior {
 
     public EliteCap()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 5, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5 }, new EnemyActionHeal() { healAmount = 7 }, };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = enemy.info.BasicAttack *2}, new EnemyActionHeal() { healAmount = enemy.info.BasicAttack *2}, };
     }
 }
 public class EliteThorn : EnemyBehavior {
 
     public EliteThorn()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 5, attackHeight = 1 }, new EnemyActionAttack() { attackDamage = 6, attackHeight = 2 }, new EnemyActionShield() { shieldAmount = 10 } };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack, attackHeight = 1 }, new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack+2, attackHeight = 2 }, new EnemyActionShield() { shieldAmount = enemy.info.BasicAttack *2} };
     }
 }
 public class BossPinata : EnemyBehavior
 {
     public BossPinata()
     {
-        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 5 }, new EnemyActionHeal() { healAmount = 7 }, };
+        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = enemy.info.BasicAttack *2}, new EnemyActionHeal() { healAmount = enemy.info.BasicAttack *2}, new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack + 2, attackHeight = 2 } };
     }
 }
 public class BossExplode : EnemyBehavior
 {
     public BossExplode()
     {
-        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.LiquidBomb } };
+        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.LiquidBomb } , new EnemyActionShield() {shieldAmount = enemy.info.BasicAttack * 2 },new EnemyActionAttack() { attackDamage = enemy.info.BasicAttack + 2, attackHeight = 2 }};
     }
 }
 public class BossFreeze : EnemyBehavior

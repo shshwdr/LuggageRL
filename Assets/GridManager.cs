@@ -332,7 +332,7 @@ public class GridManager : Singleton<GridManager>
 
     public GridItem itemEnemyAttack(Enemy enemy)
     {
-
+        List<GridItem> res = new List<GridItem>();
         var cells = getFrontCellsIndexFromBottomToTop();
         if (enemy.attackFromBottom)
         {

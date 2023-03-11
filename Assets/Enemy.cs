@@ -33,7 +33,7 @@ public class Enemy : HPObject
 
     public EnemyAttackPreview attackPreview;
     public SpriteRenderer enemyRender;
-    public int attack = 3;
+    public int attack => Core.currentAction is EnemyActionAttack attackAction ? attackAction.attackDamage : 0;
     public Transform idlePosition;
     public Transform leftTargetTransform; //where player should impact
     public Transform topTargetTransform;
@@ -41,6 +41,8 @@ public class Enemy : HPObject
     public GameObject targetedIndicator;
 
     public int attackInd => Core.currentAction is EnemyActionAttack attackAction ? attackAction.attackHeight : 0;
+    public int attackRange => Core.currentAction is EnemyActionAttack attackAction ? attackAction.attackRange : 0;
+    public int attackRangeV => Core.currentAction is EnemyActionAttack attackAction ? attackAction.attackRangeVerticle : 0;
     public bool attackFromBottom =>Core.currentAction is EnemyActionAttack attackAction?attackAction.attackFromBottom:false;
     public EnemyInfo info;
 

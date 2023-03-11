@@ -197,6 +197,8 @@ public class BattleManager : Singleton<BattleManager>
             //go.transform.localPosition = Vector3.zero;//enemySlot.position;
         }
         EnemyManager.Instance.setCurrentTargetedEnemy(EnemyManager.Instance.GetFrontEnemy());
+
+        StartCoroutine( GridManager.Instance.DrawAllItemsFromPool());
     }
 
 

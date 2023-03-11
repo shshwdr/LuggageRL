@@ -41,6 +41,8 @@ public class EnemyActionAttack : EnemyAction
 {
     public bool attackFromBottom = true;
     public int attackHeight = 0;
+    public int attackRange = 1;
+    public int attackRangeVerticle = 1;
     public int attackDamage = 3;
     public override IEnumerator TakeAction(Enemy enemy)
     {
