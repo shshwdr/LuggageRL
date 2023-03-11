@@ -41,7 +41,7 @@ public class GridManager : Singleton<GridManager>
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
     public Text itemViewText;
 
-    int drawCounts = 4;
+    int drawCounts = 2;
     int DrawCount => drawCounts + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
     public bool CanDraw(out string failedReason, int drawCount)
     {
@@ -704,11 +704,18 @@ public class GridManager : Singleton<GridManager>
     {
         for (int i = 0; i < messages.Count; i++)
         {
+
+            if (BattleManager.Instance.isBattleFinished)
+            {
+                yield break;
+            }
             var message = messages[i];
             if (message is MessageMove move)
             {
                 if (move.itemTargetIndex.Count != 0)
                 {
+
+                    AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_slide, transform.position);
                     foreach (var pair in move.itemTargetIndex.Keys)
                     {
                         if(GridItemDict[pair.index] == null)
@@ -796,6 +803,8 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemAttack attack)
             {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, transform.position);
+                
                 Debug.Log("attack " + attack.item.Name);
                 if (!GridItemDict.ContainsKey(attack.index))
                 {
@@ -1119,6 +1128,7 @@ public class GridManager : Singleton<GridManager>
 
     public GameObject AddGrid(int i, int j, ItemType type)
     {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_take_new, transform.position);
         var obj = ItemManager.Instance.createItem(type, items, Vector3.zero, i, j);
         //GameObject obj = Instantiate(Resources.Load<GameObject>("items/"+type.ToString()));
         //obj.GetComponent<GridItem>().init(new Vector2Int(i, j), type);

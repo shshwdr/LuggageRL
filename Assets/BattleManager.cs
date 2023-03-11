@@ -18,7 +18,7 @@ public class BattleManager : Singleton<BattleManager>
     int selectedAttackIndex;
     [SerializeField] private int moveMax = 4;
     int moveLeft;
-    bool isBattleFinished = false;
+   public bool isBattleFinished = false;
     string[] attackString = new string[] {"Push","Upside Down","Throw And Back" };
     public GameObject enemyPrefab;
     public Transform[] enemyPositions;
@@ -30,7 +30,9 @@ public class BattleManager : Singleton<BattleManager>
     public Transform ButtonCanvas;
 
     int battleMet = 0;
+    bool canPlayerControl = true;
 
+    public TurnSlider turnSlider;
     public void hideButtonCanvas()
     {
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>())
@@ -81,8 +83,10 @@ public class BattleManager : Singleton<BattleManager>
             isBattleFinished = true;
 
             yield return new WaitForSeconds(GridManager.animTime);
-            FloatingTextManager.Instance.addText("Win Battle!", Vector3.zero, Color.red,1);
-            yield return new WaitForSeconds(GridManager.animTime*3);
+
+            yield return StartCoroutine(GetComponentInChildren<TurnSlider>().ShowSlider("WIN!"));
+            //FloatingTextManager.Instance.addText("Win Battle!", Vector3.zero, Color.red,1);
+            //yield return new WaitForSeconds(GridManager.animTime*3);
             //RemoveText();
             //clearTurnData();
             //StartCoroutine(searchNextBattle());
@@ -108,7 +112,10 @@ public class BattleManager : Singleton<BattleManager>
         }
     }
 
-
+    void Start()
+    {
+        turnSlider = GetComponentInChildren<TurnSlider>();
+    }
 
     public void takeControl()
     {
@@ -138,6 +145,7 @@ public class BattleManager : Singleton<BattleManager>
     {
 
 
+        StartCoroutine(turnSlider.ShowSlider("Player Turn"));
         ////clear old enemies, this is bad, hacky solution
         //foreach(var enemy in Transform.FindObjectsOfType<Enemy>(true))
         //{
@@ -326,7 +334,11 @@ public class BattleManager : Singleton<BattleManager>
         hideButtonCanvas();
 
         yield return StartCoroutine(GridManager.Instance.EndTurnCardBehaviorEnumerator());
-        
+
+        if (!isBattleFinished)
+        {
+            yield return StartCoroutine(turnSlider.ShowSlider("Enemy Turn"));
+        }
         yield return StartCoroutine(EnemyManager.Instance.EnemiesAttack());
         clearTurnData();
 
@@ -339,7 +351,15 @@ public class BattleManager : Singleton<BattleManager>
         
         showButtonCanvas();
 
+        if (!isBattleFinished)
+        {
 
+            yield return StartCoroutine(turnSlider.ShowSlider("Player Turn"));
+        }
+        else
+        {
+
+        }
 
     }
 

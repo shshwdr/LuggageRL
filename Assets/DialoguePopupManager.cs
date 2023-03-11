@@ -35,6 +35,7 @@ public class DialoguePopupManager : Singleton<DialoguePopupManager>
         {
             button1.onClick.AddListener(() =>
             {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_ui_select, transform.position);
                 action1.Invoke();
                 panel.SetActive(false);
 
@@ -47,6 +48,7 @@ public class DialoguePopupManager : Singleton<DialoguePopupManager>
 
             button2.onClick.AddListener(() =>
             {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_ui_select, transform.position);
                 panel.SetActive(false);
                 Time.timeScale = 1;
 
@@ -58,6 +60,7 @@ public class DialoguePopupManager : Singleton<DialoguePopupManager>
 
             button1.onClick.AddListener(() =>
             {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_ui_select, transform.position);
                 panel.SetActive(false);
 
                 Time.timeScale = 1;
