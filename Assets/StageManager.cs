@@ -8,6 +8,7 @@ public class StageManager : Singleton<StageManager>
     [SerializeField] GameObject battleScenePrefab;
     [SerializeField] GameObject itemSelectScenePrefab;
     [SerializeField] GameObject removeItemScenePrefab;
+    [SerializeField] GameObject luggageUpgradeScenePrefab;
 
     [SerializeField] float sceneDistanceStart;
     [SerializeField] float sceneDistanceEnd;
@@ -84,7 +85,7 @@ public class StageManager : Singleton<StageManager>
                 break;
             case StageEventType.upgradeLuggageNPC:
 
-                go = Instantiate(removeItemScenePrefab);
+                go = Instantiate(luggageUpgradeScenePrefab);
                 break;
 
         }

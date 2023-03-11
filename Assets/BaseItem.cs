@@ -63,6 +63,7 @@ public class BaseItem : MonoBehaviour
     void Start()
     {
         item = GetComponent<GridItem>();
+        updateBK();
     }
     public void WillAttack(int damage)
     {

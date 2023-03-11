@@ -86,6 +86,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef5261bd8b828e4d8abe5e7e1428be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInControl: 0
+  WouldRemoveItem: 0
+  itemsToActivate: []
+  skipButton: {fileID: 0}
+  select1: 0
+  select2: 0
 --- !u!1 &1114347087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,11 +1017,12 @@ MonoBehaviour:
   battleScenePrefab: {fileID: 2208437630440124427, guid: a8c15f4a5960e4440829c5dae7b538c5, type: 3}
   itemSelectScenePrefab: {fileID: 1029336581098450868, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
   removeItemScenePrefab: {fileID: 7462643318992564497, guid: 7c2dc103e2d8f9b45ac208576beb865c, type: 3}
+  luggageUpgradeScenePrefab: {fileID: 7462643318992564497, guid: dad2862ad5ec7554795e938939da8e1f, type: 3}
   sceneDistanceStart: 2
   sceneDistanceEnd: 3
   isMoving: 1
   biomeType: 1
-  eventList: 000000000300000000000000040000000000000003000000000000000400000002000000030000000000000005000000000000000300000001000000
+  eventList: 040000000000000003000000000000000000000003000000000000000500000002000000030000000000000004000000000000000300000001000000
 --- !u!1 &2672507906304374020
 GameObject:
   m_ObjectHideFlags: 0

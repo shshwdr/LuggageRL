@@ -363,3 +363,32 @@ public class LiquidBomb : GridItemCore
         //this.addDestroyMessage(messages);
     }
 }
+
+
+[System.Serializable]
+public class FreezeBomb : GridItemCore
+{
+
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    {
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode });
+        if (GridManager.Instance.isPredict)
+        {
+            foreach (var i in GridManager.Instance.predictDict.Values)
+            {
+                i.addDestroyMessage(messages);
+            }
+        }
+        else
+        {
+            foreach (var i in GridManager.Instance.GridItemDict.Values)
+            {
+                i.addDestroyMessage(messages);
+
+            }
+        }
+        messages.Add(new MessageWait { waitTime = GridManager.animTime });
+
+        //this.addDestroyMessage(messages);
+    }
+}

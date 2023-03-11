@@ -49,9 +49,5 @@ public class ItemRemoveManager : Singleton<ItemRemoveManager>
 
             outControl();
         });
-
-        
-
-
     }
 }
