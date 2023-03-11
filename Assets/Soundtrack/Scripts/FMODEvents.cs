@@ -11,6 +11,7 @@ public class FMODEvents : Singleton<FMODEvents>
     [field: SerializeField] public EventReference music_luggage_adventure { get; private set; }
     [field: SerializeField] public EventReference music_boss { get; private set; }
     [field: SerializeField] public EventReference music_airport { get; private set; }
+    [field: SerializeField] public EventReference music_death_stinger { get; private set; }
     [field: SerializeField] public List<EventReference> musicPlaylist { get; private set; }
 
     [field: Header("SFX")]
@@ -31,6 +32,10 @@ public class FMODEvents : Singleton<FMODEvents>
     [field:SerializeField] public EventReference sfx_luggage_walk_full_loop { get; private set; }
     [field:SerializeField] public EventReference sfx_ui_hover { get; private set; }
     [field:SerializeField] public EventReference sfx_ui_select { get; private set; }
+    [field:SerializeField] public EventReference sfx_enemy_death { get; private set; }
+    [field:SerializeField] public EventReference sfx_luggage_attack_whoosh { get; private set; }
+    [field:SerializeField] public EventReference sfx_luggage_death_blow { get; private set; }
+    [field:SerializeField] public EventReference sfx_random_boing { get; private set; }
 
     private int nextPlaylistIndex = 0; 
     internal EventReference getNextMusicReference()

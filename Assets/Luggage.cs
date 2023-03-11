@@ -9,11 +9,14 @@ public class Luggage : Singleton<Luggage>
 {
     [Header("Animations")]
     [SerializeField] MMF_Player pushForwardAttackAnimationPlayer;
+
+
     [SerializeField] MMF_Player throwOutAndHitBackAttackAnimationPlayer;
 
     [SerializeField] MMF_Player upsideDownAndDropAttackAnimationPlayer;
     [SerializeField] MMF_Player walkingAnimationPlayer;
     [SerializeField] MMF_Player bagRotatedAnimationPlayer;
+    [SerializeField] MMF_Player deathAnimationPlayer;
     [SerializeField] public Transform luggageRightTargetTransform;
 
     [SerializeField] MMF_Player returnToIdleAnimationPlayer;
@@ -243,5 +246,18 @@ public class Luggage : Singleton<Luggage>
     internal IEnumerator BagRotateAttackReceived()
     {
         yield return StartCoroutine(bagRotatedAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
+    }
+
+
+    internal void playDeathSequence()
+    {
+        deathAnimationPlayer.PlayFeedbacks();
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_death_blow, transform.position);
+        AudioManager.Instance.PlayDeathMusic();
+    }
+
+    public void playWhooshSound()
+    {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_whoosh, transform.position);
     }
 }

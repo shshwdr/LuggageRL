@@ -7,6 +7,7 @@ public class Player : HPObject
     protected override IEnumerator DieInteral()
     {
         yield return StartCoroutine(base.DieInteral());
+        Luggage.Instance.playDeathSequence();
         FloatingTextManager.Instance.addText("Game Over", Vector3.zero, Color.red);
         yield return new WaitForSeconds(GridManager.animTime);
 
@@ -22,6 +23,6 @@ public class Player : HPObject
 
     public override void reactToDamage()
     {
-        gameObject.GetComponent<Luggage>().playHurtAnimation();
+        Luggage.Instance.playHurtAnimation();
     }
 }

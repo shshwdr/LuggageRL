@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using System;
 
 public class AudioManager : Singleton<AudioManager>
 {
@@ -92,7 +93,7 @@ public class AudioManager : Singleton<AudioManager>
         MAIN_MENU = 1000
     }
 
-    public void SwitchMusic(LevelTheme levelTheme)
+    public void SwitchMusicInPlaylist(LevelTheme levelTheme) //not in use, wrong code.
     {
         if (levelTheme == currentLevelTheme)
         {
@@ -114,6 +115,12 @@ public class AudioManager : Singleton<AudioManager>
     public void SetMusicArea(BiomeArea area)
     {
         musicEventInstance.setParameterByName("area", (float)area);
+    }
+
+    public void StartMusic(BiomeArea area)
+    {
+        musicEventInstance.setParameterByName("area", (float)area);
+        musicEventInstance.start();
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
@@ -161,5 +168,11 @@ public class AudioManager : Singleton<AudioManager>
     {
         CleanUp();
         //base.OnDestroy();
+    }
+
+    internal void PlayDeathMusic()
+    {
+        musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        PlayOneShot(FMODEvents.Instance.music_death_stinger, new Vector3(0,0,0));
     }
 }
