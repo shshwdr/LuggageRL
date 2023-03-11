@@ -3511,7 +3511,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -4774,8 +4774,8 @@ MonoBehaviour:
   otherSprite: {fileID: 3928238885529306327}
   otherText: {fileID: 8168976996065231784}
   otherSprite2: {fileID: 629706199984809528}
-  shieldColor: {r: 0.5176471, g: 0.6313726, b: 1, a: 0}
-  healColor: {r: 0.5254902, g: 0.8078432, b: 0.36862746, a: 0}
+  shieldColor: {r: 0.5176471, g: 0.6313726, b: 1, a: 1}
+  healColor: {r: 0.5254902, g: 0.8078432, b: 0.36862746, a: 1}
   previewCell:
   - {fileID: 3858725684155277988}
   - {fileID: 4358177322413864233}

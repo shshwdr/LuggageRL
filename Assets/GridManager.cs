@@ -737,7 +737,6 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemAttack attack)
             {
-                Luggage.Instance.DoDamage(attack.damage);
                 if (!GridItemDict.ContainsKey(attack.index))
                 {
                     Debug.Log("?");
@@ -750,6 +749,7 @@ public class GridManager : Singleton<GridManager>
                 {
                     yield return new WaitForSeconds(animTime);
                 }
+                yield return StartCoroutine(Luggage.Instance.DoDamage(attack.damage));
 
             }
             else if (message is MessageDrawItem drawItem)

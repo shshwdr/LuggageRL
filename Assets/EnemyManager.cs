@@ -116,7 +116,7 @@ public class EnemyManager : Singleton<EnemyManager>
     public List<EnemyInfo> GetEnemyInfosToAdd(int difficultCount, BattleType battleType, int maxEnemy = 3)
     {
 
-        //return new List<EnemyInfo>() { enemyDict["BossPinata"], enemyDict["BossPinata"], }
+        return new List<EnemyInfo>() { enemyDict["EliteCap"], enemyDict["EliteThorn"], };
         List<EnemyInfo> res = new List<EnemyInfo>();
         if (battleType == BattleType.boss)
         {

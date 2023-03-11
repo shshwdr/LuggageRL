@@ -179,7 +179,7 @@ public class Luggage : Singleton<Luggage>
     IEnumerator showDamage()
     {
         //yield return new WaitForSeconds(GridManager.animTime * 1.1f);
-        yield return StartCoroutine( target.ShowDamage());
+        //yield return StartCoroutine( target.ShowDamage());
 
         transform.DOMove(transform.parent.position, GridManager.animTime);
 
@@ -187,9 +187,9 @@ public class Luggage : Singleton<Luggage>
     }
     
 
-    public void DoDamage(int dam)
+    public IEnumerator DoDamage(int dam)
     {
-        target.GetDamage(dam);
+        yield return StartCoroutine( target.ApplyDamage(dam));
     }
 
 

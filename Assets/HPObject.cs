@@ -9,7 +9,7 @@ public class HPObject : MonoBehaviour
     public bool isDead = false;
     public HPBar hpbar;
     public int shield;
-    public IEnumerator ApplyDamage(int damage)
+    public virtual IEnumerator ApplyDamage(int damage)
     {
         if (shield > 0)
         {

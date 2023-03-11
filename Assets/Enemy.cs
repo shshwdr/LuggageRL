@@ -49,6 +49,28 @@ public class Enemy : HPObject
     public Text shieldText;
 
 
+
+    public override IEnumerator ApplyDamage(int damage)
+    {
+
+        if(Core is EliteCap)
+        {
+            if (damage > 5)
+            {
+                damage = 5;
+                FloatingTextManager.Instance.addText("Cap Damage!", transform.position, Color.yellow);
+                yield return new WaitForSeconds(GridManager.animTime / 2);
+            }
+        }
+
+        if (Core is EliteThorn)
+        {
+            FloatingTextManager.Instance.addText("Thorn!", transform.position, Color.yellow);
+            yield return StartCoroutine( BattleManager.Instance.player.ApplyDamage(1));
+        }
+
+        yield return StartCoroutine( base.ApplyDamage(damage));
+    }
     public void EndOfTurn()
     {
         //clear shiild 
@@ -216,14 +238,14 @@ public class Enemy : HPObject
     int damage = 0;
     [SerializeField] private bool isTargeted;
 
-    public void GetDamage(int dam)
-    {
-        damage += dam;
-    }
-    public void ClearDamage()
-    {
-        damage = 0;
-    }
+    //public void GetDamage(int dam)
+    //{
+    //    damage += dam;
+    //}
+    //public void ClearDamage()
+    //{
+    //    damage = 0;
+    //}
     protected override IEnumerator DieInteral()
     {
         yield return StartCoroutine( base.DieInteral());
@@ -234,11 +256,11 @@ public class Enemy : HPObject
         //Destroy(gameObject,GridManager.animTime);
         yield return StartCoroutine(EnemyManager.Instance.RemoveEnemy(this));
     }
-    public IEnumerator ShowDamage()
-    {
-        yield return new WaitForSeconds(0.3f);
-        yield return  StartCoroutine( ApplyDamage(damage));
-    }
+    //public IEnumerator ShowDamage()
+    //{
+    //    yield return new WaitForSeconds(0.3f);
+    //    yield return  StartCoroutine( ApplyDamage(damage));
+    //}
 
 
     public void SelectAction()
