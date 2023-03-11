@@ -38,7 +38,7 @@ public class BaseItem : MonoBehaviour
         glassBK.SetActive(false);
         itemBrokenBK.SetActive(false);
         glassBrokenBK.SetActive(false);
-        isBreakable = item.core.info.IsBreakable;
+        isBreakable = GetComponent<GridItem>().core.info.IsBreakable;
         if (isBreakable)
         {
             if (willBeDestroyed)

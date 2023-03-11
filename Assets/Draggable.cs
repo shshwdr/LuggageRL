@@ -16,9 +16,11 @@ public class Draggable : MonoBehaviour
     {
         
     }
+    
     private void OnMouseDown()
     {
-        
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_drag_pickup, transform.position);
     }
     GridEmptyCell swapOb;
     private void OnMouseDrag()
@@ -69,6 +71,7 @@ public class Draggable : MonoBehaviour
     }
     private void OnMouseUp()
     {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_drag_putdown, transform.position);
         if (swapOb)
         {
             StartCoroutine(mouseUp());

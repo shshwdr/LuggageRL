@@ -15,6 +15,8 @@ public class EnemyInfo
     public string Type;
     public int Difficulty;
     public string BiomeString;
+    public int IsLarge;
+    public int BasicAttack;
     public BiomeType BiomeType{get{
             Debug.Log("biome " +Name+" "+ BiomeString);
             return (BiomeType) System.Enum.Parse(typeof(BiomeType), BiomeString); }}
@@ -91,6 +93,7 @@ public class Enemy : HPObject
     }
     public IEnumerator AddShield(int amount)
     {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_action_shield, transform.position);
         attackPreview.transform.DOShakeScale(GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);
 
@@ -141,6 +144,7 @@ public class Enemy : HPObject
     {
 
 
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_ability_steal, transform.position);
         attackPreview.transform.DOShakeScale(GridManager.animTime * 2);
         yield return new WaitForSeconds(GridManager.animTime * 2);
 
@@ -308,6 +312,16 @@ public class Enemy : HPObject
 
     public IEnumerator Attack()
     {
+        if(info.IsLarge == 1)
+        {
+
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_heavy_attack, transform.position);
+        }
+        else
+        {
+
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_light_attack, transform.position);
+        }
         GridManager.Instance.cleanAndShowAttackPreviewOfEnemy(this);
         yield return StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
 

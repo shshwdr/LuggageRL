@@ -53,6 +53,7 @@ public class HPObject : MonoBehaviour
     public IEnumerator HealEnumerator(int damage)
     {
 
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_effect_heal, transform.position);
         hp += damage;
         hp = Mathf.Min(hp, maxHP);
         hpbar.updateHPBar(hp, maxHP);
@@ -65,6 +66,8 @@ public class HPObject : MonoBehaviour
         if (!isDead)
         {
             isDead = true;
+
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_random_boing, transform.position);
             yield return StartCoroutine( DieInteral());
         }
     }
