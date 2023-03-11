@@ -12,7 +12,7 @@ Umbrella,Umbrella,1,0,0,"On Attack: For each empty slot in bag before attack, do
 Slingshot,Slingshot,1,1,1,"On Attack: Deal <color='red'>{0}</color>  damage, for each empty slot behind it, do <color='red'>{0}</color>  more damage",2,Attacker,1,1,2,Lonely
 Poison,Poison,1,0,0,On Break: Buff the item that broke it <color='red'>{0}</color>  damage - Can stack,3,Breakable,1,0,3,Scapegoat
 Balancer,Balancer,1,0,0,"After Attack: If not moved in this attack, All items increase <color='red'>{0}</color>  damage, destroy itself",5,Special,1,1,2,Flurry
-Rocket,Rocket,1,2,0,"On Attack: deal <color='red'>{0}</color>  damage, destroy items behind it, increase <color='red'>{0}</color>  damage for each item destroyed.",3,Attacker,1,1,3,Scapegoat
+Rocket,Rocket,1,2,0,"On Attack: deal <color='red'>{0}</color>  damage, destroy items behind it, increase <color='red'>{1}</color>  damage for each item destroyed.",3,Attacker,1,1,3,Scapegoat
 Pinata,Pinata,2,0,0,On Break: draw <color='yellow'>{0}</color>  cards,6,Breakable,1,1,1,Scapegoat
 Mud,Mud,0,0,0,On Attack: destory itself. On Move: Left a mud behind,0,Curse,1,0,0,Curse
 LiquidBomb,LiquidBomb,0,0,0,On Break: Destroy everything in bag,0,Curse,1,0,0,Curse
