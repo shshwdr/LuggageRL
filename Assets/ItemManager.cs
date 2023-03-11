@@ -30,6 +30,8 @@ public class ItemManager : Singleton<ItemManager>
     public GameObject[] itemsToActivate;
     public Dictionary<string, ItemInfo> itemDict = new Dictionary<string, ItemInfo>();
     public SkipAndHealButton skipButton;
+
+    List<ItemType> itemTypePotentialPool = new List<ItemType>();
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,12 @@ public class ItemManager : Singleton<ItemManager>
         foreach(var item in itemInfos)
         {
             itemDict[item.Item] = item;
+
+            if (item.MaxCountInDeck > 0)
+            {
+                for (int i = 0; i < item.MaxCountInDeck; i++)
+                    itemTypePotentialPool.Add((ItemType)System.Enum.Parse(typeof(ItemType), item.Item));
+            }
         }
     }
 
@@ -69,8 +77,10 @@ public class ItemManager : Singleton<ItemManager>
     public void AddItems()
     {
         var enumLength = System.Enum.GetValues(typeof(ItemType)).Length;
-        var pickedItem1 = Random.Range(0, enumLength);
-        var pickedItem2 = Random.Range(0, enumLength);
+        var pickedItem1 = itemTypePotentialPool[Random.Range(0, itemTypePotentialPool.Count)];
+        itemTypePotentialPool.Remove(pickedItem1);
+        var pickedItem2 = itemTypePotentialPool[Random.Range(0, itemTypePotentialPool.Count)];
+        itemTypePotentialPool.Remove(pickedItem1);
 
         Debug.Log(pickedItem1);
         Debug.Log(pickedItem2);
