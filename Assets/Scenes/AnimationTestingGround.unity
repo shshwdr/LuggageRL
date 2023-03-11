@@ -745,6 +745,10 @@ PrefabInstance:
       value: event:/effect_heal
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_enemy_death>k__BackingField.Path
+      value: event:/enemy_death
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_item_impact>k__BackingField.Path
       value: event:/item_impact
       objectReference: {fileID: 0}
@@ -767,6 +771,10 @@ PrefabInstance:
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_luggage_walk>k__BackingField.Path
       value: event:/luggage_walk
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_random_boing>k__BackingField.Path
+      value: event:/random_boing
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_item_take_new>k__BackingField.Path
@@ -823,6 +831,10 @@ PrefabInstance:
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <music_biome_1>k__BackingField.Guid.Data4
       value: -2010475050
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_death_stinger>k__BackingField.Path
+      value: event:/music_death_stinger
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_ui_select>k__BackingField.Guid.Data1
@@ -893,6 +905,22 @@ PrefabInstance:
       value: -478490149
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_enemy_death>k__BackingField.Guid.Data1
+      value: 1033584873
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_enemy_death>k__BackingField.Guid.Data2
+      value: 1325834507
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_enemy_death>k__BackingField.Guid.Data3
+      value: 1028225948
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_enemy_death>k__BackingField.Guid.Data4
+      value: -899050919
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_item_drag_putdown>k__BackingField.Path
       value: event:/item_drag_putdown
       objectReference: {fileID: 0}
@@ -921,6 +949,10 @@ PrefabInstance:
       value: event:/enemy_light_attack
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_death_blow>k__BackingField.Path
+      value: event:/luggage_death_blow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_luggage_walk>k__BackingField.Guid.Data1
       value: 591836593
       objectReference: {fileID: 0}
@@ -935,6 +967,22 @@ PrefabInstance:
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_luggage_walk>k__BackingField.Guid.Data4
       value: -1273747452
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_random_boing>k__BackingField.Guid.Data1
+      value: -1755054197
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_random_boing>k__BackingField.Guid.Data2
+      value: 1114220332
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_random_boing>k__BackingField.Guid.Data3
+      value: -386144622
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_random_boing>k__BackingField.Guid.Data4
+      value: 89680050
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_enemy_ability_steal>k__BackingField.Path
@@ -961,8 +1009,32 @@ PrefabInstance:
       value: 1175949773
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_death_stinger>k__BackingField.Guid.Data1
+      value: -1972433260
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_death_stinger>k__BackingField.Guid.Data2
+      value: 1077743700
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_death_stinger>k__BackingField.Guid.Data3
+      value: 949520291
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_death_stinger>k__BackingField.Guid.Data4
+      value: 1888122945
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_luggage_attack_impact>k__BackingField.Path
       value: event:/luggage_attack_impact
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_attack_whoosh>k__BackingField.Path
+      value: event:/luggage_attack_whoosh
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_up_down_swirl>k__BackingField.Path
+      value: event:/luggage_ground_pound_swirl
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_item_drag_pickup>k__BackingField.Guid.Data1
@@ -1045,6 +1117,22 @@ PrefabInstance:
       value: 405243905
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_death_blow>k__BackingField.Guid.Data1
+      value: 1248693236
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_death_blow>k__BackingField.Guid.Data2
+      value: 1319756344
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_death_blow>k__BackingField.Guid.Data3
+      value: -1241351772
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_death_blow>k__BackingField.Guid.Data4
+      value: -1908542107
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_enemy_ability_steal>k__BackingField.Guid.Data1
       value: 1412317665
       objectReference: {fileID: 0}
@@ -1091,6 +1179,38 @@ PrefabInstance:
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_luggage_attack_impact>k__BackingField.Guid.Data4
       value: 382416812
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_attack_whoosh>k__BackingField.Guid.Data1
+      value: 1653317531
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_attack_whoosh>k__BackingField.Guid.Data2
+      value: 1081656060
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_attack_whoosh>k__BackingField.Guid.Data3
+      value: -955070303
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_attack_whoosh>k__BackingField.Guid.Data4
+      value: 637010720
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_up_down_swirl>k__BackingField.Guid.Data1
+      value: 1809729379
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_up_down_swirl>k__BackingField.Guid.Data2
+      value: 1073813382
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_up_down_swirl>k__BackingField.Guid.Data3
+      value: -19730774
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <sfx_luggage_up_down_swirl>k__BackingField.Guid.Data4
+      value: -598390379
       objectReference: {fileID: 0}
     - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
       propertyPath: <sfx_luggage_walk_full_loop>k__BackingField.Guid.Data1

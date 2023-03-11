@@ -36,6 +36,7 @@ public class FMODEvents : Singleton<FMODEvents>
     [field:SerializeField] public EventReference sfx_luggage_attack_whoosh { get; private set; }
     [field:SerializeField] public EventReference sfx_luggage_death_blow { get; private set; }
     [field:SerializeField] public EventReference sfx_random_boing { get; private set; }
+    [field:SerializeField] public EventReference sfx_luggage_up_down_swirl { get; private set; }
 
     private int nextPlaylistIndex = 0; 
     internal EventReference getNextMusicReference()

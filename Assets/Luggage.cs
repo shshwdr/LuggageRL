@@ -260,4 +260,8 @@ public class Luggage : Singleton<Luggage>
     {
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_whoosh, transform.position);
     }
+    public void playUpDownSwirlSound()
+    {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_up_down_swirl, transform.position);
+    }
 }
