@@ -28,7 +28,7 @@ public class TutorialManager : Singleton<TutorialManager>
 
         }
         Debug.LogError("no text " + itemName);
-        return null;
+        return textDict["PickupSelection"];
     }
 
     public string getText(string itemName)

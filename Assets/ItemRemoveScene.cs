@@ -9,10 +9,11 @@ public class ItemRemoveScene : BaseScene
     void Start()
     {
         GetComponentInChildren<Text>(true).text = TutorialManager.Instance.getText("RemoveItemSelection");
-        itemPositions = itemPositionsParent.GetComponentsInChildren<Transform>();
-        ItemManager.Instance.itemPositions = itemPositions;
-        ItemManager.Instance.itemsToActivate = itemsToActivate;
-        ItemManager.Instance.AddItems();
+        //itemPositions = itemPositionsParent.GetComponentsInChildren<Transform>();
+        //ItemRemoveManager.Instance.itemPositions = itemPositions;
+        ItemRemoveManager.Instance.itemsToActivate = itemsToActivate;
+        ItemRemoveManager.Instance.skipButton = GetComponentInChildren<SkipAndHealButton>();
+       //ItemRemoveManager.Instance.AddItems();
     }
 
     // Update is called once per frame
@@ -25,7 +26,7 @@ public class ItemRemoveScene : BaseScene
             {
                 hasStarted = true;
                 //start battle
-                ItemManager.Instance.takeControl();
+                ItemRemoveManager.Instance.takeControl();
                 StageManager.Instance.outControl();
             }
         }

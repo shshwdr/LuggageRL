@@ -81,7 +81,7 @@ public class BattleManager : Singleton<BattleManager>
         //    FloatingTextManager.Instance.addText(failedReason, Vector3.zero, Color.red);
         //}
 
-        yield return StartCoroutine(GridManager.Instance.DrawAllItemsFromPool());
+        yield return StartCoroutine(GridManager.Instance.DrawItemsFromPool());
         showButtonCanvas();
     }
 
@@ -98,12 +98,29 @@ public class BattleManager : Singleton<BattleManager>
             //clearTurnData();
             //StartCoroutine(searchNextBattle());
             //hmm make this into a class to control all?
+
+            //clean all grid items
+
+            foreach(var item in GridManager.Instance.GridItemDict.Values)
+            {
+                item.destory();
+            }
+            GridManager.Instance.RemoveAll();
+            yield return new WaitForSeconds(GridManager.animTime * 2);
+
+            yield return StartCoroutine( Luggage.Instance.RotateBackToOrigin());
+
+            //add all grid items
+
+            yield return StartCoroutine(GridManager.Instance.DrawAllItemsFromPool());
+
             outControl();
             StageManager.Instance.takeControl();
         }
-
-
     }
+
+
+
     public void takeControl()
     {
         foreach (var item in itemsToActivate)

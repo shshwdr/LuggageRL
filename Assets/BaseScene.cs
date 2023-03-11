@@ -7,7 +7,7 @@ public class BaseScene : BaseMovable
     public bool hasStarted = false;
     public bool hasFinished = false;
 
-
+    public SkipAndHealButton skipAndHealButton;
     public Transform itemPositionsParent;
     protected Transform[] itemPositions;
     public GameObject[] itemsToActivate;
@@ -15,7 +15,7 @@ public class BaseScene : BaseMovable
     // Start is called before the first frame update
     void Start()
     {
-        
+        skipAndHealButton = GetComponentInChildren<SkipAndHealButton>();
     }
 
     // Update is called once per frame

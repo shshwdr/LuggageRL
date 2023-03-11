@@ -90,7 +90,7 @@ public class Enemy : HPObject
         if(obj == null)
         {
 
-            FloatingTextManager.Instance.addText("Bag is Full!", transform.position, Color.yellow);
+            //FloatingTextManager.Instance.addText("Bag is Full!", transform.position, Color.yellow);
             yield return new WaitForSeconds(GridManager.animTime);
         }
         else

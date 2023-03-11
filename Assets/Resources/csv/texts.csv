@@ -1,3 +1,6 @@
 ﻿Name,Text
 PickupSelection,"Whoa, Something on the ground! Let's pick one"
 RemoveItemSelection,"Select an item in the bag to remove, or skip and heal 50% hp"
+SkipAndHeal,Do you want to skip and heal {0}% percent of HP ({1})?
+Popup_AddItem,Do you want to add this item into you?
+Popup_RemoveItem,Do you want to remove this item from you?

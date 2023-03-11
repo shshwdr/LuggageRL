@@ -77,6 +77,14 @@ public class Luggage : Singleton<Luggage>
         }
     }
 
+    public IEnumerator RotateBackToOrigin()
+    {
+        if (GridManager.Instance.rotatedTime != 0)
+        {
+            yield return StartCoroutine(Rotate((4 - GridManager.Instance.rotatedTime) % 4));
+        }
+    }
+
     public IEnumerator Rotate(int ind)
     {
         GridManager.Instance.Rotate(ind, false);

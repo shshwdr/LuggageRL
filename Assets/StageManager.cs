@@ -66,7 +66,7 @@ public class StageManager : Singleton<StageManager>
                 break;
             case StageEventType.eliteBattle:
                 go = Instantiate(battleScenePrefab);
-                go.GetComponent<BattleScene>().battleType = BattleType.elite;
+                //go.GetComponent<BattleScene>().battleType = BattleType.elite;
 
                 break;
 
@@ -82,7 +82,11 @@ public class StageManager : Singleton<StageManager>
 
                 go = Instantiate(removeItemScenePrefab);
                 break;
-                
+            case StageEventType.upgradeLuggageNPC:
+
+                go = Instantiate(removeItemScenePrefab);
+                break;
+
         }
         eventIndex++;
         go.transform.position += new Vector3(randomX, 0, 0);

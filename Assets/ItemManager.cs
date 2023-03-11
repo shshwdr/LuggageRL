@@ -18,13 +18,17 @@ public class ItemInfo
     public string Strategy;
     public int Defense;
 
+    public Sprite sprite => Resources.Load<Sprite>("itemSprite/" + Item);
+
 }
 
 public class ItemManager : Singleton<ItemManager>
 {
+    public bool isInControl;
     public Transform[] itemPositions;
     public GameObject[] itemsToActivate;
     public Dictionary<string, ItemInfo> itemDict = new Dictionary<string, ItemInfo>();
+    public SkipAndHealButton skipButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,23 +78,17 @@ public class ItemManager : Singleton<ItemManager>
     }
     public void takeControl()
     {
+        skipButton.actionWhenPressed = outControl;
+        isInControl = true;
         foreach (var item in itemsToActivate)
         {
             item.SetActive(true);
         }
-        item1.AddComponent<SelectableItem>();
-        item2.AddComponent<SelectableItem>();
-        //StartCoroutine(test());
     }
-    //IEnumerator test()
-    //{
-    //    yield return new WaitForSeconds(0.1f);
-    //    showButtonCanvas();
-    //    StartBattle();
-    //}
     public void outControl()
     {
 
+        isInControl = false;
         foreach (var item in itemsToActivate)
         {
             item.SetActive(false);
@@ -98,13 +96,20 @@ public class ItemManager : Singleton<ItemManager>
 
         item1.gameObject.SetActive(false);
         item2.gameObject.SetActive(false);
+        StageManager.Instance.takeControl();
     }
 
     public void select(SelectableItem item)
     {
-        GridManager.Instance.addItemToDeck(item.GetComponent<GridItem>().type);
-        outControl();
-        StageManager.Instance.takeControl();
+        DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance.getText("Popup_AddItem"), item.GetComponent<GridItem>().Core.info.sprite, () =>
+          {
+              GridManager.Instance.addItemToDeck(item.GetComponent<GridItem>().type);
+              
+
+              outControl();
+          });
+
+        
 
 
     }

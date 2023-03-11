@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SelectableItem : MonoBehaviour
@@ -17,7 +18,18 @@ public class SelectableItem : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        ItemManager.Instance.select(this);
+        if (ItemManager.Instance.isInControl)
+        {
+            if (GridManager.Instance.GridItemDict.Values.ToList().Contains(GetComponent<GridItem>()))
+            {
+
+                ItemManager.Instance.select(this);
+            }
+        }else if (ItemRemoveManager.Instance.isInControl)
+        {
+
+            ItemRemoveManager.Instance.select(this);
+        }
 
     }
 }

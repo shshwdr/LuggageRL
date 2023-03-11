@@ -13,6 +13,8 @@ public class ItemSelectScene : BaseScene
         ItemManager.Instance.itemPositions = itemPositions;
         ItemManager.Instance.itemsToActivate = itemsToActivate;
         ItemManager.Instance.AddItems();
+
+        ItemManager.Instance.skipButton = GetComponentInChildren<SkipAndHealButton>(); 
     }
 
     // Update is called once per frame

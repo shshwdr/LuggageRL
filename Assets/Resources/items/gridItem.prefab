@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 7813576957548204236}
   - component: {fileID: 4590661104223907535}
   - component: {fileID: 2069970983835408495}
+  - component: {fileID: 6535331448119026409}
   m_Layer: 0
   m_Name: gridItem
   m_TagString: Untagged
@@ -300,6 +301,18 @@ SortingGroup:
   m_SortingLayerID: 704657263
   m_SortingLayer: 7
   m_SortingOrder: 100
+--- !u!114 &6535331448119026409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773436473970345894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf9cdd71e67cd64da73865b7d4cd96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1920938710777092685
 GameObject:
   m_ObjectHideFlags: 0

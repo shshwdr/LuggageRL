@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 27ebb6c822e0f1b4ba0be5f39c5a87ca
+=======
+guid: 3c80bc4634710e54d883c7ade13cc91c
+>>>>>>> 8389fd6 (add remove item event)
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

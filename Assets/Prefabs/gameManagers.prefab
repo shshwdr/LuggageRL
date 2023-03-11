@@ -43,6 +43,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901bdd2f1c03fdf4c9fb6be92f79f80f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &762095140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 762095141}
+  - component: {fileID: 762095142}
+  m_Layer: 0
+  m_Name: LuggageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &762095141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762095140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2672507905682957349}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &762095142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762095140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef5261bd8b828e4d8abe5e7e1428be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1114347087
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +241,53 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
+--- !u!1 &1438169822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1438169823}
+  - component: {fileID: 1438169824}
+  m_Layer: 0
+  m_Name: RemoveItemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1438169823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438169822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2672507905682957349}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1438169824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438169822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f177ce52c448a44ab3bcb449c23149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInControl: 0
+  WouldRemoveItem: 0
+  itemsToActivate: []
+  skipButton: {fileID: 0}
 --- !u!1 &2672507904276066496
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,8 +823,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8ab1cba6384df4cb82949a97d6d60e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInControl: 0
   itemPositions: []
   itemsToActivate: []
+  skipButton: {fileID: 0}
 --- !u!1 &2672507905469148101
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,6 +959,8 @@ Transform:
   - {fileID: 2672507905142224192}
   - {fileID: 2672507904966578840}
   - {fileID: 210484517}
+  - {fileID: 1438169823}
+  - {fileID: 762095141}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -915,12 +1009,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleScenePrefab: {fileID: 2208437630440124427, guid: a8c15f4a5960e4440829c5dae7b538c5, type: 3}
   itemSelectScenePrefab: {fileID: 1029336581098450868, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
-  removeItemScenePrefab: {fileID: 0}
-  sceneDistanceStart: 5
-  sceneDistanceEnd: 6
+  removeItemScenePrefab: {fileID: 7462643318992564497, guid: 7c2dc103e2d8f9b45ac208576beb865c, type: 3}
+  sceneDistanceStart: 1
+  sceneDistanceEnd: 2
   isMoving: 1
   biomeType: 1
-  eventList: 0000000003000000000000000300000000000000000000000000000003000000000000000000000001000000
+  eventList: 000000000300000000000000040000000000000003000000000000000400000002000000030000000000000005000000000000000300000001000000
 --- !u!1 &2672507906304374020
 GameObject:
   m_ObjectHideFlags: 0

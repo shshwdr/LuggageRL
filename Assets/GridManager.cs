@@ -41,7 +41,7 @@ public class GridManager : Singleton<GridManager>
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
     public Text itemViewText;
 
-    int drawCount = 6;
+    int drawCount = 4;
     public bool CanDraw(out string failedReason, int drawCount)
     {
         failedReason = "";
@@ -104,7 +104,11 @@ public class GridManager : Singleton<GridManager>
         }
         for (int i = 0; i < drawCount; i++)
         {
-            if (availableEmpty.Count == 0 || deckPool.Count == 0)
+            if (availableEmpty.Count == 0)
+            {
+                FloatingTextManager.Instance.addText("Bag is Full!", Vector3.zero, Color.white);
+            }
+            if (deckPool.Count == 0)
             {
                 break;
             }
@@ -156,7 +160,19 @@ public class GridManager : Singleton<GridManager>
         return res;
     }
 
+    public void RemoveAll()
+    {
+        foreach(var item in GridItemDict.Values.ToList())
+        {
+            RemoveGrid(item);
+        }
+    }
+
     public IEnumerator DrawAllItemsFromPool()
+    {
+        yield return StartCoroutine(DrawItem(deckPool.Count));
+    }
+    public IEnumerator DrawItemsFromPool()
     {
         yield return StartCoroutine(DrawItem(drawCount));
         //List<Vector2Int> availableEmpty = new List<Vector2Int>();
@@ -192,6 +208,7 @@ public class GridManager : Singleton<GridManager>
 
 
         //StartCoroutine(MoveAfter(0, -1));
+
     }
     public int rotatedTime = 0;
     public void Rotate(int time, bool applyGravity)
@@ -1039,7 +1056,12 @@ public class GridManager : Singleton<GridManager>
         GridItemDict.Remove(ind);
         deckPool.Add(type);
     }
-
+    public void RemoveDeck(GridItem item)
+    {
+        RemoveGrid(item.index, item.type);
+        deckPool.Remove(item.type);
+        item.destory();
+    }
     public void RemoveGrid(GridItem item)
     {
         RemoveGrid(item.index, item.type);
