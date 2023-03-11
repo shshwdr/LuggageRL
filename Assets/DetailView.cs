@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class DetailView : Singleton<DetailView>
 {
+    public Text enemyName;
     public Text enemyDescription;
     public Text actionDescription;
     public GameObject enemyView;
@@ -52,6 +53,7 @@ public class DetailView : Singleton<DetailView>
         else
         {
             enemyView.SetActive(true);
+            enemyName.text = enemy.DisplayName;
             enemyDescription.text = enemy.Desc;
             actionDescription.text = enemy.Core.currentAction.Desc;
         }

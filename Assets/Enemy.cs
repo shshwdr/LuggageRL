@@ -258,6 +258,12 @@ public class Enemy : HPObject
         }
         isTargeted = isBeingTargeted;
     }
+    public IEnumerator RotateBag()
+    {
+
+        yield return StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
+        
+    }
     public IEnumerator Attack()
     {
         GridManager.Instance.showAttackPreviewOfEnemy(this);
