@@ -3796,6 +3796,8 @@ MonoBehaviour:
   isDead: 0
   hpbar: {fileID: 5396105675036245160}
   shield: 0
+  flyerAttackAnimationPlayer: {fileID: 0}
+  simpleAttackAnimationPlayer: {fileID: 2060133271}
   attackPreview: {fileID: 5791175552444314832}
   enemyRender: {fileID: 5396105675173200863}
   attack: 3

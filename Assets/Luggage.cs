@@ -13,7 +13,7 @@ public class Luggage : Singleton<Luggage>
 
     [SerializeField] MMF_Player upsideDownAndDropAttackAnimationPlayer;
     [SerializeField] MMF_Player walkingAnimationPlayer;
-    [SerializeField] Transform luggageRightTargetTransform;
+    [SerializeField] public Transform luggageRightTargetTransform;
 
     [SerializeField] MMF_Player returnToIdleAnimationPlayer;
     List<MMF_Player> attackAnimationPlayers = new List<MMF_Player>();
@@ -102,7 +102,7 @@ public class Luggage : Singleton<Luggage>
     public IEnumerator LiftAndDownAttack()
     {
         SetTarget();
-        //
+        
         transform.DOMove(target.transform.position + Vector3.up * 5, GridManager.animTime * 2);
         yield return new WaitForSeconds(GridManager.animTime * 2);
         transform.DOMove(target.transform.position, GridManager.animTime);

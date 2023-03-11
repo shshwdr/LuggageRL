@@ -1,4 +1,6 @@
 using DG.Tweening;
+using MoreMountains.Feedbacks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +23,10 @@ public class EnemyInfo
 }
 public class Enemy : HPObject
 {
+    [SerializeField] MMF_Player flyerAttackAnimationPlayer;
+    [SerializeField] MMF_Player simpleAttackAnimationPlayer;
+    List<MMF_Player> animations = new List<MMF_Player>();
+
     public EnemyAttackPreview attackPreview;
     public SpriteRenderer enemyRender;
     public int attack = 3;
@@ -167,6 +173,7 @@ public class Enemy : HPObject
         base.Awake();
         EnemyManager.Instance.AddEnemy(this);
         attackPreview = GetComponentInChildren<EnemyAttackPreview>();
+        InitiateAnimations();
         hpbar.updateHPBar(hp, maxHP);
         var prefab = Resources.Load<Sprite>("enemies/" + info.Name);
         if(prefab == null)
@@ -179,6 +186,29 @@ public class Enemy : HPObject
             enemyRender.sprite = prefab;
         }
     }
+
+    private void InitiateAnimations()
+    {
+        //animations.Add(flyerAttackAnimationPlayer);
+        animations.Add(simpleAttackAnimationPlayer);
+        foreach (MMF_Player animationPlayerList in animations)
+        {
+            foreach (MMF_Position feedback in animationPlayerList.GetFeedbacksOfType<MMF_Position>())
+            {
+                if (feedback.Mode == MMF_Position.Modes.ToDestination)
+                {
+                    switch (feedback.Label)
+                    {
+                        case "PositionRightLuggageTarget":
+                            feedback.DestinationPositionTransform = Luggage.Instance.luggageRightTargetTransform;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+    }                  
 
     int damage = 0;
     [SerializeField] private bool isTargeted;
@@ -227,23 +257,43 @@ public class Enemy : HPObject
     }
     public IEnumerator Attack()
     {
-
         GridManager.Instance.showAttackPreviewOfEnemy(this);
+        yield return StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
 
-        originalPosition = transform.position;
-        transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
-        yield return new WaitForSeconds(GridManager.animTime);
-
-
-
+        /* originalPosition = transform.position;
+         transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
+         yield return new WaitForSeconds(GridManager.animTime);
+ */
         //attack item
         yield return StartCoroutine(GridManager.Instance.EnemyAttackEnumerator(this));
 
+        GridManager.Instance.clearAttackPreview();
+
+
+        /*
+        transform.DOMove(originalPosition, GridManager.animTime);
+        yield return new WaitForSeconds(GridManager.animTime);*/
+
+
+    }
+
+    public void AttackImpact()
+    {
+        //AttackFinish();
+    }
+    public IEnumerator AttackFinish()
+    {
+        //attack item
+        yield return StartCoroutine(GridManager.Instance.EnemyAttackEnumerator(this));
 
         GridManager.Instance.clearAttackPreview();
+        
+
+        /*
         transform.DOMove(originalPosition, GridManager.animTime);
-        yield return new WaitForSeconds(GridManager.animTime);
+        yield return new WaitForSeconds(GridManager.animTime);*/
     }
+
 
     private void OnMouseEnter()
     {
