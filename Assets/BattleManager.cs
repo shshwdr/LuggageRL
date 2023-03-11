@@ -90,7 +90,8 @@ public class BattleManager : Singleton<BattleManager>
 
             //clean all grid items
 
-            foreach(var item in GridManager.Instance.GridItemDict.Values)
+            GridManager.Instance.clearAttackPreview();
+            foreach (var item in GridManager.Instance.GridItemDict.Values)
             {
                 item.destory();
             }
