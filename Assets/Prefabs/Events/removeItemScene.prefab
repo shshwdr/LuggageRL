@@ -91,7 +91,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1029336580721501961, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1029336580939583067, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
       propertyPath: m_IsActive
@@ -157,6 +157,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: removeItemScene
       objectReference: {fileID: 0}
+    - target: {fileID: 1029336581098450868, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795591274462826774, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
+      propertyPath: m_Text
+      value: Select an item in the bag to remove it
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426296321359755864, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1029336581098450866, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
@@ -200,3 +212,4 @@ MonoBehaviour:
   itemsToActivate:
   - {fileID: 3039704828276269212}
   - {fileID: 7462643318815865260}
+  - {fileID: 7462643318992564497}

@@ -127,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -159,11 +159,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 387
+      value: -118
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -307
+      value: -338
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -241,7 +241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -273,11 +273,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 611
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -307
+      value: -338
       objectReference: {fileID: 0}
     - target: {fileID: 1489641111369215469, guid: 7c06e835da196e5409014cca608759ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -319,7 +319,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1029336580721501961, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1029336580939583067, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
       propertyPath: m_IsActive
@@ -384,6 +384,14 @@ PrefabInstance:
     - target: {fileID: 1029336581098450868, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
       propertyPath: m_Name
       value: luggageUpgradeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029336581098450868, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795591274462826774, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
+      propertyPath: m_Text
+      value: Choose the Upgrade you want to do
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1029336581098450866, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}

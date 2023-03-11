@@ -248,6 +248,7 @@ public class GridItem : MonoBehaviour, IGridItem
         }
         baseItem.spriteRender.sprite = spriteResource;
         baseItem.updateCounter(core.count);
+        baseItem.updateBK();
     }
     public void addDestroyMessage(List<BattleMessage> messages,bool skipAnim = false)
     {

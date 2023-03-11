@@ -31,7 +31,7 @@ public class DummyEnemy : EnemyBehavior
 {
     public DummyEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionRotate() }; ///I'm changing this around for debugging purposes. 
+        actions = new EnemyAction[] { new EnemyActionIdle() }; ///I'm changing this around for debugging purposes. 
     }
 
 }
