@@ -11,9 +11,6 @@ public abstract class EnemyAction
 
 public class EnemyActionIdle : EnemyAction
 {
-    public bool attackFromBottom = true;
-    public int attackHeight = 0;
-    public int attackDamage = 3;
     public override IEnumerator TakeAction(Enemy enemy)
     {
         FloatingTextManager.Instance.addText(enemy.DisplayName + " is looking at you.", enemy.transform.position, Color.white);
@@ -28,9 +25,6 @@ public class EnemyActionIdle : EnemyAction
 }
 public class EnemyActionRotate : EnemyAction
 {
-    public bool attackFromBottom = true;
-    public int attackHeight = 0;
-    public int attackDamage = 3;
     public override IEnumerator TakeAction(Enemy enemy)
     {
         yield return enemy.StartCoroutine(enemy.RotateBag());

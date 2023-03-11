@@ -99,18 +99,18 @@ public class Luggage : Singleton<Luggage>
         yield return GridManager.Instance.MoveEnumerator(1, 0, false);
     }
 
-    public IEnumerator LiftAndDownAttack()
-    {
-        SetTarget();
+    //public IEnumerator LiftAndDownAttack()
+    //{
+    //    SetTarget();
         
-        transform.DOMove(target.transform.position + Vector3.up * 5, GridManager.animTime * 2);
-        yield return new WaitForSeconds(GridManager.animTime * 2);
-        transform.DOMove(target.transform.position, GridManager.animTime);
-        yield return GridManager.Instance.MoveAndAttack(0, -1);
-        //yield return new WaitForSeconds(GridManager.animTime);
+    //    transform.DOMove(target.transform.position + Vector3.up * 5, GridManager.animTime * 2);
+    //    yield return new WaitForSeconds(GridManager.animTime * 2);
+    //    transform.DOMove(target.transform.position, GridManager.animTime);
+    //    yield return GridManager.Instance.MoveAndAttack(0, -1);
+    //    //yield return new WaitForSeconds(GridManager.animTime);
 
-        yield return StartCoroutine(showDamage());
-    }
+    //    yield return StartCoroutine(showDamage());
+    //}
     public IEnumerator PushForwardAttack()
     {
         SetTarget();
@@ -130,7 +130,8 @@ public class Luggage : Singleton<Luggage>
     private IEnumerator PushForwardAttackFinish() //perform coroutines
     {
         yield return StartCoroutine(GridManager.Instance.MoveAndAttack(1, 0));
-        yield return StartCoroutine(showDamage());
+        yield return StartCoroutine(showDamage()); 
+        yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
     }
 
     public IEnumerator UpsideDownAndDrop()
@@ -153,6 +154,7 @@ public class Luggage : Singleton<Luggage>
         yield return GridManager.Instance.MoveAndAttack(0, -1);
 
         yield return StartCoroutine(showDamage());
+        yield return StartCoroutine(BattleManager.Instance.useMove(BattleManager.Instance.attackMoveCost));
     }
 
     public IEnumerator ThrowOutAndHitBack()
@@ -174,6 +176,7 @@ public class Luggage : Singleton<Luggage>
         yield return GridManager.Instance.MoveAndAttack(-1, 0);
 
         yield return StartCoroutine(showDamage());
+        yield return StartCoroutine(BattleManager.Instance.useMove(BattleManager.Instance.attackMoveCost));
     }
 
     IEnumerator showDamage()

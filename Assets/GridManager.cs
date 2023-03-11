@@ -770,6 +770,7 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemAttack attack)
             {
+                Debug.Log("attack " + attack.item.Name);
                 if (!GridItemDict.ContainsKey(attack.index))
                 {
                     Debug.Log("?");
