@@ -2281,22 +2281,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1056049623, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
-      propertyPath: FeedbacksList.Array.data[14].Active
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304813528, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
-      propertyPath: FeedbacksList.Array.data[15].Active
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1558168936, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
-      propertyPath: FeedbacksList.Array.data[6].Active
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1558168936, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
-      propertyPath: FeedbacksList.Array.data[7].Active
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1268015397992814308, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
       propertyPath: m_RootOrder
       value: 4

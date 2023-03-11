@@ -30,7 +30,7 @@ public class Enemy : HPObject
     public EnemyAttackPreview attackPreview;
     public SpriteRenderer enemyRender;
     public int attack = 3;
-    Vector3 originalPosition;
+    public Transform idlePosition;
     public Transform leftTargetTransform; //where player should impact
     public Transform topTargetTransform;
     public Transform rightTargetTransform;
@@ -202,6 +202,9 @@ public class Enemy : HPObject
                         case "PositionRightLuggageTarget":
                             feedback.DestinationPositionTransform = Luggage.Instance.luggageRightTargetTransform;
                             break;
+                        case "PositionToIdle":
+                            feedback.DestinationPositionTransform = idlePosition;
+                            break;
                         default:
                             break;
                     }
@@ -265,9 +268,9 @@ public class Enemy : HPObject
          yield return new WaitForSeconds(GridManager.animTime);
  */
         //attack item
-        yield return StartCoroutine(GridManager.Instance.EnemyAttackEnumerator(this));
+        //yield return StartCoroutine(GridManager.Instance.EnemyAttackEnumerator(this));
 
-        GridManager.Instance.clearAttackPreview();
+        //GridManager.Instance.clearAttackPreview();
 
 
         /*
@@ -279,7 +282,7 @@ public class Enemy : HPObject
 
     public void AttackImpact()
     {
-        //AttackFinish();
+        StartCoroutine(AttackFinish());
     }
     public IEnumerator AttackFinish()
     {
