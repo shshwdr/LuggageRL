@@ -3125,7 +3125,7 @@ MonoBehaviour:
     0000000E:
       type: {class: MMF_Events, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
-        Active: 0
+        Active: 1
         UniqueID: 128624871
         Label: Unity Events
         ChannelMode: 0
@@ -6636,7 +6636,7 @@ MonoBehaviour:
     0000000F:
       type: {class: MMF_Events, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
-        Active: 0
+        Active: 1
         UniqueID: -1870657227
         Label: Unity Events
         ChannelMode: 0
@@ -8537,7 +8537,7 @@ MonoBehaviour:
     00000006:
       type: {class: MMF_Events, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
-        Active: 0
+        Active: 1
         UniqueID: -894134812
         Label: Unity Events
         ChannelMode: 0
