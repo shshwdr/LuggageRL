@@ -26,7 +26,8 @@ public class Enemy : HPObject
     [SerializeField] MMF_Player flyerAttackAnimationPlayer;
     [SerializeField] MMF_Player simpleAttackAnimationPlayer;
     [SerializeField] MMF_Player hurtAnimationPlayer;
-    List<MMF_Player> animations = new List<MMF_Player>();
+    [SerializeField] MMF_Player rotateAttackAnimationPlayer;
+    //List<MMF_Player> animations = new List<MMF_Player>();
 
     public EnemyAttackPreview attackPreview;
     public SpriteRenderer enemyRender;
@@ -219,7 +220,9 @@ public class Enemy : HPObject
     private void InitiateAnimations()
     {
         //animations.Add(flyerAttackAnimationPlayer);
-        animations.Add(simpleAttackAnimationPlayer);
+        //animations.Add(simpleAttackAnimationPlayer);
+        MMF_Player[] animations = GetComponentsInChildren<MMF_Player>();
+
         foreach (MMF_Player animationPlayerList in animations)
         {
             foreach (MMF_Position feedback in animationPlayerList.GetFeedbacksOfType<MMF_Position>())
@@ -290,9 +293,19 @@ public class Enemy : HPObject
     public IEnumerator RotateBag()
     {
 
-        yield return StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
-        
+        yield return StartCoroutine(rotateAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
     }
+    public void RotateBagImpact()
+    {
+        StartCoroutine(RotateBagFinish());
+    }
+
+    private IEnumerator RotateBagFinish()
+    {
+        GridManager.Instance.Rotate(1, false);
+        yield return Luggage.Instance.BagRotateAttackReceived();
+    }
+
     public IEnumerator Attack()
     {
         GridManager.Instance.cleanAndShowAttackPreviewOfEnemy(this);

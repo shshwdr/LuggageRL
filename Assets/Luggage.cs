@@ -13,6 +13,7 @@ public class Luggage : Singleton<Luggage>
 
     [SerializeField] MMF_Player upsideDownAndDropAttackAnimationPlayer;
     [SerializeField] MMF_Player walkingAnimationPlayer;
+    [SerializeField] MMF_Player bagRotatedAnimationPlayer;
     [SerializeField] public Transform luggageRightTargetTransform;
 
     [SerializeField] MMF_Player returnToIdleAnimationPlayer;
@@ -46,8 +47,10 @@ public class Luggage : Singleton<Luggage>
     void SetTarget() //EnemyManager will handle target
     {
         target = EnemyManager.Instance.GetCurrentTargetedEnemy();
+            
+        MMF_Player[] animations = GetComponentsInChildren<MMF_Player>();
         //target.ClearDamage()
-        foreach (MMF_Player animationPlayerList in attackAnimationPlayers)
+        foreach (MMF_Player animationPlayerList in animations)
         {
             foreach (MMF_Position feedback in animationPlayerList.GetFeedbacksOfType<MMF_Position>())
             {
@@ -235,5 +238,10 @@ public class Luggage : Singleton<Luggage>
     internal void playHurtAnimation()
     {
         hurtAnimationPlayer.PlayFeedbacks();
+    }
+
+    internal IEnumerator BagRotateAttackReceived()
+    {
+        yield return StartCoroutine(bagRotatedAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
     }
 }
