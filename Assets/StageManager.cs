@@ -24,10 +24,14 @@ public class StageManager : Singleton<StageManager>
 
     public void takeControl()
     {
-        addNextEvent();
-        foreach(var item in GameObject.FindObjectsOfType<BaseMovable>())
+        var res  = addNextEvent();
+        if (res)
         {
-            item.startMove();
+
+            foreach (var item in GameObject.FindObjectsOfType<BaseMovable>())
+            {
+                item.startMove();
+            }
         }
     }
 
@@ -39,40 +43,43 @@ public class StageManager : Singleton<StageManager>
         }
     }
 
-    void meetEvent()
-    {
-
-    }
-    void addNextEvent()
+    bool addNextEvent()
     {
         foreach (var scene in Transform.FindObjectsOfType<BaseScene>())
         {
             if (!scene.hasStarted)
             {
-                return;
+                return false;
             }
         }
         if (eventIndex >= eventList.Count)
         {
             FloatingTextManager.Instance.addText("Finished Stage!", Vector3.zero, Color.yellow, 5);
-            return;
+            return true;
         }
         float randomX = Random.Range(sceneDistanceStart, sceneDistanceEnd);
         GameObject go = null;
+        bool res = false;
         switch (eventList[eventIndex])
         {
             case StageEventType.bossBattle:
                 go = Instantiate(battleScenePrefab);
                 go.GetComponent<BattleScene>().battleType = BattleType.boss;
+                go.transform.position += new Vector3(randomX, 0, 0);
+                res = true;
                 break;
             case StageEventType.eliteBattle:
                 go = Instantiate(battleScenePrefab);
                 go.GetComponent<BattleScene>().battleType = BattleType.elite;
+                go.transform.position += new Vector3(randomX, 0, 0);
+                res = true;
 
                 break;
 
             case StageEventType.normalBattle:
                 go = Instantiate(battleScenePrefab);
+                go.transform.position += new Vector3(randomX, 0, 0);
+                res = true;
 
                 break;
             case StageEventType.itemSelect:
@@ -90,8 +97,7 @@ public class StageManager : Singleton<StageManager>
 
         }
         eventIndex++;
-        go.transform.position += new Vector3(randomX, 0, 0);
-
+        return res;
     }
 
     // Update is called once per frame

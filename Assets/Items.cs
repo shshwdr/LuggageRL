@@ -108,7 +108,7 @@ public class Pins : GridItemCore
         int diff = (int)(borderIndex - originIndex).magnitude;
 
         var dir = (borderIndex - originIndex) / diff;
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + CalculateDamage(pinCountDamageIncrease) * GridManager.Instance.pinsCount, index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) ^ GridManager.Instance.pinsCount, index = index });
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         buffs.Clear();
@@ -127,12 +127,14 @@ public class Circuit : GridItemCore {
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude; 
         var itemConnected = GridManager.Instance.getItemsWithTypeAround(index,true, "Breakable");
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage), index = index });
         foreach (var item in itemConnected)
         {
+
+            messages.Add(new MessageItemAttack { item = item.Core, damage = CalculateDamage(damage), index = index,skipAnim = true });
             messages.Add(new MessageItemVisualEffect { item = item.Core, index = item.index,effect = VisualEffect.electric });
             //item.addDestroyMessageWithIndex(messages, originIndex, true);
         }
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + CalculateDamage(damage2) * itemConnected.Count, index = index });
         this.addDestroyMessage(messages);
     }
 
@@ -175,7 +177,7 @@ public class Bomb : GridItemCore
         int damage = info.Param1;
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage), index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) * 5, index = index });
         this.addDestroyMessage(messages);
     }
 
@@ -189,7 +191,7 @@ public class Bomb : GridItemCore
         {
 
             messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode });
-            messages.Add(new MessageAttackPlayer { item = this, index = index, amount = CalculateDamage(damage), target = BattleManager.Instance.player });
+            messages.Add(new MessageAttackPlayer { item = this, index = index, amount = CalculateDamage(damage) * 5, target = BattleManager.Instance.player });
 
             this.addDestroyMessage(messages);
         }
@@ -245,7 +247,7 @@ public class Slingshot : GridItemCore
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
         var itemCountBehind = GridManager.Instance.getEmptysBehind(index, index - borderIndex);
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + CalculateDamage(damage2) * itemCountBehind, index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + damage2 * CalculateDamage(damage) * itemCountBehind, index = index });
         this.addDestroyMessage(messages);
     }
 }
@@ -301,7 +303,7 @@ public class Rocket : GridItemCore
         messages.Add(new MessageItemAttack
         {
             item = this,
-            damage = CalculateDamage(damage) + CalculateDamage(damage2) * itemBehind.Count,
+            damage = CalculateDamage(damage) + damage2 * CalculateDamage(damage) * itemBehind.Count,
             index = index
         });
 

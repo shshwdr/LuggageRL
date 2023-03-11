@@ -9,6 +9,7 @@ public class TextInfo
 }
 public class TutorialManager : Singleton<TutorialManager>
 {
+    public bool SkipTutorial = true;
     public Dictionary<string, bool> read = new Dictionary<string, bool>();
     public Dictionary<string, TextInfo> textDict = new Dictionary<string, TextInfo>();
     // Start is called before the first frame update
@@ -35,7 +36,11 @@ public class TutorialManager : Singleton<TutorialManager>
     }
     public string getUnreadText(string itemName)
     {
-        return "";
+        if (SkipTutorial)
+        {
+
+            return "";
+        }
         if (read.ContainsKey(itemName))
         {
             return "";
