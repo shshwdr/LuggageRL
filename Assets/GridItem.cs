@@ -93,15 +93,12 @@ public class GridItemCore: IGridItem
     public virtual void init()
     { }
     public string Name => info.DisplayName;
+    public int Attack => isAttacker ? CalculateDamage(info.Param1) : info.Param1;
     public virtual string Desc
     {
         get
         {
-            return $@"{info.DisplayName}
-defense: {info.Defense}
-{string.Format(info.Description, isAttacker? CalculateDamage(info.Param1):  info.Param1, IsParam2Attack ? CalculateDamage(info.Param2): info.Param2)}
-strategy: {info.Strategy}
-{BuffDesc}";
+            return $@"{string.Format(info.Description, isAttacker? CalculateDamage(info.Param1):  info.Param1, IsParam2Attack ? CalculateDamage(info.Param2): info.Param2)}".Replace('\'','\"');
         }
     }
 
@@ -275,12 +272,13 @@ public class GridItem : MonoBehaviour, IGridItem
     }
     private void OnMouseEnter()
     {
-        GridManager.Instance.itemViewText.text = core.Desc;
+        DetailView.Instance.UpdateCard(core);
+        //GridManager.Instance.itemViewText.text = core.Desc;
     }
     private void OnMouseExit()
     {
-
-        GridManager.Instance.itemViewText.text = "";
+        DetailView.Instance.UpdateCard(null);
+        //GridManager.Instance.itemViewText.text = "";
     }
 
     public IEnumerator move(Vector3 targetPos, float animTime) {

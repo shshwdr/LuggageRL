@@ -88,7 +88,7 @@ public class EnemyActionSteal : EnemyAction
         //find the most item
         stealItem = GridManager.Instance.findMostItem();
 
-        enemy.attackPreview.UpdateOtherPreview(stealItem.ToString(), "steal",false);
+        enemy.attackPreview.UpdateOtherPreview("steal", stealItem.ToString());
     }
 }
 
@@ -106,7 +106,7 @@ public class EnemyActionAdd : EnemyAction
         base.Preview(enemy);
 
 
-        enemy.attackPreview.UpdateOtherPreview(addItem.ToString(), "add", false);
+        enemy.attackPreview.UpdateOtherPreviewTwoImage("add", addItem.ToString());
     }
 }
 
@@ -125,6 +125,6 @@ public class EnemyActionStealMax : EnemyAction
 
         //find the most item
 
-        enemy.attackPreview.UpdateOtherPreview("max", "steal");
+        enemy.attackPreview.UpdateOtherPreview("steal","");
     }
 }

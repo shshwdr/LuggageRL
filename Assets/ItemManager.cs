@@ -12,6 +12,7 @@ public class ItemInfo
     public int Param2;
     public string Description;
     public string Type;
+    public bool IsBreakable => Type == "Breakable";
     public int DestoryAfterTrigger;
     public int Rarity;
     public int MaxCountInDeck;

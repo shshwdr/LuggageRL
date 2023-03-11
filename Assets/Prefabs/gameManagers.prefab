@@ -763,6 +763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088e45f50c77b7549843c36512cd172c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInControl: 0
   baseScene: {fileID: 0}
   LuggageAttackText: {fileID: 1392621330}
   LuggageAttackButton: {fileID: 7804120229954410934}
@@ -1010,8 +1011,8 @@ MonoBehaviour:
   battleScenePrefab: {fileID: 2208437630440124427, guid: a8c15f4a5960e4440829c5dae7b538c5, type: 3}
   itemSelectScenePrefab: {fileID: 1029336581098450868, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
   removeItemScenePrefab: {fileID: 7462643318992564497, guid: 7c2dc103e2d8f9b45ac208576beb865c, type: 3}
-  sceneDistanceStart: 1
-  sceneDistanceEnd: 2
+  sceneDistanceStart: 2
+  sceneDistanceEnd: 3
   isMoving: 1
   biomeType: 1
   eventList: 000000000300000000000000040000000000000003000000000000000400000002000000030000000000000005000000000000000300000001000000

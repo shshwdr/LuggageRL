@@ -15,6 +15,11 @@ public class EnemyAttackPreview : MonoBehaviour
     public GameObject otherPanel;
     public Image otherSprite;
     public Text otherText;
+    public Image otherSprite2;
+
+    public Color shieldColor;
+    public Color healColor;
+
 
     public List<Image> previewCell;
     public void UpdateAttackPreview(int ind, bool startFromBottom, int attackAmount)
@@ -40,24 +45,40 @@ public class EnemyAttackPreview : MonoBehaviour
             previewCell[previewCell.Count - 1 - ind].sprite = attack;
         }
     }
-    
-    public void UpdateOtherPreview(string actionName, string count, bool isAction = true)
+    public void UpdateOtherPreviewTwoImage(string actionName, string itemName)
     {
-        Sprite sprite;
-        if (isAction)
+
+        otherSprite.sprite = Resources.Load<Sprite>("enemyActionSprite/" + actionName);
+        otherSprite2.sprite = Resources.Load<Sprite>("itemSprite/" + actionName);
+        otherText.gameObject.SetActive(false);
+        otherSprite2.gameObject.SetActive(true);
+    }
+    public void UpdateOtherPreview(string actionName, string count)
+    {
+        if(actionName == "shield")
         {
-            sprite = Resources.Load<Sprite>("enemyActionSprite/" + actionName);
-        }
-        else
+            otherText.color = shieldColor;
+        }else if(actionName == "heal")
         {
 
-            sprite = Resources.Load<Sprite>("itemSprite/" + actionName);
+            otherText.color = healColor;
         }
+        Sprite sprite;
+        //if (isAction)
+        //{
+            sprite = Resources.Load<Sprite>("enemyActionSprite/" + actionName);
+        //}
+        ////else
+        //{
+
+        //    sprite = Resources.Load<Sprite>("itemSprite/" + actionName);
+        //}
         if(sprite == null)
         {
             Debug.LogError("no action sprite " + actionName);
         }
         otherSprite.sprite = sprite;
+        otherSprite2.gameObject.SetActive(false);
         if(count == "")
         {
 
