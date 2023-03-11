@@ -125,6 +125,8 @@ public class Luggage : Singleton<Luggage>
     public void PushForwardAttackImpact() //use to call through unity events
     {
         //transform.DOMove(target.transform.position, GridManager.animTime);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_impact, transform.position);
+
         StartCoroutine(PushForwardAttackFinish());
     }
     private IEnumerator PushForwardAttackFinish() //perform coroutines
@@ -147,6 +149,7 @@ public class Luggage : Singleton<Luggage>
     public void UpsideDownAndDropImpact()
     {
         StartCoroutine(UpsideDownAndDropFinish());
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_impact, transform.position);
     }
 
     private IEnumerator UpsideDownAndDropFinish()
@@ -168,6 +171,8 @@ public class Luggage : Singleton<Luggage>
 
     public void ThrowOutAndHitBackImpact()
     {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_impact, transform.position);
+
         StartCoroutine(ThrowOutAndHitBackFinish());
     }
 
@@ -216,6 +221,11 @@ public class Luggage : Singleton<Luggage>
             returnToIdleAnimationPlayer.PlayFeedbacks();
         }
 
+    }
+
+    public void playFootStepSound()
+    {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_walk, this.transform.position);
     }
 
 }

@@ -14,7 +14,23 @@ public class FMODEvents : Singleton<FMODEvents>
     [field: SerializeField] public List<EventReference> musicPlaylist { get; private set; }
 
     [field: Header("SFX")]
-    //[field: SerializeField] public EventReference ui_click { get; private set; }
+
+    [field: SerializeField] public EventReference sfx_effect_heal { get; private set; }
+    [field: SerializeField] public EventReference sfx_enemy_ability_steal { get; private set; }
+    [field: SerializeField] public EventReference sfx_enemy_action_shield { get; private set; }
+    [field:SerializeField] public EventReference sfx_enemy_heavy_attack { get; private set; }
+    [field:SerializeField] public EventReference sfx_enemy_light_attack { get; private set; }
+    [field: SerializeField] public EventReference sfx_item_break { get; private set; }
+    [field:SerializeField] public EventReference sfx_item_drag_pickup { get; private set; }
+    [field:SerializeField] public EventReference sfx_item_drag_putdown { get; private set; }
+    [field:SerializeField] public EventReference sfx_item_impact { get; private set; }
+    [field:SerializeField] public EventReference sfx_item_slide { get; private set; }
+    [field:SerializeField] public EventReference sfx_item_take_new { get; private set; }
+    [field:SerializeField] public EventReference sfx_luggage_attack_impact { get; private set; }
+    [field:SerializeField] public EventReference sfx_luggage_walk { get; private set; }
+    [field:SerializeField] public EventReference sfx_luggage_walk_full_loop { get; private set; }
+    [field:SerializeField] public EventReference sfx_ui_hover { get; private set; }
+    [field:SerializeField] public EventReference sfx_ui_select { get; private set; }
 
     private int nextPlaylistIndex = 0; 
     internal EventReference getNextMusicReference()
@@ -28,3 +44,7 @@ public class FMODEvents : Singleton<FMODEvents>
         return musicPlaylist[nextPlaylistIndex];
     }
 }
+
+
+
+
