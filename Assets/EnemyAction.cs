@@ -16,7 +16,7 @@ public class EnemyActionIdle : EnemyAction
     public int attackDamage = 3;
     public override IEnumerator TakeAction(Enemy enemy)
     {
-        FloatingTextManager.Instance.addText(enemy.DisplayName + " is looking at you.",enemy.transform.position,Color.white);
+        FloatingTextManager.Instance.addText(enemy.DisplayName + " is looking at you.", enemy.transform.position, Color.white);
         yield return new WaitForSeconds(GridManager.animTime);
     }
 
@@ -24,6 +24,22 @@ public class EnemyActionIdle : EnemyAction
     {
         base.Preview(enemy);
         enemy.attackPreview.UpdateOtherPreview("idle", "");
+    }
+}
+public class EnemyActionRotate : EnemyAction
+{
+    public bool attackFromBottom = true;
+    public int attackHeight = 0;
+    public int attackDamage = 3;
+    public override IEnumerator TakeAction(Enemy enemy)
+    {
+        yield return enemy.StartCoroutine(enemy.RotateBag());
+    }
+
+    public override void Preview(Enemy enemy)
+    {
+        base.Preview(enemy);
+        enemy.attackPreview.UpdateOtherPreview("rotate", "");
     }
 }
 
