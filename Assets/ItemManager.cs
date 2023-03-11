@@ -70,6 +70,10 @@ public class ItemManager : Singleton<ItemManager>
         var enumLength = System.Enum.GetValues(typeof(ItemType)).Length;
         var pickedItem1 = Random.Range(0, enumLength);
         var pickedItem2 = Random.Range(0, enumLength);
+
+        Debug.Log(pickedItem1);
+        Debug.Log(pickedItem2);
+
         item1 = createItem((ItemType)pickedItem1, itemPositions[0], itemPositions[0].position);
         item1.GetComponent<Draggable>().enabled = false;
 

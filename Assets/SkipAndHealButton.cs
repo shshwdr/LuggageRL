@@ -11,10 +11,10 @@ public class SkipAndHealButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponentInChildren<Text>().text = string.Format("Skip And Heal", percentage,  (int)(BattleManager.Instance.player.maxHP * percentage/100));
+        GetComponentInChildren<Text>().text = "Skip And Heal";
         GetComponent<Button>().onClick.AddListener(()=> {
             DialoguePopupManager.Instance.showDialogue(
-            TutorialManager.Instance.getText("SkipAndHeal"), null, () =>
+            string.Format(TutorialManager.Instance.getText("SkipAndHeal"), percentage, (int)(BattleManager.Instance.player.maxHP * percentage / 100)), null, () =>
             {
                 StartCoroutine(BattleManager.Instance.player.HealEnumerator(BattleManager.Instance.player.maxHP * percentage / 100));
                 actionWhenPressed.Invoke();

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BattleManager : Singleton<BattleManager>
 {
+    public bool isInControl;
     public BaseScene baseScene;
     public Text LuggageAttackText;
     public Button LuggageAttackButton;
@@ -115,7 +116,6 @@ public class BattleManager : Singleton<BattleManager>
             yield return StartCoroutine(GridManager.Instance.DrawAllItemsFromPool());
 
             outControl();
-            StageManager.Instance.takeControl();
         }
     }
 
@@ -123,6 +123,7 @@ public class BattleManager : Singleton<BattleManager>
 
     public void takeControl()
     {
+        isInControl = true;
         foreach (var item in itemsToActivate)
         {
             item.SetActive(true);
@@ -134,7 +135,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void outControl()
     {
-
+        isInControl = false;
         foreach (var item in itemsToActivate)
         {
             item.SetActive(false);
@@ -142,6 +143,7 @@ public class BattleManager : Singleton<BattleManager>
         hideButtonCanvas();
         ButtonCanvas.gameObject.SetActive(false);
         baseScene.hasFinished = true;
+        StageManager.Instance.takeControl();
     }
     void StartBattle()
     {

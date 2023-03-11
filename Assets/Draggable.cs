@@ -23,6 +23,12 @@ public class Draggable : MonoBehaviour
     GridEmptyCell swapOb;
     private void OnMouseDrag()
     {
+
+        if (!BattleManager.Instance.isInControl)
+        {
+            return;
+        }
+
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); worldPosition.z = 0;
         transform.position = worldPosition;
         swapOb = null;

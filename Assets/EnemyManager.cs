@@ -207,7 +207,8 @@ public class EnemyManager : Singleton<EnemyManager>
             for (int i = 0; i < enemies.Count; i++)
             {
                 var enemy = enemies[0];
-                StartCoroutine(RemoveEnemy(enemy));
+                StartCoroutine( enemy.ApplyDamage(10000));
+                //StartCoroutine(RemoveEnemy(enemy));
             }
         }
     }

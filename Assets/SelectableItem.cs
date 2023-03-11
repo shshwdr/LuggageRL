@@ -20,7 +20,7 @@ public class SelectableItem : MonoBehaviour
     {
         if (ItemManager.Instance.isInControl)
         {
-            if (GridManager.Instance.GridItemDict.Values.ToList().Contains(GetComponent<GridItem>()))
+            if (!GridManager.Instance.GridItemDict.Values.ToList().Contains(GetComponent<GridItem>()))
             {
 
                 ItemManager.Instance.select(this);

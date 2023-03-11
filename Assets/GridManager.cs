@@ -602,6 +602,10 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemApplyEffect applyEffect)
             {
+                if (!GridItemDict.ContainsKey(applyEffect.targetIndex))
+                {
+                    Debug.Log("bad");
+                }
                 if (GridItemDict[applyEffect.targetIndex].core.isAttacker)
                 {
 
