@@ -22,7 +22,8 @@ public class HPObject : MonoBehaviour
         FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0), Color.red);
         if (damage < 0)
         {
-            Debug.Log("how damage get lower than 0");
+            Debug.LogWarning("how damage get lower than 0");
+            damage = Mathf.Max(0, damage);
         }
         hp -= damage;
         

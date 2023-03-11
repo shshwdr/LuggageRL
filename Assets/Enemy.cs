@@ -189,6 +189,10 @@ public class Enemy : HPObject
     public void Init(EnemyInfo _info)
     {
         Debug.Log("select " + info.Name);
+        if(info.Name == "dummy")
+        {
+            Debug.LogError("??");
+        }
         Core = (EnemyBehavior)System.Activator.CreateInstance(System.Type.GetType(_info.Name.ToString()));
         Core.enemy = this;
         info = _info;
