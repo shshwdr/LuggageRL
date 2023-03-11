@@ -568,21 +568,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
-      propertyPath: sceneDistanceEnd
-      value: 3
+      propertyPath: eventList.Array.data[0]
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
-      propertyPath: sceneDistanceStart
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
-      propertyPath: eventList.Array.size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
-      propertyPath: removeItemScenePrefab
-      value: 
-      objectReference: {fileID: 7462643318992564497, guid: 7c2dc103e2d8f9b45ac208576beb865c, type: 3}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: eventList.Array.data[1]
       value: 3
@@ -605,15 +593,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: eventList.Array.data[6]
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: eventList.Array.data[7]
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: eventList.Array.data[8]
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: eventList.Array.data[9]
@@ -625,19 +613,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: eventList.Array.data[11]
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: eventList.Array.data[12]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
-      propertyPath: eventList.Array.data[13]
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
-      propertyPath: eventList.Array.data[14]
+      propertyPath: eventList.Array.data[13]
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
+      propertyPath: eventList.Array.data[14]
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa7267459d73887499b0a8475d719b96, type: 3}

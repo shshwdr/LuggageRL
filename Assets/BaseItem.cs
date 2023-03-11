@@ -72,7 +72,7 @@ public class BaseItem : MonoBehaviour
 
         AttackText.text = damage.ToString();
         AttackText.gameObject.SetActive(true);
-        updateAttack(false);
+        updateAttack(true);
     }
     public void WillBeBuff()
     {
@@ -100,8 +100,12 @@ public class BaseItem : MonoBehaviour
     }
     void updateAttack(bool willAttack)
     {
+        //if (willAttack)
+        //{
+        //    Debug.Log("will attack");
+        //}
         AttackText.gameObject.SetActive(willAttack);
-        attackAndDefendOb.SetActive(!willAttack);
+        attackAndDefendOb.SetActive(!willAttack && !isBreakable);
         combinedAttack.text = item.core.Attack.ToString();
         combinedDefense.text = item.core.defense.ToString();
     }

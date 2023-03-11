@@ -11,4 +11,12 @@ public class Player : HPObject
         yield return new WaitForSeconds(GridManager.animTime);
 
     }
+
+    public void addMaxHP(int value)
+    {
+        maxHP += value;
+        hp += value;
+
+        hpbar.updateHPBar(hp, maxHP);
+    }
 }

@@ -36,14 +36,27 @@ public class LuggageManager : Singleton<LuggageManager>
     }
     public void select(int ind)
     {
-        if(ind == 0)
+        UpgradeType sele;
+        if (ind == 0)
         {
-            UpgradedTime[select1]++;
-        }else
+            sele = select1;
+
+        }
+        else
         {
 
-            UpgradedTime[select2]++;
+            sele = select2;
         }
+        DialoguePopupManager.Instance.showDialogue("Do you want to upgrad this: " + typeDescription[sele], null, () => {
+
+
+            UpgradedTime[sele]++;
+            if (sele == UpgradeType.hp)
+            {
+                BattleManager.Instance.player.addMaxHP(10);
+            }
+            outControl();
+        });
 
 
     }

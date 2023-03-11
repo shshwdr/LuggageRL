@@ -41,7 +41,8 @@ public class GridManager : Singleton<GridManager>
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
     public Text itemViewText;
 
-    int drawCount = 4;
+    int drawCounts = 4;
+    int DrawCount => drawCounts + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
     public bool CanDraw(out string failedReason, int drawCount)
     {
         failedReason = "";
@@ -172,9 +173,11 @@ public class GridManager : Singleton<GridManager>
     {
         yield return StartCoroutine(DrawItem(deckPool.Count));
     }
+
+
     public IEnumerator DrawItemsFromPool()
     {
-        yield return StartCoroutine(DrawItem(drawCount));
+        yield return StartCoroutine(DrawItem(DrawCount));
         //List<Vector2Int> availableEmpty = new List<Vector2Int>();
         //foreach (var key in emptyGridList)
         //{

@@ -1,6 +1,6 @@
 ﻿Name,Description
 EnemyActionIdle,This enemy would not do anything
-EnemyActionAttack,EnemyActionStealMax
+EnemyActionAttack,Enemy would attack
 EnemyActionShield,enemy would shield himself
 EnemyActionHeal,enemy will heal the one with least hp
 EnemyActionSteal,Enemy would pick an item and steal

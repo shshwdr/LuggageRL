@@ -11,7 +11,9 @@ public class BattleManager : Singleton<BattleManager>
     public Text LuggageAttackText;
     public Button LuggageAttackButton;
     public GameObject[] itemsToActivate;
-    bool canAttack = true;
+    bool CanAttack => attackCountUsed<attackCount;
+    int attackCount => 1 +LuggageManager.Instance.UpgradedTime[UpgradeType.attackCount];
+    int attackCountUsed = 0;
     public Text MoveText;
     int selectedAttackIndex;
     [SerializeField] private int moveMax = 4;
@@ -21,8 +23,6 @@ public class BattleManager : Singleton<BattleManager>
     public GameObject enemyPrefab;
     public Transform[] enemyPositions;
     public Player player;
-    [SerializeField] private int drawCount = 2;
-    [SerializeField] private int startDrawCount = 4;
     [SerializeField] private int rotateMoveCost = 0;
     [SerializeField] private int attackMoveCost = 0;
     [SerializeField] private int swapActionCost = 0;
@@ -66,21 +66,6 @@ public class BattleManager : Singleton<BattleManager>
     public IEnumerator DrawItemEnumerator(bool noCost =false)
     {
         hideButtonCanvas();
-        string failedReason;
-        int count = noCost ? startDrawCount : drawCount;
-        //if (GridManager.Instance.CanDraw(out failedReason, count))
-        //{
-        //    yield return StartCoroutine(GridManager.Instance.DrawItem(count));
-        //    if (!noCost)
-        //    {
-        //        yield return useMove(drawMoveCost);
-        //    }
-        //}
-        //else
-        //{
-
-        //    FloatingTextManager.Instance.addText(failedReason, Vector3.zero, Color.red);
-        //}
 
         yield return StartCoroutine(GridManager.Instance.DrawItemsFromPool());
         showButtonCanvas();
@@ -161,7 +146,7 @@ public class BattleManager : Singleton<BattleManager>
 
         showButtonCanvas();
         isBattleFinished = false;
-        canAttack = true;
+        attackCountUsed = 0;
         UpdateText();
         DrawItem(true);
         SelectAttack();
@@ -203,7 +188,7 @@ public class BattleManager : Singleton<BattleManager>
     void SelectAttack()
     {
         selectedAttackIndex = Random.Range(0, 3);
-        moveLeft = moveMax;
+        moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         UpdateText();
         GridManager.Instance.updateAttackEdge();
     }
@@ -271,7 +256,7 @@ public class BattleManager : Singleton<BattleManager>
             return;
         }
 
-        canAttack = false;
+        attackCountUsed ++;
         StartCoroutine(PlayerAttackMove(selectedAttackIndex));
     }
     List<int> attackIdToRotationId = new List<int>() { 0, 1, 1, 3 };
@@ -337,7 +322,7 @@ public class BattleManager : Singleton<BattleManager>
         SelectAttack();
         EnemyManager.Instance.SelectEenmiesAction();
         yield return StartCoroutine(DrawItemEnumerator(true));
-        canAttack = true;
+        attackCountUsed = 0;
         UpdateText();
 
         
@@ -348,7 +333,7 @@ public class BattleManager : Singleton<BattleManager>
     void clearTurnData()
     {
 
-        canAttack = true;
+        attackCountUsed = 0;
         foreach (var item in GridManager.Instance.GridItemDict.Values)
         {
             item.GetComponent<GridItem>().finishedAttack();
@@ -363,8 +348,8 @@ public class BattleManager : Singleton<BattleManager>
         {
             return;
         }
-        LuggageAttackButton.interactable = canAttack;
-        if (canAttack)
+        LuggageAttackButton.interactable = CanAttack;
+        if (CanAttack)
         {
 
             LuggageAttackText.text = $" {attackString[selectedAttackIndex]} ({attackMoveCost})";
