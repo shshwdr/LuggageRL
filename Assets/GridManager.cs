@@ -288,20 +288,42 @@ public class GridManager : Singleton<GridManager>
     public GameObject gridPreviewCell;
     public void showAttackPreviewOfEnemy(Enemy enemy)
     {
-        clearAttackPreview();
+
 
         if (enemy.Core.willAttacking)
         {
             var cells = getFrontCellsFromBottomToTop();
+            Transform cell = null;
             if (enemy.attackFromBottom)
             {
-                var cell = cells[enemy.attackInd];
+                cell = cells[enemy.attackInd];
+            }
+            else
+            {
+
+                cell = cells[cells.Count - 1];
+            }
+
+            var attackIndex = cell.GetComponent<GridEmptyCell>().index;
+
+            if (GridManager.Instance.GridItemDict.ContainsKey(attackIndex))
+            {
+                GridManager.Instance.GridItemDict[attackIndex].baseItem.WillBeAttacked();
+            }
+            else
+            {
                 var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
                 previewCells.Add(go);
             }
 
         }
+    }
 
+    public void cleanAndShowAttackPreviewOfEnemy(Enemy enemy)
+    {
+
+        clearAttackPreview();
+        showAttackPreviewOfEnemy(enemy);
     }
 
     public GridItem itemEnemyAttack(Enemy enemy)
@@ -316,9 +338,20 @@ public class GridManager : Singleton<GridManager>
         }
         return null;
     }
-
+    public void showAllAttackPreview()
+    {
+        clearAttackPreview();
+        foreach(var enemy in EnemyManager.Instance.GetEnemies())
+        {
+            showAttackPreviewOfEnemy(enemy);
+        }
+    }
     public void clearAttackPreview()
     {
+        foreach(var cell in GridItemDict.Values)
+        {
+            cell.baseItem.ClearWillBeAttacked();
+        }
         foreach (var cell in previewCells)
         {
             Destroy(cell);
@@ -737,7 +770,6 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemAttack attack)
             {
-                Luggage.Instance.DoDamage(attack.damage);
                 if (!GridItemDict.ContainsKey(attack.index))
                 {
                     Debug.Log("?");
@@ -750,6 +782,7 @@ public class GridManager : Singleton<GridManager>
                 {
                     yield return new WaitForSeconds(animTime);
                 }
+                yield return StartCoroutine(Luggage.Instance.DoDamage(attack.damage));
 
             }
             else if (message is MessageDrawItem drawItem)

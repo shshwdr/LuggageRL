@@ -10,6 +10,8 @@ public class EnemyAttackPreview : MonoBehaviour
 
     public Sprite empty;
     public Sprite attack;
+    public Sprite topHalfEmpty;
+    public Sprite bottomHalfEmpty;
 
 
     public GameObject otherPanel;
@@ -30,19 +32,32 @@ public class EnemyAttackPreview : MonoBehaviour
         {
             cell.gameObject.SetActive(false);
         }
-        for (int i = 0; i < ind; i++)
-        {
-
-            if (startFromBottom)
-            {
-                previewCell[previewCell.Count - 1 - i].gameObject.SetActive(true);
-                previewCell[previewCell.Count - 1 - i].sprite = empty;
-            }
-        }
         if (startFromBottom)
         {
+            for (int i = 0; i < ind; i++)
+            {
+
+                previewCell[previewCell.Count - 1 - i].gameObject.SetActive(true);
+                previewCell[previewCell.Count - 1 - i].sprite = empty;
+                previewCell[previewCell.Count - 1 - i].GetComponentInChildren<Text>().text = "";
+
+            }
             previewCell[previewCell.Count - 1 - ind].gameObject.SetActive(true);
             previewCell[previewCell.Count - 1 - ind].sprite = attack;
+            previewCell[previewCell.Count - 1 - ind].GetComponentInChildren<Text>().text = attackAmount.ToString();
+
+            previewCell[previewCell.Count -3- ind].gameObject.SetActive(true);
+            previewCell[previewCell.Count - 3 - ind].sprite = bottomHalfEmpty;
+            previewCell[previewCell.Count - 3 - ind].GetComponentInChildren<Text>().text = "";
+        }
+        else
+        {
+            previewCell[previewCell.Count - 2].gameObject.SetActive(true);
+            previewCell[previewCell.Count - 2].sprite = attack;
+            previewCell[previewCell.Count - 2].GetComponentInChildren<Text>().text = attackAmount.ToString();
+            previewCell[previewCell.Count - 1].gameObject.SetActive(true);
+            previewCell[previewCell.Count - 1].sprite = topHalfEmpty;
+            previewCell[previewCell.Count - 1].GetComponentInChildren<Text>().text = "";
         }
     }
     public void UpdateOtherPreviewTwoImage(string actionName, string itemName)
@@ -55,10 +70,11 @@ public class EnemyAttackPreview : MonoBehaviour
     }
     public void UpdateOtherPreview(string actionName, string count)
     {
-        if(actionName == "shield")
+        if (actionName == "shield")
         {
             otherText.color = shieldColor;
-        }else if(actionName == "heal")
+        }
+        else if (actionName == "heal")
         {
 
             otherText.color = healColor;
@@ -66,20 +82,20 @@ public class EnemyAttackPreview : MonoBehaviour
         Sprite sprite;
         //if (isAction)
         //{
-            sprite = Resources.Load<Sprite>("enemyActionSprite/" + actionName);
+        sprite = Resources.Load<Sprite>("enemyActionSprite/" + actionName);
         //}
         ////else
         //{
 
         //    sprite = Resources.Load<Sprite>("itemSprite/" + actionName);
         //}
-        if(sprite == null)
+        if (sprite == null)
         {
             Debug.LogError("no action sprite " + actionName);
         }
         otherSprite.sprite = sprite;
         otherSprite2.gameObject.SetActive(false);
-        if(count == "")
+        if (count == "")
         {
 
             otherText.gameObject.SetActive(false);

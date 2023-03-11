@@ -102,12 +102,25 @@ public class AttackRotateEnemy : EnemyBehavior
     }
 }
 
+public class EliteCap : EnemyBehavior {
 
+    public EliteCap()
+    {
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 5, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5 }, new EnemyActionHeal() { healAmount = 7 }, };
+    }
+}
+public class EliteThorn : EnemyBehavior {
+
+    public EliteThorn()
+    {
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 5, attackHeight = 1 }, new EnemyActionAttack() { attackDamage = 6, attackHeight = 2 }, new EnemyActionShield() { shieldAmount = 10 } };
+    }
+}
 public class BossPinata : EnemyBehavior
 {
     public BossPinata()
     {
-        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.Mud }, new EnemyActionAttack() { attackDamage = 6, attackHeight = 2 }, new EnemyActionShield() { shieldAmount = 10 } };
+        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 5 }, new EnemyActionHeal() { healAmount = 7 }, };
     }
 }
 public class BossExplode : EnemyBehavior

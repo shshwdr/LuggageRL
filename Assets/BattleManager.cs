@@ -42,8 +42,11 @@ public class BattleManager : Singleton<BattleManager>
     {
         if (isBattleFinished)
         {
+            GridManager.Instance.clearAttackPreview();
             return;
         }
+
+        GridManager.Instance.showAllAttackPreview();
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>(true))
         {
             button.gameObject.SetActive(true);
@@ -87,7 +90,8 @@ public class BattleManager : Singleton<BattleManager>
 
             //clean all grid items
 
-            foreach(var item in GridManager.Instance.GridItemDict.Values)
+            GridManager.Instance.clearAttackPreview();
+            foreach (var item in GridManager.Instance.GridItemDict.Values)
             {
                 item.destory();
             }
@@ -331,6 +335,8 @@ public class BattleManager : Singleton<BattleManager>
 
         
         showButtonCanvas();
+
+
 
     }
 
