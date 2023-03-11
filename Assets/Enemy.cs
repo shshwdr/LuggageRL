@@ -189,7 +189,7 @@ public class Enemy : HPObject
     public void Init(EnemyInfo _info)
     {
         Debug.Log("select " + info.Name);
-        if(info.Name == "dummy")
+        if(_info.Name == "dummy")
         {
             Debug.LogError("??");
         }
