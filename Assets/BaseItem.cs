@@ -63,7 +63,6 @@ public class BaseItem : MonoBehaviour
     void Start()
     {
         item = GetComponent<GridItem>();
-        updateBK();
     }
     public void WillAttack(int damage)
     {
@@ -73,6 +72,7 @@ public class BaseItem : MonoBehaviour
         AttackText.text = damage.ToString();
         AttackText.gameObject.SetActive(true);
         updateAttack(true);
+        updateBK();
     }
     public void WillBeBuff()
     {
@@ -82,10 +82,12 @@ public class BaseItem : MonoBehaviour
     {
         HealText.text = damage.ToString();
         HealText.gameObject.SetActive(true);
+        updateBK();
     }
     public void WillDestroy()
     {
         willBeDestroyed = true;
+        updateBK();
         //DestroyOverlay.SetActive(true);
     }
     public void ClearOverlayes()
@@ -97,6 +99,9 @@ public class BaseItem : MonoBehaviour
         AttackText.gameObject.SetActive(false);
         buffOverlay.SetActive(false);
         updateAttack(false);
+
+
+        updateBK();
     }
     void updateAttack(bool willAttack)
     {
