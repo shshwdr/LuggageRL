@@ -7,7 +7,7 @@ using System;
 
 public class Luggage : Singleton<Luggage>
 {
-
+    [Header("Animations")]
     [SerializeField] MMF_Player pushForwardAttackAnimationPlayer;
     [SerializeField] MMF_Player throwOutAndHitBackAttackAnimationPlayer;
 
@@ -16,8 +16,14 @@ public class Luggage : Singleton<Luggage>
     [SerializeField] public Transform luggageRightTargetTransform;
 
     [SerializeField] MMF_Player returnToIdleAnimationPlayer;
+
+
+    [SerializeField] MMF_Player hurtAnimationPlayer;
     List<MMF_Player> attackAnimationPlayers = new List<MMF_Player>();
     public Transform idleTransform;
+
+    private static float JUMP_ATTACK_HEIGHT = 2.5F; //how high the luggage will go to ground pound
+    public static float BEHIND_ATTACK_DISTANCE = 2.5F; //how far away right luggage will land for attack.
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +40,6 @@ public class Luggage : Singleton<Luggage>
     }
     Enemy target;
 
-    private static float JUMP_ATTACK_HEIGHT = 2.5F; //how high the luggage will go to ground pound
-    public static float BEHIND_ATTACK_DISTANCE = 2.5F; //how far away right luggage will land for attack.
 
     enum ENEMY_ATTACK_LOCATION { TOP, LEFT, RIGHT };
 
@@ -228,4 +232,8 @@ public class Luggage : Singleton<Luggage>
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_walk, this.transform.position);
     }
 
+    internal void playHurtAnimation()
+    {
+        hurtAnimationPlayer.PlayFeedbacks();
+    }
 }

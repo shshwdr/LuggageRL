@@ -25,6 +25,7 @@ public class Enemy : HPObject
 {
     [SerializeField] MMF_Player flyerAttackAnimationPlayer;
     [SerializeField] MMF_Player simpleAttackAnimationPlayer;
+    [SerializeField] MMF_Player hurtAnimationPlayer;
     List<MMF_Player> animations = new List<MMF_Player>();
 
     public EnemyAttackPreview attackPreview;
@@ -331,7 +332,11 @@ public class Enemy : HPObject
         yield return new WaitForSeconds(GridManager.animTime);*/
     }
 
-
+    public override void reactToDamage()
+    {
+        hurtAnimationPlayer.Initialization(); //don't know why, this one seems to need this. 
+        hurtAnimationPlayer.PlayFeedbacks();
+    }
 
 
     private void OnMouseEnter()

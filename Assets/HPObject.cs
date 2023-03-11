@@ -26,6 +26,11 @@ public class HPObject : MonoBehaviour
             damage = Mathf.Max(0, damage);
         }
         hp -= damage;
+
+        if (damage > 0)
+        {
+            reactToDamage();
+        }
         
         yield return new WaitForSeconds(GridManager.animTime);
         hpbar.updateHPBar(hp, maxHP);
@@ -33,6 +38,11 @@ public class HPObject : MonoBehaviour
         {
             yield return StartCoroutine( Die());
         }
+    }
+
+    public virtual void reactToDamage()
+    {
+        
     }
 
     public virtual IEnumerator ShieldBeAttacked(int amount)

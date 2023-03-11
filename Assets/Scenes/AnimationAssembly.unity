@@ -991,11 +991,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 879248113}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &999796536 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7483143120114793855, guid: 33e7e09018649654a9bc4ab76c9161ff, type: 3}
-  m_PrefabInstance: {fileID: 1268015397580205257}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1032718815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,10 +1080,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2060133271, guid: 31976e83c8fd7bc4dbec15f82e4a1e41, type: 3}
-      propertyPath: FeedbacksList.Array.data[5].DestinationPositionTransform
-      value: 
-      objectReference: {fileID: 999796536}
     - target: {fileID: 5396105676842874760, guid: 31976e83c8fd7bc4dbec15f82e4a1e41, type: 3}
       propertyPath: m_Name
       value: enemy
