@@ -3877,11 +3877,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: sceneDistanceEnd
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: sceneDistanceStart
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2672507906286816594, guid: aa7267459d73887499b0a8475d719b96, type: 3}
       propertyPath: eventList.Array.size
