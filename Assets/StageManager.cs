@@ -67,7 +67,7 @@ public class StageManager : Singleton<StageManager>
                 break;
             case StageEventType.eliteBattle:
                 go = Instantiate(battleScenePrefab);
-                //go.GetComponent<BattleScene>().battleType = BattleType.elite;
+                go.GetComponent<BattleScene>().battleType = BattleType.elite;
 
                 break;
 
