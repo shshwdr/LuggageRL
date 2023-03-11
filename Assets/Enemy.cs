@@ -259,7 +259,7 @@ public class Enemy : HPObject
     protected override IEnumerator DieInteral()
     {
         yield return StartCoroutine( base.DieInteral());
-
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_death, transform.position);
         transform.DOShakeScale(GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);
         transform.DOLocalMoveY(-10, GridManager.animTime);
