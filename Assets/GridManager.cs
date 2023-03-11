@@ -167,6 +167,10 @@ public class GridManager : Singleton<GridManager>
         {
             RemoveGrid(item);
         }
+        foreach(var key in GridItemDict.Keys.ToList())
+        {
+            GridItemDict.Remove(key);
+        }
     }
 
     public IEnumerator DrawAllItemsFromPool()
@@ -350,6 +354,10 @@ public class GridManager : Singleton<GridManager>
     {
         foreach(var cell in GridItemDict.Values)
         {
+            if(cell == null)
+            {
+                Debug.Log("error");
+            }
             cell.baseItem.ClearWillBeAttacked();
         }
         foreach (var cell in previewCells)
@@ -703,6 +711,10 @@ public class GridManager : Singleton<GridManager>
                 {
                     foreach (var pair in move.itemTargetIndex.Keys)
                     {
+                        if(GridItemDict[pair.index] == null)
+                        {
+                            GridItemDict.Remove(pair.index);
+                        }
                         UpdateItemPositionToIndexEnumerator(GridItemDict[pair.index]);
                     }
 
@@ -715,6 +727,11 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(counterChanage.index))
                 {
                     Debug.Log("?");
+                }
+
+                if (GridItemDict[counterChanage.index] == null)
+                {
+                    GridItemDict.Remove(counterChanage.index);
                 }
                 GridItemDict[counterChanage.index].UpdateCounter();
                 FloatingTextManager.Instance.addText((counterChanage.amount > 0 ? "+" : "") + $"{counterChanage.amount.ToString()}", GridItemDict[counterChanage.index].transform.position, Color.yellow);
@@ -730,6 +747,10 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(applyEffect.targetIndex))
                 {
                     Debug.Log("?");
+                }
+                if (GridItemDict[applyEffect.index] == null)
+                {
+                    GridItemDict.Remove(applyEffect.index);
                 }
                 if (GridItemDict[applyEffect.targetIndex].core.isAttacker)
                 {
@@ -753,6 +774,11 @@ public class GridManager : Singleton<GridManager>
                 {
                     Debug.Log("?");
                 }
+
+                if (GridItemDict[visualEffect.index] == null)
+                {
+                    GridItemDict.Remove(visualEffect.index);
+                }
                 string visualText = "";
                 if (visualEffect.effect == VisualEffect.electric)
                 {
@@ -770,9 +796,15 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemAttack attack)
             {
+                Debug.Log("attack " + attack.item.Name);
                 if (!GridItemDict.ContainsKey(attack.index))
                 {
                     Debug.Log("?");
+                }
+
+                if (GridItemDict[attack.index] == null)
+                {
+                    GridItemDict.Remove(attack.index);
                 }
                 // Debug.Log($"{attack.item.Name} Attack {attack.damage} {GridItemDict[attack.index].transform.position}");
 
@@ -792,6 +824,10 @@ public class GridManager : Singleton<GridManager>
                 {
                     Debug.Log("?");
                 }
+                if (GridItemDict[drawItem.index] == null)
+                {
+                    GridItemDict.Remove(drawItem.index);
+                }
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
                 FloatingTextManager.Instance.addText($"Draw {drawItem.amount} Items", GridItemDict[drawItem.index].transform.position, Color.blue);
                 yield return new WaitForSeconds(animTime);
@@ -803,6 +839,11 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(attackPlayer.index))
                 {
                     Debug.Log("?");
+                }
+                
+                if (GridItemDict[attackPlayer.index] == null)
+                {
+                    GridItemDict.Remove(attackPlayer.index);
                 }
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
                 FloatingTextManager.Instance.addText($"Self Damage {attackPlayer.amount}", GridItemDict[attackPlayer.index].transform.position, Color.red);
@@ -816,6 +857,10 @@ public class GridManager : Singleton<GridManager>
                 {
                     Debug.Log("?");
                 }
+                if (GridItemDict[heal.index] == null)
+                {
+                    GridItemDict.Remove(heal.index);
+                }
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
                 FloatingTextManager.Instance.addText($"Heal {heal.amount}", GridItemDict[heal.index].transform.position, Color.green);
                 yield return new WaitForSeconds(animTime);
@@ -827,6 +872,10 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(destr.index))
                 {
                     Debug.Log("?");
+                }
+                if (GridItemDict[destr.index] == null)
+                {
+                    GridItemDict.Remove(destr.index);
                 }
                 FloatingTextManager.Instance.addText("Destroy!", GridItemDict[destr.index].transform.position, Color.white);
                 GridItemDict[destr.index].destory();
@@ -842,6 +891,10 @@ public class GridManager : Singleton<GridManager>
                 {
                     Debug.Log("?");
                 }
+                if (GridItemDict[itemMove.index] == null)
+                {
+                    GridItemDict.Remove(itemMove.index);
+                }
                 UpdateItemPositionToIndexEnumerator(GridItemDict[itemMove.index]);
                 yield return new WaitForSeconds(animTime);
             }
@@ -856,6 +909,7 @@ public class GridManager : Singleton<GridManager>
         if (item != null)
         {
             damage -= item.core.defense;
+            damage = Mathf.Max(0, damage);
             item.addDestroyMessage(messages);
 
             yield return StartCoroutine(ParseMessages());

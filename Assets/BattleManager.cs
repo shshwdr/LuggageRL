@@ -24,7 +24,7 @@ public class BattleManager : Singleton<BattleManager>
     public Transform[] enemyPositions;
     public Player player;
     [SerializeField] private int rotateMoveCost = 0;
-    [SerializeField] private int attackMoveCost = 0;
+    [SerializeField] public int attackMoveCost = 0;
     [SerializeField] private int swapActionCost = 0;
     [SerializeField] private int drawMoveCost = 0;
     public Transform ButtonCanvas;
@@ -158,6 +158,9 @@ public class BattleManager : Singleton<BattleManager>
 
         battleMet++;
 
+
+        DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance. getUnreadText("Tutorial_battle1"));
+
     }
     public void AddEnemies(BattleType battleType)
     {
@@ -196,7 +199,7 @@ public class BattleManager : Singleton<BattleManager>
         UpdateText();
         GridManager.Instance.updateAttackEdge();
     }
-    IEnumerator useMove(int amount)
+    public IEnumerator useMove(int amount)
     {
         moveLeft -= amount;
         UpdateText();
@@ -285,11 +288,11 @@ public class BattleManager : Singleton<BattleManager>
             case 2:
                 yield return StartCoroutine(Luggage.Instance.ThrowOutAndHitBack());
                 break;
-            case 3:
-                yield return StartCoroutine(Luggage.Instance.LiftAndDownAttack());
-                break;
+            //case 3:
+            //    yield return StartCoroutine(Luggage.Instance.LiftAndDownAttack());
+            //    break;
         }
-        yield return useMove(attackMoveCost);
+        //yield return useMove(attackMoveCost);
 
         showButtonCanvas();
     }

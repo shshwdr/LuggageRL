@@ -12,8 +12,10 @@ public class DialoguePopupManager : Singleton<DialoguePopupManager>
     public Button button2;
     public GameObject panel;
     
-    public void showDialogue(string t, Sprite s, Action action1 = null, Action action2 = null)
+    public void showDialogue(string t, Sprite s = null, Action action1 = null, Action action2 = null)
     {
+        if(t == "") { return; }
+        Time.timeScale = 0;
         panel.SetActive(true);
         text.text = t;
         if (s)
@@ -29,12 +31,14 @@ public class DialoguePopupManager : Singleton<DialoguePopupManager>
         button1.onClick.RemoveAllListeners();
         button2.onClick.RemoveAllListeners();
 
-        if (button1 != null)
+        if (action1 != null)
         {
             button1.onClick.AddListener(() =>
             {
                 action1.Invoke();
                 panel.SetActive(false);
+
+                Time.timeScale = 1;
             }
 
                 );
@@ -44,6 +48,7 @@ public class DialoguePopupManager : Singleton<DialoguePopupManager>
             button2.onClick.AddListener(() =>
             {
                 panel.SetActive(false);
+                Time.timeScale = 1;
 
             }
             );
@@ -51,6 +56,14 @@ public class DialoguePopupManager : Singleton<DialoguePopupManager>
         else
         {
 
+            button1.onClick.AddListener(() =>
+            {
+                panel.SetActive(false);
+
+                Time.timeScale = 1;
+            }
+
+                );
             button2.gameObject.SetActive(false);
         }
     }

@@ -25,7 +25,9 @@ public class Enemy : HPObject
 {
     [SerializeField] MMF_Player flyerAttackAnimationPlayer;
     [SerializeField] MMF_Player simpleAttackAnimationPlayer;
-    List<MMF_Player> animations = new List<MMF_Player>();
+    [SerializeField] MMF_Player hurtAnimationPlayer;
+    [SerializeField] MMF_Player rotateAttackAnimationPlayer;
+    //List<MMF_Player> animations = new List<MMF_Player>();
 
     public EnemyAttackPreview attackPreview;
     public SpriteRenderer enemyRender;
@@ -189,6 +191,10 @@ public class Enemy : HPObject
     public void Init(EnemyInfo _info)
     {
         Debug.Log("select " + info.Name);
+        if(_info.Name == "dummy")
+        {
+            Debug.LogError("??");
+        }
         Core = (EnemyBehavior)System.Activator.CreateInstance(System.Type.GetType(_info.Name.ToString()));
         Core.enemy = this;
         info = _info;
@@ -214,7 +220,9 @@ public class Enemy : HPObject
     private void InitiateAnimations()
     {
         //animations.Add(flyerAttackAnimationPlayer);
-        animations.Add(simpleAttackAnimationPlayer);
+        //animations.Add(simpleAttackAnimationPlayer);
+        MMF_Player[] animations = GetComponentsInChildren<MMF_Player>();
+
         foreach (MMF_Player animationPlayerList in animations)
         {
             foreach (MMF_Position feedback in animationPlayerList.GetFeedbacksOfType<MMF_Position>())
@@ -285,9 +293,19 @@ public class Enemy : HPObject
     public IEnumerator RotateBag()
     {
 
-        yield return StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
-        
+        yield return StartCoroutine(rotateAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
     }
+    public void RotateBagImpact()
+    {
+        StartCoroutine(RotateBagFinish());
+    }
+
+    private IEnumerator RotateBagFinish()
+    {
+        GridManager.Instance.Rotate(1, false);
+        yield return Luggage.Instance.BagRotateAttackReceived();
+    }
+
     public IEnumerator Attack()
     {
         GridManager.Instance.cleanAndShowAttackPreviewOfEnemy(this);
@@ -327,7 +345,11 @@ public class Enemy : HPObject
         yield return new WaitForSeconds(GridManager.animTime);*/
     }
 
-
+    public override void reactToDamage()
+    {
+        hurtAnimationPlayer.Initialization(); //don't know why, this one seems to need this. 
+        hurtAnimationPlayer.PlayFeedbacks();
+    }
 
 
     private void OnMouseEnter()

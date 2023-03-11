@@ -9,6 +9,7 @@ public class TextInfo
 }
 public class TutorialManager : Singleton<TutorialManager>
 {
+    public Dictionary<string, bool> read = new Dictionary<string, bool>();
     public Dictionary<string, TextInfo> textDict = new Dictionary<string, TextInfo>();
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,8 @@ public class TutorialManager : Singleton<TutorialManager>
         {
             textDict[item.Name] = item;
         }
+
+        DialoguePopupManager.Instance.showDialogue(getUnreadText("Tutorial_start"));
     }
     public TextInfo getTextInfo(string itemName)
     {
@@ -30,10 +33,19 @@ public class TutorialManager : Singleton<TutorialManager>
         Debug.LogError("no text " + itemName);
         return textDict["PickupSelection"];
     }
-
+    public string getUnreadText(string itemName)
+    {
+        return "";
+        if (read.ContainsKey(itemName))
+        {
+            return "";
+        }
+        return getText(itemName);
+    }
     public string getText(string itemName)
     {
         var info = getTextInfo(itemName);
+        read[itemName] = true;
         return info.Text;
     }
 

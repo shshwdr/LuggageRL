@@ -19,4 +19,9 @@ public class Player : HPObject
 
         hpbar.updateHPBar(hp, maxHP);
     }
+
+    public override void reactToDamage()
+    {
+        gameObject.GetComponent<Luggage>().playHurtAnimation();
+    }
 }

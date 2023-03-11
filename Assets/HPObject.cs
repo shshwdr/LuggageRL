@@ -11,6 +11,7 @@ public class HPObject : MonoBehaviour
     public int shield;
     public virtual IEnumerator ApplyDamage(int damage)
     {
+
         if (shield > 0)
         {
             var reduce = Mathf.Min(damage, shield);
@@ -19,13 +20,29 @@ public class HPObject : MonoBehaviour
 
         }
         FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0), Color.red);
+        if (damage < 0)
+        {
+            Debug.LogWarning("how damage get lower than 0");
+            damage = Mathf.Max(0, damage);
+        }
         hp -= damage;
+
+        if (damage > 0)
+        {
+            reactToDamage();
+        }
+        
         yield return new WaitForSeconds(GridManager.animTime);
         hpbar.updateHPBar(hp, maxHP);
         if (hp <= 0)
         {
             yield return StartCoroutine( Die());
         }
+    }
+
+    public virtual void reactToDamage()
+    {
+        
     }
 
     public virtual IEnumerator ShieldBeAttacked(int amount)

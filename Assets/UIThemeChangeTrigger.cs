@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 
 public class UIThemeChangeTrigger : MonoBehaviour
@@ -16,7 +17,7 @@ public class UIThemeChangeTrigger : MonoBehaviour
 
     private void Start()
     {
-        foreach(ThemedUIContainer container in FindObjectsOfType<ThemedUIContainer>())
+        foreach (ThemedUIContainer container in FindObjectsOfType<ThemedUIContainer>())
         {
             switch (container.theme)
             {
@@ -33,7 +34,9 @@ public class UIThemeChangeTrigger : MonoBehaviour
                     break;
             }
         }
-    }
+    } 
+
+
     private void Update()
     {
         if (hasFinishedTransitioning)
