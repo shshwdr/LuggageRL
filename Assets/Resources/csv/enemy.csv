@@ -1,5 +1,5 @@
 ﻿Name,DisplayName,Description,Type,Difficulty,BiomeString,HP,BasicAttack,IsLarge
-DummyEnemy,"Fire ""Freddy"" Hydrant","This enemy does nothing, poor tutorial guy",minion,0,none,9,0,0
+DummyEnemy,Fire Freddy Hydrant,"This enemy does nothing, poor tutorial guy",minion,0,none,9,0,0
 SimpleAttackEnemy,Watchdog,This enemy just attack,minion,1,none,11,3,0
 AttackShieldEnemy,Scorpion,"This enemy knows how to shield, it can attack at height 2",minion,2,none,14,4,0
 AttackFlyEnemy,,This enemy can fly!,minion,3,none,16,4,0
