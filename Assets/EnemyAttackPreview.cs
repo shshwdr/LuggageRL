@@ -46,9 +46,10 @@ public class EnemyAttackPreview : MonoBehaviour
             previewCell[previewCell.Count - 1 - ind].sprite = attack;
             previewCell[previewCell.Count - 1 - ind].GetComponentInChildren<Text>().text = attackAmount.ToString();
 
-            previewCell[previewCell.Count -3- ind].gameObject.SetActive(true);
-            previewCell[previewCell.Count - 3 - ind].sprite = bottomHalfEmpty;
-            previewCell[previewCell.Count - 3 - ind].GetComponentInChildren<Text>().text = "";
+            //if()
+            //previewCell[previewCell.Count -3- ind].gameObject.SetActive(true);
+            //previewCell[previewCell.Count - 3 - ind].sprite = bottomHalfEmpty;
+            //previewCell[previewCell.Count - 3 - ind].GetComponentInChildren<Text>().text = "";
         }
         else
         {
@@ -64,9 +65,11 @@ public class EnemyAttackPreview : MonoBehaviour
     {
 
         otherSprite.sprite = Resources.Load<Sprite>("enemyActionSprite/" + actionName);
-        otherSprite2.sprite = Resources.Load<Sprite>("itemSprite/" + actionName);
+        otherSprite2.sprite = Resources.Load<Sprite>("itemSprite/" + itemName);
         otherText.gameObject.SetActive(false);
         otherSprite2.gameObject.SetActive(true);
+        otherPanel.SetActive(true);
+        attackPanel.SetActive(false);
     }
     public void UpdateOtherPreview(string actionName, string count)
     {

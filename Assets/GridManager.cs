@@ -110,6 +110,7 @@ public class GridManager : Singleton<GridManager>
             if (availableEmpty.Count == 0)
             {
                 FloatingTextManager.Instance.addText("Bag is Full!", Vector3.zero, Color.white);
+                break;
             }
             if (deckPool.Count == 0)
             {
@@ -212,7 +213,7 @@ public class GridManager : Singleton<GridManager>
     // Start is called before the first frame update
     void Start()
     {
-        //Time.timeScale = 5;
+        Time.timeScale = 5;
         if (GameManager.Instance.preselectedItems.Count > 0)
         {
             for (int i = 0;i< GameManager.Instance.preselectedItems.Count; i++)
@@ -819,7 +820,9 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(visualEffect.index))
                 {
                     Debug.Log("?");
+                    continue;
                 }
+
 
                 if (GridItemDict[visualEffect.index] == null)
                 {
@@ -1230,6 +1233,11 @@ public class GridManager : Singleton<GridManager>
             Debug.Log("no remove for index " + ind);
         }
         GridItemDict.Remove(ind);
+
+        if(type is ItemType.Mud || type is ItemType.LiquidBomb)
+        {
+            return;
+        }
         deckPool.Add(type);
     }
     public void RemoveDeck(GridItem item)

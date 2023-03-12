@@ -131,14 +131,14 @@ public class Pins : GridItemCore
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
 
+        GridManager.Instance.pinsCount++;
         var dir = (borderIndex - originIndex) / diff;
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.impact, skipAnim = true });
-        messages.Add(new MessageItemAttack { item = this, damage = (CalculateDamage(damage) ^ GridManager.Instance.pinsCount) + BattleManager.Instance.finalDamageIncrease, index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = (CalculateDamage(damage) * GridManager.Instance.pinsCount) + BattleManager.Instance.finalDamageIncrease, index = index });
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.arrow, skipAnim = true });
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         buffs.Clear();
-        GridManager.Instance.pinsCount++;
         index = borderIndex + dir * 10;
 
 

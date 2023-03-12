@@ -262,6 +262,7 @@ public class BattleManager : Singleton<BattleManager>
         //moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         UpdateText();
         GridManager.Instance.updateAttackEdge();
+        PredictNextAttack();
     }
     public IEnumerator useMove(int amount)
     {

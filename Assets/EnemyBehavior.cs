@@ -120,7 +120,7 @@ public class BossPinata : EnemyBehavior
 {
     public BossPinata()
     {
-        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 7}, new EnemyActionHeal() { healAmount = 0}, new EnemyActionAttack() { attackDamage =  2, attackHeight = 1 }, new EnemyActionRotate() };
+        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.Mud },new EnemyActionShield() { shieldAmount = 7}, new EnemyActionAdd() { addItem = ItemType.Mud, amount = 2 }, new EnemyActionAttack() { attackDamage =  2, attackHeight = 1 }, new EnemyActionAdd() { addItem = ItemType.Mud, amount = 3} };
     }
 }
 public class BossExplode : EnemyBehavior

@@ -119,29 +119,33 @@ public class Enemy : HPObject
         }
     }
 
-    public IEnumerator AddItem(ItemType type)
+    public IEnumerator AddItem(ItemType type, int amount)
     {
         attackPreview.transform.DOShakeScale(GridManager.animTime * 2);
         yield return new WaitForSeconds(GridManager.animTime * 2);
 
-        var obj = GridManager.Instance.AddItemRandomPosition(type);
-
-        if(obj == null)
+        for(int i = 0; i < amount; i++)
         {
 
-            //FloatingTextManager.Instance.addText("Bag is Full!", transform.position, Color.yellow);
-            yield return new WaitForSeconds(GridManager.animTime);
+            var obj = GridManager.Instance.AddItemRandomPosition(type);
+            if (obj == null)
+            {
+
+                //FloatingTextManager.Instance.addText("Bag is Full!", transform.position, Color.yellow);
+                yield break;
+            }
+            else
+            {
+                var originPosition = obj.transform.position;
+                obj.transform.position = transform.position;
+
+                obj.transform.DOMove(originPosition, GridManager.animTime);
+
+
+            }
         }
-        else
-        {
-            var originPosition = obj.transform.position;
-            obj.transform.position = transform.position;
+        yield return new WaitForSeconds(GridManager.animTime);
 
-            obj.transform.DOMove(originPosition, GridManager.animTime);
-            yield return new WaitForSeconds(GridManager.animTime);
-
-
-        }
 
     }
     public IEnumerator StealItem(ItemType type)

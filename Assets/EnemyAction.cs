@@ -100,7 +100,7 @@ public class EnemyActionSteal : EnemyAction
         //find the most item
         stealItem = GridManager.Instance.findMostItem();
 
-        enemy.attackPreview.UpdateOtherPreview("steal", stealItem.ToString());
+        enemy.attackPreview.UpdateOtherPreviewTwoImage("steal", stealItem.ToString());
 
     }
 }
@@ -108,10 +108,11 @@ public class EnemyActionSteal : EnemyAction
 public class EnemyActionAdd : EnemyAction
 {
     public ItemType addItem;
+    public int amount = 1;
     public override IEnumerator TakeAction(Enemy enemy)
     {
 
-        yield return enemy.StartCoroutine(enemy.AddItem(addItem));
+        yield return enemy.StartCoroutine(enemy.AddItem(addItem, amount));
         //yield return new WaitForSeconds(GridManager.animTime);
     }
     public override void Preview(Enemy enemy)
