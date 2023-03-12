@@ -17,11 +17,33 @@ public class StageManager : Singleton<StageManager>
     public bool isMoving = true;
     int eventIndex = 0;
     public BiomeType biomeType = BiomeType.forest;
-    public List<StageEventType> eventList = new List<StageEventType>() { StageEventType.itemSelect, StageEventType.normalBattle, StageEventType.itemSelect, StageEventType.normalBattle, StageEventType.itemSelect };
+    List<StageEventType> eventList = new List<StageEventType>() {
+
+
+        StageEventType.normalBattle, StageEventType.upgradeLuggageNPC,
+        StageEventType.normalBattle, StageEventType.itemSelect,
+        StageEventType.normalBattle, StageEventType.itemSelect,
+        StageEventType.normalBattle, StageEventType.itemSelect,
+        StageEventType.normalBattle, StageEventType.upgradeLuggageNPC,
+        StageEventType.normalBattle, StageEventType.itemSelect,
+        StageEventType.eliteBattle, StageEventType.upgradeRemoveNPC,
+        StageEventType.normalBattle, StageEventType.itemSelect,
+        StageEventType.normalBattle, StageEventType.upgradeLuggageNPC,
+        StageEventType.bossBattle, StageEventType.itemSelect,
+
+        StageEventType.normalBattle, StageEventType.upgradeRemoveNPC,
+        StageEventType.normalBattle, StageEventType.itemSelect,
+        StageEventType.normalBattle, StageEventType.upgradeLuggageNPC,
+        StageEventType.eliteBattle, StageEventType.itemSelect,
+        StageEventType.normalBattle, StageEventType.upgradeRemoveNPC,
+        StageEventType.normalBattle, StageEventType.itemSelect,
+        StageEventType.bossBattle, StageEventType.upgradeLuggageNPC,
+    };
     // Start is called before the first frame update
     void Start()
     {
         Invoke("takeControl", waitTime);
+        BattleManager.Instance.player.updateHPFromUpgrade();
         //takeControl();
     }
 

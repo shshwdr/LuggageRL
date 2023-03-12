@@ -14,6 +14,18 @@ public class Player : HPObject
 
     }
 
+    public void updateHPFromUpgrade()
+    {
+        if (!LuggageManager.Instance.UpgradedTime.ContainsKey(UpgradeType.hp))
+        {
+            return;
+        }
+        for (int i = 0;i< LuggageManager.Instance.UpgradedTime[UpgradeType.hp]; i++)
+        {
+            addMaxHP(10);
+        } 
+    }
+
     public void addMaxHP(int value)
     {
         maxHP += value;

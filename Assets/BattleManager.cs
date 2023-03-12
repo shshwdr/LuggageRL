@@ -10,6 +10,7 @@ public class BattleManager : Singleton<BattleManager>
     public BaseScene baseScene;
     public Text LuggageAttackText;
     public Button LuggageAttackButton;
+    public Text LuggageAttackBuffText;
     public GameObject[] luggageAttackTutorial;
     public Text roundText;
     public GameObject[] itemsToActivate;
@@ -17,12 +18,8 @@ public class BattleManager : Singleton<BattleManager>
     public GameObject luggageAttackDisabledOb;
     public GameObject luggageAttackEnabledOb;
 
-    public int finalDamageIncrease;
+    public int finalDamageIncrease=>LuggageManager.Instance.UpgradedTime[UpgradeType.basicAttack];
 
-    public void addFinalDamageIncrease()
-    {
-        finalDamageIncrease++;
-    }
 
     public Text moveHint;
     bool CanAttack => attackCountUsed < attackCount;
@@ -146,7 +143,7 @@ public class BattleManager : Singleton<BattleManager>
     public void takeControl()
     {
 
-
+        updateBuff();
         if (battleCount == 1)
         {
 
@@ -455,7 +452,10 @@ public class BattleManager : Singleton<BattleManager>
         }
         MoveText.text = $"{moveLeft}";
     }
-
+    public void updateBuff()
+    {
+        LuggageAttackBuffText.text = $"(+{LuggageManager.Instance.UpgradedTime[UpgradeType.basicAttack]}";
+    }
     void RemoveText()
     {
         FloatingTextManager.Instance.addText("Search for next Enemy", Vector3.zero, Color.white);

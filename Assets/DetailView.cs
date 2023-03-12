@@ -97,7 +97,7 @@ public class DetailView : Singleton<DetailView>
             enemyView.SetActive(true);
             enemyName.text = enemy.DisplayName;
             enemyDescription.text = enemy.Desc;
-            actionDescription.text = enemy.Core.currentAction.Desc;
+            actionDescription.text = "Next turn: "+ enemy.Core.currentAction.Desc;
         }
     }
 

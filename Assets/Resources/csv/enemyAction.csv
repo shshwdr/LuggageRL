@@ -1,9 +1,9 @@
 ﻿Name,Description
-EnemyActionIdle,This enemy would not do anything
-EnemyActionAttack,Enemy would attack
-EnemyActionShield,enemy would shield himself
-EnemyActionHeal,enemy will heal the one with least hp
-EnemyActionSteal,Enemy would pick an item and steal
-EnemyActionStealMax,Enemy would steal the item that you have most in your bag when it attacks
-EnemyActionRotate,Enemy would rotate your bag
-EnemyActionAdd,Enemy would sneak some crappy items in your bag
+EnemyActionIdle,Takes a rest and will do nothing
+EnemyActionAttack,Ready to attack
+EnemyActionShield,Will shield himself
+EnemyActionHeal,Will heal the enemy with the least HP
+EnemyActionSteal,Will steal one of your items
+EnemyActionStealMax,Will steal your most common item and attacks
+EnemyActionRotate,Will rotate your bag
+EnemyActionAdd,Puts items in your bag

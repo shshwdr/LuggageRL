@@ -32,7 +32,7 @@ public class LuggageManager : Singleton<LuggageManager>
     public void selectedTypes()
     {
         List < UpgradeType > types = typeDescription.Keys.ToList();
-        select1 = types[Random.Range(0,types.Count)];
+        select1 = UpgradeType.basicAttack;//types[Random.Range(0,types.Count)];
         types.Remove(select1);
         select2 = types[Random.Range(0, types.Count)];
     }
@@ -59,7 +59,7 @@ public class LuggageManager : Singleton<LuggageManager>
             }
             if(sele == UpgradeType.basicAttack)
             {
-                BattleManager.Instance.addFinalDamageIncrease();
+                BattleManager.Instance.updateBuff();
             }
             outControl();
         });
