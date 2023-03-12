@@ -5,6 +5,8 @@ public enum BiomeType { none,forest, desert,river}
 public enum StageEventType { normalBattle, bossBattle, eliteBattle, itemSelect, upgradeLuggageNPC, upgradeRemoveNPC}
 public class StageManager : Singleton<StageManager>
 {
+
+    float waitTime = 1f;
     [SerializeField] GameObject battleScenePrefab;
     [SerializeField] GameObject itemSelectScenePrefab;
     [SerializeField] GameObject removeItemScenePrefab;
@@ -19,7 +21,8 @@ public class StageManager : Singleton<StageManager>
     // Start is called before the first frame update
     void Start()
     {
-        takeControl();
+        Invoke("takeControl", waitTime);
+        //takeControl();
     }
 
     public void takeControl()

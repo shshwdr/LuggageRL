@@ -44,7 +44,7 @@ class LoadAssets : MonoBehaviour
     IEnumerator LoadGameAsync()
     {
         // Start an asynchronous operation to load the scene
-        AsyncOperation async = SceneManager.LoadSceneAsync(Scene);
+        AsyncOperation async = SceneManager.LoadSceneAsync(1);
 
         // Don't let the scene start until all Studio Banks have finished loading
         async.allowSceneActivation = false;
