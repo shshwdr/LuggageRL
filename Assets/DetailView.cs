@@ -19,10 +19,14 @@ public class DetailView : Singleton<DetailView>
     public TextMeshProUGUI Attack;
     public TextMeshProUGUI Defense;
     public Image image;
+    public Transform buffParent;
+    public GameObject buffPrefab;
+    
+
     void Start()
     {
     }
-
+    Dictionary<BuffType, string> buffMap = new Dictionary<BuffType, string>() { { BuffType.piggyBank, "PiggyBank" },{ BuffType.poison, "Poison" },{ BuffType.balancer, "Balancer" } };  
     public void UpdateCard(GridItemCore item)
     {
 
@@ -41,6 +45,23 @@ public class DetailView : Singleton<DetailView>
             Name.text = item.info.DisplayName;
             Attack.text = item.Attack.ToString();
             Defense.text = item.info.Defense.ToString();
+
+            foreach (Transform child in buffParent)
+            {
+                if(child != buffPrefab && child.gameObject.active)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+            for (int i = 0;i< item.buffs.Keys.Count; i++)
+            {
+                var key = item.buffs.Keys[i];
+                var value = item.buffs.Values[i];
+                var go = Instantiate(buffPrefab, buffParent);
+                go.SetActive(true);
+                go.GetComponentInChildren<Image>().sprite = ItemManager.Instance.getItemInfo( buffMap[key]).sprite;
+                go.GetComponentInChildren<Text>().text = value.ToString();
+            }
         }
         }
     public void UpdateValue(Enemy enemy)

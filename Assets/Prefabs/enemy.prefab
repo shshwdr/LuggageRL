@@ -7207,9 +7207,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1337077575
-  m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingLayerID: 1978928693
+  m_SortingLayer: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: b0a73c03728c2994e8e12234fed31eb9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8313,7 +8313,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5396105676842874760
@@ -8379,7 +8379,6 @@ MonoBehaviour:
   rotateAttackAnimationPlayer: {fileID: 1778454089}
   attackPreview: {fileID: 5791175552444314832}
   enemyRender: {fileID: 5396105675173200863}
-  attack: 3
   idlePosition: {fileID: 4166386709455690658}
   leftTargetTransform: {fileID: 1396621135893089179}
   topTargetTransform: {fileID: 2713506569938761161}
@@ -8392,6 +8391,8 @@ MonoBehaviour:
     Type: Attacker
     Difficulty: 0
     BiomeString: 
+    IsLarge: 0
+    BasicAttack: 0
     HP: 9
   shieldObj: {fileID: 5317881196502984178}
   shieldText: {fileID: 1120893301603374417}

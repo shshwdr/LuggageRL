@@ -8,7 +8,7 @@ public class BattleMessage
 }
 
 
-public enum VisualEffect { electric, explode }
+public enum VisualEffect { electric, explode, crush }
 
 public class MessageMove : BattleMessage
 {

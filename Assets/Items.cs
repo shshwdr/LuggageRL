@@ -30,7 +30,7 @@ public class Potion : GridItemCore
 {
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         var healAmount = info.Param1;
         messages.Add(new MessageItemHeal { item = this, amount = healAmount, target = BattleManager.Instance.player, index = index });
         this.addDestroyMessage(messages);
@@ -70,7 +70,7 @@ public class Poison : GridItemCore
 {
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         var value = info.Param1;
         messages.Add(new MessageItemApplyEffect { item = this, index = index, target = item, type = BuffType.poison, value = value, targetIndex = item.index });
         //messages.Add(new MessageItemAttack { item = this, damage = attack, index = index });
@@ -83,7 +83,7 @@ public class PiggyBank : GridItemCore
 {
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         messages.Add(new MessageItemApplyEffect { item = this, index = index, target = item, type = BuffType.piggyBank, value = count, targetIndex = item.index });
         //messages.Add(new MessageItemAttack { item = this, damage = attack, index = index });
         this.addDestroyMessage(messages);
@@ -323,7 +323,7 @@ public class Pinata : GridItemCore
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         var drawAmount = info.Param1;
 
         messages.Add(new MessageDrawItem { index = index, amount = drawAmount });
@@ -340,7 +340,7 @@ public class Mud : GridItemCore
 
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         this.addDestroyMessage(messages);
     }
 }
@@ -350,7 +350,7 @@ public class LiquidBomb : GridItemCore
 
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode });
         if (GridManager.Instance.isPredict)
         {
@@ -380,8 +380,8 @@ public class FreezeBomb : GridItemCore
 
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode });
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush,skipAnim = true });
         if (GridManager.Instance.isPredict)
         {
             foreach (var i in GridManager.Instance.predictDict.Values)

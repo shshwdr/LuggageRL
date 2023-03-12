@@ -37,7 +37,7 @@ public class ItemManager : Singleton<ItemManager>
 
     List<int> battleCountToRarity = new List<int>
     {
-        3,6,9,10000
+        1,3,6,9,1000
     };
     int rarityIndex = 0;
     // Start is called before the first frame update

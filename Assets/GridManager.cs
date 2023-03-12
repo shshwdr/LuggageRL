@@ -646,13 +646,8 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemApplyEffect applyEffect)
             {
-                if (!GridItemDict.ContainsKey(applyEffect.targetIndex))
+                if (predictToOrigin[(GridItemCore)applyEffect.target].baseItem.GetComponent<GridItem>().core.isAttacker)
                 {
-                    Debug.Log("bad");
-                }
-                if (GridItemDict[applyEffect.targetIndex].core.isAttacker)
-                {
-
                     predictToOrigin[(GridItemCore)applyEffect.target].baseItem.WillBeBuff();
                 }
 
@@ -794,6 +789,11 @@ public class GridManager : Singleton<GridManager>
                 if (visualEffect.effect == VisualEffect.explode)
                 {
                     visualText = "Boom!";
+                }
+                if(visualEffect.effect == VisualEffect.crush)
+                {
+
+                     AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
                 }
                 FloatingTextManager.Instance.addText(visualText, GridItemDict[visualEffect.index].transform.position, Color.white);
                 if (!visualEffect.skipAnim)
@@ -968,8 +968,9 @@ public class GridManager : Singleton<GridManager>
 
         yield return StartCoroutine(MoveAfter(0, -1));
 
-        BattleManager.Instance.PredictNextAttack();
         updateAttackEdge();
+
+        BattleManager.Instance.PredictNextAttack();
 
     }
     public Dictionary<Vector2Int, GridItemCore> predictDict;

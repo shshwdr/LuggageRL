@@ -315,16 +315,6 @@ public class Enemy : HPObject
 
     public IEnumerator Attack()
     {
-        if(info.IsLarge == 1)
-        {
-
-            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_heavy_attack, transform.position);
-        }
-        else
-        {
-
-            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_light_attack, transform.position);
-        }
         GridManager.Instance.cleanAndShowAttackPreviewOfEnemy(this);
         yield return StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
 
@@ -351,6 +341,17 @@ public class Enemy : HPObject
     }
     public IEnumerator AttackFinish()
     {
+
+        if (info.IsLarge == 1)
+        {
+
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_heavy_attack, transform.position);
+        }
+        else
+        {
+
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_light_attack, transform.position);
+        }
         //attack item
         yield return StartCoroutine(GridManager.Instance.EnemyAttackEnumerator(this));
 

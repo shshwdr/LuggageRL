@@ -15,6 +15,12 @@ public class DialoguePopupManager : Singleton<DialoguePopupManager>
     public void showDialogue(string t, Sprite s = null, Action action1 = null, Action action2 = null)
     {
         if(t == "") { return; }
+        if (action1 != null)
+        {
+
+            action1.Invoke();
+            return;
+        }
         Time.timeScale = 0;
         panel.SetActive(true);
         text.text = t;
