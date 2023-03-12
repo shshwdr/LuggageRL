@@ -30,10 +30,12 @@ public class DetailView : Singleton<DetailView>
             return;
         }
         tutorialText.text = t;
+        tutorialText.transform.parent.gameObject.SetActive(true);
     }
     public void clearTutorial()
     {
         tutorialText.text = "";
+        tutorialText.transform.parent.gameObject.SetActive(false);
     }
     Dictionary<BuffType, string> buffMap = new Dictionary<BuffType, string>() { { BuffType.piggyBank, "PiggyBank" },{ BuffType.poison, "Poison" },{ BuffType.balancer, "Balancer" } };  
     public void UpdateCard(GridItemCore item)
