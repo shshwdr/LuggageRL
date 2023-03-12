@@ -117,9 +117,9 @@ public class AudioManager : Singleton<AudioManager>
         musicEventInstance.setParameterByName("area", (float)area);
     }
 
-    public void StartMusic(BiomeArea area)
+    public void RestartMusic()
     {
-        musicEventInstance.setParameterByName("area", (float)area);
+        musicEventInstance.setParameterByName("area", (float)BiomeArea.AIRPORT_BATTLE);
         musicEventInstance.start();
     }
 

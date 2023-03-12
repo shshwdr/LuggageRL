@@ -51,6 +51,9 @@ public class GameOver : Singleton<GameOver>
     {
         GameManager.Instance.preselectedItems.Clear();
 
+        AudioManager.Instance.RestartMusic();
+
+
 
         foreach (var item in selected)
         {

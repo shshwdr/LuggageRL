@@ -321,6 +321,9 @@ public class BattleManager : Singleton<BattleManager>
         GridManager.Instance.clearAttackPreview();
         //moveId = 0; //force to push (debug)
 
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_whoosh, new Vector3(0, 0, 0));
+
+
         switch (moveId)
         {
             case 0:
