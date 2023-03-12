@@ -30,6 +30,10 @@ public class SelectableItem : MonoBehaviour
 
             ItemRemoveManager.Instance.select(this);
         }
+        else if (GameOver.Instance.isGameOver)
+        {
+            GameOver.Instance.select(this);
+        }
 
     }
 }

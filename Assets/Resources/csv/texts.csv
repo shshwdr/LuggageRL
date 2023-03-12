@@ -9,3 +9,5 @@ Tutorial_start,"Nooo! You are left at the airport and you need to find your way 
 Tutorial_attack,"Attack would push all items in you to the direction you are moving. If the item will hit the border, it would attack. Number on items shows how much you can damage the enemy."
 Tutorial_breakable,There are kinds of item that would be broken and take effect rather than hit the border. Try them out!
 MoveItemHint,Drag Item To Move it (Cost 1 Action Point)
+Gameover,"You died! But don't worry, some of your collections and your upgrades will keep for the next run!"
+WinGame,You win! Thanks for playing! You can keep playing the game if you want!

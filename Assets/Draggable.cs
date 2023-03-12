@@ -20,7 +20,7 @@ public class Draggable : MonoBehaviour
     private void OnMouseDown()
     {
 
-        if (!BattleManager.Instance.isInControl || !BattleManager.Instance.canPlayerControl)
+        if (!BattleManager.Instance.isInControl || !BattleManager.Instance.CanPlayerControl)
         {
             return;
         }
@@ -30,7 +30,7 @@ public class Draggable : MonoBehaviour
     private void OnMouseDrag()
     {
 
-        if (!BattleManager.Instance.isInControl || !BattleManager.Instance.canPlayerControl)
+        if (!BattleManager.Instance.isInControl || !BattleManager.Instance.CanPlayerControl)
         {
             return;
         }

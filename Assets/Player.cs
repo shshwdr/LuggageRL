@@ -8,8 +8,9 @@ public class Player : HPObject
     {
         yield return StartCoroutine(base.DieInteral());
         Luggage.Instance.playDeathSequence();
-        FloatingTextManager.Instance.addText("Game Over", Vector3.zero, Color.red);
+        //FloatingTextManager.Instance.addText("Game Over", Vector3.zero, Color.red);
         yield return new WaitForSeconds(GridManager.animTime);
+        GameOver.Instance.startGameOver(false);
 
     }
 

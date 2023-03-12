@@ -29,7 +29,15 @@ public class HPObject : MonoBehaviour
 
         if (damage > 0)
         {
-            reactToDamage();
+            //try
+            //{
+
+                reactToDamage();
+            //}
+            //catch ()
+            //{
+
+            //}
         }
         
         yield return new WaitForSeconds(GridManager.animTime);
