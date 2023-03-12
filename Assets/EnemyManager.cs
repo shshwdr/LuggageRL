@@ -54,6 +54,10 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             enemy.EndOfTurn();
             yield return StartCoroutine(enemy.Core.TakeAction());
+            if (GameOver.Instance.isGameOver)
+            {
+                yield break;
+            }
 
         }
     }
@@ -91,6 +95,7 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             if (info.Type == "boss" && info.canPutInBiome(biome))
             {
+                StageManager.Instance.biomeType = BiomeType.desert;
                 return info;
             }
         }
@@ -225,6 +230,11 @@ public class EnemyManager : Singleton<EnemyManager>
                 //StartCoroutine(RemoveEnemy(enemy));
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartCoroutine(BattleManager.Instance.player.ApplyDamage(10000));
+        }
     }
     public void setCurrentTargetedEnemy(Enemy enemy)
     {
@@ -232,7 +242,10 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             e.setIsTargeted(false);
         }
-        enemy.setIsTargeted(true);
-        currentTargetedEnemy = enemy;
+        if (enemy)
+        {
+            enemy.setIsTargeted(true);
+            currentTargetedEnemy = enemy;
+        }
     }
 }

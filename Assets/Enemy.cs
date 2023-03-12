@@ -392,7 +392,7 @@ public class Enemy : HPObject
     }
     private void OnMouseDown()
     {
-        if (BattleManager.Instance.canPlayerControl)
+        if (BattleManager.Instance.CanPlayerControl)
         {
             EnemyManager.Instance.setCurrentTargetedEnemy(this);
         }

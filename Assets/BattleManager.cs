@@ -47,7 +47,7 @@ public class BattleManager : Singleton<BattleManager>
 
     public  int battleCount = 0;
     public bool canPlayerControl = true;
-
+    public bool CanPlayerControl => canPlayerControl && !GameOver.Instance.isGameOver;
     public TurnSlider turnSlider;
 
     public void hideButtonCanvas()
@@ -145,6 +145,7 @@ public class BattleManager : Singleton<BattleManager>
 
     public void takeControl()
     {
+            //AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_death, transform.position);
         isInControl = true;
         foreach (var item in itemsToActivate)
         {
@@ -257,6 +258,7 @@ public class BattleManager : Singleton<BattleManager>
         if (moveLeft == 0)
         {
             yield return StartCoroutine(EndOfTurn());
+
             //yield return StartCoroutine(PlayerAttackMove());
         }
 
@@ -342,7 +344,7 @@ public class BattleManager : Singleton<BattleManager>
 
     public void PredictNextAttack()
     {
-        if (isBattleFinished)
+        if (isBattleFinished || GameOver.Instance.isGameOver)
         {
             return;
         }
@@ -374,6 +376,10 @@ public class BattleManager : Singleton<BattleManager>
             yield return StartCoroutine(turnSlider.ShowSlider("Enemy Turn"));
         }
         yield return StartCoroutine(EnemyManager.Instance.EnemiesAttack());
+        if (GameOver.Instance.isGameOver)
+        {
+            yield break;
+        }
         clearTurnData();
 
         SelectAttack();

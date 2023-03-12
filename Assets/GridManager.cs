@@ -206,6 +206,16 @@ public class GridManager : Singleton<GridManager>
     // Start is called before the first frame update
     void Start()
     {
+
+        if (GameManager.Instance.preselectedItems.Count > 0)
+        {
+            for (int i = 0;i< GameManager.Instance.preselectedItems.Count; i++)
+            {
+                deckPool[i] = GameManager.Instance.preselectedItems[i];
+            }
+        }
+
+
         GenerateGrid();
 
         //AddGrid(1, 1, ItemType.herb);
