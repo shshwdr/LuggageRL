@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 3d751dc76d5835545a4d35c6d9adc414
+=======
+guid: 747245daa47f42d498080ab40a712faf
+>>>>>>> 645fe37 (some param tweak)
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6

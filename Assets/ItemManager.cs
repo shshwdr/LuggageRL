@@ -1,6 +1,7 @@
 using Sinbad;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 [System.Serializable]
 public class ItemInfo
@@ -31,7 +32,14 @@ public class ItemManager : Singleton<ItemManager>
     public Dictionary<string, ItemInfo> itemDict = new Dictionary<string, ItemInfo>();
     public SkipAndHealButton skipButton;
 
-    List<ItemType> itemTypePotentialPool = new List<ItemType>();
+    List<ItemInfo> itemTypePotentialPool = new List<ItemInfo>();
+    List<ItemType> itemTypePotentialRarityPool = new List<ItemType>();
+
+    List<int> battleCountToRarity = new List<int>
+    {
+        3,6,9,10000
+    };
+    int rarityIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +52,19 @@ public class ItemManager : Singleton<ItemManager>
             if (item.MaxCountInDeck > 0)
             {
                 for (int i = 0; i < item.MaxCountInDeck; i++)
-                    itemTypePotentialPool.Add((ItemType)System.Enum.Parse(typeof(ItemType), item.Item));
+                {
+
+                    if(item.Rarity == 0)
+                    {
+                        itemTypePotentialRarityPool.Add((ItemType)System.Enum.Parse(typeof(ItemType), item.Item));
+                    }
+                    else
+                    {
+                        
+
+                        itemTypePotentialPool.Add(item);
+                    }
+                }
             }
         }
     }
@@ -76,11 +96,23 @@ public class ItemManager : Singleton<ItemManager>
     GameObject item2;
     public void AddItems()
     {
-        var enumLength = System.Enum.GetValues(typeof(ItemType)).Length;
-        var pickedItem1 = itemTypePotentialPool[Random.Range(0, itemTypePotentialPool.Count)];
-        itemTypePotentialPool.Remove(pickedItem1);
-        var pickedItem2 = itemTypePotentialPool[Random.Range(0, itemTypePotentialPool.Count)];
-        itemTypePotentialPool.Remove(pickedItem1);
+        if (BattleManager.Instance.battleCount > battleCountToRarity[rarityIndex])
+        {
+            rarityIndex += 1;
+            foreach(var item in itemTypePotentialPool)
+            {
+                if (item.Rarity == rarityIndex)
+                {
+                    itemTypePotentialRarityPool.Add((ItemType)System.Enum.Parse(typeof(ItemType), item.Item));
+                }
+            }
+        }
+
+        var tempPool = itemTypePotentialRarityPool.ToList();
+        var pickedItem1 = tempPool[Random.Range(0, tempPool.Count)];
+        tempPool.Remove(pickedItem1);
+        var pickedItem2 = tempPool[Random.Range(0, tempPool.Count)];
+        tempPool.Remove(pickedItem1);
 
         Debug.Log(pickedItem1);
         Debug.Log(pickedItem2);
@@ -118,6 +150,7 @@ public class ItemManager : Singleton<ItemManager>
     {
         DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance.getText("Popup_AddItem"), item.GetComponent<GridItem>().Core.info.sprite, () =>
           {
+              itemTypePotentialRarityPool.Remove(item.GetComponent<GridItem>().type);
               GridManager.Instance.addItemToDeck(item.GetComponent<GridItem>().type);
               StartCoroutine( GridManager.Instance.DrawAllItemsFromPool());
 

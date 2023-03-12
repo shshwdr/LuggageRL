@@ -29,7 +29,7 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField] private int drawMoveCost = 0;
     public Transform ButtonCanvas;
 
-    int battleMet = 0;
+    public  int battleCount = 0;
     bool canPlayerControl = true;
 
     public TurnSlider turnSlider;
@@ -164,7 +164,7 @@ public class BattleManager : Singleton<BattleManager>
         SelectAttack();
         EnemyManager.Instance.SelectEenmiesAction();
 
-        battleMet++;
+        battleCount++;
 
 
         DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance. getUnreadText("Tutorial_battle1"));
@@ -173,15 +173,15 @@ public class BattleManager : Singleton<BattleManager>
     public void AddEnemies(BattleType battleType)
     {
         var maxEnemy = 3;
-        if (battleMet < 7)
+        if (battleCount < 7)
         {
             maxEnemy = 2;
         }
-        if(battleMet < 3)
+        if(battleCount < 3)
         {
             maxEnemy = 1;
         }
-        var enemyList = EnemyManager.Instance.GetEnemyInfosToAdd(battleMet, battleType, maxEnemy);
+        var enemyList = EnemyManager.Instance.GetEnemyInfosToAdd(battleCount, battleType, maxEnemy);
 
         if(enemyList.Count > enemyPositions.Length)
         {
@@ -197,6 +197,8 @@ public class BattleManager : Singleton<BattleManager>
             //go.transform.localPosition = Vector3.zero;//enemySlot.position;
         }
         EnemyManager.Instance.setCurrentTargetedEnemy(EnemyManager.Instance.GetFrontEnemy());
+
+        StartCoroutine( GridManager.Instance.DrawAllItemsFromPool());
     }
 
 
