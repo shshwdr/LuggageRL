@@ -20,7 +20,6 @@ public class StageManager : Singleton<StageManager>
     List<StageEventType> eventList = new List<StageEventType>() {
 
 
-        StageEventType.normalBattle, StageEventType.upgradeLuggageNPC,
         StageEventType.normalBattle, StageEventType.itemSelect,
         StageEventType.normalBattle, StageEventType.itemSelect,
         StageEventType.normalBattle, StageEventType.itemSelect,
