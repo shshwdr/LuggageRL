@@ -10,7 +10,12 @@ public class BattleManager : Singleton<BattleManager>
     public BaseScene baseScene;
     public Text LuggageAttackText;
     public Button LuggageAttackButton;
+    public GameObject[] luggageAttackTutorial;
+    public Text roundText;
     public GameObject[] itemsToActivate;
+
+    public GameObject luggageAttackDisabledOb;
+    public GameObject luggageAttackEnabledOb;
     bool CanAttack => attackCountUsed<attackCount;
     int attackCount => 1 +LuggageManager.Instance.UpgradedTime[UpgradeType.attackCount];
     int attackCountUsed = 0;
@@ -19,7 +24,9 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField] private int moveMax = 4;
     int moveLeft;
    public bool isBattleFinished = false;
-    string[] attackString = new string[] {"Push","Upside Down","Throw And Back" };
+    string[] attackString = new string[] { "Pilling Hammer",
+"Backflip",
+"Overhead Backbreaker" };
     public GameObject enemyPrefab;
     public Transform[] enemyPositions;
     public Player player;
@@ -33,6 +40,7 @@ public class BattleManager : Singleton<BattleManager>
     bool canPlayerControl = true;
 
     public TurnSlider turnSlider;
+
     public void hideButtonCanvas()
     {
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>())
@@ -384,15 +392,26 @@ public class BattleManager : Singleton<BattleManager>
             return;
         }
         LuggageAttackButton.interactable = CanAttack;
+
+        foreach(var item in luggageAttackTutorial)
+        {
+            item.SetActive(false);
+        }
+        roundText.text= $"{attackCount}x per round";
+        luggageAttackTutorial[selectedAttackIndex].SetActive(true);
         if (CanAttack)
         {
 
-            LuggageAttackText.text = $" {attackString[selectedAttackIndex]} ({attackMoveCost})";
+            luggageAttackEnabledOb.SetActive(true);
+            luggageAttackDisabledOb.SetActive(false);
+            LuggageAttackText.text = $"{attackString[selectedAttackIndex]} ({attackCount - attackCountUsed})";
         }
         else
         {
 
-            LuggageAttackText.text = $" {attackString[selectedAttackIndex]} (Attacked)";
+            LuggageAttackText.text = $"";
+            luggageAttackEnabledOb.SetActive(false);
+            luggageAttackDisabledOb.SetActive(true);
         }
         MoveText.text = $"{moveLeft}";
     }
