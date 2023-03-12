@@ -247,7 +247,7 @@ public class BattleManager : Singleton<BattleManager>
     }
 
 
-    void SelectAttack()
+    public void SelectAttack()
     {
         if (selectedAttackIndex == -1)
         {
@@ -396,7 +396,7 @@ public class BattleManager : Singleton<BattleManager>
         }
         clearTurnData();
 
-        SelectAttack();
+        //SelectAttack();
         EnemyManager.Instance.SelectEenmiesAction();
         yield return StartCoroutine(DrawItemEnumerator(true));
         attackCountUsed = 0;
@@ -461,7 +461,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void updateBuff()
     {
-        LuggageAttackBuffText.text = $"(+{LuggageManager.Instance.UpgradedTime[UpgradeType.basicAttack]}";
+        LuggageAttackBuffText.text = LuggageManager.Instance.UpgradedTime[UpgradeType.basicAttack] == 0?"":$"(+{LuggageManager.Instance.UpgradedTime[UpgradeType.basicAttack]})";
     }
     void RemoveText()
     {
