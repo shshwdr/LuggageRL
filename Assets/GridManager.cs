@@ -213,7 +213,7 @@ public class GridManager : Singleton<GridManager>
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 5;
+        //Time.timeScale = 5;
         if (GameManager.Instance.preselectedItems.Count > 0)
         {
             for (int i = 0;i< GameManager.Instance.preselectedItems.Count; i++)
@@ -817,8 +817,7 @@ public class GridManager : Singleton<GridManager>
             else if (message is MessageItemVisualEffect visualEffect)
             {
 
-                if (!GridItemDict.ContainsKey(visualEffect.index))
-                {
+                if (!GridItemDict.ContainsKey(visualEffect.index))                {
                     Debug.Log("?");
                     continue;
                 }
