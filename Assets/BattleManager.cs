@@ -67,12 +67,18 @@ public class BattleManager : Singleton<BattleManager>
         }
 
         GridManager.Instance.showAllAttackPreview();
+        //StartCoroutine(test());
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>(true))
         {
             button.gameObject.SetActive(true);
         }
         MoveText.transform.parent.gameObject.SetActive(true);
 
+    }
+    IEnumerator test()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GridManager.Instance.showAllAttackPreview();
     }
     public void SkipMove()
     {
@@ -241,7 +247,7 @@ public class BattleManager : Singleton<BattleManager>
     }
 
 
-    void SelectAttack()
+    public void SelectAttack()
     {
         if (selectedAttackIndex == -1)
         {
@@ -265,6 +271,7 @@ public class BattleManager : Singleton<BattleManager>
 
             //yield return StartCoroutine(PlayerAttackMove());
         }
+        showButtonCanvas();
 
     }
     public IEnumerator MoveTile()
@@ -345,7 +352,7 @@ public class BattleManager : Singleton<BattleManager>
         }
         //yield return useMove(attackMoveCost);
 
-        showButtonCanvas();
+        //showButtonCanvas();
     }
 
 
@@ -389,7 +396,7 @@ public class BattleManager : Singleton<BattleManager>
         }
         clearTurnData();
 
-        SelectAttack();
+        //SelectAttack();
         EnemyManager.Instance.SelectEenmiesAction();
         yield return StartCoroutine(DrawItemEnumerator(true));
         attackCountUsed = 0;
@@ -454,7 +461,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void updateBuff()
     {
-        LuggageAttackBuffText.text = $"(+{LuggageManager.Instance.UpgradedTime[UpgradeType.basicAttack]}";
+        LuggageAttackBuffText.text = LuggageManager.Instance.UpgradedTime[UpgradeType.basicAttack] == 0?"":$"(+{LuggageManager.Instance.UpgradedTime[UpgradeType.basicAttack]})";
     }
     void RemoveText()
     {

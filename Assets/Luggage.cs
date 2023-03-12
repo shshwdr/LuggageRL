@@ -144,6 +144,7 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(GridManager.Instance.MoveAndAttack(1, 0));
         yield return StartCoroutine(showDamage()); 
         yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
+        BattleManager.Instance.SelectAttack();
     }
 
     public IEnumerator UpsideDownAndDrop()
@@ -168,6 +169,7 @@ public class Luggage : Singleton<Luggage>
 
         yield return StartCoroutine(showDamage());
         yield return StartCoroutine(BattleManager.Instance.useMove(BattleManager.Instance.attackMoveCost));
+        BattleManager.Instance.SelectAttack();
     }
 
     public IEnumerator ThrowOutAndHitBack()
@@ -192,6 +194,7 @@ public class Luggage : Singleton<Luggage>
 
         yield return StartCoroutine(showDamage());
         yield return StartCoroutine(BattleManager.Instance.useMove(BattleManager.Instance.attackMoveCost));
+        BattleManager.Instance. SelectAttack();
     }
 
     IEnumerator showDamage()

@@ -276,6 +276,7 @@ public class Enemy : HPObject
         yield return StartCoroutine(EnemyManager.Instance.RemoveEnemy(this));
         EnemyManager.Instance.setCurrentTargetedEnemy(EnemyManager.Instance.GetFrontEnemy());
         Luggage.Instance. target = EnemyManager.Instance.GetCurrentTargetedEnemy();
+        GridManager.Instance.showAllAttackPreview();
     }
     //public IEnumerator ShowDamage()
     //{
