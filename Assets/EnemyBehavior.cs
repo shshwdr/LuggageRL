@@ -47,7 +47,7 @@ public class AttackShieldEnemy : EnemyBehavior
 {
     public AttackShieldEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 5 }, new EnemyActionAttack() { attackDamage = 0, attackHeight = 1 },  };
+        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 0 }, new EnemyActionAttack() { attackDamage = 0, attackHeight = 0 }, new EnemyActionIdle() };
     }
 
 }
