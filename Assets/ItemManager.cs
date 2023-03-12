@@ -130,7 +130,7 @@ public class ItemManager : Singleton<ItemManager>
         {
             item.SetActive(true);
         }
-        DetailView.Instance.showTutorial(TutorialManager.Instance.getUnreadText("Tutorial_breakable"));
+        DetailView.Instance.showTutorial("Breakable",TutorialManager.Instance.getUnreadText("Breakable"));
     }
     public void outControl()
     {

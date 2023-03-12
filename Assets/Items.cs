@@ -23,7 +23,8 @@ public class Stone : GridItemCore
         buffs.Clear();
         //FloatingTextManager.Instance.addText("Attack!", transform.position);
         //Luggage.Instance.DoDamage(1);
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.impact, skipAnim = true });
+
 
     }
 }
@@ -35,7 +36,9 @@ public class Potion : GridItemCore
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         var healAmount = info.Param1;
         messages.Add(new MessageItemHeal { item = this, amount = healAmount, target = BattleManager.Instance.player, index = index });
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.potion, skipAnim = true });
         messages.Add(new MessageDrawItem { index = index, amount = 1 });
+
         this.addDestroyMessage(messages);
         //BattleManager.Instance.player.Heal(3);
         //FloatingTextManager.Instance.addText("Heal!", transform.position);
@@ -61,11 +64,12 @@ public class Arrow : GridItemCore
         var dir = (borderIndex - originIndex) / diff;
         //Debug.Log("diff " + diff);
         messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(attack) * (movedCount + 1) + BattleManager.Instance.finalDamageIncrease, skipAnim = true, index = index });
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.arrow, skipAnim = true });
+
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         index = borderIndex + dir * 10; ;
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bow_and_arrow, new Vector3(0, 0, 0));
 
     }
 
@@ -86,7 +90,7 @@ public class Poison : GridItemCore
         //messages.Add(new MessageItemAttack { item = this, damage = attack, index = index });
         this.addDestroyMessage(messages);
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, new Vector3(0, 0, 0));
+
 
     }
 }
@@ -97,12 +101,12 @@ public class PiggyBank : GridItemCore
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.piggy, skipAnim = true });
+
         messages.Add(new MessageItemApplyEffect { item = this, index = index, target = item, type = BuffType.piggyBank, value = count, targetIndex = item.index });
         //messages.Add(new MessageItemAttack { item = this, damage = attack, index = index });
         this.addDestroyMessage(messages);
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, new Vector3(0, 0, 0));
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_piggy_bank_break, new Vector3(0, 0, 0));
 
     }
     public override void afterTurn(List<BattleMessage> messages)
@@ -128,14 +132,15 @@ public class Pins : GridItemCore
         int diff = (int)(borderIndex - originIndex).magnitude;
 
         var dir = (borderIndex - originIndex) / diff;
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.impact, skipAnim = true });
         messages.Add(new MessageItemAttack { item = this, damage = (CalculateDamage(damage) ^ GridManager.Instance.pinsCount) + BattleManager.Instance.finalDamageIncrease, index = index });
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.arrow, skipAnim = true });
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         buffs.Clear();
         GridManager.Instance.pinsCount++;
         index = borderIndex + dir * 10;
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
 
     }
 }
@@ -150,17 +155,17 @@ public class Circuit : GridItemCore {
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude; 
         var itemConnected = GridManager.Instance.getItemsWithTypeAround(index,true, "Breakable");
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.electric, skipAnim = true });
         messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + BattleManager.Instance.finalDamageIncrease, index = index });
         foreach (var item in itemConnected)
         {
 
+            messages.Add(new MessageItemVisualEffect { item = item.Core, index = item.index, effect = VisualEffect.electric, skipAnim = true });
             messages.Add(new MessageItemAttack { item = item.Core, damage = CalculateDamage(damage) + BattleManager.Instance.finalDamageIncrease, index = index,skipAnim = true });
-            messages.Add(new MessageItemVisualEffect { item = item.Core, index = item.index,effect = VisualEffect.electric });
             //item.addDestroyMessageWithIndex(messages, originIndex, true);
         }
         this.addDestroyMessage(messages);
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_surge, new Vector3(0, 0, 0));
 
     }
 
@@ -176,6 +181,7 @@ public class Coke : GridItemCore
         int healAmount = info.Param2;
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.impact, skipAnim = true });
         if (movedCount > 0)
         {
             messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + BattleManager.Instance.finalDamageIncrease, index = index });
@@ -188,8 +194,6 @@ public class Coke : GridItemCore
         this.addDestroyMessage(messages);
         //FloatingTextManager.Instance.addText("Attack!", transform.position);
         //Luggage.Instance.DoDamage(1);
-
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
 
     }
 }
@@ -206,10 +210,9 @@ public class Bomb : GridItemCore
         int damage = info.Param1;
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode});
         messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) * 5 + BattleManager.Instance.finalDamageIncrease, index = index });
         this.addDestroyMessage(messages);
-
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bomb_explode, new Vector3(0, 0, 0));
 
     }
 
@@ -227,7 +230,6 @@ public class Bomb : GridItemCore
 
             this.addDestroyMessage(messages);
 
-            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bomb_explode, new Vector3(0, 0, 0));
 
         }
 
@@ -251,11 +253,11 @@ public class CreditCard : GridItemCore
         }
         if (count <= 2)
         {
+            messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.cash, skipAnim = true });
             messages.Add(new MessageDrawItem { index = index, amount = amount });
             this.addDestroyMessage(messages);
 
         }
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_cash_register, new Vector3(0, 0, 0));
 
     }
 }
@@ -269,11 +271,11 @@ public class Umbrella : GridItemCore
         int damage = info.Param1;
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
-        var emptySlotCount = 12 - GridManager.Instance.GridItemDict.Count;
+        var emptySlotCount = 12 - GridManager.Instance.GridItemDict.Count; 
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.impact, skipAnim = true });
         messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(emptySlotCount * damage) + BattleManager.Instance.finalDamageIncrease, index = index });
         this.addDestroyMessage(messages);
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
     }
 }
 
@@ -286,11 +288,11 @@ public class Slingshot : GridItemCore
         int damage2 = info.Param2;
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
-        var itemCountBehind = GridManager.Instance.getEmptysBehind(index, index - borderIndex);
+        var itemCountBehind = GridManager.Instance.getEmptysBehind(index, index - borderIndex); 
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.arrow, skipAnim = true });
         messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + damage2 * CalculateDamage(damage) * itemCountBehind + BattleManager.Instance.finalDamageIncrease, index = index });
         this.addDestroyMessage(messages);
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bow_and_arrow, new Vector3(0, 0, 0));
 
     }
 }
@@ -314,6 +316,7 @@ public class Balancer : GridItemCore {
                 }
                 else
             {
+                messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.heal, skipAnim = true });
                 foreach (var item in GridManager.Instance.GridItemDict.Values)
                 {
                     if (!item.IsDestroyed)
@@ -325,7 +328,6 @@ public class Balancer : GridItemCore {
             }
             addDestroyMessageWithIndex(messages, originIndex, true);
         }
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_effect_heal, new Vector3(0, 0, 0));
 
     }
 }
@@ -351,12 +353,11 @@ public class Rocket : GridItemCore
             damage = CalculateDamage(damage) + damage2 * CalculateDamage(damage) * itemBehind.Count + BattleManager.Instance.finalDamageIncrease,
             index = index
         });
-
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.rocket, skipAnim = true });
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         index = borderIndex + dir * 10; ;
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_rocket, new Vector3(0, 0, 0));
 
     }
 }
@@ -377,7 +378,6 @@ public class Pinata : GridItemCore
         //FloatingTextManager.Instance.addText("Heal!", transform.position);
         //destory();
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, new Vector3(0, 0, 0));
 
 
     }
@@ -392,7 +392,6 @@ public class Mud : GridItemCore
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         this.addDestroyMessage(messages);
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, new Vector3(0, 0, 0));
 
     }
 }
@@ -422,7 +421,6 @@ public class LiquidBomb : GridItemCore
         messages.Add(new MessageWait { waitTime = GridManager.animTime });
 
         //this.addDestroyMessage(messages);
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bomb_explode, new Vector3(0, 0, 0));
 
     }
 }
@@ -455,7 +453,6 @@ public class FreezeBomb : GridItemCore
 
         //this.addDestroyMessage(messages);
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
 
     }
 }

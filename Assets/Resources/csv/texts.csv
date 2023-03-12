@@ -1,13 +1,12 @@
 ﻿Name,Text
-PickupSelection,Whoah! They have dropped something. Let's pick one!
+PickupSelection,Whoa! They dropped something. Let's pick one!
 RemoveItemSelection,My chance to get rid of one of these items!
 SkipAndHeal,Do you want to skip and heal {0}% percent of HP ({1})?
-Popup_AddItem,Do you want to add this item into you?
-Popup_RemoveItem,Do you want to remove this item from you?
-LuggageUpgradeSelect,Time to pepare myself for the next battles!
-Tutorial_start,"Nooo! You are left at the airport and you need to find your way home! Gladly you have something in you, use them to clear your way home!"
-Tutorial_attack,"Attack would push all items in you to the direction you are moving. If the item will hit the border, it would attack. Number on items shows how much you can damage the enemy."
-Tutorial_breakable,There are kinds of item that would be broken and take effect rather than hit the border. Try them out!
-MoveItemHint,Drag Item To Move it (Cost 1 Action Point)
-Gameover,"You died! But don't worry, some of your collections and your upgrades will keep for the next run!"
+LuggageUpgradeSelect,Time to prepare myself for the upcoming battles!
+Standard,Nooo! You are left at the airport and you need to find your way home! Gladly you have some items packed.//Use them to clear your way home!
+Attack!,"When you attack, all items inside you push in the direction you are moving. If an item hits the border, it will attack.//The red numbers show the item's damage."
+Breakable,There are items that will break instead of doing damage when they hit the border.//They have different effects – try them out!
+Defend,"In their turn, enemies can attack your item slots. To defend such attacks, move items in these slots.//The blue numbers show the amount of defense."
+MoveItemHint,Drag an item to move it (Costs 1 Action Point)
+Gameover,"You died! But don't worry, some of your collections and your upgrades will stay with you for your next run!"
 WinGame,You win! Thanks for playing! You can keep playing the game if you want!

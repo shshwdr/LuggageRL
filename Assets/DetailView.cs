@@ -21,8 +21,9 @@ public class DetailView : Singleton<DetailView>
     public Image image;
     public Transform buffParent;
     public GameObject buffPrefab;
-    
+
     public TextMeshProUGUI tutorialText;
+    public TextMeshProUGUI tutorialTextTitle;
 
 
     private void Start()
@@ -31,13 +32,14 @@ public class DetailView : Singleton<DetailView>
         enemyView.SetActive(false);
         tutorialText.transform.parent.gameObject.SetActive(false);
     }
-    public void showTutorial(string t)
+    public void showTutorial(string title, string t)
     {
         if(t == "")
         {
             return;
         }
-        tutorialText.text = t;
+        tutorialTextTitle.text = title;
+        tutorialText.text = t.Replace('/','\n');
         tutorialText.transform.parent.gameObject.SetActive(true);
     }
     public void clearTutorial()

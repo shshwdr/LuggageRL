@@ -822,19 +822,47 @@ public class GridManager : Singleton<GridManager>
                     GridItemDict.Remove(visualEffect.index);
                 }
                 string visualText = "";
-                if (visualEffect.effect == VisualEffect.electric)
-                {
-                    visualText = "Electric!";
-                }
-                if (visualEffect.effect == VisualEffect.explode)
-                {
-                    visualText = "Boom!";
-                }
-                if(visualEffect.effect == VisualEffect.crush)
-                {
 
-                     AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
+                switch (visualEffect.effect)
+                {
+                    case VisualEffect.electric:
+                        visualText = "Electric!";
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
+                        break;
+                    case VisualEffect.explode:
+                        visualText = "Boom!";
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bomb_explode, Vector3.zero);
+                        break;
+                    case VisualEffect.crush:
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
+                        break;
+                    case VisualEffect.potion:
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_effect_heal, Vector3.zero);
+                        break;
+                    case VisualEffect.arrow:
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bow_and_arrow, Vector3.zero);
+                        break;
+                    case VisualEffect.piggy:
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_piggy_bank_break, Vector3.zero);
+                        break;
+                    case VisualEffect.surge:
+                        break;
+                    case VisualEffect.cash:
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_cash_register, Vector3.zero);
+                        break;
+                    case VisualEffect.heal:
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_effect_heal, Vector3.zero);
+                        break;
+                    case VisualEffect.rocket:
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_rocket, Vector3.zero);
+                        break;
+                    case VisualEffect.impact:
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, Vector3.zero);
+                        break;
+                    default:
+                        break;
                 }
+
                 FloatingTextManager.Instance.addText(visualText, GridItemDict[visualEffect.index].transform.position, Color.white);
                 if (!visualEffect.skipAnim)
                 {

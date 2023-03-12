@@ -839,7 +839,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOver: 0
-  canKeepItemsCount: 1
   selectItemText: {fileID: 1349269199}
   bubbleText: {fileID: 488176666}
   selectedItems: {fileID: 233737903}
@@ -2902,7 +2901,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3905735489555944019}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3056,6 +3055,7 @@ MonoBehaviour:
   buffParent: {fileID: 1546417674}
   buffPrefab: {fileID: 120565964}
   tutorialText: {fileID: 1802499118}
+  tutorialTextTitle: {fileID: 0}
 --- !u!1 &4549562709259645593
 GameObject:
   m_ObjectHideFlags: 0

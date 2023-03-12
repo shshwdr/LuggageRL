@@ -25,14 +25,14 @@ public class BattleManager : Singleton<BattleManager>
     }
 
     public Text moveHint;
-    bool CanAttack => attackCountUsed<attackCount;
-    int attackCount => 1 +LuggageManager.Instance.UpgradedTime[UpgradeType.attackCount];
+    bool CanAttack => attackCountUsed < attackCount;
+    int attackCount => 1 + LuggageManager.Instance.UpgradedTime[UpgradeType.attackCount];
     int attackCountUsed = 0;
     public Text MoveText;
     int selectedAttackIndex = -1;
     [SerializeField] private int moveMax = 4;
     int moveLeft;
-   public bool isBattleFinished = false;
+    public bool isBattleFinished = false;
     string[] attackString = new string[] { "Pilling Hammer",
 "Backflip",
 "Overhead Backbreaker" };
@@ -45,7 +45,7 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField] private int drawMoveCost = 0;
     public Transform ButtonCanvas;
 
-    public  int battleCount = 0;
+    public int battleCount = 0;
     public bool canPlayerControl = true;
     public bool CanPlayerControl => canPlayerControl && !GameOver.Instance.isGameOver;
     public TurnSlider turnSlider;
@@ -91,7 +91,7 @@ public class BattleManager : Singleton<BattleManager>
         }
         StartCoroutine(DrawItemEnumerator(noCost));
     }
-    public IEnumerator DrawItemEnumerator(bool noCost =false)
+    public IEnumerator DrawItemEnumerator(bool noCost = false)
     {
         hideButtonCanvas();
 
@@ -128,7 +128,7 @@ public class BattleManager : Singleton<BattleManager>
             GridManager.Instance.RemoveAll();
             yield return new WaitForSeconds(GridManager.animTime * 2);
 
-            yield return StartCoroutine( Luggage.Instance.RotateBackToOrigin());
+            yield return StartCoroutine(Luggage.Instance.RotateBackToOrigin());
 
             //add all grid items
 
@@ -145,7 +145,14 @@ public class BattleManager : Singleton<BattleManager>
 
     public void takeControl()
     {
-            //AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_death, transform.position);
+
+
+        if (battleCount == 1)
+        {
+
+            DetailView.Instance.showTutorial("Defend", TutorialManager.Instance.getUnreadText("Defend"));
+        }
+        //AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_death, transform.position);
         isInControl = true;
         foreach (var item in itemsToActivate)
         {
@@ -171,9 +178,9 @@ public class BattleManager : Singleton<BattleManager>
     void StartBattle()
     {
 
-        if(battleCount == 0)
+        if (battleCount == 0)
         {
-            moveHint.text =  TutorialManager.Instance.getText("MoveItemHint");
+            moveHint.text = TutorialManager.Instance.getText("MoveItemHint");
         }
         StartCoroutine(turnSlider.ShowSlider("Player Turn"));
         ////clear old enemies, this is bad, hacky solution
@@ -203,7 +210,7 @@ public class BattleManager : Singleton<BattleManager>
     public void hoverHoverAttackButton()
     {
 
-        DetailView.Instance.showTutorial(TutorialManager.Instance.getUnreadText("Tutorial_attack"));
+        DetailView.Instance.showTutorial("Attack!", TutorialManager.Instance.getUnreadText("Attack!"));
     }
     public void AddEnemies(BattleType battleType)
     {
@@ -212,17 +219,17 @@ public class BattleManager : Singleton<BattleManager>
         {
             maxEnemy = 2;
         }
-        if(battleCount < 2)
+        if (battleCount < 2)
         {
             maxEnemy = 1;
         }
         var enemyList = EnemyManager.Instance.GetEnemyInfosToAdd(battleCount, battleType, maxEnemy);
 
-        if(enemyList.Count > enemyPositions.Length)
+        if (enemyList.Count > enemyPositions.Length)
         {
             Debug.LogError("Adding too many enemies to fit the slots");
         }
-        for(int x = 0; x < enemyList.Count; x++)
+        for (int x = 0; x < enemyList.Count; x++)
         {
             var enemySlot = enemyPositions[x];
             var go = Instantiate(enemyPrefab, enemySlot.position, Quaternion.identity, enemySlot);
@@ -233,13 +240,13 @@ public class BattleManager : Singleton<BattleManager>
         }
         EnemyManager.Instance.setCurrentTargetedEnemy(EnemyManager.Instance.GetFrontEnemy());
 
-        StartCoroutine( GridManager.Instance.DrawAllItemsFromPool());
+        StartCoroutine(GridManager.Instance.DrawAllItemsFromPool());
     }
 
 
     void SelectAttack()
     {
-        if(selectedAttackIndex == -1)
+        if (selectedAttackIndex == -1)
         {
             selectedAttackIndex = 0;
         }
@@ -307,7 +314,7 @@ public class BattleManager : Singleton<BattleManager>
             return;
         }
 
-        attackCountUsed ++;
+        attackCountUsed++;
         StartCoroutine(PlayerAttackMove(selectedAttackIndex));
     }
     List<int> attackIdToRotationId = new List<int>() { 0, 1, 1, 3 };
@@ -335,9 +342,9 @@ public class BattleManager : Singleton<BattleManager>
             case 2:
                 yield return StartCoroutine(Luggage.Instance.ThrowOutAndHitBack());
                 break;
-            //case 3:
-            //    yield return StartCoroutine(Luggage.Instance.LiftAndDownAttack());
-            //    break;
+                //case 3:
+                //    yield return StartCoroutine(Luggage.Instance.LiftAndDownAttack());
+                //    break;
         }
         //yield return useMove(attackMoveCost);
 
@@ -391,7 +398,7 @@ public class BattleManager : Singleton<BattleManager>
         attackCountUsed = 0;
         UpdateText();
 
-        
+
         showButtonCanvas();
 
         if (!isBattleFinished)
@@ -426,11 +433,11 @@ public class BattleManager : Singleton<BattleManager>
         }
         LuggageAttackButton.interactable = CanAttack;
 
-        foreach(var item in luggageAttackTutorial)
+        foreach (var item in luggageAttackTutorial)
         {
             item.SetActive(false);
         }
-        roundText.text= $"{attackCount}x per round";
+        roundText.text = $"{attackCount}x per round";
         luggageAttackTutorial[selectedAttackIndex].SetActive(true);
         if (CanAttack)
         {
@@ -451,7 +458,7 @@ public class BattleManager : Singleton<BattleManager>
 
     void RemoveText()
     {
-        FloatingTextManager.Instance.addText("Search for next Enemy",Vector3.zero,Color.white);
+        FloatingTextManager.Instance.addText("Search for next Enemy", Vector3.zero, Color.white);
         //LuggageAttackText.text = "Search for next Enemy";u
     }
 

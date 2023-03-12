@@ -8,7 +8,7 @@ public class BattleMessage
 }
 
 
-public enum VisualEffect { electric, explode, crush }
+public enum VisualEffect { electric, explode, crush, potion, arrow, piggy,surge,cash, heal,rocket,impact}
 
 public class MessageMove : BattleMessage
 {
