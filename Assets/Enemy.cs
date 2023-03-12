@@ -33,7 +33,8 @@ public class Enemy : HPObject
 
     public EnemyAttackPreview attackPreview;
     public SpriteRenderer enemyRender;
-    public int attack => Core.currentAction is EnemyActionAttack attackAction ? attackAction.attackDamage : 0;
+    public int attack => Core.currentAction is EnemyActionAttack attackAction ? attackAction.attackDamage + info.BasicAttack : 0;
+    public int defense => Core.currentAction is EnemyActionAttack attackAction ? (attackAction.attackDamage + info.BasicAttack) : 0;
     public Transform idlePosition;
     public Transform leftTargetTransform; //where player should impact
     public Transform topTargetTransform;

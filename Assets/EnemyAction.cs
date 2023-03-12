@@ -43,7 +43,7 @@ public class EnemyActionAttack : EnemyAction
     public int attackHeight = 0;
     public int attackRange = 1;
     public int attackRangeVerticle = 1;
-    public int attackDamage = 3;
+    public int attackDamage = 0;
     public override IEnumerator TakeAction(Enemy enemy)
     {
         yield return enemy.StartCoroutine(enemy.Attack());
@@ -52,7 +52,7 @@ public class EnemyActionAttack : EnemyAction
     public override void Preview(Enemy enemy)
     {
         base.Preview(enemy);
-        enemy.attackPreview.UpdateAttackPreview(attackHeight,attackFromBottom,attackDamage);
+        enemy.attackPreview.UpdateAttackPreview(attackHeight,attackFromBottom,enemy.attack);
     }
 }
 
@@ -61,13 +61,13 @@ public class EnemyActionShield : EnemyAction
     public int shieldAmount = 5;
     public override IEnumerator TakeAction(Enemy enemy)
     {
-        yield return enemy.StartCoroutine(enemy.AddShield(shieldAmount));
+        yield return enemy.StartCoroutine(enemy.AddShield(enemy.defense));
         //yield return new WaitForSeconds(GridManager.animTime);
     }
     public override void Preview(Enemy enemy)
     {
         base.Preview(enemy);
-        enemy.attackPreview.UpdateOtherPreview("shield", shieldAmount.ToString());
+        enemy.attackPreview.UpdateOtherPreview("shield", enemy.defense.ToString());
     }
 }
 public class EnemyActionHeal : EnemyAction
@@ -75,13 +75,13 @@ public class EnemyActionHeal : EnemyAction
     public int healAmount = 5;
     public override IEnumerator TakeAction(Enemy enemy)
     {
-        yield return enemy.StartCoroutine(enemy.HealMinHP(healAmount));
+        yield return enemy.StartCoroutine(enemy.HealMinHP(enemy.defense));
         //yield return new WaitForSeconds(GridManager.animTime);
     }
     public override void Preview(Enemy enemy)
     {
         base.Preview(enemy);
-        enemy.attackPreview.UpdateOtherPreview("heal", healAmount.ToString());
+        enemy.attackPreview.UpdateOtherPreview("heal", enemy.defense.ToString());
     }
 }
 public class EnemyActionSteal : EnemyAction

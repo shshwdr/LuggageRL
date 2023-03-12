@@ -705,10 +705,6 @@ public class GridManager : Singleton<GridManager>
         for (int i = 0; i < messages.Count; i++)
         {
 
-            if (BattleManager.Instance.isBattleFinished)
-            {
-                yield break;
-            }
             var message = messages[i];
             if (message is MessageMove move)
             {
@@ -730,6 +726,10 @@ public class GridManager : Singleton<GridManager>
             }
             else if (message is MessageItemChangeCounter counterChanage)
             {
+                if (BattleManager.Instance.isBattleFinished)
+                {
+                    yield break;
+                }
 
                 if (!GridItemDict.ContainsKey(counterChanage.index))
                 {
