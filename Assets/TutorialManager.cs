@@ -22,7 +22,7 @@ public class TutorialManager : Singleton<TutorialManager>
             textDict[item.Name] = item;
         }
 
-        DetailView.Instance.showTutorial("Standard",TutorialManager.Instance.getUnreadText("Standard"));
+        DetailView.Instance.showTutorial("Stranded", TutorialManager.Instance.getUnreadText("Stranded"));
     }
     public TextInfo getTextInfo(string itemName)
     {

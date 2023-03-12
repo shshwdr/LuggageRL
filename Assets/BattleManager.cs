@@ -67,12 +67,18 @@ public class BattleManager : Singleton<BattleManager>
         }
 
         GridManager.Instance.showAllAttackPreview();
+        //StartCoroutine(test());
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>(true))
         {
             button.gameObject.SetActive(true);
         }
         MoveText.transform.parent.gameObject.SetActive(true);
 
+    }
+    IEnumerator test()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GridManager.Instance.showAllAttackPreview();
     }
     public void SkipMove()
     {
@@ -265,6 +271,7 @@ public class BattleManager : Singleton<BattleManager>
 
             //yield return StartCoroutine(PlayerAttackMove());
         }
+        showButtonCanvas();
 
     }
     public IEnumerator MoveTile()
@@ -345,7 +352,7 @@ public class BattleManager : Singleton<BattleManager>
         }
         //yield return useMove(attackMoveCost);
 
-        showButtonCanvas();
+        //showButtonCanvas();
     }
 
 
