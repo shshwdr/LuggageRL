@@ -316,7 +316,7 @@ public class BattleManager : Singleton<BattleManager>
     public IEnumerator PlayerAttackMove(int moveId)
     {
         hideButtonCanvas();
-        
+        GridManager.Instance.clearAttackPreview();
         //moveId = 0; //force to push (debug)
 
         switch (moveId)

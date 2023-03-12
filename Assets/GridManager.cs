@@ -396,21 +396,49 @@ public class GridManager : Singleton<GridManager>
         {
             if (x == 1)
             {
-                return b.x.CompareTo(a.x);
+                if(b.x == a.x)
+                {
+                    return b.y.CompareTo(a.y); //still try to follow an order
+                }
+                else
+                {
+                    return b.x.CompareTo(a.x); //have to follow this order
+                }
             }
             else if (x == -1)
             {
-                return a.x.CompareTo(b.x);
+                if (b.x == a.x)
+                {
+                    return b.y.CompareTo(a.y);
+                }
+                else
+                {
+                    return a.x.CompareTo(b.x);
+                }
             }
             else if (y == 1)
             {
+                if (b.y == a.y)
+                {
+                    return b.x.CompareTo(a.x);
+                }
+                else
+                {
+                    return b.y.CompareTo(a.y);
+                }
 
-                return b.y.CompareTo(a.y);
             }
             else
             {
 
-                return a.y.CompareTo(b.y);
+                if (b.y == a.y)
+                {
+                    return b.x.CompareTo(a.x);
+                }
+                else
+                {
+                    return a.y.CompareTo(b.y);
+                }
             }
         });
         return allItemIndex;

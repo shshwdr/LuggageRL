@@ -23,6 +23,14 @@ public class DetailView : Singleton<DetailView>
     public GameObject buffPrefab;
     
     public TextMeshProUGUI tutorialText;
+
+
+    private void Start()
+    {
+        CardView.SetActive(false);
+        enemyView.SetActive(false);
+        tutorialText.transform.parent.gameObject.SetActive(false);
+    }
     public void showTutorial(string t)
     {
         if(t == "")
@@ -90,4 +98,5 @@ public class DetailView : Singleton<DetailView>
             actionDescription.text = enemy.Core.currentAction.Desc;
         }
     }
+
 }
