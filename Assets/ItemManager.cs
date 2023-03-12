@@ -110,9 +110,8 @@ public class ItemManager : Singleton<ItemManager>
 
         var tempPool = itemTypePotentialRarityPool.ToList();
         var pickedItem1 = tempPool[Random.Range(0, tempPool.Count)];
-        tempPool.Remove(pickedItem1);
+        tempPool.RemoveAll(item => item == pickedItem1);
         var pickedItem2 = tempPool[Random.Range(0, tempPool.Count)];
-        tempPool.Remove(pickedItem1);
 
         Debug.Log(pickedItem1);
         Debug.Log(pickedItem2);
