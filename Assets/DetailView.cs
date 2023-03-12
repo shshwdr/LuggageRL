@@ -22,9 +22,18 @@ public class DetailView : Singleton<DetailView>
     public Transform buffParent;
     public GameObject buffPrefab;
     
-
-    void Start()
+    public TextMeshProUGUI tutorialText;
+    public void showTutorial(string t)
     {
+        if(t == "")
+        {
+            return;
+        }
+        tutorialText.text = t;
+    }
+    public void clearTutorial()
+    {
+        tutorialText.text = "";
     }
     Dictionary<BuffType, string> buffMap = new Dictionary<BuffType, string>() { { BuffType.piggyBank, "PiggyBank" },{ BuffType.poison, "Poison" },{ BuffType.balancer, "Balancer" } };  
     public void UpdateCard(GridItemCore item)

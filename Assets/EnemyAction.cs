@@ -75,13 +75,13 @@ public class EnemyActionHeal : EnemyAction
     public int healAmount = 5;
     public override IEnumerator TakeAction(Enemy enemy)
     {
-        yield return enemy.StartCoroutine(enemy.HealMinHP(enemy.defense));
+        yield return enemy.StartCoroutine(enemy.HealMinHP(enemy.heal));
         //yield return new WaitForSeconds(GridManager.animTime);
     }
     public override void Preview(Enemy enemy)
     {
         base.Preview(enemy);
-        enemy.attackPreview.UpdateOtherPreview("heal", enemy.defense.ToString());
+        enemy.attackPreview.UpdateOtherPreview("heal", enemy.heal.ToString());
     }
 }
 public class EnemyActionSteal : EnemyAction

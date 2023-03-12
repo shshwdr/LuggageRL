@@ -14,11 +14,11 @@ public class Stone : GridItemCore
         int diff = (int)(borderIndex - originIndex).magnitude;
         if (movedCount > 0)
         {
-            messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) * moveDamageScale, index = index });
+            messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) * moveDamageScale + BattleManager.Instance.finalDamageIncrease, index = index });
         }
         else
         {
-            messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage), index = index });
+            messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + BattleManager.Instance.finalDamageIncrease, index = index });
         }
         buffs.Clear();
         //FloatingTextManager.Instance.addText("Attack!", transform.position);
@@ -53,7 +53,7 @@ public class Arrow : GridItemCore
 
         var dir = (borderIndex - originIndex) / diff;
         //Debug.Log("diff " + diff);
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(attack) * (movedCount + 1), skipAnim = true, index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(attack) * (movedCount + 1) + BattleManager.Instance.finalDamageIncrease, skipAnim = true, index = index });
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         index = borderIndex + dir * 10; ;
@@ -111,7 +111,7 @@ public class Pins : GridItemCore
         int diff = (int)(borderIndex - originIndex).magnitude;
 
         var dir = (borderIndex - originIndex) / diff;
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) ^ GridManager.Instance.pinsCount, index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) ^ GridManager.Instance.pinsCount + BattleManager.Instance.finalDamageIncrease, index = index });
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         buffs.Clear();
@@ -130,11 +130,11 @@ public class Circuit : GridItemCore {
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude; 
         var itemConnected = GridManager.Instance.getItemsWithTypeAround(index,true, "Breakable");
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage), index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + BattleManager.Instance.finalDamageIncrease, index = index });
         foreach (var item in itemConnected)
         {
 
-            messages.Add(new MessageItemAttack { item = item.Core, damage = CalculateDamage(damage), index = index,skipAnim = true });
+            messages.Add(new MessageItemAttack { item = item.Core, damage = CalculateDamage(damage) + BattleManager.Instance.finalDamageIncrease, index = index,skipAnim = true });
             messages.Add(new MessageItemVisualEffect { item = item.Core, index = item.index,effect = VisualEffect.electric });
             //item.addDestroyMessageWithIndex(messages, originIndex, true);
         }
@@ -155,7 +155,7 @@ public class Coke : GridItemCore
         int diff = (int)(borderIndex - originIndex).magnitude;
         if (movedCount > 0)
         {
-            messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage), index = index });
+            messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + BattleManager.Instance.finalDamageIncrease, index = index });
         }
         else
         {
@@ -180,7 +180,7 @@ public class Bomb : GridItemCore
         int damage = info.Param1;
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) * 5, index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) * 5 + BattleManager.Instance.finalDamageIncrease, index = index });
         this.addDestroyMessage(messages);
     }
 
@@ -194,7 +194,7 @@ public class Bomb : GridItemCore
         {
 
             messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode });
-            messages.Add(new MessageAttackPlayer { item = this, index = index, amount = CalculateDamage(damage) * 5, target = BattleManager.Instance.player });
+            messages.Add(new MessageAttackPlayer { item = this, index = index, amount = CalculateDamage(damage) * 5 + BattleManager.Instance.finalDamageIncrease, target = BattleManager.Instance.player });
 
             this.addDestroyMessage(messages);
         }
@@ -235,7 +235,7 @@ public class Umbrella : GridItemCore
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
         var emptySlotCount = 12 - GridManager.Instance.GridItemDict.Count;
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(emptySlotCount * damage), index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(emptySlotCount * damage) + BattleManager.Instance.finalDamageIncrease, index = index });
         this.addDestroyMessage(messages);
     }
 }
@@ -250,7 +250,7 @@ public class Slingshot : GridItemCore
         var originIndex = index;
         int diff = (int)(borderIndex - originIndex).magnitude;
         var itemCountBehind = GridManager.Instance.getEmptysBehind(index, index - borderIndex);
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + damage2 * CalculateDamage(damage) * itemCountBehind, index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + damage2 * CalculateDamage(damage) * itemCountBehind + BattleManager.Instance.finalDamageIncrease, index = index });
         this.addDestroyMessage(messages);
     }
 }
@@ -306,7 +306,7 @@ public class Rocket : GridItemCore
         messages.Add(new MessageItemAttack
         {
             item = this,
-            damage = CalculateDamage(damage) + damage2 * CalculateDamage(damage) * itemBehind.Count,
+            damage = CalculateDamage(damage) + damage2 * CalculateDamage(damage) * itemBehind.Count + BattleManager.Instance.finalDamageIncrease,
             index = index
         });
 

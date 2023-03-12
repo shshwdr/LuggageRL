@@ -9,7 +9,7 @@ public class TextInfo
 }
 public class TutorialManager : Singleton<TutorialManager>
 {
-    public bool SkipTutorial = true;
+    bool SkipTutorial = false;
     public Dictionary<string, bool> read = new Dictionary<string, bool>();
     public Dictionary<string, TextInfo> textDict = new Dictionary<string, TextInfo>();
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class TutorialManager : Singleton<TutorialManager>
             textDict[item.Name] = item;
         }
 
-        DialoguePopupManager.Instance.showDialogue(getUnreadText("Tutorial_start"));
+        DetailView.Instance.showTutorial(TutorialManager.Instance.getUnreadText("Tutorial_start"));
     }
     public TextInfo getTextInfo(string itemName)
     {

@@ -33,8 +33,9 @@ public class Enemy : HPObject
 
     public EnemyAttackPreview attackPreview;
     public SpriteRenderer enemyRender;
-    public int attack => Core.currentAction is EnemyActionAttack attackAction ? attackAction.attackDamage + info.BasicAttack : 0;
-    public int defense => Core.currentAction is EnemyActionAttack attackAction ? (attackAction.attackDamage + info.BasicAttack) : 0;
+    public int attack => Core.currentAction is EnemyActionAttack attackAction ?(int)( (attackAction.attackDamage + info.BasicAttack) * (1+EnemyManager.Instance.remainsDiffultCount*0.1f)) : 0;
+    public int defense => Core.currentAction is EnemyActionShield attackAction ? (int)((attackAction.shieldAmount + info.BasicAttack) * (1 + EnemyManager.Instance.remainsDiffultCount * 0.1f)) : 0;
+    public int heal => Core.currentAction is EnemyActionHeal heal ? (int)((heal.healAmount + info.BasicAttack) * (1 + EnemyManager.Instance.remainsDiffultCount * 0.1f)) : 0;
     public Transform idlePosition;
     public Transform leftTargetTransform; //where player should impact
     public Transform topTargetTransform;
@@ -205,7 +206,7 @@ public class Enemy : HPObject
         Core = (EnemyBehavior)System.Activator.CreateInstance(System.Type.GetType(_info.Name.ToString()));
         Core.enemy = this;
         info = _info;
-        maxHP = info.HP;
+        maxHP = (int)(info.HP * (1 + EnemyManager.Instance.remainsDiffultCount * 0.1f));
         hp = maxHP;
         base.Awake();
         EnemyManager.Instance.AddEnemy(this);
@@ -265,6 +266,7 @@ public class Enemy : HPObject
     //}
     protected override IEnumerator DieInteral()
     {
+        targetedIndicator.SetActive(false);
         yield return StartCoroutine( base.DieInteral());
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_death, transform.position);
         transform.DOShakeScale(GridManager.animTime);

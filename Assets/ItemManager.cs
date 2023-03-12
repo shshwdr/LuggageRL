@@ -130,6 +130,7 @@ public class ItemManager : Singleton<ItemManager>
         {
             item.SetActive(true);
         }
+        DetailView.Instance.showTutorial(TutorialManager.Instance.getUnreadText("Tutorial_breakable"));
     }
     public void outControl()
     {
@@ -143,6 +144,8 @@ public class ItemManager : Singleton<ItemManager>
         item1.gameObject.SetActive(false);
         item2.gameObject.SetActive(false);
         StageManager.Instance.takeControl();
+
+        DetailView.Instance.clearTutorial();
     }
 
     public void select(SelectableItem item)

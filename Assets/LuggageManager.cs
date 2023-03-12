@@ -56,6 +56,10 @@ public class LuggageManager : Singleton<LuggageManager>
             {
                 BattleManager.Instance.player.addMaxHP(10);
             }
+            if(sele == UpgradeType.basicAttack)
+            {
+                BattleManager.Instance.addFinalDamageIncrease();
+            }
             outControl();
         });
 

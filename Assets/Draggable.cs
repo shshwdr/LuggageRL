@@ -20,13 +20,17 @@ public class Draggable : MonoBehaviour
     private void OnMouseDown()
     {
 
+        if (!BattleManager.Instance.isInControl || !BattleManager.Instance.canPlayerControl)
+        {
+            return;
+        }
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_drag_pickup, transform.position);
     }
     GridEmptyCell swapOb;
     private void OnMouseDrag()
     {
 
-        if (!BattleManager.Instance.isInControl)
+        if (!BattleManager.Instance.isInControl || !BattleManager.Instance.canPlayerControl)
         {
             return;
         }
@@ -103,7 +107,7 @@ public class Draggable : MonoBehaviour
 
         BattleManager.Instance.hideButtonCanvas();
 
-        FloatingTextManager.Instance.addText("Move!", Vector3.zero,Color.white);
+        //FloatingTextManager.Instance.addText("Move!", Vector3.zero,Color.white);
 
         var targetItem = GridManager.Instance.GetItem(GridManager.Instance.GridItemDict, swapOb.index);
         GridManager.Instance.MoveItemToIndex(GetComponent<GridItem>(), swapOb.index);

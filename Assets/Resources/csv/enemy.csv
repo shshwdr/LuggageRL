@@ -4,10 +4,10 @@ SimpleAttackEnemy,Watchdog,This enemy just attack,minion,1,none,15,3,0
 AttackShieldEnemy,Scorpion,"This enemy knows how to shield, it can attack at height 2",minion,2,none,25,4,0
 AttackFlyEnemy,,This enemy can fly!,minion,3,none,30,4,0
 AttackHealEnemy,,This enemy heals the enemy with least hp ratio,minion,3,none,33,4,0
-AttackGrowEnemy,Karl Turtleneck,"This enemy would attack from bottom and then middle and then top. Basically it grow and attack higher and higher, then back to lowest",minion,3,none,35,4,0
-ShieldHealEnemy,Armored Bee,This enemy heals the enemy with least hp ratio and shield!,minion,4,none,43,5,0
+AttackGrowEnemy,Karl Turtleneck,"This enemy would attack from bottom and then middle and then top. Basically it grow and attack higher and higher, then back to lowest",minion,4,none,35,4,0
+ShieldHealEnemy,Armored Bee,This enemy heals the enemy with least hp ratio and shield!,minion,5,none,50,6,0
 StealAttackEnemy,Racoon,This enemy steal certain item from you and attack,minion,4,none,44,5,0
-AttackStealEnemy,Ape,This enemy steal max item you are having and attack,minion,4,none,45,5,0
+AttackStealEnemy,Ape,This enemy steal max item you are having and attack,minion,5,none,50,6,0
 AttackRotateEnemy,giant woodlouse,This enemy would rotate bag and attack,minion,2,none,25,4,0
 BossPinata,Pinata,This boss would flood your bag with useless items,boss,,forest,80,8,1
 BossExplode,Nasty Airport Kid,This boss would throw liquid bomb to your bag that explode everything in your bag,boss,,desert,80,8,1

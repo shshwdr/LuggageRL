@@ -16,11 +16,20 @@ public class BattleManager : Singleton<BattleManager>
 
     public GameObject luggageAttackDisabledOb;
     public GameObject luggageAttackEnabledOb;
+
+    public int finalDamageIncrease;
+
+    public void addFinalDamageIncrease()
+    {
+        finalDamageIncrease++;
+    }
+
+    public Text moveHint;
     bool CanAttack => attackCountUsed<attackCount;
     int attackCount => 1 +LuggageManager.Instance.UpgradedTime[UpgradeType.attackCount];
     int attackCountUsed = 0;
     public Text MoveText;
-    int selectedAttackIndex;
+    int selectedAttackIndex = -1;
     [SerializeField] private int moveMax = 4;
     int moveLeft;
    public bool isBattleFinished = false;
@@ -37,19 +46,23 @@ public class BattleManager : Singleton<BattleManager>
     public Transform ButtonCanvas;
 
     public  int battleCount = 0;
-    bool canPlayerControl = true;
+    public bool canPlayerControl = true;
 
     public TurnSlider turnSlider;
 
     public void hideButtonCanvas()
     {
+        canPlayerControl = false;
         foreach (var button in ButtonCanvas.GetComponentsInChildren<Button>())
         {
             button.gameObject.SetActive(false);
         }
+
+        MoveText.transform.parent.gameObject.SetActive(false);
     }
     void showButtonCanvas()
     {
+        canPlayerControl = true;
         if (isBattleFinished)
         {
             GridManager.Instance.clearAttackPreview();
@@ -61,6 +74,8 @@ public class BattleManager : Singleton<BattleManager>
         {
             button.gameObject.SetActive(true);
         }
+        MoveText.transform.parent.gameObject.SetActive(true);
+
     }
     public void SkipMove()
     {
@@ -93,6 +108,9 @@ public class BattleManager : Singleton<BattleManager>
             yield return new WaitForSeconds(GridManager.animTime);
 
             yield return StartCoroutine(GetComponentInChildren<TurnSlider>().ShowSlider("WIN!"));
+
+            DetailView.Instance.clearTutorial();
+            moveHint.text = "";
             //FloatingTextManager.Instance.addText("Win Battle!", Vector3.zero, Color.red,1);
             //yield return new WaitForSeconds(GridManager.animTime*3);
             //RemoveText();
@@ -152,7 +170,10 @@ public class BattleManager : Singleton<BattleManager>
     void StartBattle()
     {
 
-
+        if(battleCount == 0)
+        {
+            moveHint.text =  TutorialManager.Instance.getText("MoveItemHint");
+        }
         StartCoroutine(turnSlider.ShowSlider("Player Turn"));
         ////clear old enemies, this is bad, hacky solution
         //foreach(var enemy in Transform.FindObjectsOfType<Enemy>(true))
@@ -167,16 +188,21 @@ public class BattleManager : Singleton<BattleManager>
         showButtonCanvas();
         isBattleFinished = false;
         attackCountUsed = 0;
-        UpdateText();
         DrawItem(true);
         SelectAttack();
+        UpdateText();
         EnemyManager.Instance.SelectEenmiesAction();
 
         battleCount++;
 
 
-        DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance. getUnreadText("Tutorial_battle1"));
 
+    }
+
+    public void hoverHoverAttackButton()
+    {
+
+        DetailView.Instance.showTutorial(TutorialManager.Instance.getUnreadText("Tutorial_attack"));
     }
     public void AddEnemies(BattleType battleType)
     {
@@ -185,7 +211,7 @@ public class BattleManager : Singleton<BattleManager>
         {
             maxEnemy = 2;
         }
-        if(battleCount < 3)
+        if(battleCount < 2)
         {
             maxEnemy = 1;
         }
@@ -212,7 +238,14 @@ public class BattleManager : Singleton<BattleManager>
 
     void SelectAttack()
     {
-        selectedAttackIndex = Random.Range(0, 3);
+        if(selectedAttackIndex == -1)
+        {
+            selectedAttackIndex = 0;
+        }
+        else
+        {
+            selectedAttackIndex = Random.Range(0, 3);
+        }
         moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         UpdateText();
         GridManager.Instance.updateAttackEdge();
@@ -265,15 +298,6 @@ public class BattleManager : Singleton<BattleManager>
         showButtonCanvas();
     }
 
-    public void PlayerAttackManuallySelectId(int i)
-    {
-
-        if (moveLeft < attackMoveCost)
-        {
-            return;
-        }
-        StartCoroutine(PlayerAttackMove(i));
-    }
     public void PlayerAttackManually()
     {
         if (moveLeft < attackMoveCost)

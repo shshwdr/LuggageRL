@@ -6,5 +6,6 @@ Popup_AddItem,Do you want to add this item into you?
 Popup_RemoveItem,Do you want to remove this item from you?
 LuggageUpgradeSelect,Time to pepare myself for the next battles!
 Tutorial_start,"Nooo! You are left at the airport and you need to find your way home! Gladly you have something in you, use them to clear your way home!"
-Tutorial_battle1,"Attack would push all items in you to the direction you are moving. If the item will hit the border, it would attack. Number on items shows how much you can damage the enemy."
+Tutorial_attack,"Attack would push all items in you to the direction you are moving. If the item will hit the border, it would attack. Number on items shows how much you can damage the enemy."
 Tutorial_breakable,There are kinds of item that would be broken and take effect rather than hit the border. Try them out!
+MoveItemHint,Drag Item To Move it (Cost 1 Action Point)

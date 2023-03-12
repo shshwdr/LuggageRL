@@ -20,7 +20,7 @@ public class TurnSlider : MonoBehaviour
         slider.DOScaleY(1, GridManager.animTime);
         textTrans.DOLocalMoveX(0, GridManager.animTime);
 
-        yield return new WaitForSeconds(GridManager.animTime);
+        yield return new WaitForSeconds(GridManager.animTime*2);
 
         slider.DOScaleY(0, GridManager.animTime);
         textTrans.DOLocalMoveX(-1440, GridManager.animTime);

@@ -156,10 +156,17 @@ public class EnemyManager : Singleton<EnemyManager>
                 break;
             }
         }
+        if (difficultCount > 0)
+        {
+            Debug.Log("remains difficulty " + difficultCount);
+            remainsDiffultCount = difficultCount;
+        }
 
 
         return res;
     }
+
+    public int remainsDiffultCount = 0;
     void Start()
     {
 
