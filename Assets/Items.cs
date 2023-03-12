@@ -23,6 +23,8 @@ public class Stone : GridItemCore
         buffs.Clear();
         //FloatingTextManager.Instance.addText("Attack!", transform.position);
         //Luggage.Instance.DoDamage(1);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
+
     }
 }
 [System.Serializable]
@@ -37,7 +39,11 @@ public class Potion : GridItemCore
         //BattleManager.Instance.player.Heal(3);
         //FloatingTextManager.Instance.addText("Heal!", transform.position);
         //destory();
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_potion_drink, new Vector3(0, 0, 0));
+
+
     }
+
 }
 [System.Serializable]
 public class Arrow : GridItemCore
@@ -57,6 +63,9 @@ public class Arrow : GridItemCore
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         index = borderIndex + dir * 10; ;
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bow_and_arrow, new Vector3(0, 0, 0));
+
     }
 
     public override void move(List<BattleMessage> messages)
@@ -75,6 +84,9 @@ public class Poison : GridItemCore
         messages.Add(new MessageItemApplyEffect { item = this, index = index, target = item, type = BuffType.poison, value = value, targetIndex = item.index });
         //messages.Add(new MessageItemAttack { item = this, damage = attack, index = index });
         this.addDestroyMessage(messages);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, new Vector3(0, 0, 0));
+
     }
 }
 
@@ -87,6 +99,10 @@ public class PiggyBank : GridItemCore
         messages.Add(new MessageItemApplyEffect { item = this, index = index, target = item, type = BuffType.piggyBank, value = count, targetIndex = item.index });
         //messages.Add(new MessageItemAttack { item = this, damage = attack, index = index });
         this.addDestroyMessage(messages);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, new Vector3(0, 0, 0));
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_piggy_bank_break, new Vector3(0, 0, 0));
+
     }
     public override void afterTurn(List<BattleMessage> messages)
     {
@@ -117,6 +133,9 @@ public class Pins : GridItemCore
         buffs.Clear();
         GridManager.Instance.pinsCount++;
         index = borderIndex + dir * 10;
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
+
     }
 }
 
@@ -139,6 +158,9 @@ public class Circuit : GridItemCore {
             //item.addDestroyMessageWithIndex(messages, originIndex, true);
         }
         this.addDestroyMessage(messages);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_surge, new Vector3(0, 0, 0));
+
     }
 
 }
@@ -165,6 +187,9 @@ public class Coke : GridItemCore
         this.addDestroyMessage(messages);
         //FloatingTextManager.Instance.addText("Attack!", transform.position);
         //Luggage.Instance.DoDamage(1);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
+
     }
 }
 
@@ -182,6 +207,9 @@ public class Bomb : GridItemCore
         int diff = (int)(borderIndex - originIndex).magnitude;
         messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) * 5 + BattleManager.Instance.finalDamageIncrease, index = index });
         this.addDestroyMessage(messages);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bomb_explode, new Vector3(0, 0, 0));
+
     }
 
     public override void afterTurn(List<BattleMessage> messages)
@@ -197,7 +225,11 @@ public class Bomb : GridItemCore
             messages.Add(new MessageAttackPlayer { item = this, index = index, amount = CalculateDamage(damage) * 5 + BattleManager.Instance.finalDamageIncrease, target = BattleManager.Instance.player });
 
             this.addDestroyMessage(messages);
+
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bomb_explode, new Vector3(0, 0, 0));
+
         }
+
     }
 
 }
@@ -222,6 +254,8 @@ public class CreditCard : GridItemCore
             this.addDestroyMessage(messages);
 
         }
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_cash_register, new Vector3(0, 0, 0));
+
     }
 }
 
@@ -237,6 +271,8 @@ public class Umbrella : GridItemCore
         var emptySlotCount = 12 - GridManager.Instance.GridItemDict.Count;
         messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(emptySlotCount * damage) + BattleManager.Instance.finalDamageIncrease, index = index });
         this.addDestroyMessage(messages);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
     }
 }
 
@@ -252,6 +288,9 @@ public class Slingshot : GridItemCore
         var itemCountBehind = GridManager.Instance.getEmptysBehind(index, index - borderIndex);
         messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + damage2 * CalculateDamage(damage) * itemCountBehind + BattleManager.Instance.finalDamageIncrease, index = index });
         this.addDestroyMessage(messages);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bow_and_arrow, new Vector3(0, 0, 0));
+
     }
 }
 
@@ -285,6 +324,8 @@ public class Balancer : GridItemCore {
             }
             addDestroyMessageWithIndex(messages, originIndex, true);
         }
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_effect_heal, new Vector3(0, 0, 0));
+
     }
 }
 
@@ -313,6 +354,9 @@ public class Rocket : GridItemCore
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         index = borderIndex + dir * 10; ;
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_rocket, new Vector3(0, 0, 0));
+
     }
 }
 
@@ -331,6 +375,10 @@ public class Pinata : GridItemCore
         //BattleManager.Instance.player.Heal(3);
         //FloatingTextManager.Instance.addText("Heal!", transform.position);
         //destory();
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, new Vector3(0, 0, 0));
+
+
     }
 }
 
@@ -342,6 +390,9 @@ public class Mud : GridItemCore
     {
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         this.addDestroyMessage(messages);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, new Vector3(0, 0, 0));
+
     }
 }
 [System.Serializable]
@@ -370,6 +421,8 @@ public class LiquidBomb : GridItemCore
         messages.Add(new MessageWait { waitTime = GridManager.animTime });
 
         //this.addDestroyMessage(messages);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bomb_explode, new Vector3(0, 0, 0));
+
     }
 }
 
@@ -400,5 +453,8 @@ public class FreezeBomb : GridItemCore
         messages.Add(new MessageWait { waitTime = GridManager.animTime });
 
         //this.addDestroyMessage(messages);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_impact, new Vector3(0, 0, 0));
+
     }
 }

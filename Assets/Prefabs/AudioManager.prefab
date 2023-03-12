@@ -90,6 +90,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aff943c914215d40929c1b7f5fff01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <music_biome_1>k__BackingField:
+    Guid:
+      Data1: -1695975820
+      Data2: 1184270347
+      Data3: -1294754118
+      Data4: -2010475050
+    Path: event:/music_biome_1
   <music_luggage_adventure>k__BackingField:
     Guid:
       Data1: 347517947
@@ -97,4 +104,246 @@ MonoBehaviour:
       Data3: -565034327
       Data4: 975092811
     Path: event:/music_luggage_adventure
-  <musicPlaylist>k__BackingField: []
+  <music_boss>k__BackingField:
+    Guid:
+      Data1: -370713243
+      Data2: 1260200056
+      Data3: 558385328
+      Data4: -1559840
+    Path: event:/music_boss
+  <music_airport>k__BackingField:
+    Guid:
+      Data1: -1228935347
+      Data2: 1179370425
+      Data3: -1122943354
+      Data4: 1926985539
+    Path: event:/music_airport
+  <music_death_stinger>k__BackingField:
+    Guid:
+      Data1: -1972433260
+      Data2: 1077743700
+      Data3: 949520291
+      Data4: 1888122945
+    Path: event:/music_death_stinger
+  <music_airport_battle>k__BackingField:
+    Guid:
+      Data1: -564982370
+      Data2: 1329894913
+      Data3: -1095529085
+      Data4: 101379752
+    Path: event:/music_airport_battle
+  <musicPlaylist>k__BackingField:
+  - Guid:
+      Data1: -1228935347
+      Data2: 1179370425
+      Data3: -1122943354
+      Data4: 1926985539
+    Path: event:/music_airport
+  - Guid:
+      Data1: -370713243
+      Data2: 1260200056
+      Data3: 558385328
+      Data4: -1559840
+    Path: event:/music_boss
+  - Guid:
+      Data1: 347517947
+      Data2: 1201711524
+      Data3: -565034327
+      Data4: 975092811
+    Path: event:/music_luggage_adventure
+  <sfx_effect_heal>k__BackingField:
+    Guid:
+      Data1: 243105075
+      Data2: 1201437379
+      Data3: 1619203239
+      Data4: -478490149
+    Path: event:/effect_heal
+  <sfx_enemy_ability_steal>k__BackingField:
+    Guid:
+      Data1: 1412317665
+      Data2: 1124045846
+      Data3: -1162100333
+      Data4: 363505136
+    Path: event:/enemy_ability_steal
+  <sfx_enemy_action_shield>k__BackingField:
+    Guid:
+      Data1: -168564059
+      Data2: 1113929556
+      Data3: -1852975206
+      Data4: 745320806
+    Path: event:/enemy_action_shield
+  <sfx_enemy_death>k__BackingField:
+    Guid:
+      Data1: 1033584873
+      Data2: 1325834507
+      Data3: 1028225948
+      Data4: -899050919
+    Path: event:/enemy_death
+  <sfx_enemy_heavy_attack>k__BackingField:
+    Guid:
+      Data1: -2140812669
+      Data2: 1271849958
+      Data3: -777943878
+      Data4: -2115710879
+    Path: event:/enemy_heavy_attack
+  <sfx_enemy_light_attack>k__BackingField:
+    Guid:
+      Data1: 270297123
+      Data2: 1132081999
+      Data3: 463029139
+      Data4: 405243905
+    Path: event:/enemy_light_attack
+  <sfx_bow_and_arrow>k__BackingField:
+    Guid:
+      Data1: -492389810
+      Data2: 1255761512
+      Data3: 780372149
+      Data4: 932698799
+    Path: event:/item_bow_and_arrow
+  <sfx_item_break>k__BackingField:
+    Guid:
+      Data1: -696020461
+      Data2: 1166978824
+      Data3: -1999141203
+      Data4: -999583962
+    Path: event:/item_break
+  <sfx_item_buy>k__BackingField:
+    Guid:
+      Data1: 1578664029
+      Data2: 1278836693
+      Data3: 401086653
+      Data4: -540430118
+    Path: event:/item_buy
+  <sfx_item_drag_pickup>k__BackingField:
+    Guid:
+      Data1: -988235848
+      Data2: 1093411867
+      Data3: -870431866
+      Data4: 1902146635
+    Path: event:/item_drag_pickup
+  <sfx_item_drag_putdown>k__BackingField:
+    Guid:
+      Data1: -642970851
+      Data2: 1207221340
+      Data3: 922810779
+      Data4: 139488663
+    Path: event:/item_drag_putdown
+  <sfx_item_impact>k__BackingField:
+    Guid:
+      Data1: -1432493284
+      Data2: 1114300653
+      Data3: -699112048
+      Data4: 1797604684
+    Path: event:/item_impact
+  <sfx_item_piggy_bank_break>k__BackingField:
+    Guid:
+      Data1: 312927674
+      Data2: 1174595679
+      Data3: 1569927576
+      Data4: 367055166
+    Path: event:/item_piggy_bank_break
+  <sfx_item_potion_drink>k__BackingField:
+    Guid:
+      Data1: 1128531177
+      Data2: 1076465594
+      Data3: 1161829273
+      Data4: 715619795
+    Path: event:/item_potion_drink
+  <sfx_item_rocket>k__BackingField:
+    Guid:
+      Data1: 470057854
+      Data2: 1158260163
+      Data3: -1232119632
+      Data4: 198272968
+    Path: event:/item_rocket
+  <sfx_item_slide>k__BackingField:
+    Guid:
+      Data1: -878500881
+      Data2: 1074539609
+      Data3: -1003273311
+      Data4: 533014968
+    Path: event:/item_slide
+  <sfx_item_surge>k__BackingField:
+    Guid:
+      Data1: -1431914068
+      Data2: 1329972836
+      Data3: -739294533
+      Data4: -564138315
+    Path: event:/item_surge
+  <sfx_item_take_new>k__BackingField:
+    Guid:
+      Data1: 1497323069
+      Data2: 1171438579
+      Data3: 462001305
+      Data4: 1175949773
+    Path: event:/item_take_new
+  <sfx_luggage_attack_impact>k__BackingField:
+    Guid:
+      Data1: -1035412223
+      Data2: 1317702347
+      Data3: 1077899696
+      Data4: 382416812
+    Path: event:/luggage_attack_impact
+  <sfx_luggage_attack_whoosh>k__BackingField:
+    Guid:
+      Data1: 1653317531
+      Data2: 1081656060
+      Data3: -955070303
+      Data4: 637010720
+    Path: event:/luggage_attack_whoosh
+  <sfx_luggage_death_blow>k__BackingField:
+    Guid:
+      Data1: 1248693236
+      Data2: 1319756344
+      Data3: -1241351772
+      Data4: -1908542107
+    Path: event:/luggage_death_blow
+  <sfx_luggage_up_down_swirl>k__BackingField:
+    Guid:
+      Data1: 1809729379
+      Data2: 1073813382
+      Data3: -19730774
+      Data4: -598390379
+    Path: event:/luggage_ground_pound_swirl
+  <sfx_luggage_walk>k__BackingField:
+    Guid:
+      Data1: 591836593
+      Data2: 1340220073
+      Data3: -957261403
+      Data4: -1273747452
+    Path: event:/luggage_walk
+  <sfx_luggage_walk_full_loop>k__BackingField:
+    Guid:
+      Data1: -715553047
+      Data2: 1191450653
+      Data3: 656456126
+      Data4: -1337722436
+    Path: event:/luggage_walk_full_loop
+  <sfx_ui_hover>k__BackingField:
+    Guid:
+      Data1: 650725196
+      Data2: 1334814641
+      Data3: -427429986
+      Data4: -757102930
+    Path: event:/ui_hover
+  <sfx_ui_select>k__BackingField:
+    Guid:
+      Data1: 1714303419
+      Data2: 1268683388
+      Data3: 993219770
+      Data4: -1508742383
+    Path: event:/ui_select
+  <sfx_random_boing>k__BackingField:
+    Guid:
+      Data1: -1755054197
+      Data2: 1114220332
+      Data3: -386144622
+      Data4: 89680050
+    Path: event:/random_boing
+  <sfx_bomb_explode>k__BackingField:
+    Guid:
+      Data1: -2018936429
+      Data2: 1334590773
+      Data3: -188075377
+      Data4: -1637933682
+    Path: event:/item_bomb_explode

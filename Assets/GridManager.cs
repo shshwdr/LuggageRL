@@ -87,6 +87,8 @@ public class GridManager : Singleton<GridManager>
     public void addItemToDeck(ItemType type)
     {
         deckPool.Add(type);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_take_new, new Vector3(0, 0, 0));
+
     }
     public List<ItemType> deckPool = new List<ItemType>() { ItemType.Circuit, ItemType.Stone, ItemType.Potion, ItemType.Potion, ItemType.Potion, ItemType.Stone, };
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
@@ -1167,7 +1169,6 @@ public class GridManager : Singleton<GridManager>
 
     public GameObject AddGrid(int i, int j, ItemType type)
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_take_new, transform.position);
         var obj = ItemManager.Instance.createItem(type, items, Vector3.zero, i, j);
         //GameObject obj = Instantiate(Resources.Load<GameObject>("items/"+type.ToString()));
         //obj.GetComponent<GridItem>().init(new Vector2Int(i, j), type);

@@ -21,7 +21,7 @@ public class UIThemeChangeTrigger : MonoBehaviour
         {
             switch (container.theme)
             {
-                case BiomeArea.AIRPORT:
+                case BiomeArea.AIRPORT_BATTLE:
                 case BiomeArea.BOSS:
                     airportFrameUI = container.gameObject;
 
@@ -55,7 +55,7 @@ public class UIThemeChangeTrigger : MonoBehaviour
             Color fadeOutAlpha = new Color(1.0f, 1.0f, 1.0f, Mathf.Lerp(1f, 0f, travelledDistance / transitionDistance));
             switch(area)
             {
-                case BiomeArea.AIRPORT:
+                case BiomeArea.AIRPORT_BATTLE:
                 case BiomeArea.BOSS:
                     foreach(SpriteRenderer ren in airportFrameUI.GetComponentsInChildren<SpriteRenderer>())
                     {
