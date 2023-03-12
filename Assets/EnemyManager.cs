@@ -231,6 +231,11 @@ public class EnemyManager : Singleton<EnemyManager>
             }
         }
 
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            StartCoroutine(BattleManager.Instance.player.HealEnumerator(10000));
+        }
         if (Input.GetKeyDown(KeyCode.L))
         {
             StartCoroutine(BattleManager.Instance.player.ApplyDamage(10000));

@@ -35,6 +35,7 @@ public class Potion : GridItemCore
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         var healAmount = info.Param1;
         messages.Add(new MessageItemHeal { item = this, amount = healAmount, target = BattleManager.Instance.player, index = index });
+        messages.Add(new MessageDrawItem { index = index, amount = 1 });
         this.addDestroyMessage(messages);
         //BattleManager.Instance.player.Heal(3);
         //FloatingTextManager.Instance.addText("Heal!", transform.position);
@@ -127,7 +128,7 @@ public class Pins : GridItemCore
         int diff = (int)(borderIndex - originIndex).magnitude;
 
         var dir = (borderIndex - originIndex) / diff;
-        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) ^ GridManager.Instance.pinsCount + BattleManager.Instance.finalDamageIncrease, index = index });
+        messages.Add(new MessageItemAttack { item = this, damage = (CalculateDamage(damage) ^ GridManager.Instance.pinsCount) + BattleManager.Instance.finalDamageIncrease, index = index });
         messages.Add(new MessageItemMove { item = this, index = index });
         this.addDestroyMessageWithIndex(messages, originIndex, true);
         buffs.Clear();
@@ -248,7 +249,7 @@ public class CreditCard : GridItemCore
                 count++;
             }
         }
-        if (count == 1)
+        if (count <= 2)
         {
             messages.Add(new MessageDrawItem { index = index, amount = amount });
             this.addDestroyMessage(messages);
