@@ -311,6 +311,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1029336581624154739, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029336581624154741, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029336581624154741, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029336581624154741, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1795591274462826774, guid: 22a31ab5a1101bf41a0df85c6150960a, type: 3}
       propertyPath: m_Text
       value: Choose the Upgrade you want to do

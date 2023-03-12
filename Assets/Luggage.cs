@@ -42,7 +42,7 @@ public class Luggage : Singleton<Luggage>
     {
 
     }
-    Enemy target;
+    public Enemy target;
 
 
     enum ENEMY_ATTACK_LOCATION { TOP, LEFT, RIGHT };

@@ -76,7 +76,14 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public Enemy GetFrontEnemy()
     {
-        return enemies[0];
+        foreach(var e in enemies)
+        {
+            if (!e.isDead)
+            {
+                return e;
+            }
+        }
+        return null;
     }
     EnemyInfo GetBossInBiome(BiomeType biome)
     {
@@ -116,7 +123,7 @@ public class EnemyManager : Singleton<EnemyManager>
     public List<EnemyInfo> GetEnemyInfosToAdd(int difficultCount, BattleType battleType, int maxEnemy = 3)
     {
 
-        //return new List<EnemyInfo>() { enemyDict["AttackFlyEnemy"], enemyDict["SimpleAttackEnemy"], enemyDict["EliteCap"], };
+       return new List<EnemyInfo>() { enemyDict["SimpleAttackEnemy"], enemyDict["SimpleAttackEnemy"], enemyDict["StealAttackEnemy"], };
         List<EnemyInfo> res = new List<EnemyInfo>();
         if (battleType == BattleType.boss)
         {

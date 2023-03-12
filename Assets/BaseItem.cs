@@ -117,15 +117,6 @@ public class BaseItem : MonoBehaviour
         willBeAttackedObj.SetActive(true);
     }
 
-    public void WillBeStolen()
-    {
-        willBeStokenObj.SetActive(true);
-    }
-    public void ClearWillBeStolen()
-    {
-
-        willBeStokenObj.SetActive(false);
-    }
     void updateAttack(bool willAttack)
     {
         //if (willAttack)
@@ -136,6 +127,17 @@ public class BaseItem : MonoBehaviour
         attackAndDefendOb.SetActive(!willAttack && !isBreakable);
         combinedAttack.text = item.core.Attack.ToString();
         combinedDefense.text = item.core.defense.ToString();
+
+
+        willBeStokenObj.SetActive(false);
+        foreach (var enemy in EnemyManager.Instance.GetEnemies())
+        {
+            if(enemy.Core.currentAction is EnemyActionSteal stealAction&&stealAction.stealItem == GetComponent<GridItem>().core.type)
+            {
+
+                willBeStokenObj.SetActive(true);
+            }
+        }
     }
     public void updateBuff()
     {

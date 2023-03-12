@@ -274,6 +274,8 @@ public class Enemy : HPObject
         transform.DOLocalMoveY(-10, GridManager.animTime);
         //Destroy(gameObject,GridManager.animTime);
         yield return StartCoroutine(EnemyManager.Instance.RemoveEnemy(this));
+        EnemyManager.Instance.setCurrentTargetedEnemy(EnemyManager.Instance.GetFrontEnemy());
+        Luggage.Instance. target = EnemyManager.Instance.GetCurrentTargetedEnemy();
     }
     //public IEnumerator ShowDamage()
     //{
@@ -314,11 +316,14 @@ public class Enemy : HPObject
         GridManager.Instance.Rotate(1, false);
         yield return Luggage.Instance.BagRotateAttackReceived();
     }
-
+    bool finishedAttack = false;
     public IEnumerator Attack()
     {
         GridManager.Instance.cleanAndShowAttackPreviewOfEnemy(this);
-        yield return StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
+        finishedAttack = false;
+        StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
+        yield return new WaitUntil(() => finishedAttack);
+        finishedAttack = false;
 
         /* originalPosition = transform.position;
          transform.DOMove(Luggage.Instance.transform.position, GridManager.animTime);
@@ -358,8 +363,8 @@ public class Enemy : HPObject
         yield return StartCoroutine(GridManager.Instance.EnemyAttackEnumerator(this));
 
         GridManager.Instance.clearAttackPreview();
-        
 
+        finishedAttack = true;
         /*
         transform.DOMove(originalPosition, GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);*/
@@ -387,6 +392,9 @@ public class Enemy : HPObject
     }
     private void OnMouseDown()
     {
-        EnemyManager.Instance.setCurrentTargetedEnemy(this);
+        if (BattleManager.Instance.canPlayerControl)
+        {
+            EnemyManager.Instance.setCurrentTargetedEnemy(this);
+        }
     }
 }

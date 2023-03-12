@@ -66,7 +66,7 @@ public class HPObject : MonoBehaviour
         if (!isDead)
         {
             isDead = true;
-
+            //fx_luggage_death_blow 
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_random_boing, transform.position);
             yield return StartCoroutine( DieInteral());
         }

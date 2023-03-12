@@ -21,8 +21,10 @@ public class LuggageUpgradeScene : BaseScene
         LuggageManager.Instance.skipButton = GetComponentInChildren<SkipAndHealButton>();
         LuggageManager.Instance.selectedTypes();
         button1.GetComponentInChildren<Text>().text = LuggageManager.Instance.typeDescription[LuggageManager.Instance.select1];
+        button1.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>("upgradeIcons/" + LuggageManager.Instance.select1.ToString());
         button1.onClick.AddListener(() => LuggageManager.Instance.select(0));
         button2.GetComponentInChildren<Text>().text = LuggageManager.Instance.typeDescription[LuggageManager.Instance.select2];
+        button2.GetComponentsInChildren<Image>()[2].sprite = Resources.Load<Sprite>("upgradeIcons/" + LuggageManager.Instance.select2.ToString());
         button2.onClick.AddListener(() => LuggageManager.Instance.select(1));
         //ItemRemoveManager.Instance.AddItems();
     }

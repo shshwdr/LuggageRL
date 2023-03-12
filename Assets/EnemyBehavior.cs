@@ -69,21 +69,21 @@ public class AttackHealEnemy : EnemyBehavior
 {
     public AttackHealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0, attackHeight = 1 }, new EnemyActionHeal() { healAmount = 5}, };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0, attackHeight = 1 }, new EnemyActionHeal() { healAmount = 1}, };
     }
 }
 public class ShieldHealEnemy : EnemyBehavior
 {
     public ShieldHealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 0 }, new EnemyActionHeal() { healAmount = 6 }, };
+        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 0 }, new EnemyActionHeal() { healAmount = 0 }, };
     }
 }
 public class StealAttackEnemy : EnemyBehavior
 {
     public StealAttackEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionSteal() { }, new EnemyActionAttack() { attackDamage = 0 }, new EnemyActionShield() { shieldAmount = 6} };
+        actions = new EnemyAction[] { new EnemyActionSteal() { }, new EnemyActionIdle(), new EnemyActionAttack() { attackDamage = 0 }, new EnemyActionShield() { shieldAmount = 2} };
     }
 }
 
@@ -91,14 +91,14 @@ public class AttackStealEnemy : EnemyBehavior
 {
     public AttackStealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage =0 }, new EnemyActionStealMax() { }, new EnemyActionHeal() { healAmount = 6 } };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage =0 }, new EnemyActionStealMax() { }, new EnemyActionHeal() { healAmount = 1 } ,new EnemyActionIdle()};
     }
 }
 public class AttackRotateEnemy : EnemyBehavior
 {
     public AttackRotateEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0 }, new EnemyActionStealMax() { }, };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0 }, new EnemyActionRotate() { }, };
     }
 }
 
@@ -106,7 +106,7 @@ public class EliteCap : EnemyBehavior {
 
     public EliteCap()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 6}, new EnemyActionHeal() { healAmount = 7}, };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 6}, new EnemyActionHeal() { healAmount = 2}, };
     }
 }
 public class EliteThorn : EnemyBehavior {
@@ -120,14 +120,14 @@ public class BossPinata : EnemyBehavior
 {
     public BossPinata()
     {
-        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 7}, new EnemyActionHeal() { healAmount = 8}, new EnemyActionAttack() { attackDamage =  2, attackHeight = 2 } };
+        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 7}, new EnemyActionHeal() { healAmount = 2}, new EnemyActionAttack() { attackDamage =  2, attackHeight = 2 } };
     }
 }
 public class BossExplode : EnemyBehavior
 {
     public BossExplode()
     {
-        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.LiquidBomb } , new EnemyActionShield() {shieldAmount = 8 },new EnemyActionAttack() { attackDamage =2, attackHeight = 2 }};
+        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.LiquidBomb } ,new EnemyActionAttack() { attackDamage =2, attackHeight = 2 }, new EnemyActionSteal() };
     }
 }
 public class BossFreeze : EnemyBehavior

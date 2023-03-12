@@ -86,7 +86,7 @@ public class EnemyActionHeal : EnemyAction
 }
 public class EnemyActionSteal : EnemyAction
 {
-    ItemType stealItem;
+    public ItemType stealItem;
     public override IEnumerator TakeAction(Enemy enemy)
     {
 
@@ -101,6 +101,7 @@ public class EnemyActionSteal : EnemyAction
         stealItem = GridManager.Instance.findMostItem();
 
         enemy.attackPreview.UpdateOtherPreview("steal", stealItem.ToString());
+
     }
 }
 

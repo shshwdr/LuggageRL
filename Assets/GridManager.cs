@@ -41,7 +41,7 @@ public class GridManager : Singleton<GridManager>
     public List<GridEmptyCell> emptyGridList = new List<GridEmptyCell>();
     public Text itemViewText;
 
-    int drawCounts = 2;
+    int drawCounts = 3;
     int DrawCount => drawCounts + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
     public bool CanDraw(out string failedReason, int drawCount)
     {
