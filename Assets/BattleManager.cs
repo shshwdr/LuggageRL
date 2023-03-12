@@ -22,7 +22,7 @@ public class BattleManager : Singleton<BattleManager>
 
 
     public Text moveHint;
-    bool CanAttack => attackCountUsed < attackCount;
+    bool CanAttack => attackCountUsed < attackCount && moveLeft>=2;
     int attackCount => 1 + LuggageManager.Instance.UpgradedTime[UpgradeType.attackCount];
     int attackCountUsed = 0;
     public Text MoveText;
@@ -144,6 +144,7 @@ public class BattleManager : Singleton<BattleManager>
     void Start()
     {
         turnSlider = GetComponentInChildren<TurnSlider>();
+        LuggageAttackButton.gameObject.SetActive(false);
     }
 
     public void takeControl()
@@ -199,6 +200,7 @@ public class BattleManager : Singleton<BattleManager>
         showButtonCanvas();
         isBattleFinished = false;
         attackCountUsed = 0;
+        moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         DrawItem(true);
         SelectAttack();
         UpdateText();
@@ -257,7 +259,7 @@ public class BattleManager : Singleton<BattleManager>
         {
             selectedAttackIndex = Random.Range(0, 3);
         }
-        moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
+        //moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         UpdateText();
         GridManager.Instance.updateAttackEdge();
     }
@@ -399,6 +401,7 @@ public class BattleManager : Singleton<BattleManager>
         //SelectAttack();
         EnemyManager.Instance.SelectEenmiesAction();
         yield return StartCoroutine(DrawItemEnumerator(true));
+        moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         attackCountUsed = 0;
         UpdateText();
 

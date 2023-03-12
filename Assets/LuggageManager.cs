@@ -49,7 +49,7 @@ public class LuggageManager : Singleton<LuggageManager>
 
             sele = select2;
         }
-        DialoguePopupManager.Instance.showDialogue("Do you want to upgrad this: " + typeDescription[sele], null, () => {
+        //DialoguePopupManager.Instance.showDialogue("Do you want to upgrad this: " + typeDescription[sele], null, () => {
 
 
             UpgradedTime[sele]++;
@@ -62,7 +62,7 @@ public class LuggageManager : Singleton<LuggageManager>
                 BattleManager.Instance.updateBuff();
             }
             outControl();
-        });
+        //});
 
 
     }

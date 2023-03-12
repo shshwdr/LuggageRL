@@ -13,12 +13,13 @@ public class SkipAndHealButton : MonoBehaviour
     {
         GetComponentInChildren<Text>().text = "Skip And Heal";
         GetComponent<Button>().onClick.AddListener(()=> {
-            DialoguePopupManager.Instance.showDialogue(
-            string.Format(TutorialManager.Instance.getText("SkipAndHeal"), percentage, (int)(BattleManager.Instance.player.maxHP * percentage / 100)), null, () =>
-            {
+           // DialoguePopupManager.Instance.showDialogue(
+            //string.Format(TutorialManager.Instance.getText("SkipAndHeal"), percentage, (int)(BattleManager.Instance.player.maxHP * percentage / 100)), null, () =>
+            //{
                 StartCoroutine(BattleManager.Instance.player.HealEnumerator(BattleManager.Instance.player.maxHP * percentage / 100));
                 actionWhenPressed.Invoke();
-            });
+            //}
+            //);
         });
     }
 

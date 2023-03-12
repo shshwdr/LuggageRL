@@ -90,12 +90,12 @@ public class GridManager : Singleton<GridManager>
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_take_new, new Vector3(0, 0, 0));
 
     }
-    public List<ItemType> deckPool = new List<ItemType>() { ItemType.Circuit, ItemType.Stone, ItemType.Potion, ItemType.Potion, ItemType.Potion, ItemType.Stone, };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Stone, ItemType.Arrow};
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
-    public IEnumerator DrawItem(int drawCount)
+    public IEnumerator DrawItem(int drawCount, bool shouldDrop)
     {
         List<Vector2Int> availableEmpty = new List<Vector2Int>();
         foreach (var key in emptyGridList)
@@ -117,13 +117,17 @@ public class GridManager : Singleton<GridManager>
             }
             var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
             var pickedType = deckPool[Random.Range(0, deckPool.Count)];
+
+            Debug.Log("draw " + pickedType.ToString());
             deckPool.Remove(pickedType);
             AddGrid(picked.x, picked.y, pickedType);
             availableEmpty.Remove(picked);
         }
-
-        yield return StartCoroutine(MoveAfter(0, -1));
-        BattleManager.Instance.PredictNextAttack();
+        if (shouldDrop)
+        {
+            yield return StartCoroutine(MoveAfter(0, -1));
+            BattleManager.Instance.PredictNextAttack();
+        }
     }
 
     public GameObject AddItemRandomPosition(ItemType type)
@@ -177,13 +181,13 @@ public class GridManager : Singleton<GridManager>
 
     public IEnumerator DrawAllItemsFromPool()
     {
-        yield return StartCoroutine(DrawItem(deckPool.Count));
+        yield return StartCoroutine(DrawItem(deckPool.Count,true));
     }
 
 
     public IEnumerator DrawItemsFromPool()
     {
-        yield return StartCoroutine(DrawItem(DrawCount));
+        yield return StartCoroutine(DrawItem(DrawCount,true));
         //List<Vector2Int> availableEmpty = new List<Vector2Int>();
         //foreach (var key in emptyGridList)
         //{
@@ -208,7 +212,7 @@ public class GridManager : Singleton<GridManager>
     // Start is called before the first frame update
     void Start()
     {
-
+        //Time.timeScale = 5;
         if (GameManager.Instance.preselectedItems.Count > 0)
         {
             for (int i = 0;i< GameManager.Instance.preselectedItems.Count; i++)
@@ -908,7 +912,7 @@ public class GridManager : Singleton<GridManager>
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
                 FloatingTextManager.Instance.addText($"Draw {drawItem.amount} Items", GridItemDict[drawItem.index].transform.position, Color.blue);
                 yield return new WaitForSeconds(animTime);
-                yield return StartCoroutine(DrawItem(drawItem.amount));
+                yield return StartCoroutine(DrawItem(drawItem.amount,false));
             }
             else if (message is MessageAttackPlayer attackPlayer)
             {

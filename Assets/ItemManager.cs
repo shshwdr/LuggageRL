@@ -150,14 +150,14 @@ public class ItemManager : Singleton<ItemManager>
 
     public void select(SelectableItem item)
     {
-        DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance.getText("Popup_AddItem"), item.GetComponent<GridItem>().Core.info.sprite, () =>
-          {
+        ////DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance.getText("Popup_AddItem"), item.GetComponent<GridItem>().Core.info.sprite, () =>
+         // {
               itemTypePotentialRarityPool.Remove(item.GetComponent<GridItem>().type);
               GridManager.Instance.addItemToDeck(item.GetComponent<GridItem>().type);
               StartCoroutine( GridManager.Instance.DrawAllItemsFromPool());
 
               outControl();
-          });
+         //});
 
         
 

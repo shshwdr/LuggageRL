@@ -41,13 +41,13 @@ public class ItemRemoveManager : Singleton<ItemRemoveManager>
 
     public void select(SelectableItem item)
     {
-        DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance.getText("Popup_RemoveItem"), item.GetComponent<GridItem>().Core.info.sprite, () =>
-        {
+        //DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance.getText("Popup_RemoveItem"), item.GetComponent<GridItem>().Core.info.sprite, () =>
+        //{
             GridManager.Instance.RemoveDeck(item.GetComponent<GridItem>());
 
             StartCoroutine(GridManager.Instance.MoveAfter(0, -1));
 
             outControl();
-        });
+        //});
     }
 }

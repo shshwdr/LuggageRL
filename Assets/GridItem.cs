@@ -175,6 +175,7 @@ public class GridItemCore: IGridItem
 
     public void addDestroyMessage(List<BattleMessage> messages, bool skipAnim = false)
     {
+        
         isDestroyed = true;
         messages.Add(new MessageDestroy {index = index, item = this, skipAnim = skipAnim });
         //GridManager.Instance.RemoveGrid(index, type);
@@ -261,6 +262,7 @@ public class GridItem : MonoBehaviour, IGridItem
     }
     public void destory()
     {
+        Debug.Log("destory " + type);
         transform.DOShakeScale(GridManager.animTime);
         //Debug.Log($"destroy {index} {type}");
         Destroy(gameObject, GridManager.animTime);
