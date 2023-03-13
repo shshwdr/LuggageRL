@@ -8269,7 +8269,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1768670240
+        UniqueID: 9259591
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -8389,7 +8389,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -845354707
+        UniqueID: -194705145
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -8657,7 +8657,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1373998151
+        UniqueID: 749486193
         Label: Holding Pause
         ChannelMode: 0
         Channel: 0
@@ -8733,7 +8733,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 688348907
+        UniqueID: 861067476
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -8853,7 +8853,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 929202895
+        UniqueID: -952254115
         Label: PositionLeftEnemyTarget
         ChannelMode: 0
         Channel: 0
@@ -9130,7 +9130,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 1844473809
+        UniqueID: 2030530959
         Label: Impact
         ChannelMode: 0
         Channel: 0
@@ -9206,7 +9206,7 @@ MonoBehaviour:
       type: {class: MMF_Events, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -894134812
+        UniqueID: 1293917919
         Label: Unity Events
         ChannelMode: 0
         Channel: 0
@@ -9298,7 +9298,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 409009132
+        UniqueID: -1547937971
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -9409,7 +9409,7 @@ MonoBehaviour:
       type: {class: MMF_Rotation, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 982249435
+        UniqueID: -1805748481
         Label: Rotation
         ChannelMode: 0
         Channel: 0
@@ -9474,7 +9474,7 @@ MonoBehaviour:
         Owner: {fileID: 1558168936}
         DebugActive: 0
         AnimateRotationTarget: {fileID: 1268015398595313318}
-        Mode: 0
+        Mode: 1
         RotationSpace: 0
         AnimateRotationDuration: 0.5
         RemapCurveZero: 0
@@ -9653,7 +9653,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -120942533
+        UniqueID: -996144451
         Label: PositionReturnToIdle
         ChannelMode: 0
         Channel: 0
@@ -9867,7 +9867,7 @@ MonoBehaviour:
       type: {class: MMF_Position, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 125239851
+        UniqueID: 2096289559
         Label: Position
         ChannelMode: 0
         Channel: 0
@@ -10135,7 +10135,7 @@ MonoBehaviour:
       type: {class: MMF_HoldingPause, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: 250929117
+        UniqueID: 2087793024
         Label: Holding Pause
         ChannelMode: 0
         Channel: 0
@@ -10211,7 +10211,7 @@ MonoBehaviour:
       type: {class: MMF_SquashAndStretch, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
         Active: 1
-        UniqueID: -1615455552
+        UniqueID: 2007893065
         Label: Squash and Stretch
         ChannelMode: 0
         Channel: 0
@@ -11923,9 +11923,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1268015397992814308}
   - component: {fileID: 1268015397580205259}
+  - component: {fileID: 1242655445}
   m_Layer: 0
   m_Name: HeroContainer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11959,6 +11960,32 @@ SortingGroup:
   m_SortingLayerID: 1978928693
   m_SortingLayer: 1
   m_SortingOrder: 0
+--- !u!61 &1242655445
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268015397992814309}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1268015398161644034
 GameObject:
   m_ObjectHideFlags: 0
@@ -12210,7 +12237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c18c519e5f1a384eb7067e88a7fb9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 40
   isDead: 0
   hpbar: {fileID: 7922783075191796820}
   shield: 0
@@ -12231,11 +12258,12 @@ MonoBehaviour:
   upsideDownAndDropAttackAnimationPlayer: {fileID: 1304813528}
   walkingAnimationPlayer: {fileID: 1268015397469390039}
   bagRotatedAnimationPlayer: {fileID: 409030535}
-  deathAnimationPlayer: {fileID: 0}
+  deathAnimationPlayer: {fileID: 6029130581066647149}
   luggageRightTargetTransform: {fileID: 7483143120114793855}
   returnToIdleAnimationPlayer: {fileID: 707944272}
   hurtAnimationPlayer: {fileID: 1583072828}
   idleTransform: {fileID: 1268015396848479313}
+  target: {fileID: 0}
 --- !u!114 &1187736673
 MonoBehaviour:
   m_ObjectHideFlags: 0
