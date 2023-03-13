@@ -69,7 +69,7 @@ public class AttackHealEnemy : EnemyBehavior
 {
     public AttackHealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionHeal() { healAmount = -1 }, new EnemyActionAttack() { attackDamage = 0, attackHeight = 1 }, new EnemyActionIdle() };
+        actions = new EnemyAction[] { new EnemyActionHeal() { healAmount = -1 }, new EnemyActionAttack() { attackDamage = 0, attackFromBottom= false }, new EnemyActionIdle() };
     }
 }
 public class ShieldHealEnemy : EnemyBehavior
@@ -91,7 +91,7 @@ public class AttackStealEnemy : EnemyBehavior
 {
     public AttackStealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage =0 }, new EnemyActionStealMax() { }, new EnemyActionHeal() { healAmount = -1 } ,new EnemyActionIdle()};
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage =0,attackHeight = 2 }, new EnemyActionStealMax() { }, new EnemyActionHeal() { healAmount = -1 } ,new EnemyActionIdle()};
     }
 }
 public class AttackRotateEnemy : EnemyBehavior
@@ -106,14 +106,14 @@ public class EliteCap : EnemyBehavior {
 
     public EliteCap()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = -2, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5}, new EnemyActionAttack() { attackDamage = -1 }, new EnemyActionSteal(), new EnemyActionIdle() };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = -2, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5}, new EnemyActionAttack() { attackDamage = -1, attackHeight = 2 }, new EnemyActionSteal(), new EnemyActionIdle() };
     }
 }
 public class EliteThorn : EnemyBehavior {
 
     public EliteThorn()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0, attackHeight = 1 },new EnemyActionRotate(), new EnemyActionAttack() { attackDamage = +2, attackHeight = 2 }, new EnemyActionShield() { shieldAmount = 5} };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0, attackHeight = 0 },new EnemyActionRotate(), new EnemyActionAttack() { attackDamage = +2, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5} };
     }
 }
 public class BossPinata : EnemyBehavior

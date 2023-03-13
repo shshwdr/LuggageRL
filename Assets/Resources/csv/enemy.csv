@@ -2,9 +2,9 @@
 DummyEnemy,Freddy Hydrant,"Freddy is a nice guy. Standing around, taking things as they come.",minion,0,none,10,0,0
 SimpleAttackEnemy,Walter Watchdog,"He is a simple fellow. He sees you – he runs at you. And if he is faster than you, well … Good luck!",minion,1,none,10,3,0
 AttackShieldEnemy,Crab,"The Crab knows how to shield. And it is jumpy, attacking at height 2.",minion,2,none,14,4,0
-AttackFlyEnemy,Dragon Fly,Is it a bird? Is it a helicopter? NO! It is Dragon ... Fly ... man.,minion,3,none,20,4,0
-AttackHealEnemy,Crumpy Bee,She loves her comrads! Healing the team member with the least HP ratio.,minion,3,none,21,4,0
-AttackGrowEnemy,Karl Turtleneck,"Karl attacks from the bottom, then middle and then top, in a cycle.",minion,4,none,25,4,0
+AttackFlyEnemy,Dragon Fly,Is it a bird? Is it a helicopter? NO! It is Dragon ... Fly ... man.,minion,3,none,20,3,0
+AttackHealEnemy,Crumpy Bee,She loves her comrads! Healing the team member with the least HP ratio.,minion,4,none,22,3,0
+AttackGrowEnemy,Karl Turtleneck,"Karl attacks from the bottom, then middle and then top, in a cycle.",minion,4,none,24,4,0
 ShieldHealEnemy,Balky Mushroom,He is keeping the back of the troup. Heals the enemy with the least HP ratio and shields!,minion,5,none,38,6,0
 StealAttackEnemy,Sneaky Foxy,Watch out! The fox steals an item from you and attacks.,minion,4,none,24,5,0
 AttackStealEnemy,Starving Dragon,"Always hungry, never picky. Steals the item you have most of, and attacks.",minion,5,none,30,5,0
