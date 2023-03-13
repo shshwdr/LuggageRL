@@ -1,12 +1,12 @@
 ﻿Name,Text
-PickupSelection,Whoa! They dropped something. Let's pick one!
+PickupSelection,Whoa! They dropped some nice items. Let's pick one!
 RemoveItemSelection,My chance to get rid of one of these items!
 SkipAndHeal,Do you want to skip and heal {0}% percent of HP ({1})?
 LuggageUpgradeSelect,Time to prepare myself for the upcoming battles!
-Stranded,Nooo! You are left at the airport and you need to find your way home! Gladly you have some items packed.//Use them to clear your way home!
-Attack!,"When you attack, all items inside you push in the direction you are moving. If an item hits the border, it will attack.//The red numbers show the item's damage."
-Breakable,There are items that will break instead of doing damage when they hit the border.//They have different effects – try them out!
-Defend,"In their turn, enemies can attack your item slots. To defend such attacks, move items in these slots.//The blue numbers show the amount of defense."
-MoveItemHint,Drag an item to move it (Costs 1 Action Point)
-Gameover,"You died! But don't worry, some of your collections will stay with you for your next run!"
+Stranded,Nooo! You are left at the airport and you need to find your way home! Luckily you have some items packed.//Use them to clear your way home!
+Attack!,"You attack by sliding items in the direction you are moving, shown by a red border on the luggage. If an item hits the border, it will attack. //The red numbers show the item's damage."
+Breakable,There are items that break when rammed by another item during an attack. //They have different effects – try them out!
+Defend,"In their turn, enemies can attack your item slots. Any item in that slot will block damage using their defense.//The blue numbers show the item's defense."
+MoveItemHint,Drag an item to swap it (Costs 1 Action Point)
+Gameover,"You died! But don't worry, some of your collections and your upgrades will stay with you for your next run!"
 WinGame,You win! Thanks for playing! You can keep playing the game if you want!
