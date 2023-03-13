@@ -268,25 +268,25 @@ public class EnemyManager : Singleton<EnemyManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                var enemy = enemies[0];
-                StartCoroutine( enemy.ApplyDamage(10000));
-                //StartCoroutine(RemoveEnemy(enemy));
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    for (int i = 0; i < enemies.Count; i++)
+        //    {
+        //        var enemy = enemies[0];
+        //        StartCoroutine( enemy.ApplyDamage(10000));
+        //        //StartCoroutine(RemoveEnemy(enemy));
+        //    }
+        //}
 
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            StartCoroutine(BattleManager.Instance.player.HealEnumerator(10000));
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            StartCoroutine(BattleManager.Instance.player.ApplyDamage(10000));
-        }
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    StartCoroutine(BattleManager.Instance.player.HealEnumerator(10000));
+        //}
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    StartCoroutine(BattleManager.Instance.player.ApplyDamage(10000));
+        //}
     }
     public void setCurrentTargetedEnemy(Enemy enemy)
     {
