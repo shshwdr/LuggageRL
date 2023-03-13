@@ -33,9 +33,9 @@ public class Enemy : HPObject
 
     public EnemyAttackPreview attackPreview;
     public SpriteRenderer enemyRender;
-    public int attack => Core.currentAction is EnemyActionAttack attackAction ?(int)( (attackAction.attackDamage + info.BasicAttack) * (1+EnemyManager.Instance.remainsDiffultCount*0.1f)) : 0;
-    public int defense => Core.currentAction is EnemyActionShield attackAction ? (int)((attackAction.shieldAmount + info.BasicAttack) * (1 + EnemyManager.Instance.remainsDiffultCount * 0.1f)) : 0;
-    public int heal => Core.currentAction is EnemyActionHeal heal ? (int)((heal.healAmount + info.BasicAttack) * (1 + EnemyManager.Instance.remainsDiffultCount * 0.1f)) : 0;
+    public int attack => Core.currentAction is EnemyActionAttack attackAction ?(int)( (attackAction.attackDamage + info.BasicAttack) * (1+EnemyManager.Instance.remainsDiffultCount*0.05f)) : 0;
+    public int defense => Core.currentAction is EnemyActionShield attackAction ? (int)((attackAction.shieldAmount + info.BasicAttack) * (1 + EnemyManager.Instance.remainsDiffultCount * 0.05f)) : 0;
+    public int heal => Core.currentAction is EnemyActionHeal heal ? (int)((heal.healAmount + info.BasicAttack) * (1 + EnemyManager.Instance.remainsDiffultCount * 0.05f)) : 0;
     public Transform idlePosition;
     public Transform leftTargetTransform; //where player should impact
     public Transform topTargetTransform;
@@ -210,7 +210,7 @@ public class Enemy : HPObject
         Core = (EnemyBehavior)System.Activator.CreateInstance(System.Type.GetType(_info.Name.ToString()));
         Core.enemy = this;
         info = _info;
-        maxHP = (int)(info.HP * (1 + EnemyManager.Instance.remainsDiffultCount * 0.1f));
+        maxHP = (int)(info.HP * (1 + EnemyManager.Instance.remainsDiffultCount * 0.05f));
         hp = maxHP;
         base.Awake();
         EnemyManager.Instance.AddEnemy(this);

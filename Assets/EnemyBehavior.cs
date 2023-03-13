@@ -106,7 +106,7 @@ public class EliteCap : EnemyBehavior {
 
     public EliteCap()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5}, new EnemyActionHeal() { healAmount = -1},new EnemyActionSteal(), new EnemyActionIdle() };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = -2, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5}, new EnemyActionAttack() { attackDamage = -1 }, new EnemyActionSteal(), new EnemyActionIdle() };
     }
 }
 public class EliteThorn : EnemyBehavior {

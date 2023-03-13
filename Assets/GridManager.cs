@@ -90,7 +90,9 @@ public class GridManager : Singleton<GridManager>
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_take_new, new Vector3(0, 0, 0));
 
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Stone, ItemType.Arrow};
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Stone, ItemType.Arrow };
+    //{ ItemType.Stone, ItemType.Balancer, ItemType.Poison, ItemType.Bomb, ItemType.Arrow, ItemType.Pins, ItemType.Umbrella, ItemType.Circuit,ItemType.Coke,ItemType.CreditCard,ItemType.LiquidBomb,ItemType.Rocket,ItemType.Pinata };
+    //{ ItemType.Stone, ItemType.Stone, ItemType.Arrow};
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
@@ -213,7 +215,7 @@ public class GridManager : Singleton<GridManager>
     // Start is called before the first frame update
     void Start()
     {
-        //Time.timeScale = 5;
+       // Time.timeScale = 5;
         if (GameManager.Instance.preselectedItems.Count > 0)
         {
             for (int i = 0;i< GameManager.Instance.preselectedItems.Count; i++)
@@ -774,6 +776,7 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(counterChanage.index))
                 {
                     Debug.Log("?");
+                    continue;
                 }
 
                 if (GridItemDict[counterChanage.index] == null)
@@ -794,6 +797,7 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(applyEffect.targetIndex))
                 {
                     Debug.Log("?");
+                    continue;
                 }
                 if (GridItemDict[applyEffect.index] == null)
                 {
@@ -883,6 +887,7 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(attack.index))
                 {
                     Debug.Log("?");
+                    continue;
                 }
 
                 if (GridItemDict[attack.index] == null)
@@ -906,6 +911,7 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(drawItem.index))
                 {
                     Debug.Log("?");
+                    continue;
                 }
                 if (GridItemDict[drawItem.index] == null)
                 {
@@ -922,6 +928,7 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(attackPlayer.index))
                 {
                     Debug.Log("?");
+                    continue;
                 }
                 
                 if (GridItemDict[attackPlayer.index] == null)
@@ -939,6 +946,7 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(heal.index))
                 {
                     Debug.Log("?");
+                    continue;
                 }
                 if (GridItemDict[heal.index] == null)
                 {
@@ -955,6 +963,7 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(destr.index))
                 {
                     Debug.Log("?");
+                    continue;
                 }
                 if (GridItemDict[destr.index] == null)
                 {
@@ -973,6 +982,7 @@ public class GridManager : Singleton<GridManager>
                 if (!GridItemDict.ContainsKey(itemMove.index))
                 {
                     Debug.Log("?");
+                    continue;
                 }
                 if (GridItemDict[itemMove.index] == null)
                 {
