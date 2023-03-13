@@ -1786,7 +1786,7 @@ RectTransform:
   - {fileID: 628363098}
   - {fileID: 233737903}
   m_Father: {fileID: 5097064718368712173}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2153,7 +2153,7 @@ RectTransform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_Children: []
   m_Father: {fileID: 5097064718368712173}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1402089360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3006,9 +3006,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1055173587}
   - {fileID: 464911503339102096}
   - {fileID: 1402089359}
-  - {fileID: 1055173587}
   m_Father: {fileID: 494543295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3944,7 +3944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4130075329453454612, guid: 3ab92382a0ea6ed4688b45d7d0d0114a, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4130075329453454612, guid: 3ab92382a0ea6ed4688b45d7d0d0114a, type: 3}
       propertyPath: m_AnchorMax.x

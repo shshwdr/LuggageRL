@@ -16274,6 +16274,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 19449845, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19449845, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19449845, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19449845, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 179623000, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -16442,6 +16458,22 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 949170191, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 949170191, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 949170191, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 949170191, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1222835917, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -16508,6 +16540,26 @@ PrefabInstance:
     - target: {fileID: 1222835918, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325348135, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325348135, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325348135, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325348135, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402089361, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1625762644, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
       propertyPath: m_IsActive
@@ -16613,6 +16665,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 464911503339102096, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -43
+      objectReference: {fileID: 0}
     - target: {fileID: 464911504149724912, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -16656,6 +16712,10 @@ PrefabInstance:
     - target: {fileID: 2904126480884476853, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -142.99998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905735489555944019, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549562709083257090, guid: 06ce0499bf695254d9dcef12f1393896, type: 3}
       propertyPath: m_Pivot.x

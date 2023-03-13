@@ -76,7 +76,7 @@ public class ShieldHealEnemy : EnemyBehavior
 {
     public ShieldHealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 0 }, new EnemyActionHeal() { healAmount = -1 }, new EnemyActionIdle() };
+        actions = new EnemyAction[] { new EnemyActionShield() { shieldAmount = 0 }, new EnemyActionHeal() { healAmount = -1 }, new EnemyActionAttack() { attackDamage = -2 } };
     }
 }
 public class StealAttackEnemy : EnemyBehavior
