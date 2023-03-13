@@ -97,7 +97,7 @@ public class GridManager : Singleton<GridManager>
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
-    public IEnumerator DrawItem(int drawCount, bool shouldDrop)
+    public IEnumerator DrawItem(int drawCount, bool shouldDrop, bool shouldShow)
     {
         List<Vector2Int> availableEmpty = new List<Vector2Int>();
         foreach (var key in emptyGridList)
@@ -111,12 +111,14 @@ public class GridManager : Singleton<GridManager>
         {
             if (availableEmpty.Count == 0)
             {
+                if(shouldShow)
                 FloatingTextManager.Instance.addText("Bag is Full!", Vector3.zero, Color.white);
                 break;
             }
             if (deckPool.Count == 0)
             {
-                FloatingTextManager.Instance.addText("Deck is Empty!", Vector3.zero, Color.white);
+                if (shouldShow)
+                    FloatingTextManager.Instance.addText("Deck is Empty!", Vector3.zero, Color.white);
                 break;
             }
             var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
@@ -185,13 +187,13 @@ public class GridManager : Singleton<GridManager>
 
     public IEnumerator DrawAllItemsFromPool()
     {
-        yield return StartCoroutine(DrawItem(deckPool.Count,true));
+        yield return StartCoroutine(DrawItem(deckPool.Count,true,false));
     }
 
 
     public IEnumerator DrawItemsFromPool()
     {
-        yield return StartCoroutine(DrawItem(DrawCount,true));
+        yield return StartCoroutine(DrawItem(DrawCount,true, false));
         //List<Vector2Int> availableEmpty = new List<Vector2Int>();
         //foreach (var key in emptyGridList)
         //{
@@ -921,7 +923,7 @@ public class GridManager : Singleton<GridManager>
                 //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
                 FloatingTextManager.Instance.addText($"Draw {drawItem.amount} Items", GridItemDict[drawItem.index].transform.position, Color.blue);
                 yield return new WaitForSeconds(animTime);
-                yield return StartCoroutine(DrawItem(drawItem.amount,false));
+                yield return StartCoroutine(DrawItem(drawItem.amount,false, true));
             }
             else if (message is MessageAttackPlayer attackPlayer)
             {
@@ -1004,14 +1006,14 @@ public class GridManager : Singleton<GridManager>
         {
             damage -= item.core.defense;
             damage = Mathf.Max(0, damage);
-            item.addDestroyMessage(messages);
+            //item.addDestroyMessage(messages);
 
-            yield return StartCoroutine(ParseMessages());
+            //yield return StartCoroutine(ParseMessages());
 
-            yield return StartCoroutine(MoveAfter(0, -1));
+            //yield return StartCoroutine(MoveAfter(0, -1));
 
 
-            BattleManager.Instance.PredictNextAttack();
+            //BattleManager.Instance.PredictNextAttack();
         }
 
         yield return StartCoroutine(BattleManager.Instance.player.ApplyDamage(damage));
