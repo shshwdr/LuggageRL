@@ -9,7 +9,7 @@ ShieldHealEnemy,Balky Mushroom,He is keeping the back of the troup. Heals the en
 StealAttackEnemy,Sneaky Foxy,Watch out! The fox steals an item from you and attacks.,minion,4,none,24,5,0
 AttackStealEnemy,Starving Dragon,"Always hungry, never picky. Steals the item you have most of, and attacks.",minion,4,none,30,5,0
 AttackRotateEnemy,Somersault Woodlouse,She not only attacks but also pushes you around.,minion,2,none,17,4,0
-BossPinata,Generous Pinata,She will stuff you with nice looking and very useless items.,boss,,none,50,8,1
-BossExplode,Last Kraken,"His liquid ""presents"" will let all of your items explode.",boss,,none,50,8,1
-EliteCap,Armored Tankling,"No matter how hard you hit him: 5 damage, that's all he will take in one round.",elite,,none,40,6,1
-EliteThorn,Nasty Bitling,Attacking this sharp-teethed monster comes with a cost - it will bite back!,elite,,none,40,5,1
+BossPinata,Generous Pinata,She will stuff you with nice looking and very useless items.,boss,0,none,50,8,1
+BossExplode,Last Kraken,"His liquid ""presents"" will let all of your items explode.",boss,0,none,50,7,1
+EliteCap,Armored Tankling,"No matter how hard you hit him: 5 damage, that's all he will take in one round.",elite,0,none,40,6,1
+EliteThorn,Nasty Bitling,Attacking this sharp-teethed monster comes with a cost - it will bite back!,elite,0,none,40,5,1
