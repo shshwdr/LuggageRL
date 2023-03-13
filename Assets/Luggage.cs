@@ -210,7 +210,11 @@ public class Luggage : Singleton<Luggage>
 
     public IEnumerator DoDamage(int dam)
     {
-        yield return StartCoroutine( target.ApplyDamage(dam));
+        if (target)
+        {
+
+            yield return StartCoroutine(target.ApplyDamage(dam));
+        }
     }
 
 

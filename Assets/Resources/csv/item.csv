@@ -1,18 +1,18 @@
 ﻿Item,DisplayName,Param1,Param2,isParam2Attack,Description,Defense,Type,DestoryAfterTrigger,Rarity,MaxCountInDeck,Strategy
-Arrow,Arrow,1,0,0,On Attack: Deals <color='red'>{0}</color> * (moving distance during attack) <color='red'>damage</color>,1,Attacker,1,1,3,Lonely
-Stone,Stone,1,2,0,"On Attack: Deals <color='red'>{0} damage</color>. If moved during attack, deals <color='red'>{1} × damage</color>. Isn't destroyed.",4,Attacker,0,1,1,Basic
-Potion,Healing Potion,3,0,0,"On Break:  <color='green'>Heals</color> Player for <color='green'>{0}</color>, <color=blue>draw 1</color> card",2,Breakable,1,1,2,Basic
+Arrow,Arrow,1,0,0,On Attack: Deals <color='red'>{0}</color> × (moving distance during attack) <color='red'>damage</color>,1,Attacker,1,1,3,Lonely
+Stone,Stone,1,2,0,"On Attack: Deals <color='red'>{0} damage</color>. If moved during attack, deals <color='red'>{1} × damage</color>. Is not destroyed.",4,Attacker,0,1,1,Basic
+Potion,Healing Potion,3,0,0,"On Break:  <color=#39a62b>Heals</color> Player for <color=#39a62b>{0}</color>, <color=blue>draw 1</color> card",2,Breakable,1,1,2,Basic
 Circuit,Power strip,1,2,1,On Attack: Deals <color='red'>{0} damage</color>. Deals additional damage for each breakable item connected to it.,3,Attacker,1,2,3,Flurry
-Pins,Pins,1,0,0,On Attack: Deals <color='red'>{0} * (Pins used count in this attack) damage</color> ,4,Attacker,1,1,6,Flurry
+Pins,Pins,1,0,0,On Attack: Deals <color='red'>{0} × (Pins used count in this attack) damage</color> ,4,Attacker,1,1,6,Flurry
 PiggyBank,Piggy Bank,1,0,0,On End of Turn: Adds <color='red'>{0}</color> coins to this card. On Break: Adds the amount of saved coins as <color='red'>damage</color> to the item that breaks the Piggy.,2,Breakable,1,0,3,KO
-Coke,Coke Coola,4,3,0,"On Attack: Deals <color='red'>{0} damage</color>. If NOT moved during attack, <color='green'>heal {1}</color>",1,Attacker,1,3,2,KO
-Bomb,Bomb,1,2,0,"On Attack: Deals <color='red'>5 × {0} damage</color>.\nExplodes in {1} turns, dealing {0} damage to you.",1,Attacker,1,3,3,KO
+Coke,Coke Coola,4,3,0,"On Attack: Deals <color='red'>{0} damage</color>. If NOT moved during attack, <color=#39a62b>heal {1}</color>",1,Attacker,1,3,2,KO
+Bomb,Bomb,1,2,0,"On Attack: Deals <color='red'>5 × {0} damage</color>.Explodes in {1} turns, dealing {0} damage to you.",1,Attacker,1,3,3,KO
 CreditCard,Credit card,3,0,0,Doesn't attack or break. If only 2 items are left in bag: <color='blue'>Draws {0} cards </color> and destroys itself.,0,Special,1,2,1,Lonely
 Umbrella,Umbrella,1,1,0,"On Attack: For each empty slot in bag before attack, deal {1} <color='red'>* {0} damage </color> ",2,Attacker,1,3,2,Lonely
-Slingshot,Slingshot,1,1,1,On Attack: Deals <color='red'>{0}</color> * (each empty slot behind it) <color='red'>damage</color>,2,Attacker,1,3,2,Lonely
+Slingshot,Slingshot,1,1,1,On Attack: Deals <color='red'>{0}</color> × (each empty slot behind it) <color='red'>damage</color>,2,Attacker,1,3,2,Lonely
 Poison,Poison,1,0,0,On Break: Adds <color='red'>{0} damage</color> to the item that breaks the Poison bottle. Can stack with other Poison items.,3,Breakable,1,0,3,Scapegoat
 Balancer,Balancer,1,0,0,"After Attack: If not moved in this attack, adds <color='red'>{0} damage</color> to all other items. Destroys itself after attack.",5,Special,1,2,3,Flurry
 Rocket,Rocket,1,2,0,"On Attack: Deals <color='red'>{0} damage</color>. Destroys all items behind it, gaining {1} × <color='red'>{0} damage</color> for each item destroyed.",3,Attacker,1,2,3,Scapegoat
-Pinata,Pinata,2,0,0,On Break: Draws <color='blue'>{0}</color> cards,6,Breakable,1,1,3,Scapegoat
+Pinata,Pinata,2,0,0,On Break: Draws up <color='blue'>{0}</color> cards,6,Breakable,1,2,3,Scapegoat
 Mud,Mud,0,0,0,On Attack: Destroys itself.,0,Curse,1,0,0,Curse
 LiquidBomb,LiquidBomb,0,0,0,On Break: Destroys everything in bag.,0,Curse,1,0,0,Curse

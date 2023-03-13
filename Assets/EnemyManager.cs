@@ -91,26 +91,72 @@ public class EnemyManager : Singleton<EnemyManager>
     }
     EnemyInfo GetBossInBiome(BiomeType biome)
     {
-        foreach (var info in enemyDict.Values)
+        EnemyInfo selected = null;
+        if(GameManager.Instance.showedBoss == "")
         {
-            if (info.Type == "boss" && info.canPutInBiome(biome))
-            {
-                StageManager.Instance.biomeType = BiomeType.desert;
-                return info;
-            }
+            selected = enemyDict["BossPinata"];
         }
-        return null;
+        else
+        {
+            var potentials = new List<EnemyInfo>();
+            foreach (var info in enemyDict.Values)
+            {
+                if (info.Type == "boss" && info.canPutInBiome(biome))
+                {
+                    if (GameManager.Instance.showedBoss == info.Name)
+                    {
+                        continue;
+                    }
+                    potentials.Add(info);
+                }
+            }
+            selected = potentials[UnityEngine.Random.Range(0, potentials.Count)];
+            enemyDict.Remove(selected.Name);
+        }
+        
+        if (GameManager.Instance.showedBoss == "")
+        {
+            GameManager.Instance.showedBoss = selected.Name;
+        }
+        else if (GameManager.Instance.showedBoss == "both")
+        {
+
+        }
+        else
+        {
+            GameManager.Instance.showedBoss = "both";
+        }
+        return selected;
     }
     EnemyInfo GetEliteInBiome(BiomeType biome)
     {
+        var potentials = new List<EnemyInfo>();
         foreach (var info in enemyDict.Values)
         {
             if (info.Type == "elite" && info.canPutInBiome(biome))
             {
-                return info;
+                if(GameManager.Instance.showedElite == info.Name)
+                {
+                    continue;
+                }
+                potentials.Add(info);
             }
         }
-        return null;
+        var selected = potentials[UnityEngine.Random.Range(0, potentials.Count)];
+        enemyDict.Remove(selected.Name);
+        if (GameManager.Instance.showedElite == "")
+        {
+            GameManager.Instance.showedElite = selected.Name;
+        }
+        else if (GameManager.Instance.showedElite =="both")
+        {
+
+        }
+        else
+        {
+            GameManager.Instance.showedElite = "both";
+        }
+        return selected;
     }
     List<EnemyInfo> GetEnemiesWithLowerDifficulty(int d, BiomeType biome)
     {
@@ -127,7 +173,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public List<EnemyInfo> GetEnemyInfosToAdd(int difficultCount, BattleType battleType, int maxEnemy = 3)
     {
-
+        return new List<EnemyInfo>() { enemyDict["BossExplode"], enemyDict["SimpleAttackEnemy"], enemyDict["SimpleAttackEnemy"] };
         //return new List<EnemyInfo>() { enemyDict["SimpleAttackEnemy"], enemyDict["AttackFlyEnemy"] };
         List<EnemyInfo> res = new List<EnemyInfo>();
         if (battleType == BattleType.boss)

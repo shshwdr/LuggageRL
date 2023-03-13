@@ -28,6 +28,8 @@ public class EnemyActionRotate : EnemyAction
     public override IEnumerator TakeAction(Enemy enemy)
     {
         yield return enemy.StartCoroutine(enemy.RotateBag());
+
+        GridManager.Instance.updateAttackEdge();
     }
 
     public override void Preview(Enemy enemy)
