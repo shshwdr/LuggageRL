@@ -90,7 +90,7 @@ public class GridManager : Singleton<GridManager>
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_take_new, new Vector3(0, 0, 0));
 
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Stone, ItemType.Arrow };
+    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Stone, ItemType.Arrow,ItemType.Pins };
     //{ ItemType.Stone, ItemType.Balancer, ItemType.Poison, ItemType.Bomb, ItemType.Arrow, ItemType.Pins, ItemType.Umbrella, ItemType.Circuit,ItemType.Coke,ItemType.CreditCard,ItemType.LiquidBomb,ItemType.Rocket,ItemType.Pinata };
     //{ ItemType.Stone, ItemType.Stone, ItemType.Arrow};
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
@@ -116,6 +116,7 @@ public class GridManager : Singleton<GridManager>
             }
             if (deckPool.Count == 0)
             {
+                FloatingTextManager.Instance.addText("Deck is Empty!", Vector3.zero, Color.white);
                 break;
             }
             var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
@@ -215,7 +216,7 @@ public class GridManager : Singleton<GridManager>
     // Start is called before the first frame update
     void Start()
     {
-       // Time.timeScale = 5;
+        //Time.timeScale = 5;
         if (GameManager.Instance.preselectedItems.Count > 0)
         {
             for (int i = 0;i< GameManager.Instance.preselectedItems.Count; i++)
