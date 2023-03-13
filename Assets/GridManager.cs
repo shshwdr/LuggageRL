@@ -315,33 +315,46 @@ public class GridManager : Singleton<GridManager>
     public void showAttackPreviewOfEnemy(Enemy enemy)
     {
 
-
         if (enemy.Core.willAttacking)
         {
             var cells = getFrontCellsFromBottomToTop();
-            Transform cell = null;
-            if (enemy.attackFromBottom)
-            {
-                cell = cells[enemy.attackInd];
-            }
-            else
+            List<Transform> cellsRes = new List<Transform>();
+            for (int i = 0; i < enemy.attackRangeV; i++)
             {
 
-                cell = cells[cells.Count - 1];
+                if (enemy.attackFromBottom)
+                {
+                    var cell = cells[enemy.attackInd+i];
+                    cellsRes.Add(cell);
+                }
+                else
+                {
+
+                    var cell = cells[cells.Count - 1];
+                    cellsRes.Add(cell);
+                }
             }
 
-            var attackIndex = cell.GetComponent<GridEmptyCell>().index;
-
-            if (GridManager.Instance.GridItemDict.ContainsKey(attackIndex))
+            foreach(var cell in cellsRes)
             {
-                GridManager.Instance.GridItemDict[attackIndex].baseItem.WillBeAttacked();
-            }
-            else
-            {
-                var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
-                previewCells.Add(go);
+                updateOneCell(cell);
             }
 
+        }
+    }
+
+    void updateOneCell(Transform cell)
+    {
+
+        var attackIndex = cell.GetComponent<GridEmptyCell>().index;
+        if (GridManager.Instance.GridItemDict.ContainsKey(attackIndex))
+        {
+            GridManager.Instance.GridItemDict[attackIndex].baseItem.WillBeAttacked();
+        }
+        else
+        {
+            var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
+            previewCells.Add(go);
         }
     }
 
@@ -352,17 +365,35 @@ public class GridManager : Singleton<GridManager>
         showAttackPreviewOfEnemy(enemy);
     }
 
-    public GridItem itemEnemyAttack(Enemy enemy)
+    public List<GridItem> itemEnemyAttack(Enemy enemy)
     {
         List<GridItem> res = new List<GridItem>();
         var cells = getFrontCellsIndexFromBottomToTop();
         if (enemy.attackFromBottom)
         {
-            var cell = cells[enemy.attackInd];
-            var item = GridItemDict.ContainsKey(cell) ? GridItemDict[cell].GetComponent<GridItem>() : null;
-            return item;
+            if (enemy.attackRangeV>0)
+            {
+                for(int i = 0;i< enemy.attackRangeV; i++)
+                {
+                    var cell = cells[enemy.attackInd+i];
+                    var item = GridItemDict.ContainsKey(cell) ? GridItemDict[cell].GetComponent<GridItem>() : null;
+                    if (item != null)
+                    {
+                        res.Add(item);
+                    }
+                }
+            }
         }
-        return null;
+        else
+        {
+            var cell = cells[cells.Count - 1];
+            var item = GridItemDict.ContainsKey(cell) ? GridItemDict[cell].GetComponent<GridItem>() : null;
+            if (item != null)
+            {
+                res.Add(item);
+            }
+        }
+        return res;
     }
     public void showAllAttackPreview()
     {
@@ -1001,19 +1032,23 @@ public class GridManager : Singleton<GridManager>
     {
         messages.Clear();
         var damage = enemy.attack;
-        var item = GridManager.Instance.itemEnemyAttack(enemy);
-        if (item != null)
+        var items = GridManager.Instance.itemEnemyAttack(enemy);
+        foreach(var item in items)
         {
-            damage -= item.core.defense;
-            damage = Mathf.Max(0, damage);
-            //item.addDestroyMessage(messages);
 
-            //yield return StartCoroutine(ParseMessages());
+            if (item != null)
+            {
+                damage -= item.core.defense;
+                damage = Mathf.Max(0, damage);
+                //item.addDestroyMessage(messages);
 
-            //yield return StartCoroutine(MoveAfter(0, -1));
+                //yield return StartCoroutine(ParseMessages());
+
+                //yield return StartCoroutine(MoveAfter(0, -1));
 
 
-            //BattleManager.Instance.PredictNextAttack();
+                //BattleManager.Instance.PredictNextAttack();
+            }
         }
 
         yield return StartCoroutine(BattleManager.Instance.player.ApplyDamage(damage));

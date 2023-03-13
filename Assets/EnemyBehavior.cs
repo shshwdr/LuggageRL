@@ -91,7 +91,7 @@ public class AttackStealEnemy : EnemyBehavior
 {
     public AttackStealEnemy()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage =0,attackHeight = 2 }, new EnemyActionStealMax() { }, new EnemyActionHeal() { healAmount = -1 } ,new EnemyActionIdle()};
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage =0,attackHeight = 0,attackRangeVerticle = 2 }, new EnemyActionStealMax() { }, new EnemyActionHeal() { healAmount = -1 } , new EnemyActionAttack() { attackDamage = 0, attackHeight = 1, attackRangeVerticle = 2 }, new EnemyActionIdle()};
     }
 }
 public class AttackRotateEnemy : EnemyBehavior
@@ -106,7 +106,7 @@ public class EliteCap : EnemyBehavior {
 
     public EliteCap()
     {
-        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = -2, attackHeight = 1 }, new EnemyActionShield() { shieldAmount = 5}, new EnemyActionAttack() { attackDamage = -1, attackHeight = 2 }, new EnemyActionSteal(), new EnemyActionIdle() };
+        actions = new EnemyAction[] { new EnemyActionAttack() { attackDamage = 0, attackHeight = 0,attackRangeVerticle = 2 }, new EnemyActionShield() { shieldAmount = 5}, new EnemyActionAttack() { attackDamage = -1, attackHeight = 1, attackRangeVerticle = 2 }, new EnemyActionSteal(), new EnemyActionIdle() };
     }
 }
 public class EliteThorn : EnemyBehavior {
@@ -120,14 +120,14 @@ public class BossPinata : EnemyBehavior
 {
     public BossPinata()
     {
-        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.Mud },new EnemyActionShield() { shieldAmount = 7}, new EnemyActionAdd() { addItem = ItemType.Mud, amount = 2 }, new EnemyActionAttack() { attackDamage =  2, attackHeight = 1 }, new EnemyActionAdd() { addItem = ItemType.Mud, amount = 3} };
+        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.Mud },new EnemyActionShield() { shieldAmount = 7}, new EnemyActionAdd() { addItem = ItemType.Mud, amount = 2 }, new EnemyActionAttack() { attackDamage =  2, attackHeight = 0,attackRangeVerticle=2 }, new EnemyActionAdd() { addItem = ItemType.Mud, amount = 3} };
     }
 }
 public class BossExplode : EnemyBehavior
 {
     public BossExplode()
     {
-        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.LiquidBomb } ,new EnemyActionAttack() { attackDamage =2, attackHeight = 1 }, new EnemyActionSteal(), new EnemyActionIdle(), new EnemyActionAttack() { attackDamage = 0, attackHeight = 2 } };
+        actions = new EnemyAction[] { new EnemyActionAdd() { addItem = ItemType.LiquidBomb } ,new EnemyActionAttack() { attackDamage =3, attackHeight = 0,attackRangeVerticle = 3 }, new EnemyActionSteal(), new EnemyActionIdle(), new EnemyActionAttack() { attackDamage = 0, attackHeight = 1, attackRangeVerticle = 2} };
     }
 }
 public class BossFreeze : EnemyBehavior
