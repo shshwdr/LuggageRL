@@ -24,7 +24,7 @@ public class EnemyAttackPreview : MonoBehaviour
 
 
     public List<Image> previewCell;
-    public void UpdateAttackPreview(int ind, bool startFromBottom, int attackAmount)
+    public void UpdateAttackPreview(int ind, bool startFromBottom, int attackAmount,int attackRangeV)
     {
         otherPanel.SetActive(false);
         attackPanel.SetActive(true);
@@ -42,14 +42,18 @@ public class EnemyAttackPreview : MonoBehaviour
                 previewCell[previewCell.Count - 1 - i].GetComponentInChildren<Text>().text = "";
 
             }
-            previewCell[previewCell.Count - 1 - ind].gameObject.SetActive(true);
-            previewCell[previewCell.Count - 1 - ind].sprite = attack;
-            previewCell[previewCell.Count - 1 - ind].GetComponentInChildren<Text>().text = attackAmount.ToString();
+            for(int i = 0;i< attackRangeV; i++)
+            {
+
+                previewCell[previewCell.Count - 1 - ind - (i)].gameObject.SetActive(true);
+                previewCell[previewCell.Count - 1 - ind - (i )].sprite = attack;
+                previewCell[previewCell.Count - 1 - ind - (i)].GetComponentInChildren<Text>().text = attackAmount.ToString();
+            }
 
             //if()
-            //previewCell[previewCell.Count -3- ind].gameObject.SetActive(true);
-            //previewCell[previewCell.Count - 3 - ind].sprite = bottomHalfEmpty;
-            //previewCell[previewCell.Count - 3 - ind].GetComponentInChildren<Text>().text = "";
+            previewCell[previewCell.Count - 1 - ind - (attackRangeV - 1)-1].gameObject.SetActive(true);
+            previewCell[previewCell.Count - 1 - ind - (attackRangeV - 1) - 1].sprite = bottomHalfEmpty;
+            previewCell[previewCell.Count - 1 - ind - (attackRangeV - 1) - 1].GetComponentInChildren<Text>().text = "";
         }
         else
         {

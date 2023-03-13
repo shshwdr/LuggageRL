@@ -54,7 +54,7 @@ public class EnemyActionAttack : EnemyAction
     public override void Preview(Enemy enemy)
     {
         base.Preview(enemy);
-        enemy.attackPreview.UpdateAttackPreview(attackHeight,attackFromBottom,enemy.attack);
+        enemy.attackPreview.UpdateAttackPreview(attackHeight,attackFromBottom,enemy.attack, enemy.attackRangeV);
     }
 }
 
