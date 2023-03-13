@@ -175,7 +175,8 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         //return new List<EnemyInfo>() { enemyDict["EliteCap"] }; 
         //return new List<EnemyInfo>() { enemyDict["AttackRotateEnemy"]};
-        //return new List<EnemyInfo>() { enemyDict["BossExplode"], enemyDict["SimpleAttackEnemy"], enemyDict["SimpleAttackEnemy"] };
+        //return new List<EnemyInfo>() { enemyDict["BossExplode"], enemyDict["BossPinata"], enemyDict["EliteCap"] };
+        //return new List<EnemyInfo>() { enemyDict["AttackStealEnemy"], enemyDict["AttackFlyEnemy"], enemyDict["AttackHealEnemy"] };
         //return new List<EnemyInfo>() { enemyDict["SimpleAttackEnemy"], enemyDict["AttackFlyEnemy"] };
         List<EnemyInfo> res = new List<EnemyInfo>();
         if (battleType == BattleType.boss)

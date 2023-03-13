@@ -8,5 +8,5 @@ Attack!,"When you attack, all items inside you push in the direction you are mov
 Breakable,There are items that will break instead of doing damage when they hit the border.//They have different effects – try them out!
 Defend,"In their turn, enemies can attack your item slots. To defend such attacks, move items in these slots.//The blue numbers show the amount of defense."
 MoveItemHint,Drag an item to move it (Costs 1 Action Point)
-Gameover,"You died! But don't worry, some of your collections and your upgrades will stay with you for your next run!"
+Gameover,"You died! But don't worry, some of your collections will stay with you for your next run!"
 WinGame,You win! Thanks for playing! You can keep playing the game if you want!

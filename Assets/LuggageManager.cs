@@ -25,7 +25,7 @@ public class LuggageManager : Singleton<LuggageManager>
         {
             UpgradedTime[type.Key] = 0;
         }
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
     public UpgradeType select1;
     public UpgradeType select2;
