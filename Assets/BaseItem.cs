@@ -131,13 +131,14 @@ public class BaseItem : MonoBehaviour
         willDefend = false;
         combinedDefense.GetComponent<RectTransform>().sizeDelta = normalSize;
         //combinedDefense.GetComponent<Outline>().DOKill();
-        combinedDefense.GetComponent<Outline>().effectColor = outlineColorTarget;
+        combinedDefense.GetComponent<Outline>().effectColor = outlineColorOrigin;
     }
     public void WillBeAttacked()
     {
         willDefend = true;
         //willBeAttackedObj.SetActive(true);
         combinedDefense.GetComponent<RectTransform>().sizeDelta = largeSize;
+        combinedDefense.GetComponent<Outline>().effectColor = outlineColorTarget;
         //DOTween.To(()=> combinedDefense.GetComponent<Outline>().effectColor, x=> combinedDefense.GetComponent<Outline>().effectColor = x, outlineColorTarget, 1).SetLoops(-1,LoopType.Yoyo);
 
     }

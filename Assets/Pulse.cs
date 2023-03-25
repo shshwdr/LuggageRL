@@ -10,7 +10,7 @@ public class Pulse : MonoBehaviour
     void Start()
     {
         var rend = GetComponent<SpriteRenderer>();
-        DOTween.To(() => rend.color, x => rend.color = x, new Color(1,1,1,0.8f), time).SetLoops(-1,LoopType.Yoyo);
+        DOTween.To(() => rend.color, x => rend.color = x, new Color(1,1,1,0.5f), time).SetLoops(-1,LoopType.Yoyo);
 
     }
 
