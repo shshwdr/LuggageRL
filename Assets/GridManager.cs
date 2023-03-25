@@ -337,24 +337,26 @@ public class GridManager : Singleton<GridManager>
 
             foreach(var cell in cellsRes)
             {
-                updateOneCell(cell);
+                updateOneCell(cell,enemy.attack);
             }
 
         }
     }
 
-    void updateOneCell(Transform cell)
+    void updateOneCell(Transform cell, int attack)
     {
 
         var attackIndex = cell.GetComponent<GridEmptyCell>().index;
         if (GridManager.Instance.GridItemDict.ContainsKey(attackIndex))
         {
-            GridManager.Instance.GridItemDict[attackIndex].baseItem.WillBeAttacked();
+            GridManager.Instance.GridItemDict[attackIndex].baseItem.WillBeAttacked(attack);
         }
         else
         {
             var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
             previewCells.Add(go);
+            go.GetComponentInChildren<Text>(true).text = attack.ToString();
+            go.GetComponentInChildren<Text>(true).gameObject.SetActive(true);
         }
     }
 

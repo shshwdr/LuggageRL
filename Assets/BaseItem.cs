@@ -12,6 +12,8 @@ public class BaseItem : MonoBehaviour
     public Text combinedAttack;
     public Text combinedDefense;
 
+    public Text beAttackedText;
+    
     public Text HealText;
     public GameObject DestroyOverlay;
     public GameObject buffOverlay;
@@ -132,9 +134,12 @@ public class BaseItem : MonoBehaviour
         combinedDefense.GetComponent<RectTransform>().sizeDelta = normalSize;
         //combinedDefense.GetComponent<Outline>().DOKill();
         combinedDefense.GetComponent<Outline>().effectColor = outlineColorOrigin;
+        beAttackedText.gameObject.SetActive(false);
     }
-    public void WillBeAttacked()
+    public void WillBeAttacked(int attack)
     {
+        beAttackedText.gameObject.SetActive(true);
+        beAttackedText.text = attack.ToString();
         willDefend = true;
         //willBeAttackedObj.SetActive(true);
         combinedDefense.GetComponent<RectTransform>().sizeDelta = largeSize;

@@ -173,6 +173,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public List<EnemyInfo> GetEnemyInfosToAdd(int difficultCount, BattleType battleType, int maxEnemy = 3)
     {
+        return new List<EnemyInfo>() { enemyDict["SimpleAttackEnemy"] };
         //return new List<EnemyInfo>() { enemyDict["EliteCap"] }; 
         //return new List<EnemyInfo>() { enemyDict["AttackRotateEnemy"]};
         //return new List<EnemyInfo>() { enemyDict["BossExplode"], enemyDict["BossPinata"], enemyDict["EliteCap"] };
