@@ -124,19 +124,11 @@ public class Luggage : Singleton<Luggage>
     public IEnumerator PushForwardAttack()
     {
         SetTarget();
-
         yield return StartCoroutine(pushForwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
-
-        /*//transform.DOMove(target.transform.position, GridManager.animTime);
-        yield return GridManager.Instance.MoveAndAttack(1, 0);
-
-        yield return StartCoroutine(showDamage());*/
     }
-    public void PushForwardAttackImpact() //use to call through unity events
+    public void PushForwardAttackImpact()
     {
-        //transform.DOMove(target.transform.position, GridManager.animTime);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_impact, transform.position);
-
         StartCoroutine(PushForwardAttackFinish());
     }
     private IEnumerator PushForwardAttackFinish() //perform coroutines
@@ -145,7 +137,49 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(showDamage()); 
         yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
         BattleManager.Instance.SelectAttack();
+        
+        DetailView.Instance.showTutorial("Move", TutorialManager.Instance.getUnreadText("Move"));
     }
+    
+    
+    public IEnumerator PushBackwardAttack()
+    {
+        SetTarget();
+        yield return StartCoroutine(pushForwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
+    }
+    public void PushBackwardAttackImpact()
+    {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_impact, transform.position);
+        StartCoroutine(PushBackwardAttackFinish());
+    }
+    private IEnumerator PushBackwardAttackFinish() //perform coroutines
+    {
+        yield return StartCoroutine(GridManager.Instance.MoveAndAttack(-1, 0));
+        yield return StartCoroutine(showDamage()); 
+        yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
+        BattleManager.Instance.SelectAttack();
+    }
+    
+    public IEnumerator PushUpwardAttack()
+    {
+        SetTarget();
+        yield return StartCoroutine(pushForwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
+    }
+    public void PushUpwardAttackImpact()
+    {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_impact, transform.position);
+        StartCoroutine(PushUpwardAttackFinish());
+    }
+    private IEnumerator PushUpwardAttackFinish() //perform coroutines
+    {
+        yield return StartCoroutine(GridManager.Instance.MoveAndAttack(0, 1));
+        yield return StartCoroutine(showDamage()); 
+        yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
+        BattleManager.Instance.SelectAttack();
+    }
+    
+    
+    
 
     public IEnumerator UpsideDownAndDrop()
     {

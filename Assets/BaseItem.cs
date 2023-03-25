@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BaseItem : MonoBehaviour
 {
-    public Text AttackText;
+    //public Text AttackText;
 
-    public GameObject attackAndDefendOb;
+    //public GameObject attackAndDefendOb;
     public Text combinedAttack;
     public Text combinedDefense;
 
@@ -30,8 +31,9 @@ public class BaseItem : MonoBehaviour
     public GameObject previewAttack;
     public GameObject previewSteal;
     bool isBreakable;
-    bool willBeDestroyed = false;
-    bool willAttack = false;
+    public bool willBeDestroyed = false;
+    public bool willAttack = false;
+    public bool willDefend = false;
     public void updateBK()
     {
         itemBK.SetActive(false);
@@ -71,9 +73,12 @@ public class BaseItem : MonoBehaviour
     {
         willAttack = true;
 
-
-        AttackText.text = damage.ToString();
-        AttackText.gameObject.SetActive(true);
+        combinedAttack.text = damage.ToString();
+        //AttackText.text = damage.ToString();
+        //AttackText.gameObject.SetActive(true);
+        combinedAttack.GetComponent<RectTransform>().sizeDelta = largeSize;
+        combinedAttack.GetComponent<Outline>().effectColor = outlineColorTarget;
+        //DOTween.To(()=> combinedAttack.GetComponent<Outline>().effectColor, x=> combinedAttack.GetComponent<Outline>().effectColor = x, outlineColorTarget, 1).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.Linear);
         updateAttack(true);
         updateBK();
     }
@@ -99,7 +104,13 @@ public class BaseItem : MonoBehaviour
         //DestroyOverlay.SetActive(false);
         willAttack = false;
         willBeDestroyed = false;
-        AttackText.gameObject.SetActive(false);
+        //AttackText.gameObject.SetActive(false);
+        
+        combinedAttack.GetComponent<RectTransform>().sizeDelta = normalSize;
+        
+        //.GetComponent<Outline>().DOKill();
+        combinedAttack.GetComponent<Outline>().effectColor = outlineColorOrigin;
+        
         buffOverlay.SetActive(false);
         updateAttack(false);
 
@@ -107,14 +118,28 @@ public class BaseItem : MonoBehaviour
         updateBK();
     }
 
+    private Color outlineColorOrigin = new Color(0,0,0,0f);
+    private Color outlineColorTarget = Color.black;
+    private float outlineChangeTime = 0.3f;
+    private Vector2 smallSize = new Vector2(70, 70);
+    private Vector2 largeSize = new Vector2(140, 140);
+    private Vector2 normalSize = new Vector2(90, 90);
+    
     public void ClearWillBeAttacked()
     {
-        willBeAttackedObj.SetActive(false);
+        //willBeAttackedObj.SetActive(false);
+        willDefend = false;
+        combinedDefense.GetComponent<RectTransform>().sizeDelta = normalSize;
+        //combinedDefense.GetComponent<Outline>().DOKill();
+        combinedDefense.GetComponent<Outline>().effectColor = outlineColorTarget;
     }
     public void WillBeAttacked()
     {
+        willDefend = true;
+        //willBeAttackedObj.SetActive(true);
+        combinedDefense.GetComponent<RectTransform>().sizeDelta = largeSize;
+        //DOTween.To(()=> combinedDefense.GetComponent<Outline>().effectColor, x=> combinedDefense.GetComponent<Outline>().effectColor = x, outlineColorTarget, 1).SetLoops(-1,LoopType.Yoyo);
 
-        willBeAttackedObj.SetActive(true);
     }
 
     void updateAttack(bool willAttack)
@@ -123,9 +148,9 @@ public class BaseItem : MonoBehaviour
         //{
         //    Debug.Log("will attack");
         //}
-        AttackText.gameObject.SetActive(willAttack);
-        attackAndDefendOb.SetActive(!willAttack && !isBreakable);
-        combinedAttack.text = item.core.Attack.ToString();
+        //AttackText.gameObject.SetActive(willAttack);
+        //attackAndDefendOb.SetActive(!willAttack && !isBreakable);
+        //combinedAttack.text = item.core.Attack.ToString();
         combinedDefense.text = item.core.defense.ToString();
 
 

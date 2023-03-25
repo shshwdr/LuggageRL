@@ -275,7 +275,7 @@ public class GridItem : MonoBehaviour, IGridItem
     }
     private void OnMouseEnter()
     {
-        DetailView.Instance.UpdateCard(core);
+        DetailView.Instance.UpdateCard(baseItem);
         //GridManager.Instance.itemViewText.text = core.Desc;
     }
     private void OnMouseExit()

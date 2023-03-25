@@ -20,6 +20,7 @@ public class BattleManager : Singleton<BattleManager>
 
     public int finalDamageIncrease=>LuggageManager.Instance.UpgradedTime[UpgradeType.basicAttack];
 
+    public Sprite[] tutorialAttackSprites;
 
     public Text moveHint;
     bool CanAttack => attackCountUsed < attackCount && moveLeft>=2;
@@ -27,12 +28,18 @@ public class BattleManager : Singleton<BattleManager>
     int attackCountUsed = 0;
     public Text MoveText;
     int selectedAttackIndex = -1;
+    private int maxAttackCount = 1;
     [SerializeField] private int moveMax = 4;
     int moveLeft;
     public bool isBattleFinished = false;
     string[] attackString = new string[] { "Pilling Hammer",
+        "Hit Back",
+        "Hit Up",
 "Backflip",
-"Overhead Backbreaker" };
+//"Overhead Backbreaker"
+};
+    
+    
     public GameObject enemyPrefab;
     public Transform[] enemyPositions;
     public Player player;
@@ -46,7 +53,23 @@ public class BattleManager : Singleton<BattleManager>
     public bool canPlayerControl = true;
     public bool CanPlayerControl => canPlayerControl && !GameOver.Instance.isGameOver;
     public TurnSlider turnSlider;
+    
+    private int[] learnNewAttackBattle = new[] { 1, 3, 8 };
+    public void LearnNewAttackType(int battleId)
+    {
+        if (maxAttackCount >= learnNewAttackBattle.Length)
+        {
+            return;
+        }
 
+        if (battleId >= learnNewAttackBattle[maxAttackCount])
+        {
+            DialoguePopupManager.Instance.showDialogue("You learned a new type of attack: "+attackString[maxAttackCount]+"\nAttacks would randomly pick after each attack.",tutorialAttackSprites[maxAttackCount]);
+        
+            maxAttackCount++;
+        }
+    }
+    
     public void hideButtonCanvas()
     {
         canPlayerControl = false;
@@ -107,6 +130,7 @@ public class BattleManager : Singleton<BattleManager>
         if (!isBattleFinished)
         {
             isBattleFinished = true;
+            hidePlayerAttack();
 
             yield return new WaitForSeconds(GridManager.animTime);
 
@@ -138,6 +162,8 @@ public class BattleManager : Singleton<BattleManager>
             yield return StartCoroutine(GridManager.Instance.DrawAllItemsFromPool());
 
             outControl();
+
+            LearnNewAttackType(battleCount);
         }
     }
 
@@ -257,7 +283,7 @@ public class BattleManager : Singleton<BattleManager>
         }
         else
         {
-            selectedAttackIndex = Random.Range(0, 3);
+            selectedAttackIndex = Random.Range(0, maxAttackCount);
         }
         //moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         UpdateText();
@@ -344,10 +370,12 @@ public class BattleManager : Singleton<BattleManager>
                 yield return StartCoroutine(Luggage.Instance.PushForwardAttack());
                 break;
             case 1:
-                yield return StartCoroutine(Luggage.Instance.UpsideDownAndDrop());
+                yield return StartCoroutine(Luggage.Instance.PushBackwardAttack());
+                //yield return StartCoroutine(Luggage.Instance.UpsideDownAndDrop());
                 break;
             case 2:
-                yield return StartCoroutine(Luggage.Instance.ThrowOutAndHitBack());
+                yield return StartCoroutine(Luggage.Instance.PushUpwardAttack());
+                //yield return StartCoroutine(Luggage.Instance.ThrowOutAndHitBack());
                 break;
                 //case 3:
                 //    yield return StartCoroutine(Luggage.Instance.LiftAndDownAttack());
@@ -371,20 +399,47 @@ public class BattleManager : Singleton<BattleManager>
                 GridManager.Instance.predict(1, 0);
                 break;
             case 1:
-                GridManager.Instance.predict(0, 1);
+                GridManager.Instance.predict(-1, 0);
                 break;
             case 2:
                 GridManager.Instance.predict(0, 1);
                 break;
+            
             case 3:
+                GridManager.Instance.predict(0, 1);
+                break;
+            case 4:
+                GridManager.Instance.predict(0, 1);
+                break;
+            case 5:
                 GridManager.Instance.predict(0, -1);
                 break;
         }
+
+        showPlayerAttack();
     }
 
+    void hidePlayerAttack()
+    {
+        player.attackOb.SetActive(false);
+        playerAttack = 0;
+    }
+
+    public int playerAttack = 0;
+    void showPlayerAttack()
+    {
+        if (isInControl && !isBattleFinished)
+        {
+            player.attackOb.SetActive(true);
+            player.attackText.text = playerAttack.ToString();
+            playerAttack = 0;
+        }
+
+    }
     public IEnumerator EndOfTurn()
     {
         hideButtonCanvas();
+        hidePlayerAttack();
 
         yield return StartCoroutine(GridManager.Instance.EndTurnCardBehaviorEnumerator());
 
@@ -408,6 +463,8 @@ public class BattleManager : Singleton<BattleManager>
 
 
         showButtonCanvas();
+        
+        
 
         if (!isBattleFinished)
         {
@@ -476,9 +533,9 @@ public class BattleManager : Singleton<BattleManager>
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //}
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

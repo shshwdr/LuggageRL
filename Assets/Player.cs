@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : HPObject
 {
+    public GameObject attackOb;
+    public Text attackText;
     protected override IEnumerator DieInteral()
     {
         yield return StartCoroutine(base.DieInteral());

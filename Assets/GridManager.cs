@@ -713,6 +713,7 @@ public class GridManager : Singleton<GridManager>
             
             else if (message is MessageItemAttack attack)
             {
+                BattleManager.Instance.playerAttack += attack.damage;
                 Debug.Log($"{attack.item.Name} Attack {attack.damage}");
                 predictToOrigin[attack.item].baseItem.WillAttack(attack.damage);
                 //Luggage.Instance.DoDamage(attack.damage);

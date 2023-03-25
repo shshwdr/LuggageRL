@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,10 @@ public class DetailView : Singleton<DetailView>
     public Text actionDescription;
     public GameObject enemyView;
 
+
+    public GameObject willAttackOB;
+    public GameObject willDefendOB;
+    public GameObject willDestoryOB;
 
     public GameObject CardView;
     public TextMeshProUGUI Name;
@@ -38,6 +43,8 @@ public class DetailView : Singleton<DetailView>
         {
             return;
         }
+
+        tutorialText.transform.parent.DOShakeScale(1,0.5f);
         tutorialTextTitle.text = title;
         tutorialText.text = t.Replace('/','\n');
         tutorialText.transform.parent.gameObject.SetActive(true);
@@ -48,9 +55,9 @@ public class DetailView : Singleton<DetailView>
         tutorialText.transform.parent.gameObject.SetActive(false);
     }
     Dictionary<BuffType, string> buffMap = new Dictionary<BuffType, string>() { { BuffType.piggyBank, "PiggyBank" },{ BuffType.poison, "Poison" },{ BuffType.balancer, "Balancer" } };  
-    public void UpdateCard(GridItemCore item)
+    public void UpdateCard(BaseItem baseItem)
     {
-
+        var item = baseItem?baseItem.GetComponent<GridItem>().core:null;
         enemyView.SetActive(false);
         if (item == null)
         {
@@ -66,6 +73,11 @@ public class DetailView : Singleton<DetailView>
             Name.text = item.info.DisplayName;
             Attack.text = item.Attack.ToString();
             Defense.text = item.info.Defense.ToString();
+
+            willDefendOB.SetActive(baseItem.willDefend);
+            willAttackOB.SetActive(baseItem.willAttack);
+            willDestoryOB.SetActive(baseItem.willBeDestroyed);
+            
 
             foreach (Transform child in buffParent)
             {
