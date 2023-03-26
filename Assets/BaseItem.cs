@@ -109,7 +109,7 @@ public class BaseItem : MonoBehaviour
         //AttackText.gameObject.SetActive(false);
         
         combinedAttack.GetComponent<RectTransform>().sizeDelta = normalSize;
-        
+        combinedAttack.text = item.core.Attack.ToString();
         //.GetComponent<Outline>().DOKill();
         combinedAttack.GetComponent<Outline>().effectColor = outlineColorOrigin;
         
