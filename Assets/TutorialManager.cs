@@ -21,8 +21,8 @@ public class TutorialManager : Singleton<TutorialManager>
         {
             textDict[item.Name] = item;
         }
-
-        DetailView.Instance.showTutorial("Stranded", TutorialManager.Instance.getUnreadText("Stranded"));
+        DialoguePopupManager.Instance.showDialogue(TutorialManager.Instance.getText("Stranded"));
+        //DetailView.Instance.showTutorial("Stranded", TutorialManager.Instance.getUnreadText("Stranded"));
     }
     public TextInfo getTextInfo(string itemName)
     {

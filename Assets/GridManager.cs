@@ -90,7 +90,9 @@ public class GridManager : Singleton<GridManager>
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_take_new, new Vector3(0, 0, 0));
 
     }
-    List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Stone, ItemType.Arrow,ItemType.Pins };
+
+    public List<ItemType> DeckPool => deckPool;
+     List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Stone, ItemType.Arrow,/*ItemType.Pins*/ };
     //{ ItemType.Stone, ItemType.Balancer, ItemType.Poison, ItemType.Bomb, ItemType.Arrow, ItemType.Pins, ItemType.Umbrella, ItemType.Circuit,ItemType.Coke,ItemType.CreditCard,ItemType.LiquidBomb,ItemType.Rocket,ItemType.Pinata };
     //{ ItemType.Stone, ItemType.Stone, ItemType.Arrow};
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
@@ -121,6 +123,8 @@ public class GridManager : Singleton<GridManager>
                     FloatingTextManager.Instance.addText("Deck is Empty!", Vector3.zero, Color.white);
                 break;
             }
+            
+            
             var picked = availableEmpty[Random.Range(0, availableEmpty.Count)];
             var pickedType = deckPool[Random.Range(0, deckPool.Count)];
 
@@ -187,13 +191,21 @@ public class GridManager : Singleton<GridManager>
 
     public IEnumerator DrawAllItemsFromPool()
     {
-        yield return StartCoroutine(DrawItem(deckPool.Count,true,false));
+            yield return StartCoroutine(DrawItem(deckPool.Count,true,false));
+        
     }
 
 
     public IEnumerator DrawItemsFromPool()
     {
+        if (BabySittingTutorial.Instance.hijackDrawItem())
+        {
+            yield return StartCoroutine(BabySittingTutorial.Instance.DrawItem(deckPool.Count,true,false));
+        }
+        else
+        {
         yield return StartCoroutine(DrawItem(DrawCount,true, false));
+        }
         //List<Vector2Int> availableEmpty = new List<Vector2Int>();
         //foreach (var key in emptyGridList)
         //{
@@ -836,7 +848,7 @@ public class GridManager : Singleton<GridManager>
                     Debug.Log("?");
                     continue;
                 }
-                if (GridItemDict[applyEffect.index] == null)
+                if (GridItemDict[applyEffect.targetIndex] == null)
                 {
                     GridItemDict.Remove(applyEffect.index);
                 }

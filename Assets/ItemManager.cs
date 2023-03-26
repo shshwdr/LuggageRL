@@ -117,9 +117,11 @@ public class ItemManager : Singleton<ItemManager>
         Debug.Log(pickedItem2);
 
         item1 = createItem((ItemType)pickedItem1, itemPositions[0], itemPositions[0].position);
+        item1.GetComponent<BaseItem>().combinedAttack.transform.parent.gameObject.SetActive(false);
         item1.GetComponent<Draggable>().enabled = false;
 
         item2 = createItem((ItemType)pickedItem2, itemPositions[1], itemPositions[1].position);
+        item2.GetComponent<BaseItem>().combinedAttack.transform.parent.gameObject.SetActive(false);
         item2.GetComponent<Draggable>().enabled = false;
     }
     public void takeControl()

@@ -1,5 +1,5 @@
 ﻿Name,DisplayName,Description,Type,Difficulty,BiomeString,HP,BasicAttack,IsLarge
-DummyEnemy,Freddy Hydrant,"Freddy is a nice guy. Standing around, taking things as they come.",minion,0,none,10,0,0
+DummyEnemy,Freddy Hydrant,"Freddy is a nice guy. Standing around, taking things as they come.",minion,0,none,15,0,0
 SimpleAttackEnemy,Walter Watchdog,"He is a simple fellow. He sees you – he runs at you. And if he is faster than you, well … Good luck!",minion,1,none,10,3,0
 AttackShieldEnemy,Crab,"The Crab knows how to shield. And it is jumpy, attacking at height 2.",minion,2,none,14,4,0
 AttackFlyEnemy,Dragon Fly,Is it a bird? Is it a helicopter? NO! It is Dragon ... Fly ... man.,minion,3,none,20,3,0

@@ -9,6 +9,8 @@ public class Luggage : Singleton<Luggage>
 {
     [Header("Animations")]
     [SerializeField] MMF_Player pushForwardAttackAnimationPlayer;
+    [SerializeField] MMF_Player pushBackwardAttackAnimationPlayer;
+    [SerializeField] MMF_Player pushUpwardAttackAnimationPlayer;
 
 
     [SerializeField] MMF_Player throwOutAndHitBackAttackAnimationPlayer;
@@ -33,6 +35,8 @@ public class Luggage : Singleton<Luggage>
     void Start()
     {
         attackAnimationPlayers.Add(pushForwardAttackAnimationPlayer);
+        attackAnimationPlayers.Add(pushBackwardAttackAnimationPlayer);
+        attackAnimationPlayers.Add(pushUpwardAttackAnimationPlayer);
         attackAnimationPlayers.Add(throwOutAndHitBackAttackAnimationPlayer);
         attackAnimationPlayers.Add(upsideDownAndDropAttackAnimationPlayer);
     }
@@ -137,15 +141,15 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(showDamage()); 
         yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
         BattleManager.Instance.SelectAttack();
-        
-        DetailView.Instance.showTutorial("Move", TutorialManager.Instance.getUnreadText("Move"));
+        BattleManager.Instance.FinishAttack();
+
     }
     
     
     public IEnumerator PushBackwardAttack()
     {
         SetTarget();
-        yield return StartCoroutine(pushForwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
+        yield return StartCoroutine(pushBackwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
     }
     public void PushBackwardAttackImpact()
     {
@@ -158,12 +162,13 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(showDamage()); 
         yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
         BattleManager.Instance.SelectAttack();
+        BattleManager.Instance.FinishAttack();
     }
     
     public IEnumerator PushUpwardAttack()
     {
         SetTarget();
-        yield return StartCoroutine(pushForwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
+        yield return StartCoroutine(pushUpwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
     }
     public void PushUpwardAttackImpact()
     {
@@ -176,6 +181,7 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(showDamage()); 
         yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
         BattleManager.Instance.SelectAttack();
+        BattleManager.Instance.FinishAttack();
     }
     
     
@@ -204,6 +210,7 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(showDamage());
         yield return StartCoroutine(BattleManager.Instance.useMove(BattleManager.Instance.attackMoveCost));
         BattleManager.Instance.SelectAttack();
+        BattleManager.Instance.FinishAttack();
     }
 
     public IEnumerator ThrowOutAndHitBack()
@@ -229,6 +236,7 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(showDamage());
         yield return StartCoroutine(BattleManager.Instance.useMove(BattleManager.Instance.attackMoveCost));
         BattleManager.Instance. SelectAttack();
+        BattleManager.Instance.FinishAttack();
     }
 
     IEnumerator showDamage()

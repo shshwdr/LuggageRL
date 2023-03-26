@@ -3,13 +3,15 @@ PickupSelection,Whoa! They dropped some nice items. Let's pick one!
 RemoveItemSelection,My chance to get rid of one of these items!
 SkipAndHeal,Do you want to skip and heal {0}% percent of HP ({1})?
 LuggageUpgradeSelect,Time to prepare myself for the upcoming battles!
-Stranded,Nooo! You are left at the airport and you need to find your way home! Luckily you have some items packed.//Use them to clear your way home!
+Stranded,Nooo! You are left at the airport and you need to find your way home! Luckily you have some items packed. Use them to clear your way home!
 Attack!,Attacking makes items slide towards the red luggage border. Items that hit the border will attack. //The red numbers show the item's damage.
 Breakable,There are items that break when rammed by another item during an attack. //They all have different effects – try them out!
 Defend,Enemies can attack your item slots. Any item in that slot will block damage using their defense.//The blue numbers show the item's defense.
 MoveItemHint,Drag an item to swap it (Costs 1 Action Point)
 Gameover,"You died! But don't worry, some of your collections and your upgrades will stay with you for your next run!"
 WinGame,You win! Thanks for playing! You can keep playing the game if you want!
-Move,You can move Items around to prepare better attack next turn. Each item has their own rules of damage they can deal based on their position in you.
-Draw,
-Destory,
+Drag,You can drag Items around to prepare better attack. Each item has their own rules of damage they can deal based on their position in you. Try move the stone as suggested.
+End Turn,You can click end turn to start next turn. You would draw items from the ones you haven't drawn before and add them randomly into you.
+Destroy Breakable,"When a breakable item is crushed by another item, they will take effect."
+Different Attack,You will randomly pick attack each time you attacked. Hover over attack button so see your next attack. This time you will attack to left. Try attack first!
+Fly Away,"Most items would destroy themselves after attack, you would need to draw them next round. Only Stone can stay."

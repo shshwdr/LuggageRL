@@ -15,6 +15,10 @@ public class BattleManager : Singleton<BattleManager>
     public Text roundText;
     public GameObject[] itemsToActivate;
 
+    public bool hasAttacked = false;
+    
+    public Button SkipTurnButton;
+
     public GameObject luggageAttackDisabledOb;
     public GameObject luggageAttackEnabledOb;
 
@@ -50,6 +54,7 @@ public class BattleManager : Singleton<BattleManager>
     public Transform ButtonCanvas;
 
     public int battleCount = 0;
+    public int turnCount = 0;
     public bool canPlayerControl = true;
     public bool CanPlayerControl => canPlayerControl && !GameOver.Instance.isGameOver;
     public TurnSlider turnSlider;
@@ -62,7 +67,7 @@ public class BattleManager : Singleton<BattleManager>
             return;
         }
 
-        if (battleId >= learnNewAttackBattle[maxAttackCount])
+        if (battleId >= learnNewAttackBattle[maxAttackCount-1])
         {
             DialoguePopupManager.Instance.showDialogue("You learned a new type of attack: "+attackString[maxAttackCount]+"\nAttacks would randomly pick after each attack.",tutorialAttackSprites[maxAttackCount]);
         
@@ -96,6 +101,11 @@ public class BattleManager : Singleton<BattleManager>
             button.gameObject.SetActive(true);
         }
         MoveText.transform.parent.gameObject.SetActive(true);
+
+        if (BabySittingTutorial.Instance.shouldDisableAction(PlayerActionType.EndTurn))
+        {
+            SkipTurnButton.gameObject.SetActive(false);
+        }
 
     }
     IEnumerator test()
@@ -179,8 +189,9 @@ public class BattleManager : Singleton<BattleManager>
         updateBuff();
         if (battleCount == 1)
         {
-
-            DetailView.Instance.showTutorial("Defend", TutorialManager.Instance.getUnreadText("Defend"));
+            
+            DetailView.Instance.showTutorial("Different Attack", TutorialManager.Instance.getUnreadText("Different Attack"));
+            //DetailView.Instance.showTutorial("Defend", TutorialManager.Instance.getUnreadText("Defend"));
         }
         //AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_death, transform.position);
         isInControl = true;
@@ -207,12 +218,38 @@ public class BattleManager : Singleton<BattleManager>
     }
     void StartBattle()
     {
-
+        DetailView.Instance.showTutorial("Attack!", TutorialManager.Instance.getUnreadText("Attack!"));
+        // if (battleCount == 2)
+        // {
+        //     DetailView.Instance.showTutorial("DifferentAttack", TutorialManager.Instance.getUnreadText("DifferentAttack"));
+        //     
+        // }
+        hasAttacked = false;
+        turnCount = 0;
         if (battleCount == 0)
         {
             moveHint.text = TutorialManager.Instance.getText("MoveItemHint");
         }
+        
+        battleCount++;
+
+        StartCoroutine(startBattleEnumerator());
+    }
+
+    IEnumerator startBattleEnumerator()
+    {
+        
+        foreach (var item in GridManager.Instance.GridItemDict.Values)
+        {
+            item.destory();
+        }
+        GridManager.Instance.RemoveAll();
+
+        yield return new WaitForSeconds(GridManager.animTime * 2);
+        
         StartCoroutine(turnSlider.ShowSlider("Player Turn"));
+        
+        
         ////clear old enemies, this is bad, hacky solution
         //foreach(var enemy in Transform.FindObjectsOfType<Enemy>(true))
         //{
@@ -232,17 +269,13 @@ public class BattleManager : Singleton<BattleManager>
         UpdateText();
         EnemyManager.Instance.SelectEenmiesAction();
 
-        battleCount++;
-
-
 
     }
 
-    public void hoverHoverAttackButton()
-    {
-
-        DetailView.Instance.showTutorial("Attack!", TutorialManager.Instance.getUnreadText("Attack!"));
-    }
+    // public void hoverHoverAttackButton()
+    // {
+    //
+    // }
     public void AddEnemies(BattleType battleType)
     {
         var maxEnemy = 3;
@@ -283,7 +316,11 @@ public class BattleManager : Singleton<BattleManager>
         }
         else
         {
-            selectedAttackIndex = Random.Range(0, maxAttackCount);
+            selectedAttackIndex = BabySittingTutorial.Instance.selectAttack();
+            if (selectedAttackIndex == -1)
+            {
+                selectedAttackIndex = Random.Range(0, maxAttackCount);
+            }
         }
         //moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         UpdateText();
@@ -294,6 +331,7 @@ public class BattleManager : Singleton<BattleManager>
     {
         moveLeft -= amount;
         UpdateText();
+        BabySittingTutorial.Instance. hideLines();
         if (moveLeft == 0)
         {
             yield return StartCoroutine(EndOfTurn());
@@ -350,13 +388,30 @@ public class BattleManager : Singleton<BattleManager>
         attackCountUsed++;
         StartCoroutine(PlayerAttackMove(selectedAttackIndex));
     }
-    List<int> attackIdToRotationId = new List<int>() { 0, 1, 1, 3 };
+    List<int> attackIdToRotationId = new List<int>() { 0, 2, 1, 1 };
     public int getCurrentAttackRotationId()
     {
         return attackIdToRotationId[selectedAttackIndex];
     }
+
+    public void FinishAttack()
+    {
+        
+        DetailView.Instance.showTutorial("End Turn", TutorialManager.Instance.getUnreadText("End Turn"));
+        if (battleCount == 2)
+        {
+            DetailView.Instance.showTutorial("Defend", TutorialManager.Instance.getUnreadText("Defend"));
+            BabySittingTutorial.Instance. showLines();
+        }
+
+        
+    }
     public IEnumerator PlayerAttackMove(int moveId)
     {
+        hasAttacked = true;
+        
+        
+        
         hideButtonCanvas();
         GridManager.Instance.clearAttackPreview();
         //moveId = 0; //force to push (debug)
@@ -381,6 +436,13 @@ public class BattleManager : Singleton<BattleManager>
                 //    yield return StartCoroutine(Luggage.Instance.LiftAndDownAttack());
                 //    break;
         }
+        
+        if (battleCount == 1 && turnCount >= 2)
+        {
+            DetailView.Instance.showTutorial("Fly Away", TutorialManager.Instance.getUnreadText("Fly Away"));
+            
+        }
+        
         //yield return useMove(attackMoveCost);
 
         //showButtonCanvas();
@@ -453,12 +515,29 @@ public class BattleManager : Singleton<BattleManager>
             yield break;
         }
         clearTurnData();
-
         //SelectAttack();
         EnemyManager.Instance.SelectEenmiesAction();
+        if (battleCount == 2 && turnCount == 0)
+        {
+            DetailView.Instance.showTutorial("Destroy Breakable", TutorialManager.Instance.getUnreadText("Destroy Breakable"));
+            //DetailView.Instance.showTutorial("Different Attack", TutorialManager.Instance.getUnreadText("Different Attack"));
+            
+        }
+        // else if (battleCount == 2 && turnCount == 1)
+        // {
+        //     DetailView.Instance.showTutorial("Destroy Breakable", TutorialManager.Instance.getUnreadText("Destroy Breakable"));
+        //     
+        // }
+        turnCount++;
         yield return StartCoroutine(DrawItemEnumerator(true));
         moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         attackCountUsed = 0;
+
+        DetailView.Instance.showTutorial("Drag", TutorialManager.Instance.getUnreadText("Drag"));
+
+        
+        BabySittingTutorial.Instance.showLines();
+        
         UpdateText();
 
 

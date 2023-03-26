@@ -157,6 +157,11 @@ public class BaseItem : MonoBehaviour
         //AttackText.gameObject.SetActive(willAttack);
         //attackAndDefendOb.SetActive(!willAttack && !isBreakable);
         //combinedAttack.text = item.core.Attack.ToString();
+        if (item == null) 
+        {
+            
+            item = GetComponent<GridItem>();
+        }
         combinedDefense.text = item.core.defense.ToString();
 
 

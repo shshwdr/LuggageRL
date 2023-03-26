@@ -16,21 +16,24 @@ public class Draggable : MonoBehaviour
     {
         
     }
-    
+
+    private bool mouseDown = false;
     private void OnMouseDown()
     {
 
-        if (!BattleManager.Instance.isInControl || !BattleManager.Instance.CanPlayerControl)
+        if (!BattleManager.Instance.isInControl || !BattleManager.Instance.CanPlayerControl || BabySittingTutorial.Instance.shouldDisableAction(PlayerActionType.Move))
         {
             return;
         }
+
+        mouseDown = true;
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_drag_pickup, transform.position);
     }
     GridEmptyCell swapOb;
     private void OnMouseDrag()
     {
 
-        if (!BattleManager.Instance.isInControl || !BattleManager.Instance.CanPlayerControl)
+        if (!mouseDown)
         {
             return;
         }
@@ -85,6 +88,8 @@ public class Draggable : MonoBehaviour
             GridManager.Instance.updatePos(GetComponent<GridItem>());
 
         }
+
+        mouseDown = false;
     }
 
     IEnumerator mouseUp()
