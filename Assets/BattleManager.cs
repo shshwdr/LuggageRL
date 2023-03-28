@@ -119,13 +119,13 @@ public class BattleManager : Singleton<BattleManager>
 
         StartCoroutine(EndOfTurn());
     }
-    public void DrawItem(bool noCost = false)
+    public IEnumerator DrawItem(bool noCost = false)
     {
         if (!noCost && moveLeft < drawMoveCost)
         {
-            return;
+            yield break;
         }
-        StartCoroutine(DrawItemEnumerator(noCost));
+        yield return StartCoroutine(DrawItemEnumerator(noCost));
     }
     public IEnumerator DrawItemEnumerator(bool noCost = false)
     {
@@ -147,6 +147,13 @@ public class BattleManager : Singleton<BattleManager>
         if (!isBattleFinished)
         {
             isBattleFinished = true;
+
+
+            if (battleCount >= 2)
+            {
+                BabySittingTutorial.Instance.finishTutorial();
+            }
+            
             hidePlayerAttack();
 
             yield return new WaitForSeconds(GridManager.animTime);
@@ -270,7 +277,7 @@ public class BattleManager : Singleton<BattleManager>
         isBattleFinished = false;
         attackCountUsed = 0;
         moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
-        DrawItem(true);
+        yield return  StartCoroutine(DrawItem(true));
         SelectAttack();
         UpdateText();
         EnemyManager.Instance.SelectEenmiesAction();

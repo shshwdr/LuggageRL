@@ -13,9 +13,16 @@ public enum PlayerActionType
 public class BabySittingTutorial : Singleton<BabySittingTutorial>
 {
 
+    public bool isOn = true;
+
+    public void finishTutorial()
+    {
+        isOn = false;
+    }
     void Start()
     {
         overlayButton.GetComponent<Button>().onClick.AddListener(hideOverlay);
+        DontDestroyOnLoad(this.gameObject);
     }
     public GameObject attackOverlay;
     public GameObject attackOverlay2;
@@ -23,6 +30,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
     private GameObject currentOverlay;
     public void showOverlay(GameObject overlay)
     {
+        if (!isOn)
+        {
+            return;
+        }
         overlay.SetActive(true);
         overlayButton.SetActive(true);
         currentOverlay = overlay;
@@ -45,6 +56,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
     public bool hijackDrawItem()
     {
+        if (!isOn)
+        {
+            return false;
+        }
         var battleId = BattleManager.Instance.battleCount;
         var turnId = BattleManager.Instance.turnCount;
         if (battleId == 1 && turnId < 3)
@@ -62,6 +77,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
     public int selectAttack()
     {
+        if (!isOn)
+        {
+            return -1;
+        }
         var battleId = BattleManager.Instance.battleCount;
         var turnId = BattleManager.Instance.turnCount;
         if (battleId == 2 && turnId == 0)
@@ -74,6 +93,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
     public IEnumerator DrawItem(int drawCount, bool shouldDrop, bool shouldShow)
     {
+        if (!isOn)
+        {
+            yield break;
+        }
         var battleId = BattleManager.Instance.battleCount;
         var turnId = BattleManager.Instance.turnCount;
 
@@ -180,6 +203,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
     public void hideLines()
     {
+        if (!isOn)
+        {
+            return;
+        }
         foreach (Transform tran in battle1Turn0LineHint.transform.parent)
         {
             tran.gameObject.SetActive(false);
@@ -188,6 +215,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
     public void showLines()
     {
+        if (!isOn)
+        {
+            return;
+        }
         hideLines();
 
         var battleId = BattleManager.Instance.battleCount;
@@ -208,6 +239,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
     public bool shouldDisableAction(PlayerActionType act)
     {
+        if (!isOn)
+        {
+            return false;
+        }
         var battleId = BattleManager.Instance.battleCount;
         var turnId = BattleManager.Instance.turnCount;
         var hasAttacked = BattleManager.Instance.hasAttacked;
@@ -215,6 +250,12 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
         {
             if (battleId <= 1 && turnId == 0 && !hasAttacked)
             {
+                return true;
+            }
+            
+            if (battleId == 2 && turnId == 0&& !hasAttacked)
+            {
+                FloatingTextManager.Instance.addText("Please Follow The Tutorial And Attack First!",Vector3.zero,Color.white);
                 return true;
             }
         }
