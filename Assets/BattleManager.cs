@@ -133,6 +133,13 @@ public class BattleManager : Singleton<BattleManager>
 
         yield return StartCoroutine(GridManager.Instance.DrawItemsFromPool());
         showButtonCanvas();
+
+        if (battleCount == 1 && turnCount == 0)
+        {
+            
+            BabySittingTutorial.Instance.showOverlay(BabySittingTutorial.Instance.attackOverlay);
+            //DetailView.Instance.showTutorial("Attack!", TutorialManager.Instance.getUnreadText("Attack!"));
+        }
     }
 
     public IEnumerator FinishCurrentBattle()
@@ -218,7 +225,6 @@ public class BattleManager : Singleton<BattleManager>
     }
     void StartBattle()
     {
-        DetailView.Instance.showTutorial("Attack!", TutorialManager.Instance.getUnreadText("Attack!"));
         // if (battleCount == 2)
         // {
         //     DetailView.Instance.showTutorial("DifferentAttack", TutorialManager.Instance.getUnreadText("DifferentAttack"));
@@ -268,6 +274,8 @@ public class BattleManager : Singleton<BattleManager>
         SelectAttack();
         UpdateText();
         EnemyManager.Instance.SelectEenmiesAction();
+        
+        
 
 
     }
