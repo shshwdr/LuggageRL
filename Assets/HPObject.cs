@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class HPObject : MonoBehaviour
@@ -26,6 +27,7 @@ public class HPObject : MonoBehaviour
             damage = Mathf.Max(0, damage);
         }
         hp -= damage;
+        hp = math.max(hp, 0);
 
         if (damage > 0)
         {
