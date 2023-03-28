@@ -28,6 +28,37 @@ public class Stone : GridItemCore
 
     }
 }
+
+[System.Serializable]
+public class Marble : GridItemCore
+{
+    public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
+    {
+        int damage = info.Param1;
+        int moveDamageScale = info.Param2;
+        var originIndex = index;
+        int diff = (int)(borderIndex - originIndex).magnitude;
+
+        var dir = (borderIndex - originIndex) / diff;
+        if (movedCount > 0)
+        {
+            messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) * moveDamageScale + BattleManager.Instance.finalDamageIncrease, index = index });
+        }
+        else
+        {
+            messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + BattleManager.Instance.finalDamageIncrease, index = index });
+        }
+        buffs.Clear();
+        //FloatingTextManager.Instance.addText("Attack!", transform.position);
+        //Luggage.Instance.DoDamage(1);
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.impact, skipAnim = true });
+
+
+        messages.Add(new MessageItemMove { item = this, index = index });
+        this.addDestroyMessageWithIndex(messages, originIndex, true);
+        index = borderIndex + dir * 10;
+    }
+}
 [System.Serializable]
 public class Potion : GridItemCore
 {

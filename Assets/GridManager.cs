@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public enum ItemType
 {
-    Stone, Potion, Arrow, Poison, Circuit,
+    Stone, Potion, Arrow, Poison, Circuit, Marble,
     Pins,
     PiggyBank,
     Coke,
@@ -92,7 +92,7 @@ public class GridManager : Singleton<GridManager>
     }
 
     public List<ItemType> DeckPool => deckPool;
-     List<ItemType> deckPool = new List<ItemType>() { ItemType.Stone, ItemType.Stone, ItemType.Arrow,/*ItemType.Pins*/ };
+     List<ItemType> deckPool = new List<ItemType>() { ItemType.Marble, ItemType.Marble, ItemType.Arrow,/*ItemType.Pins*/ };
     //{ ItemType.Stone, ItemType.Balancer, ItemType.Poison, ItemType.Bomb, ItemType.Arrow, ItemType.Pins, ItemType.Umbrella, ItemType.Circuit,ItemType.Coke,ItemType.CreditCard,ItemType.LiquidBomb,ItemType.Rocket,ItemType.Pinata };
     //{ ItemType.Stone, ItemType.Stone, ItemType.Arrow};
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };

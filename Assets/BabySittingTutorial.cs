@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PlayerActionType
 {
@@ -11,6 +12,33 @@ public enum PlayerActionType
 
 public class BabySittingTutorial : Singleton<BabySittingTutorial>
 {
+
+    void Start()
+    {
+        overlayButton.GetComponent<Button>().onClick.AddListener(hideOverlay);
+    }
+    public GameObject attackOverlay;
+    public GameObject attackOverlay2;
+    public GameObject overlayButton;
+    private GameObject currentOverlay;
+    public void showOverlay(GameObject overlay)
+    {
+        overlay.SetActive(true);
+        overlayButton.SetActive(true);
+        currentOverlay = overlay;
+    }
+
+    public void hideOverlay()
+    {
+        currentOverlay.SetActive(false);
+        overlayButton.SetActive(false);
+
+        if (currentOverlay == attackOverlay)
+        {
+            showOverlay(attackOverlay2);
+        }
+    }
+    
     public GameObject battle1Turn0LineHint;
     public GameObject battle1Turn1LineHint;
     public GameObject battle2Turn0LineHint;
@@ -51,7 +79,7 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
         if (battleId == 1)
         {
-            drawCount = 1;
+            drawCount = turnId+1;
         }
         else if (battleId == 2)
         {
@@ -76,18 +104,42 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
             {
                 if (turnId == 0)
                 {
-                    pickedType = ItemType.Stone;
+                    pickedType = ItemType.Marble;
                     picked = new Vector2Int(0, 2);
                 }
                 else if (turnId == 1)
                 {
-                    pickedType = ItemType.Stone;
-                    picked = new Vector2Int(1, 2);
+
+                    if (i == 0)
+                    {
+                        pickedType = ItemType.Marble;
+                        picked = new Vector2Int(1, 2);
+                    }else if (i == 1)
+                    {
+                        
+                        pickedType = ItemType.Marble;
+                        picked = new Vector2Int(3, 2);
+                    }
                 }
                 else if (turnId == 2)
                 {
-                    pickedType = ItemType.Arrow;
-                    picked = new Vector2Int(0, 2);
+                    
+                    if (i == 0)
+                    {
+                        pickedType = ItemType.Marble;
+                        picked = new Vector2Int(0, 2);
+                    }else if (i == 1)
+                    {
+                        
+                        pickedType = ItemType.Marble;
+                        picked = new Vector2Int(3, 2);
+                    }
+                    else
+                    {
+                        pickedType = ItemType.Arrow;
+                        picked = new Vector2Int(2, 2);
+                    }
+                    
                 }
             }
             else if (battleId == 2)
@@ -96,18 +148,18 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
                 {
                     if (i == 0)
                     {
-                        pickedType = ItemType.Stone;
-                        picked = new Vector2Int(3, 0);
+                        pickedType = ItemType.Marble;
+                        picked = new Vector2Int(2, 0);
                     }
                     else if (i == 1)
                     {
-                        pickedType = ItemType.Stone;
+                        pickedType = ItemType.Marble;
                         picked = new Vector2Int(3, 1);
                     }
                     else if (i == 2)
                     {
                         pickedType = ItemType.Arrow;
-                        picked = new Vector2Int(3, 2);
+                        picked = new Vector2Int(2, 2);
                     }
                 }
             }

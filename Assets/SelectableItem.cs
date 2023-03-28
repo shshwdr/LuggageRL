@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SelectableItem : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class SelectableItem : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (ItemManager.Instance.isInControl)
         {
             if (!GridManager.Instance.GridItemDict.Values.ToList().Contains(GetComponent<GridItem>()))
