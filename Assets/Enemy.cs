@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -384,6 +385,10 @@ public class Enemy : HPObject
 
     private void OnMouseEnter()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         //show attack preview
         GridManager.Instance.cleanAndShowAttackPreviewOfEnemy(this);
 
@@ -397,6 +402,10 @@ public class Enemy : HPObject
     }
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (BattleManager.Instance.CanPlayerControl)
         {
             EnemyManager.Instance.setCurrentTargetedEnemy(this);

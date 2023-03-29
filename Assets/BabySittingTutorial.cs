@@ -26,7 +26,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
     }
     public GameObject attackOverlay;
     public GameObject attackOverlay2;
+    public GameObject endTurnOverlay;
+    public GameObject moveOverlay;
     public GameObject overlayButton;
+    public GameObject overlayParent;
     private GameObject currentOverlay;
     public void showOverlay(GameObject overlay)
     {
@@ -34,6 +37,7 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
         {
             return;
         }
+        overlayParent.SetActive(true);
         overlay.SetActive(true);
         overlayButton.SetActive(true);
         currentOverlay = overlay;
@@ -42,6 +46,7 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
     public void hideOverlay()
     {
         currentOverlay.SetActive(false);
+        overlayParent.SetActive(false);
         overlayButton.SetActive(false);
 
         if (currentOverlay == attackOverlay)
