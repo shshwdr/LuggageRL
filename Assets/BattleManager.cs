@@ -119,13 +119,13 @@ public class BattleManager : Singleton<BattleManager>
 
         StartCoroutine(EndOfTurn());
     }
-    public void DrawItem(bool noCost = false)
+    public IEnumerator DrawItem(bool noCost = false)
     {
         if (!noCost && moveLeft < drawMoveCost)
         {
-            return;
+            yield break;
         }
-        StartCoroutine(DrawItemEnumerator(noCost));
+        yield return StartCoroutine(DrawItemEnumerator(noCost));
     }
     public IEnumerator DrawItemEnumerator(bool noCost = false)
     {
@@ -147,6 +147,13 @@ public class BattleManager : Singleton<BattleManager>
         if (!isBattleFinished)
         {
             isBattleFinished = true;
+
+
+            if (battleCount >= 2)
+            {
+                BabySittingTutorial.Instance.finishTutorial();
+            }
+            
             hidePlayerAttack();
 
             yield return new WaitForSeconds(GridManager.animTime);
@@ -270,7 +277,7 @@ public class BattleManager : Singleton<BattleManager>
         isBattleFinished = false;
         attackCountUsed = 0;
         moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
-        DrawItem(true);
+        yield return  StartCoroutine(DrawItem(true));
         SelectAttack();
         UpdateText();
         EnemyManager.Instance.SelectEenmiesAction();
@@ -405,7 +412,8 @@ public class BattleManager : Singleton<BattleManager>
     public void FinishAttack()
     {
         
-        DetailView.Instance.showTutorial("End Turn", TutorialManager.Instance.getUnreadText("End Turn"));
+        BabySittingTutorial.Instance.showOverlay(BabySittingTutorial.Instance.endTurnOverlay);
+        //DetailView.Instance.showTutorial("End Turn", TutorialManager.Instance.getUnreadText("End Turn"));
         if (battleCount == 2)
         {
             DetailView.Instance.showTutorial("Defend", TutorialManager.Instance.getUnreadText("Defend"));
@@ -541,10 +549,12 @@ public class BattleManager : Singleton<BattleManager>
         moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         attackCountUsed = 0;
 
-        DetailView.Instance.showTutorial("Drag", TutorialManager.Instance.getUnreadText("Drag"));
+        
+        BabySittingTutorial.Instance.showOverlay(BabySittingTutorial.Instance.moveOverlay);
+        //DetailView.Instance.showTutorial("Drag", TutorialManager.Instance.getUnreadText("Drag"));
 
         
-        BabySittingTutorial.Instance.showLines();
+        //BabySittingTutorial.Instance.showLines();
         
         UpdateText();
 

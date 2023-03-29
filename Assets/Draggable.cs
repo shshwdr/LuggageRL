@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class Draggable : MonoBehaviour
     private void OnMouseDown()
     {
 
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (!BattleManager.Instance.isInControl || !BattleManager.Instance.CanPlayerControl || BabySittingTutorial.Instance.shouldDisableAction(PlayerActionType.Move))
         {
             return;
@@ -33,6 +38,10 @@ public class Draggable : MonoBehaviour
     private void OnMouseDrag()
     {
 
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (!mouseDown)
         {
             return;
@@ -78,6 +87,10 @@ public class Draggable : MonoBehaviour
     }
     private void OnMouseUp()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_drag_putdown, transform.position);
         if (swapOb)
         {

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public struct SerializedDictionary<T, U>
@@ -275,6 +276,10 @@ public class GridItem : MonoBehaviour, IGridItem
     }
     private void OnMouseEnter()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         DetailView.Instance.UpdateCard(baseItem);
         //GridManager.Instance.itemViewText.text = core.Desc;
     }
