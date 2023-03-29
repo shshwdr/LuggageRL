@@ -11,14 +11,16 @@ public class FloatingText : MonoBehaviour
     public int jumpPower = 10;
     public float animTime = 1;
     public float moveUp = 1;
-    public void init(string text,Vector3 pos,Color color,float stayTime)
+    public bool autoDispose;
+    public void init(string text,Vector3 pos,Color color,float stayTime, bool autoDispose = true)
     {
         gameObject.SetActive(true);
         GetComponentInChildren<Text>().text = text;
         GetComponentInChildren<Text>().color = color;
         transform.position = pos;
-        Destroy(gameObject, 1);
+        if (autoDispose) Destroy(gameObject, 1);
         animTime = stayTime;
+        this.autoDispose = autoDispose;
     }
     // Start is called before the first frame update
     void Start()
@@ -31,5 +33,23 @@ public class FloatingText : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UpdateText(string text, bool isFinalUpdate = true)
+    {
+        if (isFinalUpdate)
+        {
+            Destroy(gameObject, 3);
+        }
+        go.localScale *= 1.6f;
+        go.DOPunchScale(endValue, .2f, jumpPower);
+        go.DOPunchRotation(new Vector3(0, 0, -50), .2f, 10, .4f);
+        GetComponentInChildren<Text>().text = text;
+        Sequence sequence = DOTween.Sequence();
+        sequence.PrependInterval(1.5f);
+        sequence.Append(go.DOLocalJump(new Vector3(3, 2, 0), 1, 1, 1));
+        sequence.Join(go.DOScale(0, .8f));
+
+        sequence.Play();
     }
 }

@@ -78,7 +78,7 @@ public class StageManager : Singleton<StageManager>
         }
         if (eventIndex >= eventList.Count)
         {
-            FloatingTextManager.Instance.addText("Finished Stage!", Vector3.zero, Color.yellow, 5);
+            FloatingTextManager.Instance.addText("Finished Stage!", Vector3.zero, Color.yellow, true, 5);
             return true;
         }
         float randomX = Random.Range(sceneDistanceStart, sceneDistanceEnd);

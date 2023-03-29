@@ -12,6 +12,7 @@ public class HPObject : MonoBehaviour
     public int shield;
 
     private int currentDamageCounter = 0;
+    private FloatingText currentFloatingText;
     public virtual IEnumerator ApplyDamage(int damage, bool isFinalAttack = true)
     {
         currentDamageCounter += damage;
@@ -22,7 +23,22 @@ public class HPObject : MonoBehaviour
             yield return StartCoroutine(ShieldBeAttacked(reduce));
 
         }
-        FloatingTextManager.Instance.addText(currentDamageCounter.ToString(), transform.position + new Vector3(0, 1, 0), Color.red);
+        
+        if (currentFloatingText != null)
+        {
+            currentFloatingText.UpdateText(currentDamageCounter.ToString(), isFinalAttack);
+        } 
+        else
+        {
+            currentFloatingText = FloatingTextManager.Instance.addText(currentDamageCounter.ToString(), transform.position + new Vector3(0, 3, 0), Color.red, isFinalAttack);
+        }
+
+        if (isFinalAttack)
+        {
+            currentDamageCounter = 0;
+            currentFloatingText = null;
+        }
+
         if (damage < 0)
         {
             Debug.LogWarning("how damage get lower than 0");
@@ -31,10 +47,6 @@ public class HPObject : MonoBehaviour
         hp -= damage;
         hp = math.max(hp, 0);
 
-        if (isFinalAttack)
-        {
-            currentDamageCounter = 0;
-        }
         if (damage > 0)
         {
             //try
