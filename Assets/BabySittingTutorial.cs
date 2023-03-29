@@ -31,12 +31,19 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
     public GameObject overlayButton;
     public GameObject overlayParent;
     private GameObject currentOverlay;
+    private HashSet<GameObject> visitedOverlay = new HashSet<GameObject>();
     public void showOverlay(GameObject overlay)
     {
         if (!isOn)
         {
             return;
         }
+
+        if (visitedOverlay.Contains(overlay))
+        {
+            return;
+        }
+        visitedOverlay.Add(overlay);
         overlayParent.SetActive(true);
         overlay.SetActive(true);
         overlayButton.SetActive(true);
