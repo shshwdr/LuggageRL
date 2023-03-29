@@ -250,12 +250,11 @@ public class Luggage : Singleton<Luggage>
     }
     
 
-    public IEnumerator DoDamage(int dam)
+    public IEnumerator DoDamage(int dam, bool isFinalAttack = true)
     {
         if (target)
         {
-
-            yield return StartCoroutine(target.ApplyDamage(dam));
+            yield return StartCoroutine(target.ApplyDamage(dam, isFinalAttack));
         }
     }
 

@@ -58,7 +58,7 @@ public class Enemy : HPObject
 
 
 
-    public override IEnumerator ApplyDamage(int damage)
+    public override IEnumerator ApplyDamage(int damage, bool isFinalAttack = true)
     {
 
         if(Core is EliteCap)
@@ -72,7 +72,7 @@ public class Enemy : HPObject
         }
 
 
-        yield return StartCoroutine( base.ApplyDamage(damage));
+        yield return StartCoroutine( base.ApplyDamage(damage, isFinalAttack));
 
 
         if (Core is EliteThorn)

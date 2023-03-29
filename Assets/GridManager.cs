@@ -793,7 +793,19 @@ public class GridManager : Singleton<GridManager>
     }
     public IEnumerator ParseMessages()
     {
-        for (int i = 0; i < messages.Count; i++)
+        int totalItemAttackCount = 0;
+        for (int j = 0; j < messages.Count; j++)
+        {
+            var message = messages[j];
+            if (message is MessageItemAttack)
+            {
+                totalItemAttackCount++;
+            }
+        }
+
+        int itemAttacksPerformed = 0;
+
+            for (int i = 0; i < messages.Count; i++)
         {
 
             var message = messages[i];
@@ -951,7 +963,18 @@ public class GridManager : Singleton<GridManager>
                 {
                     yield return new WaitForSeconds(animTime);
                 }
-                yield return StartCoroutine(Luggage.Instance.DoDamage(attack.damage));
+
+                itemAttacksPerformed++;
+                bool isFinalAttack = itemAttacksPerformed == totalItemAttackCount;
+                if (isFinalAttack)
+                {
+                    yield return StartCoroutine(Luggage.Instance.DoDamage(attack.damage, isFinalAttack));
+                }
+                else
+                {
+                    yield return StartCoroutine(Luggage.Instance.DoDamage(attack.damage, isFinalAttack));
+
+                }
 
             }
             else if (message is MessageDrawItem drawItem)

@@ -9,9 +9,11 @@ public class HPObject : MonoBehaviour
     public bool isDead = false;
     public HPBar hpbar;
     public int shield;
-    public virtual IEnumerator ApplyDamage(int damage)
-    {
 
+    private int currentDamageCounter = 0;
+    public virtual IEnumerator ApplyDamage(int damage, bool isFinalAttack = true)
+    {
+        currentDamageCounter += damage;
         if (shield > 0)
         {
             var reduce = Mathf.Min(damage, shield);
@@ -19,7 +21,7 @@ public class HPObject : MonoBehaviour
             yield return StartCoroutine(ShieldBeAttacked(reduce));
 
         }
-        FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0), Color.red);
+        FloatingTextManager.Instance.addText(currentDamageCounter.ToString(), transform.position + new Vector3(0, 1, 0), Color.red);
         if (damage < 0)
         {
             Debug.LogWarning("how damage get lower than 0");
@@ -27,6 +29,10 @@ public class HPObject : MonoBehaviour
         }
         hp -= damage;
 
+        if (isFinalAttack)
+        {
+            currentDamageCounter = 0;
+        }
         if (damage > 0)
         {
             //try
