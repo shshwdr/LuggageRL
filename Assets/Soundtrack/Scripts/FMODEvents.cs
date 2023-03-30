@@ -12,6 +12,7 @@ public class FMODEvents : Singleton<FMODEvents>
     [field: SerializeField] public EventReference music_boss { get; private set; }
     [field: SerializeField] public EventReference music_airport { get; private set; }
     [field: SerializeField] public EventReference music_death_stinger { get; private set; }
+    [field: SerializeField] public EventReference music_win_round { get; private set; }
     [field: SerializeField] public EventReference music_airport_battle { get; private set; }
     [field: SerializeField] public List<EventReference> musicPlaylist { get; private set; }
 

@@ -23288,6 +23288,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_win_round>k__BackingField.Path
+      value: event:/win_round
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_win_round>k__BackingField.Guid.Data1
+      value: -1092812001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_win_round>k__BackingField.Guid.Data2
+      value: 1257610638
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_win_round>k__BackingField.Guid.Data3
+      value: 534476446
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618617846538232520, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
+      propertyPath: <music_win_round>k__BackingField.Guid.Data4
+      value: -83063001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a50285a53eb6e643b709f57606c3c75, type: 3}
 --- !u!1001 &3729876681085173137

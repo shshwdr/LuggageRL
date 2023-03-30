@@ -158,6 +158,8 @@ public class BattleManager : Singleton<BattleManager>
 
             yield return new WaitForSeconds(GridManager.animTime);
 
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.music_win_round, transform.position);
+
             yield return StartCoroutine(GetComponentInChildren<TurnSlider>().ShowSlider("WIN!"));
 
             //DetailView.Instance.clearTutorial();
