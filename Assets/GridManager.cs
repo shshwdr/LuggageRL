@@ -92,7 +92,9 @@ public class GridManager : Singleton<GridManager>
     }
 
     public List<ItemType> DeckPool => deckPool;
-     List<ItemType> deckPool = new List<ItemType>() { ItemType.Marble, ItemType.Marble, ItemType.Arrow,/*ItemType.Pins*/ };
+
+    private List<ItemType> deckPool = new List<ItemType>() //{ ItemType.Marble, ItemType.Poison, ItemType.Potion, };
+         { ItemType.Marble, ItemType.Marble, ItemType.Arrow,/*ItemType.Pins*/ };
     //{ ItemType.Stone, ItemType.Balancer, ItemType.Poison, ItemType.Bomb, ItemType.Arrow, ItemType.Pins, ItemType.Umbrella, ItemType.Circuit,ItemType.Coke,ItemType.CreditCard,ItemType.LiquidBomb,ItemType.Rocket,ItemType.Pinata };
     //{ ItemType.Stone, ItemType.Stone, ItemType.Arrow};
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
@@ -322,7 +324,8 @@ public class GridManager : Singleton<GridManager>
         }
         return res;
     }
-    List<GameObject> previewCells = new List<GameObject>();
+    //List<GameObject> previewCells = new List<GameObject>();
+    private Dictionary<Vector2Int, GameObject> previewCells = new Dictionary<Vector2Int, GameObject>();
     public GameObject gridPreviewCell;
     public void showAttackPreviewOfEnemy(Enemy enemy)
     {
@@ -365,10 +368,19 @@ public class GridManager : Singleton<GridManager>
         }
         else
         {
-            var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
-            previewCells.Add(go);
-            go.GetComponentInChildren<Text>(true).text = attack.ToString();
-            go.GetComponentInChildren<Text>(true).gameObject.SetActive(true);
+            if (previewCells.ContainsKey(attackIndex))
+            {
+                previewCells[attackIndex].GetComponentInChildren<Text>(true).text =
+                    (int.Parse(previewCells[attackIndex].GetComponentInChildren<Text>(true).text) + attack).ToString();
+            }
+            else
+            {
+                
+                var go = Instantiate(gridPreviewCell, cell.position, cell.rotation);
+                previewCells[attackIndex] =go;
+                go.GetComponentInChildren<Text>(true).text = attack.ToString();
+                go.GetComponentInChildren<Text>(true).gameObject.SetActive(true);
+            }
         }
     }
 
@@ -427,7 +439,7 @@ public class GridManager : Singleton<GridManager>
             }
             cell.baseItem.ClearWillBeAttacked();
         }
-        foreach (var cell in previewCells)
+        foreach (var cell in previewCells.Values)
         {
             Destroy(cell);
         }
@@ -1071,13 +1083,17 @@ public class GridManager : Singleton<GridManager>
         messages.Clear();
         var damage = enemy.attack;
         var items = GridManager.Instance.itemEnemyAttack(enemy);
+        
+        int fianlDamage =( enemy.attackRangeV - items.Count)*damage;
         foreach(var item in items)
         {
 
             if (item != null)
             {
-                damage -= item.core.defense;
-                damage = Mathf.Max(0, damage);
+                var d = damage;
+                    d-= item.core.defense;
+                d = Mathf.Max(0, d);
+                fianlDamage += d;
                 //item.addDestroyMessage(messages);
 
                 //yield return StartCoroutine(ParseMessages());
@@ -1089,7 +1105,7 @@ public class GridManager : Singleton<GridManager>
             }
         }
 
-        yield return StartCoroutine(BattleManager.Instance.player.ApplyDamage(damage));
+        yield return StartCoroutine(BattleManager.Instance.player.ApplyDamage(fianlDamage));
     }
     public List<GameObject> attackingEdges;
     public void updateAttackEdge()

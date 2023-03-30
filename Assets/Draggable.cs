@@ -101,6 +101,9 @@ public class Draggable : MonoBehaviour
             GridManager.Instance.updatePos(GetComponent<GridItem>());
 
         }
+        
+        
+        GridManager.Instance.showAllAttackPreview();
 
         mouseDown = false;
     }

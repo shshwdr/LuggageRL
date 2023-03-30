@@ -92,6 +92,7 @@ public class BaseItem : MonoBehaviour
     {
         HealText.text = damage.ToString();
         HealText.gameObject.SetActive(true);
+        combinedAttack.gameObject.SetActive(false);
         updateBK();
     }
     public void WillDestroy()
@@ -108,6 +109,8 @@ public class BaseItem : MonoBehaviour
         willBeDestroyed = false;
         //AttackText.gameObject.SetActive(false);
         
+        combinedAttack.gameObject.SetActive(item.core.isAttacker);
+        combinedDefense.gameObject.SetActive(true);
         combinedAttack.GetComponent<RectTransform>().sizeDelta = normalSize;
         if (item)
         {
@@ -139,11 +142,15 @@ public class BaseItem : MonoBehaviour
         //combinedDefense.GetComponent<Outline>().DOKill();
         combinedDefense.GetComponent<Outline>().effectColor = outlineColorOrigin;
         beAttackedText.gameObject.SetActive(false);
+        previewBeAttacked = 0;
     }
+
+    private int previewBeAttacked = 0;
     public void WillBeAttacked(int attack)
     {
+        previewBeAttacked += attack;
         beAttackedText.gameObject.SetActive(true);
-        beAttackedText.text = attack.ToString();
+        beAttackedText.text = previewBeAttacked.ToString();
         willDefend = true;
         //willBeAttackedObj.SetActive(true);
         combinedDefense.GetComponent<RectTransform>().sizeDelta = largeSize;

@@ -160,7 +160,7 @@ public class BattleManager : Singleton<BattleManager>
 
             yield return StartCoroutine(GetComponentInChildren<TurnSlider>().ShowSlider("WIN!"));
 
-            DetailView.Instance.clearTutorial();
+            //DetailView.Instance.clearTutorial();
             moveHint.text = "";
             //FloatingTextManager.Instance.addText("Win Battle!", Vector3.zero, Color.red,1);
             //yield return new WaitForSeconds(GridManager.animTime*3);
@@ -203,8 +203,7 @@ public class BattleManager : Singleton<BattleManager>
         updateBuff();
         if (battleCount == 1)
         {
-            
-            DetailView.Instance.showTutorial("Different Attack", TutorialManager.Instance.getUnreadText("Different Attack"));
+            //DetailView.Instance.showTutorial("Different Attack", TutorialManager.Instance.getUnreadText("Different Attack"));
             //DetailView.Instance.showTutorial("Defend", TutorialManager.Instance.getUnreadText("Defend"));
         }
         //AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_death, transform.position);
@@ -416,7 +415,8 @@ public class BattleManager : Singleton<BattleManager>
         //DetailView.Instance.showTutorial("End Turn", TutorialManager.Instance.getUnreadText("End Turn"));
         if (battleCount == 2)
         {
-            DetailView.Instance.showTutorial("Defend", TutorialManager.Instance.getUnreadText("Defend"));
+            BabySittingTutorial.Instance.showOverlay(BabySittingTutorial.Instance.defenseOverlay);
+            //DetailView.Instance.showTutorial("Defend", TutorialManager.Instance.getUnreadText("Defend"));
             BabySittingTutorial.Instance. showLines();
         }
 
@@ -453,11 +453,11 @@ public class BattleManager : Singleton<BattleManager>
                 //    break;
         }
         
-        if (battleCount == 1 && turnCount >= 2)
-        {
-            DetailView.Instance.showTutorial("Fly Away", TutorialManager.Instance.getUnreadText("Fly Away"));
-            
-        }
+        // if (battleCount == 1 && turnCount >= 2)
+        // {
+        //     DetailView.Instance.showTutorial("Fly Away", TutorialManager.Instance.getUnreadText("Fly Away"));
+        //     
+        // }
         
         //yield return useMove(attackMoveCost);
 
@@ -535,7 +535,8 @@ public class BattleManager : Singleton<BattleManager>
         EnemyManager.Instance.SelectEenmiesAction();
         if (battleCount == 2 && turnCount == 0)
         {
-            DetailView.Instance.showTutorial("Destroy Breakable", TutorialManager.Instance.getUnreadText("Destroy Breakable"));
+            BabySittingTutorial.Instance.showOverlay(BabySittingTutorial.Instance.breakableOverlay);
+            //DetailView.Instance.showTutorial("Destroy Breakable", TutorialManager.Instance.getUnreadText("Destroy Breakable"));
             //DetailView.Instance.showTutorial("Different Attack", TutorialManager.Instance.getUnreadText("Different Attack"));
             
         }
@@ -549,8 +550,15 @@ public class BattleManager : Singleton<BattleManager>
         moveLeft = moveMax + LuggageManager.Instance.UpgradedTime[UpgradeType.actionCount];
         attackCountUsed = 0;
 
-        
-        BabySittingTutorial.Instance.showOverlay(BabySittingTutorial.Instance.moveOverlay);
+        if (turnCount == 1)
+        {
+            BabySittingTutorial.Instance.showOverlay(BabySittingTutorial.Instance.moveOverlay);
+        }
+        else
+        {
+            
+            BabySittingTutorial.Instance.showOverlay(BabySittingTutorial.Instance.arrowOverlay);
+        }
         //DetailView.Instance.showTutorial("Drag", TutorialManager.Instance.getUnreadText("Drag"));
 
         
