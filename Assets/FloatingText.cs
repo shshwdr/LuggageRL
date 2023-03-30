@@ -48,11 +48,11 @@ public class FloatingText : MonoBehaviour
         }
     }
 
-    public void FlingAndDestroyText()
+    public void FlingAndDestroyText(float prependWaitTime = 1.5f)
     {
 
         Sequence sequence = DOTween.Sequence();
-        sequence.PrependInterval(1.5f);
+        sequence.PrependInterval(prependWaitTime);
         sequence.Append(go.DOLocalJump(new Vector3(3, 2, 0), 1, 1, 1));
         sequence.Join(go.DOScale(0, .8f));
 

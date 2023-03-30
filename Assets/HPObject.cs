@@ -24,15 +24,37 @@ public class HPObject : MonoBehaviour
 
         }
 
-        FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0), new Color(1,.8f,0), true);
+        if (!isFinalAttack || currentFloatingText != null)
+        {
+            //any multi attack
+            //mini hit
+            FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0), new Color(1, .8f, 0), true);
+        }
 
         if (currentFloatingText != null)
         {
+            //continue multi-attack
+            //update final counter
             currentFloatingText.UpdateText(currentDamageCounter.ToString(), isFinalAttack);
         } 
         else
         {
-            currentFloatingText = FloatingTextManager.Instance.addText(currentDamageCounter.ToString(), transform.position + new Vector3(0, 3, 0), Color.red, isFinalAttack);
+            //one-time attack
+            Vector3 damageTranformOffset; 
+            if (this is Enemy)
+            {
+                damageTranformOffset = new Vector3(0, 3, 0);
+            }
+            else
+            {
+                damageTranformOffset = new Vector3(0, 1, 0);
+            }
+
+            currentFloatingText = FloatingTextManager.Instance.addText(currentDamageCounter.ToString(), transform.position + damageTranformOffset, Color.red, false);
+            if (isFinalAttack)
+            {
+                currentFloatingText.FlingAndDestroyText(1f);
+            }
         }
 
         if (isFinalAttack)
