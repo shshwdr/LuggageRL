@@ -18,7 +18,10 @@ public enum ItemType
     Balancer,
     Rocket,
     Pinata,
-
+Alarm,
+ProtectPotion,
+Thorns,
+HolyGrail,
     Mud,
 LiquidBomb,
 FreezeBomb,
@@ -95,12 +98,14 @@ public class GridManager : Singleton<GridManager>
 
     private List<ItemType> deckPool = new List<ItemType>() //{ ItemType.Marble, ItemType.Poison, ItemType.Potion, };
          { ItemType.Marble, ItemType.Marble, ItemType.Arrow,/*ItemType.Pins*/ };
+         //{ ItemType.Alarm, ItemType.Thorns,ItemType.HolyGrail,/*ItemType.Pins*/ };
     //{ ItemType.Stone, ItemType.Balancer, ItemType.Poison, ItemType.Bomb, ItemType.Arrow, ItemType.Pins, ItemType.Umbrella, ItemType.Circuit,ItemType.Coke,ItemType.CreditCard,ItemType.LiquidBomb,ItemType.Rocket,ItemType.Pinata };
     //{ ItemType.Stone, ItemType.Stone, ItemType.Arrow};
     //{ ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.poison, ItemType.poison };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
     //{ ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.arrow, };
     //{ ItemType.ore, ItemType.ore, ItemType.ore, ItemType.herb, ItemType.herb, ItemType.herb, ItemType.arrow, ItemType.arrow, ItemType.arrow, ItemType.poison, ItemType.poison, ItemType.poison };
+    
     public IEnumerator DrawItem(int drawCount, bool shouldDrop, bool shouldShow)
     {
         List<Vector2Int> availableEmpty = new List<Vector2Int>();
@@ -951,7 +956,7 @@ public class GridManager : Singleton<GridManager>
                         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_break, Vector3.zero);
                         break;
                     case VisualEffect.potion:
-                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_effect_heal, Vector3.zero);
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_potion_drink, Vector3.zero);
                         break;
                     case VisualEffect.arrow:
                         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_bow_and_arrow, Vector3.zero);
@@ -1073,6 +1078,23 @@ public class GridManager : Singleton<GridManager>
 
                 yield return StartCoroutine( heal.target.HealEnumerator(heal.amount));
             }
+            else if (message is MessageItemStun stun)
+            {
+                if (!GridItemDict.ContainsKey(stun.index))
+                {
+                    Debug.Log("?");
+                    continue;
+                }
+                if (GridItemDict[stun.index] == null)
+                {
+                    GridItemDict.Remove(stun.index);
+                }
+                //FloatingTextManager.Instance.addText($"Heal {heal.amount}", heal.target.transform.position,Color.green);
+                FloatingTextManager.Instance.addText($"Stun Enemy!", GridItemDict[stun.index].transform.position, Color.red);
+                yield return new WaitForSeconds(animTime);
+                var target = Luggage.Instance.target;
+                yield return StartCoroutine( target.StunEnumerator());
+            }
             else if (message is MessageDestroy destr)
             {
                 if (!GridItemDict.ContainsKey(destr.index))
@@ -1126,7 +1148,10 @@ public class GridManager : Singleton<GridManager>
                 d = Mathf.Max(0, d);
                 fianlDamage += d;
 
-                item.PlayFlashDamageAnimation();
+
+		item.PlayFlashDamageAnimation();
+		yield return StartCoroutine(item.core.defend(enemy));
+
                 //item.addDestroyMessage(messages);
 
                 //yield return StartCoroutine(ParseMessages());

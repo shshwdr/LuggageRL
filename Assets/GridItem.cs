@@ -59,7 +59,7 @@ public struct SerializedDictionary<T, U>
     }
 }
 [Serializable]
-public enum BuffType { poison, piggyBank, balancer}
+public enum BuffType { poison, piggyBank, balancer,revenge}
 public static class Ut
 {
     public static T DeepClone<T>(this T obj)
@@ -131,6 +131,10 @@ public class GridItemCore: IGridItem
         {
             rawDamage += buffs[BuffType.balancer];
         }
+        if (buffs.ContainsKey(BuffType.revenge))
+        {
+            rawDamage += buffs[BuffType.revenge];
+        }
         return rawDamage;
     }
 
@@ -175,6 +179,10 @@ public class GridItemCore: IGridItem
     public virtual void afterAttack(List<BattleMessage> messages) { }
     public virtual void afterTurn(List<BattleMessage> messages) { }
 
+    public virtual IEnumerator defend(Enemy enemy)
+    {
+        yield break ;
+    }
     public void addDestroyMessage(List<BattleMessage> messages, bool skipAnim = false)
     {
         

@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class EnemyBehavior {
     public Enemy enemy;
-
-    public EnemyAction currentAction => actions[i];
+    public bool isStuned = false;
+    public EnemyAction currentAction => isStuned?new EnemyActionIdle(): actions[i];
     public bool willAttacking => currentAction is EnemyActionAttack;
     public virtual void SelectAction() {
-        actions[i].Preview(enemy);
+        currentAction.Preview(enemy);
     }
     public virtual IEnumerator TakeAction()
     {
-        yield return enemy.StartCoroutine(actions[i].TakeAction(enemy));
+        yield return enemy.StartCoroutine(currentAction.TakeAction(enemy));
 
         i++;
+        isStuned = false;
         if (i >= actions.Length)
         {
             i = 0;

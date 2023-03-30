@@ -21,7 +21,7 @@ public class GridEmptyCell : MonoBehaviour
     }
 
     internal void PlayCellAttackedAnimation()
-    {
+    { 
         CellAttackedAnimation.Initialization();
         CellAttackedAnimation.PlayFeedbacks();
     }

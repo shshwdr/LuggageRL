@@ -57,7 +57,16 @@ public class Enemy : HPObject
     public GameObject shieldObj;
     public Text shieldText;
 
-
+    public IEnumerator StunEnumerator()
+    {
+        
+        FloatingTextManager.Instance.addText("Stun!", transform.position, Color.yellow);
+        
+        Core.isStuned = true;
+        SelectAction();
+        yield return new WaitForSeconds(GridManager.animTime / 2);
+        
+    }
 
     public override IEnumerator ApplyDamage(int damage, bool isFinalAttack = true)
     {

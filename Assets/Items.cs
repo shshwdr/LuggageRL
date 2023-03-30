@@ -65,6 +65,7 @@ public class Potion : GridItemCore
     public override void beCrushed(IGridItem item, List<BattleMessage> messages)
     {
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.potion, skipAnim = true });
         var healAmount = info.Param1;
         messages.Add(new MessageItemHeal { item = this, amount = healAmount, target = BattleManager.Instance.player, index = index });
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.potion, skipAnim = true });
@@ -74,12 +75,98 @@ public class Potion : GridItemCore
         //BattleManager.Instance.player.Heal(3);
         //FloatingTextManager.Instance.addText("Heal!", transform.position);
         //destory();
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_potion_drink, new Vector3(0, 0, 0));
 
 
     }
 
 }
+
+
+[System.Serializable]
+public class Alarm : GridItemCore
+{
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    {
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
+        messages.Add(new MessageItemStun { item = this, index = index });
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.alarm, skipAnim = true });
+
+        this.addDestroyMessage(messages);
+        //BattleManager.Instance.player.Heal(3);
+        //FloatingTextManager.Instance.addText("Heal!", transform.position);
+        //destory();
+
+
+    }
+
+}
+
+
+[System.Serializable]
+public class HolyGrail : GridItemCore
+{
+    public override void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex)
+    {
+        int damage = info.Param1;
+        int moveDamageScale = info.Param2;
+        var originIndex = index;
+        int diff = (int)(borderIndex - originIndex).magnitude;
+
+        var dir = (borderIndex - originIndex) / diff;
+        
+        messages.Add(new MessageItemAttack { item = this, damage = CalculateDamage(damage) + BattleManager.Instance.finalDamageIncrease, index = index });
+        
+        buffs.Clear();
+        //FloatingTextManager.Instance.addText("Attack!", transform.position);
+        //Luggage.Instance.DoDamage(1);
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.impact, skipAnim = true });
+
+        messages.Add(new MessageItemMove { item = this, index = index });
+        this.addDestroyMessageWithIndex(messages, originIndex, true);
+        index = borderIndex + dir * 10;
+    }
+}
+
+[System.Serializable]
+public class ProtectPotion : GridItemCore
+{
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    {
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
+        messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.potion, skipAnim = true });
+       //messages.Add(new MessageItemShieldPlayer { item = this, index = index });
+
+        this.addDestroyMessage(messages);
+        //BattleManager.Instance.player.Heal(3);
+        //FloatingTextManager.Instance.addText("Heal!", transform.position);
+        //destory();
+
+
+    }
+
+}
+
+[System.Serializable]
+public class Thorns : GridItemCore {
+    public override IEnumerator defend(Enemy enemy)
+    {
+        FloatingTextManager.Instance.addText("Thorn!", GridManager.Instance.IndexToPosition(index), Color.yellow);
+        foreach (var e in EnemyManager.Instance.GetEnemies())
+        {
+            
+            yield return  enemy.StartCoroutine(e. ApplyDamage(Attack));
+        }
+        
+        isDestroyed = true;
+        
+        FloatingTextManager.Instance.addText("Destroy!", GridManager.Instance.IndexToPosition(index), Color.white);
+        GridManager.Instance. GridItemDict[index].destory();
+        GridManager.Instance.RemoveGrid(index, type);
+        yield return new WaitForSeconds(GridManager.animTime);
+    }
+}
+
+
 [System.Serializable]
 public class Arrow : GridItemCore
 {

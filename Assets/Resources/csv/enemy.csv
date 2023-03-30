@@ -2,14 +2,14 @@
 DummyEnemy,Freddy Hydrant,"Freddy is a nice guy. Standing around, taking things as they come.",minion,0,none,15,0,0
 SimpleAttackEnemy,Walter Watchdog,"He is a simple fellow. He sees you – he runs at you. And if he is faster than you, well … Good luck!",minion,1,none,10,3,0
 AttackShieldEnemy,Crab,"The Crab knows how to shield. And it is jumpy, attacking at height 2.",minion,2,none,14,4,0
-AttackFlyEnemy,Dragon Fly,Is it a bird? Is it a helicopter? NO! It is Dragon ... Fly ... man.,minion,3,none,20,3,0
-AttackHealEnemy,Crumpy Bee,She loves her comrads! Healing the team member with the least HP ratio.,minion,4,none,22,4,0
-AttackGrowEnemy,Karl Turtleneck,"Karl attacks from the bottom, then middle and then top, in a cycle.",minion,4,none,24,4,0
+AttackFlyEnemy,Dragon Fly,Is it a bird? Is it a helicopter? NO! It is Dragon ... Fly ... man.,minion,3,none,20,4,0
+AttackHealEnemy,Crumpy Bee,She loves her comrads! Healing the team member with the least HP ratio.,minion,4,none,22,5,0
+AttackGrowEnemy,Karl Turtleneck,"Karl attacks from the bottom, then middle and then top, in a cycle.",minion,4,none,24,5,0
 ShieldHealEnemy,Balky Mushroom,He is keeping the back of the troup. Heals the enemy with the least HP ratio and shields!,minion,5,none,38,6,0
 StealAttackEnemy,Sneaky Foxy,Watch out! The fox steals an item from you and attacks.,minion,4,none,24,5,0
 AttackStealEnemy,Starving Dragon,"Always hungry, never picky. Steals the item you have most of, and attacks.",minion,4,none,30,5,0
-AttackRotateEnemy,Somersault Woodlouse,She not only attacks but also pushes you around.,minion,3,none,24,5,0
-BossPinata,Generous Pinata,She will stuff you with nice looking and very useless items.,boss,0,none,50,8,1
-BossExplode,Last Kraken,"His liquid ""presents"" will let all of your items explode.",boss,0,none,50,7,1
-EliteCap,Armored Tankling,"No matter how hard you hit him: 5 damage, that's all he will take in one round.",elite,0,none,40,6,1
-EliteThorn,Nasty Bitling,Attacking this sharp-teethed monster comes with a cost - it will bite back!,elite,0,none,40,5,1
+AttackRotateEnemy,Somersault Woodlouse,She not only attacks but also pushes you around.,minion,3,none,24,4,0
+BossPinata,Generous Pinata,She will stuff you with nice looking and very useless items.,boss,0,none,50,10,1
+BossExplode,Last Kraken,"His liquid ""presents"" will let all of your items explode.",boss,0,none,50,12,1
+EliteCap,Armored Tankling,"No matter how hard you hit him: 5 damage, that's all he will take in one round.",elite,0,none,40,8,1
+EliteThorn,Nasty Bitling,Attacking this sharp-teethed monster comes with a cost - it will bite back!,elite,0,none,40,7,1
