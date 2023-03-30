@@ -23,11 +23,17 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
     {
         overlayButton.GetComponent<Button>().onClick.AddListener(hideOverlay);
         DontDestroyOnLoad(this.gameObject);
+        showOverlay(startOverlay);
+        
     }
     public GameObject attackOverlay;
     public GameObject attackOverlay2;
     public GameObject endTurnOverlay;
     public GameObject moveOverlay;
+    public GameObject arrowOverlay;
+    public GameObject defenseOverlay;
+    public GameObject breakableOverlay;
+    public GameObject startOverlay;
     public GameObject overlayButton;
     public GameObject overlayParent;
     private GameObject currentOverlay;
@@ -39,6 +45,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
             return;
         }
 
+        if (overlay == startOverlay)
+        {
+            Time.timeScale = 0;
+        }
         if (visitedOverlay.Contains(overlay))
         {
             return;
@@ -52,6 +62,10 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
     public void hideOverlay()
     {
+        if (currentOverlay == startOverlay)
+        {
+            Time.timeScale = 1;
+        }
         currentOverlay.SetActive(false);
         overlayParent.SetActive(false);
         overlayButton.SetActive(false);
@@ -79,7 +93,7 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
             return true;
         }
 
-        if (battleId == 2 && turnId == 0)
+        if (battleId == 2 && turnId <=1)
         {
             return true;
         }
@@ -196,6 +210,32 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
                         pickedType = ItemType.Arrow;
                         picked = new Vector2Int(2, 2);
                     }
+                }else if (turnId == 1)
+                {
+                    
+                    if (i == 0)
+                    {
+                        if (GridManager.Instance.DeckPool.Contains(ItemType.Poison))
+                        {
+                            pickedType = ItemType.Poison;
+                        }
+                        else
+                        {
+                            
+                            pickedType = ItemType.PiggyBank;
+                        }
+                        picked = new Vector2Int(0, 1);
+                    }
+                    else if (i == 1)
+                    {
+                        pickedType = GridManager.Instance.DeckPool[Random.Range(0, GridManager.Instance.DeckPool.Count)];;
+                        picked = new Vector2Int(1, 2);
+                    }
+                    else if (i == 2)
+                    {
+                        pickedType = GridManager.Instance.DeckPool[Random.Range(0, GridManager.Instance.DeckPool.Count)];;
+                        picked = new Vector2Int(1, 3);
+                    }
                 }
             }
 
@@ -215,38 +255,38 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
     public void hideLines()
     {
-        if (!isOn)
-        {
-            return;
-        }
-        foreach (Transform tran in battle1Turn0LineHint.transform.parent)
-        {
-            tran.gameObject.SetActive(false);
-        }
+        // if (!isOn)
+        // {
+        //     return;
+        // }
+        // foreach (Transform tran in battle1Turn0LineHint.transform.parent)
+        // {
+        //     tran.gameObject.SetActive(false);
+        // }
     }
 
     public void showLines()
     {
-        if (!isOn)
-        {
-            return;
-        }
-        hideLines();
-
-        var battleId = BattleManager.Instance.battleCount;
-        var turnId = BattleManager.Instance.turnCount;
-        if (battleId == 1 && turnId == 1)
-        {
-            battle1Turn0LineHint.SetActive(true);
-        }
-        else if (battleId == 1 && turnId == 2)
-        {
-            battle1Turn1LineHint.SetActive(true);
-        }
-        else if (battleId == 2 && turnId == 0)
-        {
-            battle2Turn0LineHint.SetActive(true);
-        }
+        // if (!isOn)
+        // {
+        //     return;
+        // }
+        // hideLines();
+        //
+        // var battleId = BattleManager.Instance.battleCount;
+        // var turnId = BattleManager.Instance.turnCount;
+        // if (battleId == 1 && turnId == 1)
+        // {
+        //     battle1Turn0LineHint.SetActive(true);
+        // }
+        // else if (battleId == 1 && turnId == 2)
+        // {
+        //     battle1Turn1LineHint.SetActive(true);
+        // }
+        // else if (battleId == 2 && turnId == 0)
+        // {
+        //     battle2Turn0LineHint.SetActive(true);
+        // }
     }
 
     public bool shouldDisableAction(PlayerActionType act)

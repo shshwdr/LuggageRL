@@ -132,7 +132,7 @@ public class ItemManager : Singleton<ItemManager>
         {
             item.SetActive(true);
         }
-        DetailView.Instance.showTutorial("Breakable",TutorialManager.Instance.getUnreadText("Breakable"));
+        //DetailView.Instance.showTutorial("Breakable",TutorialManager.Instance.getUnreadText("Breakable"));
     }
     public void outControl()
     {
