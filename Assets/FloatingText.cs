@@ -37,20 +37,15 @@ public class FloatingText : MonoBehaviour
 
     public void UpdateText(string text, bool isFinalUpdate = true)
     {
-        if (isFinalUpdate)
-        {
-            Destroy(gameObject, 3);
-        }
         go.localScale *= 1.6f;
         go.DOPunchScale(endValue, .2f, jumpPower);
         go.DOPunchRotation(new Vector3(0, 0, -50), .2f, 10, .4f);
         GetComponentInChildren<Text>().text = text;
-        Sequence sequence = DOTween.Sequence();
-        sequence.PrependInterval(1.5f);
-        sequence.Append(go.DOLocalJump(new Vector3(3, 2, 0), 1, 1, 1));
-        sequence.Join(go.DOScale(0, .8f));
 
-        sequence.Play();
+        if (isFinalUpdate)
+        {
+            FlingAndDestroyText();
+        }
     }
 
     public void FlingAndDestroyText()
