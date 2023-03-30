@@ -19,6 +19,11 @@ public class MessageItemMove : BattleMessage
     public Vector2Int index;
     public GridItemCore item;
 }
+public class MessageItemBroken : BattleMessage
+{
+    public IGridItem breaker;
+    public Vector2 moveDirection;
+}
 public class MessageItemAttack : BattleMessage
 {
     public Vector2Int index;

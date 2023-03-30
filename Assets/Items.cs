@@ -62,8 +62,10 @@ public class Marble : GridItemCore
 [System.Serializable]
 public class Potion : GridItemCore
 {
-    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
     {
+        base.beCrushed(item, messages, moveDirection);
+
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.potion, skipAnim = true });
         var healAmount = info.Param1;
@@ -85,8 +87,10 @@ public class Potion : GridItemCore
 [System.Serializable]
 public class Alarm : GridItemCore
 {
-    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
     {
+        base.beCrushed(item, messages, moveDirection);
+
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         messages.Add(new MessageItemStun { item = this, index = index });
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.alarm, skipAnim = true });
@@ -130,8 +134,10 @@ public class HolyGrail : GridItemCore
 [System.Serializable]
 public class ProtectPotion : GridItemCore
 {
-    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
     {
+        base.beCrushed(item, messages, moveDirection);
+
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.potion, skipAnim = true });
        //messages.Add(new MessageItemShieldPlayer { item = this, index = index });
@@ -200,14 +206,15 @@ public class Arrow : GridItemCore
 [System.Serializable]
 public class Poison : GridItemCore
 {
-    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
     {
+        base.beCrushed(item, messages, moveDirection);
+
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         var value = info.Param1;
         messages.Add(new MessageItemApplyEffect { item = this, index = index, target = item, type = BuffType.poison, value = value, targetIndex = item.index });
         //messages.Add(new MessageItemAttack { item = this, damage = attack, index = index });
         this.addDestroyMessage(messages);
-
 
 
     }
@@ -216,8 +223,10 @@ public class Poison : GridItemCore
 [System.Serializable]
 public class PiggyBank : GridItemCore
 {
-    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
     {
+        base.beCrushed(item, messages, moveDirection);
+
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.piggy, skipAnim = true });
 
@@ -484,8 +493,9 @@ public class Rocket : GridItemCore
 public class Pinata : GridItemCore
 {
 
-    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
     {
+        base.beCrushed(item, messages, moveDirection);
 
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         var drawAmount = info.Param1;
@@ -505,8 +515,10 @@ public class Pinata : GridItemCore
 public class Mud : GridItemCore
 {
 
-    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
     {
+        base.beCrushed(item, messages, moveDirection);
+
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         this.addDestroyMessage(messages);
 
@@ -517,8 +529,10 @@ public class Mud : GridItemCore
 public class LiquidBomb : GridItemCore
 {
 
-    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
     {
+        base.beCrushed(item, messages, moveDirection);
+
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush, skipAnim = true });
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode });
         if (GridManager.Instance.isPredict)
@@ -548,8 +562,10 @@ public class LiquidBomb : GridItemCore
 public class FreezeBomb : GridItemCore
 {
 
-    public override void beCrushed(IGridItem item, List<BattleMessage> messages)
+    public override void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
     {
+        base.beCrushed(item, messages, moveDirection);
+
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.explode });
         messages.Add(new MessageItemVisualEffect { item = this, index = index, effect = VisualEffect.crush,skipAnim = true });
         if (GridManager.Instance.isPredict)

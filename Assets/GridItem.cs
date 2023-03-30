@@ -175,7 +175,11 @@ public class GridItemCore: IGridItem
     public virtual void beforeAttack(List<BattleMessage> messages) { }
     public virtual void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex) { }
     public virtual void move(List<BattleMessage> messages) { movedCount++; }
-    public virtual void beCrushed(IGridItem item, List<BattleMessage> messages) { }
+    public virtual void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection)
+    {
+        this.addMessageItemBroken(messages, item, moveDirection, true);
+    }
+
     public virtual void afterAttack(List<BattleMessage> messages) { }
     public virtual void afterTurn(List<BattleMessage> messages) { }
 
@@ -200,6 +204,11 @@ public class GridItemCore: IGridItem
         Debug.Log($"addDestroyMessage {ind} {type}");
     }
 
+    public void addMessageItemBroken(List<BattleMessage> messages, IGridItem breaker, Vector2 moveDirection, bool skipAnim = false)
+    {
+        messages.Add(new MessageItemBroken { breaker = breaker, moveDirection = moveDirection, skipAnim = skipAnim });
+        Debug.Log($"addMessageItemBroken {breaker} {moveDirection}");
+    }
 }
 
 public interface IGridItem
@@ -207,7 +216,7 @@ public interface IGridItem
     public void beforeAttack(List<BattleMessage> messages);
     public void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex);
     public void move(List<BattleMessage> messages);
-    public void beCrushed(IGridItem item, List<BattleMessage> messages);
+    public void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection);
     public void addDestroyMessage(List<BattleMessage> messages, bool skipAnim = false);
     public void addDestroyMessageWithIndex(List<BattleMessage> messages, Vector2Int ind, bool skipAnim = false);
     public void afterAttack(List<BattleMessage> messages);
@@ -241,7 +250,7 @@ public class GridItem : MonoBehaviour, IGridItem
     }
     public virtual void hitBorder(List<BattleMessage> messages, Vector2Int borderIndex) { core.hitBorder(messages, borderIndex); }
     public virtual void move(List<BattleMessage> messages) { core.move(messages); }
-    public virtual void beCrushed(IGridItem item, List<BattleMessage> messages) { core.beCrushed(item,messages); }
+    public virtual void beCrushed(IGridItem item, List<BattleMessage> messages, Vector2Int moveDirection) { core.beCrushed(item, messages, moveDirection); }
     public BaseItem baseItem;
     public ItemType type { get { return core.type; } }
     public void init(Vector2Int ind,ItemType t)

@@ -693,7 +693,7 @@ public class GridManager : Singleton<GridManager>
 
                         if (isAttacking)
                         {
-                            GetItem(gridItemDict, newKey).beCrushed(gridItem, messages);
+                            GetItem(gridItemDict, newKey).beCrushed(gridItem, messages, moveVector);
                             //messages.Add(new MessageItemBeCrushed { item = gridItem });
                             //GetItem(newKey).GetComponent<GridItem>().BeHit(gridItem);
                         }
@@ -917,6 +917,7 @@ public class GridManager : Singleton<GridManager>
                     GridItemDict[applyEffect.targetIndex].ApplyBuff(applyEffect.type, applyEffect.value);
                     FloatingTextManager.Instance.addText($"Apply {applyEffect.type.ToString()}", GridItemDict[applyEffect.targetIndex].transform.position, Color.yellow);
                     //FloatingTextManager.Instance.addText($"{attack.damage}", heal.item.transform.position);
+
                 }
                 if (!applyEffect.skipAnim)
                 {
@@ -926,6 +927,11 @@ public class GridManager : Singleton<GridManager>
             else if (message is MessageWait wait)
             {
                 yield return new WaitForSeconds(wait.waitTime);
+            }
+            else if (message is MessageItemBroken broken)
+            {
+                GridItemDict[broken.breaker.index].transform.DOPunchPosition(new Vector3(.5f * broken.moveDirection.x, 0, 0), .6f, 1, .1f);
+                continue;
             }
             else if (message is MessageItemVisualEffect visualEffect)
             {
