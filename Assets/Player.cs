@@ -17,6 +17,32 @@ public class Player : HPObject
 
     }
 
+    public override IEnumerator ApplyDamage(int damage)
+    {
+        yield return StartCoroutine( base.ApplyDamage(damage));
+
+        if (damage > 0)
+        {
+            
+            bool hasRevenge = false;
+            foreach (var gridItem in GridManager.Instance.GridItemDict.Values)
+            {
+                if (gridItem.type == ItemType.HolyGrail)
+                {
+                
+                    FloatingTextManager.Instance.addText($"Apply {BuffType. revenge.ToString()}", gridItem.transform.position, Color.red);
+                    gridItem.core.ApplyBuff(BuffType. revenge,1);
+                    hasRevenge = true;
+                }
+            }
+
+            if (hasRevenge == true)
+            {
+                yield return new WaitForSeconds(GridManager.animTime);
+            }
+        }
+    }
+
     public void updateHPFromUpgrade()
     {
         if (!LuggageManager.Instance.UpgradedTime.ContainsKey(UpgradeType.hp))

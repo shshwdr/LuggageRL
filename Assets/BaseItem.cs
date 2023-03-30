@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -148,7 +149,7 @@ public class BaseItem : MonoBehaviour
     private int previewBeAttacked = 0;
     public void WillBeAttacked(int attack)
     {
-        previewBeAttacked += attack;
+        previewBeAttacked =math.max( attack, previewBeAttacked);
         beAttackedText.gameObject.SetActive(true);
         beAttackedText.text = previewBeAttacked.ToString();
         willDefend = true;

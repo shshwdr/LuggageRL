@@ -54,7 +54,7 @@ public class DetailView : Singleton<DetailView>
         tutorialText.text = "";
         tutorialText.transform.parent.gameObject.SetActive(false);
     }
-    Dictionary<BuffType, string> buffMap = new Dictionary<BuffType, string>() { { BuffType.piggyBank, "PiggyBank" },{ BuffType.poison, "Poison" },{ BuffType.balancer, "Balancer" } };  
+    Dictionary<BuffType, string> buffMap = new Dictionary<BuffType, string>() { { BuffType.piggyBank, "PiggyBank" },{ BuffType.poison, "Poison" },{ BuffType.balancer, "Balancer" } ,{ BuffType.revenge, "HolyGrail" } };  
     public void UpdateCard(BaseItem baseItem)
     {
         var item = baseItem?baseItem.GetComponent<GridItem>().core:null;

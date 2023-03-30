@@ -8,7 +8,7 @@ public class BattleMessage
 }
 
 
-public enum VisualEffect { electric, explode, crush, potion, arrow, piggy,surge,cash, heal,rocket,impact}
+public enum VisualEffect { electric, explode, crush, potion, arrow, piggy,surge,cash, heal,rocket,impact,alarm}
 
 public class MessageMove : BattleMessage
 {
@@ -76,6 +76,12 @@ public class MessageItemHeal : BattleMessage
     public GridItemCore item;
     public int amount;
     public HPObject target;
+}
+public  class MessageItemStun:BattleMessage
+{
+    public Vector2Int index;
+    public GridItemCore item;
+    public Enemy target;
 }
 public class MessageShowPopup : BattleMessage {
     public string str;
