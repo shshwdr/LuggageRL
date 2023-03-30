@@ -151,7 +151,11 @@ public class Thorns : GridItemCore {
     public override IEnumerator defend(Enemy enemy)
     {
         FloatingTextManager.Instance.addText("Thorn!", GridManager.Instance.IndexToPosition(index), Color.yellow);
-        yield return  enemy.StartCoroutine(enemy. ApplyDamage(Attack));
+        foreach (var e in EnemyManager.Instance.GetEnemies())
+        {
+            
+            yield return  enemy.StartCoroutine(e. ApplyDamage(Attack));
+        }
         
         isDestroyed = true;
         
