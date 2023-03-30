@@ -96,6 +96,11 @@ public class HPObject : MonoBehaviour
             isDead = true;
             //fx_luggage_death_blow 
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_random_boing, transform.position);
+            if (currentFloatingText != null)
+            {
+                currentFloatingText.FlingAndDestroyText();
+                currentFloatingText = null;
+            }
             yield return StartCoroutine( DieInteral());
         }
     }

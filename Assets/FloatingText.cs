@@ -52,4 +52,17 @@ public class FloatingText : MonoBehaviour
 
         sequence.Play();
     }
+
+    public void FlingAndDestroyText()
+    {
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.PrependInterval(1.5f);
+        sequence.Append(go.DOLocalJump(new Vector3(3, 2, 0), 1, 1, 1));
+        sequence.Join(go.DOScale(0, .8f));
+
+        sequence.Play();
+            
+        Destroy(gameObject, 3);
+    }
 }
