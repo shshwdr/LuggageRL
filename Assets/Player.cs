@@ -17,9 +17,9 @@ public class Player : HPObject
 
     }
 
-    public override IEnumerator ApplyDamage(int damage)
+    public override IEnumerator ApplyDamage(int damage, bool isFinalAttack = true)
     {
-        yield return StartCoroutine( base.ApplyDamage(damage));
+        yield return StartCoroutine( base.ApplyDamage(damage,isFinalAttack));
 
         if (damage > 0)
         {
