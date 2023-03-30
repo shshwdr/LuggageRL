@@ -1,4 +1,5 @@
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -343,5 +344,10 @@ public class GridItem : MonoBehaviour, IGridItem
     public virtual void afterTurn(List<BattleMessage> messages) {
 
         core.afterTurn(messages);
+    }
+
+    internal void PlayFlashDamageAnimation()
+    {
+        baseItem.cellAttackedAnimation.PlayFeedbacks();
     }
 }

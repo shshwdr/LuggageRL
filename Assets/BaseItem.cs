@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class BaseItem : MonoBehaviour
     //public GameObject attackAndDefendOb;
     public Text combinedAttack;
     public Text combinedDefense;
+
+    public MMF_Player cellAttackedAnimation;
 
     public Text beAttackedText;
     

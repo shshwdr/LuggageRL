@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour
 {
-    
+    Color additiveDarkenColor = new Color(.75f, .75f, .75f, 1f);
+    Color shadowColor = new Color(0, 0, 0, .2f);
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +58,7 @@ public class Draggable : MonoBehaviour
         }
         foreach (var item in GridManager.Instance.emptyGridList)
         {
-            item.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+            item.GetComponentInChildren<SpriteRenderer>().color = Color.clear;
             var magnitude = (item.transform.position - transform.position).magnitude;
             if (magnitude < distance)
             {
@@ -77,11 +78,11 @@ public class Draggable : MonoBehaviour
 
             if (!GridManager.Instance.HasItem(swapOb.index))
             {
-                swapOb.GetComponentInChildren<SpriteRenderer>().color = Color.green;
+                swapOb.GetComponentInChildren<SpriteRenderer>().color = shadowColor;
             }
             else
             {
-                GridManager.Instance.GetItem(GridManager.Instance.GridItemDict, swapOb.index).GetComponentInChildren<SpriteRenderer>().color = Color.green;
+                GridManager.Instance.GetItem(GridManager.Instance.GridItemDict, swapOb.index).GetComponentInChildren<SpriteRenderer>().color = additiveDarkenColor;
             }
         }
     }
@@ -118,7 +119,7 @@ public class Draggable : MonoBehaviour
         }
         foreach (var item in GridManager.Instance.emptyGridList)
         {
-            item.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+            item.GetComponentInChildren<SpriteRenderer>().color = Color.clear;
         }
 
         if (swapOb.index == GetComponent<GridItem>().core.index)

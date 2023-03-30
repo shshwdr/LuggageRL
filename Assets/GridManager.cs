@@ -421,6 +421,37 @@ public class GridManager : Singleton<GridManager>
         }
         return res;
     }
+    public void playEmptyCellsAttackedAnimation(Enemy enemy)
+    {
+
+
+        List<GridEmptyCell> res = new List<GridEmptyCell>();
+        var cells = getFrontCellsIndexFromBottomToTop();
+        if (enemy.attackFromBottom)
+        {
+            if (enemy.attackRangeV > 0)
+            {
+                for (int i = 0; i < enemy.attackRangeV; i++)
+                {
+                    var cell = cells[enemy.attackInd + i];
+                    if (!GridItemDict.ContainsKey(cell))
+                    {
+                        var item = emptyGridList.Find(x => x.index == cell);
+                        item.PlayCellAttackedAnimation();
+                    }
+                }
+            }
+        }
+        else
+        {
+            var cell = cells[cells.Count - 1];
+            if (!GridItemDict.ContainsKey(cell))
+            {
+                var item = emptyGridList.Find(x => x.index == cell);
+                item.PlayCellAttackedAnimation();
+            }
+        }
+    }
     public void showAllAttackPreview()
     {
         clearAttackPreview();
@@ -1094,6 +1125,8 @@ public class GridManager : Singleton<GridManager>
                     d-= item.core.defense;
                 d = Mathf.Max(0, d);
                 fianlDamage += d;
+
+                item.PlayFlashDamageAnimation();
                 //item.addDestroyMessage(messages);
 
                 //yield return StartCoroutine(ParseMessages());
@@ -1104,6 +1137,7 @@ public class GridManager : Singleton<GridManager>
                 //BattleManager.Instance.PredictNextAttack();
             }
         }
+        playEmptyCellsAttackedAnimation(enemy);
 
         yield return StartCoroutine(BattleManager.Instance.player.ApplyDamage(fianlDamage));
     }
