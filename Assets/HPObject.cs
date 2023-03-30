@@ -23,7 +23,9 @@ public class HPObject : MonoBehaviour
             yield return StartCoroutine(ShieldBeAttacked(reduce));
 
         }
-        
+
+        FloatingTextManager.Instance.addText(damage.ToString(), transform.position + new Vector3(0, 1, 0), new Color(1,.8f,0), true);
+
         if (currentFloatingText != null)
         {
             currentFloatingText.UpdateText(currentDamageCounter.ToString(), isFinalAttack);
