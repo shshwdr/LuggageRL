@@ -24013,7 +24013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bfcb816f30ce2948a4983ddce7a7852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOn: 1
+  isOn: 0
   attackOverlay: {fileID: 1107525492}
   attackOverlay2: {fileID: 143143274}
   endTurnOverlay: {fileID: 1118091666}

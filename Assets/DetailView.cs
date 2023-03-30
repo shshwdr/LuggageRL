@@ -71,7 +71,7 @@ public class DetailView : Singleton<DetailView>
             Desc.text = item.Desc;
             Stretegy.text = item.info.Strategy;
             Name.text = item.info.DisplayName;
-            Attack.text = item.Attack.ToString();
+            Attack.text = item.isAttacker? item.Attack.ToString():"";
             Defense.text = item.info.Defense.ToString();
 
             willDefendOB.SetActive(baseItem.willDefend);

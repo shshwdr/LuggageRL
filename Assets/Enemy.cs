@@ -34,7 +34,7 @@ public class Enemy : HPObject
 
     public EnemyAttackPreview attackPreview;
     public SpriteRenderer enemyRender;
-    public int attack => Core.currentAction is EnemyActionAttack attackAction ?(int)( (attackAction.attackDamage + info.BasicAttack) * (1+EnemyManager.Instance.remainsDiffultCount*0.05f)) : 0;
+    public int attack => Core.currentAction is EnemyActionAttack attackAction ?(int)( (attackAction.attackDamage + info.BasicAttack) * (1+EnemyManager.Instance.remainsDiffultCount*0.05f)) / attackRangeV: 0;
     public int defense => Core.currentAction is EnemyActionShield attackAction ? (int)((attackAction.shieldAmount + info.BasicAttack) * (1 + EnemyManager.Instance.remainsDiffultCount * 0.05f)) : 0;
     public int heal => Core.currentAction is EnemyActionHeal heal ? (int)((heal.healAmount + info.BasicAttack) * (1 + EnemyManager.Instance.remainsDiffultCount * 0.05f)) : 0;
     public Transform idlePosition;
