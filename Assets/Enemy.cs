@@ -30,6 +30,7 @@ public class Enemy : HPObject
     [SerializeField] MMF_Player simpleAttackAnimationPlayer;
     [SerializeField] MMF_Player hurtAnimationPlayer;
     [SerializeField] MMF_Player rotateAttackAnimationPlayer;
+    [SerializeField] MMF_Player idleAnimationPlayer;
     //List<MMF_Player> animations = new List<MMF_Player>();
 
     public EnemyAttackPreview attackPreview;
@@ -61,7 +62,7 @@ public class Enemy : HPObject
     {
         
         FloatingTextManager.Instance.addText("Stun!", transform.position, Color.yellow);
-        
+        reactToDamage();
         Core.isStuned = true;
         SelectAction();
         yield return new WaitForSeconds(GridManager.animTime / 2);
@@ -280,6 +281,7 @@ public class Enemy : HPObject
     //}
     protected override IEnumerator DieInteral()
     {
+        StopIdleAnimation();
         targetedIndicator.SetActive(false);
         yield return StartCoroutine( base.DieInteral());
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_enemy_death, transform.position);
@@ -318,7 +320,7 @@ public class Enemy : HPObject
     }
     public IEnumerator RotateBag()
     {
-
+        StopIdleAnimation();
         yield return StartCoroutine(rotateAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
     }
     public void RotateBagImpact()
@@ -330,10 +332,12 @@ public class Enemy : HPObject
     {
         GridManager.Instance.Rotate(1, false);
         yield return Luggage.Instance.BagRotateAttackReceived();
+        StartIdleAnimation();
     }
     bool finishedAttack = false;
     public IEnumerator Attack()
     {
+        StopIdleAnimation();
         GridManager.Instance.cleanAndShowAttackPreviewOfEnemy(this);
         finishedAttack = false;
         StartCoroutine(simpleAttackAnimationPlayer.PlayFeedbacksCoroutine(gameObject.transform.position, 1f, false));
@@ -380,6 +384,8 @@ public class Enemy : HPObject
         GridManager.Instance.clearAttackPreview();
 
         finishedAttack = true;
+
+        StartIdleAnimation();
         /*
         transform.DOMove(originalPosition, GridManager.animTime);
         yield return new WaitForSeconds(GridManager.animTime);*/
@@ -387,10 +393,21 @@ public class Enemy : HPObject
 
     public override void reactToDamage()
     {
+        StopIdleAnimation();
         hurtAnimationPlayer.Initialization(); //don't know why, this one seems to need this. 
         hurtAnimationPlayer.PlayFeedbacks();
+        StartCoroutine(idleAnimationPlayer.PlayFeedbacksAfterFrames(100));
     }
 
+    private void StopIdleAnimation()
+    {
+        idleAnimationPlayer.StopFeedbacks();
+    }
+    private void StartIdleAnimation()
+    {
+
+        idleAnimationPlayer.PlayFeedbacks();
+    }
 
     private void OnMouseEnter()
     {
