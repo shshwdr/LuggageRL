@@ -135,7 +135,7 @@ public class BaseItem : MonoBehaviour
     private Color outlineColorTarget = Color.black;
     private float outlineChangeTime = 0.3f;
     private Vector2 smallSize = new Vector2(70, 70);
-    private Vector2 largeSize = new Vector2(140, 140);
+    private Vector2 largeSize = new Vector2(130, 130);
     private Vector2 normalSize = new Vector2(90, 90);
     
     public void ClearWillBeAttacked()
