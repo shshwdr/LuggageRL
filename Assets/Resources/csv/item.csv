@@ -18,5 +18,5 @@ Mud,Mud,0,0,0,On Attack: Destroys itself.,0,Curse,1,0,0,Curse
 LiquidBomb,LiquidBomb,0,0,0,On Break: Destroys everything in bag.,0,Curse,1,0,0,Curse
 Marble,Marble,1,2,0,"On Attack: Deals <color='red'>{0} damage</color>. If moved during attack, deals <color='red'>{1} × damage</color>. Is not destroyed.",3,Attacker,1,1,0,Basic
 Alarm,Alarm,0,0,0,On Break: Stun targeted enemy  <color='red'>1 turn</color>. Would not stack.,3,Breakable,1,1,1,
-Thorns,Hammer,1,0,0,"When hit by enemy: deal damage to all enemies  <color='red'>equal to its damage</color>, destroy itself. Would not attack itself.",5,Attacker,1,1,2,
-HolyGrail,Revenge Stone,1,0,0, <color='red'>+1 ATK</color> for each time player gets hurt,4,Attacker,1,2,3,
+Thorns,Spikes,1,0,0,"When hit by enemy: deal damage to all enemies  <color='red'>equal to its damage</color>, destroy itself. Would not attack itself.",5,Attacker,1,1,2,
+HolyGrail,Revenge Totem,1,0,0, <color='red'>+1 ATK</color> for each time player gets hurt,4,Attacker,1,2,3,

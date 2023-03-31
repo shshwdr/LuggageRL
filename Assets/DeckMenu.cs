@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeckMenu : MonoBehaviour
 {
     public GameObject Panel;
-
+    public Text deckCount;
     public GameObject cell;
     Transform cellParent;
 

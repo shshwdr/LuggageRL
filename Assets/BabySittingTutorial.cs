@@ -42,6 +42,7 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
     {
         if (!isOn)
         {
+            hideOverlay();
             return;
         }
 
@@ -242,6 +243,7 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
 
             Debug.Log("draw " + pickedType.ToString());
             GridManager.Instance.DeckPool.Remove(pickedType);
+            GridManager.Instance.updateDeckView();
             GridManager.Instance.AddGrid(picked.x, picked.y, pickedType);
             availableEmpty.Remove(picked);
         }
