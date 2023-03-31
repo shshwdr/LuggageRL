@@ -333,7 +333,7 @@ public class Enemy : HPObject
     {
         GridManager.Instance.Rotate(1, false);
         yield return Luggage.Instance.BagRotateAttackReceived();
-        StartIdleAnimation();
+        StartIdleAnimation(100);
     }
     bool finishedAttack = false;
     public IEnumerator Attack()
@@ -397,17 +397,23 @@ public class Enemy : HPObject
         StopIdleAnimation();
         hurtAnimationPlayer.Initialization(); //don't know why, this one seems to need this. 
         hurtAnimationPlayer.PlayFeedbacks();
-        StartCoroutine(idleAnimationPlayer.PlayFeedbacksAfterFrames(100));
+        StartIdleAnimation(100);
     }
 
     private void StopIdleAnimation()
     {
         idleAnimationPlayer.StopFeedbacks();
     }
-    private void StartIdleAnimation()
+    private void StartIdleAnimation(int delayFrames = 0)
     {
-
-        idleAnimationPlayer.PlayFeedbacks();
+        if (delayFrames == 0)
+        {
+            idleAnimationPlayer.PlayFeedbacks();
+        }
+        else
+        {
+            StartCoroutine(idleAnimationPlayer.PlayFeedbacksAfterFrames(delayFrames));
+        }
     }
 
     private void OnMouseEnter()

@@ -285,7 +285,7 @@ public class Luggage : Singleton<Luggage>
     {
         walkingAnimationPlayer?.StopFeedbacks();
         returnToIdleAnimationPlayer?.PlayFeedbacks();
-        StartIdleAnimation();
+        StartIdleAnimation(100);
 
     }
 
@@ -309,9 +309,16 @@ public class Luggage : Singleton<Luggage>
     {
         idleAnimationPlayer.StopFeedbacks();
     }
-    private void StartIdleAnimation()
+    private void StartIdleAnimation(int delayFrames = 0)
     {
-        idleAnimationPlayer.PlayFeedbacks();
+        if (delayFrames == 0)
+        {
+            idleAnimationPlayer.PlayFeedbacks();
+        }
+        else
+        {
+            StartCoroutine(idleAnimationPlayer.PlayFeedbacksAfterFrames(delayFrames));
+        }
     }
     internal void playDeathSequence()
     {
