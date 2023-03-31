@@ -131,7 +131,7 @@ public class BaseItem : MonoBehaviour
         updateBK();
     }
 
-    private Color outlineColorOrigin = new Color(0,0,0,0f);
+    private Color outlineColorOrigin = Color.black;//new Color(0,0,0,0f);
     private Color outlineColorTarget = Color.black;
     private float outlineChangeTime = 0.3f;
     private Vector2 smallSize = new Vector2(70, 70);

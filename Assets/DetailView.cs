@@ -113,4 +113,10 @@ public class DetailView : Singleton<DetailView>
         }
     }
 
+    public void clearAll()
+    {
+        CardView.SetActive(false);
+        enemyView.SetActive(false);
+    }
+
 }
