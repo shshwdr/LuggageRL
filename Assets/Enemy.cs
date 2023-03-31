@@ -211,7 +211,7 @@ public class Enemy : HPObject
         yield return new WaitForSeconds(GridManager.animTime*2);
     }
 
-    public void Init(EnemyInfo _info)
+    public void Init(EnemyInfo _info, int i)
     {
         Debug.Log("select " + info.Name);
         if(_info.Name == "dummy")
@@ -220,6 +220,7 @@ public class Enemy : HPObject
         }
         Core = (EnemyBehavior)System.Activator.CreateInstance(System.Type.GetType(_info.Name.ToString()));
         Core.enemy = this;
+        enemyRender.sortingOrder = 1 + i;
         info = _info;
         maxHP = (int)(info.HP * (1 + EnemyManager.Instance.remainsDiffultCount * 0.05f));
         hp = maxHP;
