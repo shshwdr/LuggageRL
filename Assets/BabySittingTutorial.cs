@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,14 +39,20 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
     public GameObject overlayParent;
     private GameObject currentOverlay;
     private HashSet<GameObject> visitedOverlay = new HashSet<GameObject>();
+
+    private float animTime = 0.3f;
     public void showOverlay(GameObject overlay)
     {
         if (!isOn)
         {
-            hideOverlay();
+            hideOverlay(false);
             return;
         }
 
+        currentOverlay = overlay;
+        currentOverlay.GetComponent<Image>().color=new Color(1,1,1, 0f);
+        DOTween.To(()=> currentOverlay.GetComponent<Image>().color, x=> currentOverlay.GetComponent<Image>().color = x, Color.white, animTime).SetUpdate(true);
+        
         if (overlay == startOverlay)
         {
             Time.timeScale = 0;
@@ -58,19 +65,51 @@ public class BabySittingTutorial : Singleton<BabySittingTutorial>
         overlayParent.SetActive(true);
         overlay.SetActive(true);
         overlayButton.SetActive(true);
-        currentOverlay = overlay;
     }
 
     public void hideOverlay()
+    {
+        hideOverlay(true);
+    }
+    public void hideOverlay(bool anim)
     {
         if (currentOverlay == startOverlay)
         {
             Time.timeScale = 1;
         }
-        currentOverlay.SetActive(false);
+
+        if (anim)
+        {
+            
+            // currentOverlay.GetComponent<Image>().color=new Color(0, 0, 0, 0f);
+
+            if (currentOverlay)
+            {
+                DOTween.To(() => currentOverlay.GetComponent<Image>().color,
+                    x => currentOverlay.GetComponent<Image>().color = x, new Color(1,1,1, 0f), animTime);
+            }
+
+            Invoke("setActiveFalse",animTime);
+        }
+        else
+        {
+
+            setActiveFalse();
+        }
+        
+
+    }
+
+    void setActiveFalse()
+    {
+        if (currentOverlay)
+        {
+            
+            currentOverlay.SetActive(false);
+        }
         overlayParent.SetActive(false);
         overlayButton.SetActive(false);
-
+        
         if (currentOverlay == attackOverlay)
         {
             showOverlay(attackOverlay2);

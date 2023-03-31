@@ -149,6 +149,7 @@ public class BattleManager : Singleton<BattleManager>
             isBattleFinished = true;
 
 
+            DetailView.Instance.clearAll();
             if (battleCount >= 2)
             {
                 BabySittingTutorial.Instance.finishTutorial();
@@ -570,6 +571,7 @@ public class BattleManager : Singleton<BattleManager>
 
 
         showButtonCanvas();
+        DetailView.Instance.clearAll();
         
         
 
