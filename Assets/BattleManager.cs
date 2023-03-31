@@ -69,7 +69,7 @@ public class BattleManager : Singleton<BattleManager>
 
         if (battleId >= learnNewAttackBattle[maxAttackCount-1])
         {
-            DialoguePopupManager.Instance.showDialogue("You learned a new type of attack: "+attackString[maxAttackCount]+"\nAttacks would randomly pick after each attack.",tutorialAttackSprites[maxAttackCount]);
+            DialoguePopupManager.Instance.showDialogue("You learned a new attack\n"+attackString[maxAttackCount]+"\nAttacks would randomly pick after each attack.",tutorialAttackSprites[maxAttackCount]);
         
             maxAttackCount++;
         }
