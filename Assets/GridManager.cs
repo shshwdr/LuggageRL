@@ -92,6 +92,7 @@ public class GridManager : Singleton<GridManager>
         deckPool.Add(type);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_item_take_new, new Vector3(0, 0, 0));
 
+        updateDeckView();
     }
 
     public List<ItemType> DeckPool => deckPool;
@@ -137,6 +138,8 @@ public class GridManager : Singleton<GridManager>
 
             Debug.Log("draw " + pickedType.ToString());
             deckPool.Remove(pickedType);
+            
+            updateDeckView();
             AddGrid(picked.x, picked.y, pickedType);
             availableEmpty.Remove(picked);
         }
@@ -1390,8 +1393,13 @@ public class GridManager : Singleton<GridManager>
     {
         GridItemDict.Remove(new Vector2Int(i, j));
         deckPool.Add(type);
+        updateDeckView();
     }
 
+    public void updateDeckView()
+    {
+        GameObject.FindObjectOfType<DeckMenu>().deckCount.text = deckPool.Count.ToString();
+    }
     public void RemoveGrid(Vector2Int ind, ItemType type)
     {
         if (!GridItemDict.ContainsKey(ind))
@@ -1405,12 +1413,16 @@ public class GridManager : Singleton<GridManager>
             return;
         }
         deckPool.Add(type);
+        
+        updateDeckView();
     }
     public void RemoveDeck(GridItem item)
     {
         RemoveGrid(item.index, item.type);
         deckPool.Remove(item.type);
         item.destory();
+        
+        updateDeckView();
     }
     public void RemoveGrid(GridItem item)
     {

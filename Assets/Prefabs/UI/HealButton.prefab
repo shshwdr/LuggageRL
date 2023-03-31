@@ -86,6 +86,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealButton
       objectReference: {fileID: 0}
+    - target: {fileID: 3550116555803590450, guid: 3ab92382a0ea6ed4688b45d7d0d0114a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550116555803590450, guid: 3ab92382a0ea6ed4688b45d7d0d0114a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5d8f87b889c0af142a2ee5e9903489ff, type: 3}
     - target: {fileID: 4130075329453454612, guid: 3ab92382a0ea6ed4688b45d7d0d0114a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
