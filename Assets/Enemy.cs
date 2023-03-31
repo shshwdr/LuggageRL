@@ -238,6 +238,7 @@ public class Enemy : HPObject
 
             enemyRender.sprite = prefab;
         }
+        StartIdleAnimation();
     }
 
     private void InitiateAnimations()

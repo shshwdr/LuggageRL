@@ -285,7 +285,7 @@ public class Luggage : Singleton<Luggage>
     {
         walkingAnimationPlayer?.StopFeedbacks();
         returnToIdleAnimationPlayer?.PlayFeedbacks();
-        idleAnimationPlayer.PlayFeedbacksAfterFrames(100);
+        StartIdleAnimation();
 
     }
 
@@ -315,6 +315,7 @@ public class Luggage : Singleton<Luggage>
     }
     internal void playDeathSequence()
     {
+        StopIdleAnimation();
         deathAnimationPlayer.PlayFeedbacks();
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_death_blow, transform.position);
         AudioManager.Instance.PlayDeathMusic();
