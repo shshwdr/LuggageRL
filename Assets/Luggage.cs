@@ -22,6 +22,7 @@ public class Luggage : Singleton<Luggage>
     [SerializeField] public Transform luggageRightTargetTransform;
 
     [SerializeField] MMF_Player returnToIdleAnimationPlayer;
+    [SerializeField] MMF_Player idleAnimationPlayer;
 
 
     [SerializeField] MMF_Player hurtAnimationPlayer;
@@ -127,9 +128,12 @@ public class Luggage : Singleton<Luggage>
     //}
     public IEnumerator PushForwardAttack()
     {
+        StopIdleAnimation();
         SetTarget();
         yield return StartCoroutine(pushForwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
     }
+
+
     public void PushForwardAttackImpact()
     {
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.sfx_luggage_attack_impact, transform.position);
@@ -142,12 +146,14 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
         BattleManager.Instance.SelectAttack();
         BattleManager.Instance.FinishAttack();
+        StartIdleAnimation();
 
     }
-    
-    
+
+
     public IEnumerator PushBackwardAttack()
     {
+        StopIdleAnimation();
         SetTarget();
         yield return StartCoroutine(pushBackwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
     }
@@ -163,10 +169,13 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
         BattleManager.Instance.SelectAttack();
         BattleManager.Instance.FinishAttack();
+        StartIdleAnimation();
+
     }
-    
+
     public IEnumerator PushUpwardAttack()
     {
+        StopIdleAnimation();
         SetTarget();
         yield return StartCoroutine(pushUpwardAttackAnimationPlayer.PlayFeedbacksCoroutine(this.transform.position, 1.0f, false));
     }
@@ -182,13 +191,16 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(BattleManager.Instance. useMove(BattleManager.Instance. attackMoveCost));
         BattleManager.Instance.SelectAttack();
         BattleManager.Instance.FinishAttack();
+        StartIdleAnimation();
+
     }
-    
-    
-    
+
+
+
 
     public IEnumerator UpsideDownAndDrop()
     {
+        StopIdleAnimation();
         SetTarget();
 
         GridManager.Instance.Rotate(2, false);
@@ -211,11 +223,13 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(BattleManager.Instance.useMove(BattleManager.Instance.attackMoveCost));
         BattleManager.Instance.SelectAttack();
         BattleManager.Instance.FinishAttack();
+        StartIdleAnimation();
+
     }
 
     public IEnumerator ThrowOutAndHitBack()
     {
-
+        StopIdleAnimation();
         SetTarget();
 
         GridManager.Instance.Rotate(1, false);
@@ -237,6 +251,7 @@ public class Luggage : Singleton<Luggage>
         yield return StartCoroutine(BattleManager.Instance.useMove(BattleManager.Instance.attackMoveCost));
         BattleManager.Instance. SelectAttack();
         BattleManager.Instance.FinishAttack();
+        StartIdleAnimation();
     }
 
     IEnumerator showDamage()
@@ -262,22 +277,15 @@ public class Luggage : Singleton<Luggage>
 
     internal void StartCharacterWalking()
     {
-        if (walkingAnimationPlayer != null)
-        {
-            walkingAnimationPlayer.PlayFeedbacks();
-        }
+        StopIdleAnimation();
+        walkingAnimationPlayer?.PlayFeedbacks();
     }
 
     internal void StopCharacterWalking()
     {
-        if (walkingAnimationPlayer != null)
-        {
-            walkingAnimationPlayer.StopFeedbacks();
-        }
-        if (returnToIdleAnimationPlayer != null)
-        {
-            returnToIdleAnimationPlayer.PlayFeedbacks();
-        }
+        walkingAnimationPlayer?.StopFeedbacks();
+        returnToIdleAnimationPlayer?.PlayFeedbacks();
+        idleAnimationPlayer.PlayFeedbacksAfterFrames(100);
 
     }
 
@@ -297,6 +305,14 @@ public class Luggage : Singleton<Luggage>
     }
 
 
+    private void StopIdleAnimation()
+    {
+        idleAnimationPlayer.StopFeedbacks();
+    }
+    private void StartIdleAnimation()
+    {
+        idleAnimationPlayer.PlayFeedbacks();
+    }
     internal void playDeathSequence()
     {
         deathAnimationPlayer.PlayFeedbacks();
