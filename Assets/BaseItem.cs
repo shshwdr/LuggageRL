@@ -152,7 +152,8 @@ public class BaseItem : MonoBehaviour
     private int previewBeAttacked = 0;
     public void WillBeAttacked(int attack)
     {
-        previewBeAttacked =math.max( attack, previewBeAttacked);
+        var attackAfterDefend = attack - item.core.defense;
+        previewBeAttacked +=attackAfterDefend;
         beAttackedText.gameObject.SetActive(true);
         beAttackedText.text = previewBeAttacked.ToString();
         willDefend = true;
